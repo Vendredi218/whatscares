@@ -68,6 +68,8 @@ export default async function handler(req, res) {
     return res.status(200).json(result);
   } catch (err) {
     console.error('mood-search failed:', err.message);
-    return res.status(502).json({ error: 'search unavailable' });
+    const body = { error: 'search unavailable' };
+    if (req.headers['x-ws-debug'] === '1') body.detail = String(err.message).slice(0, 300);
+    return res.status(502).json(body);
   }
 }
