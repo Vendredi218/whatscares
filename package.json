@@ -1,0 +1,9 @@
+{
+  "name": "whatscares",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node dev-server.mjs",
+    "build-catalog": "node scripts/build-catalog.mjs"
+  }
+}

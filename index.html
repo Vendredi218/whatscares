@@ -72,38 +72,32 @@ nav {
 
 /* ─── HERO ─── */
 .hero {
-  padding: 88px clamp(24px, 4vw, 48px) 28px;
-  max-width: 640px;
+  padding: 124px 24px 56px;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-eyebrow {
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 18px; font-weight: 500;
 }
 
 .hero h1 {
-  font-family: var(--serif); font-size: clamp(32px, 5vw, 42px); font-weight: 400;
-  line-height: 1.2; margin-bottom: 8px; letter-spacing: -0.5px;
+  font-family: var(--serif); font-size: clamp(36px, 5.5vw, 54px); font-weight: 400;
+  line-height: 1.15; margin-bottom: 16px; letter-spacing: -0.5px;
 }
 .hero h1 em { font-style: italic; color: var(--text-2); }
 
-.hero p {
-  font-family: var(--serif); font-size: 15px; font-style: italic;
-  color: var(--text-3); margin-bottom: 24px;
+.hero-sub {
+  font-family: var(--serif); font-size: 16px; font-style: italic;
+  color: var(--text-2); line-height: 1.65;
+  max-width: 520px; margin: 0 auto 36px;
 }
 
-/* ─── SEARCH ─── */
-.search-wrap { position: relative; max-width: 420px; }
-
-.search {
-  width: 100%; padding: 12px 16px 12px 40px;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); color: var(--text);
-  font-size: 14px; font-family: var(--sans); outline: none;
-  transition: border-color 0.2s;
-}
-.search:focus { border-color: var(--text-3); }
-.search::placeholder { color: var(--text-3); }
-
-.search-wrap svg {
-  position: absolute; left: 13px; top: 50%;
-  transform: translateY(-50%); color: var(--text-3);
-  pointer-events: none; opacity: 0.5;
+.hero-meta {
+  margin-top: 20px; font-size: 12px; color: var(--text-3);
+  letter-spacing: 0.5px;
 }
 
 /* ─── LAYOUT ─── */
@@ -703,22 +697,27 @@ footer {
 
 /* ─── SEARCH PANEL ─── */
 .search-panel {
-  max-width: 560px;
-  margin-top: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5);
 }
 
 .search-tabs {
   display: flex;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 20px;
 }
 
 .search-tab {
   flex: 1;
-  padding: 12px 0;
+  padding: 15px 0;
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
   color: var(--text-3);
   font-family: var(--sans);
   font-size: 14px;
@@ -731,83 +730,89 @@ footer {
 .search-tab:hover { color: var(--text-2); }
 .search-tab.active { color: var(--text); border-bottom-color: var(--accent); }
 
-.search-mode { display: none; }
+.search-mode { display: none; padding: 22px 24px 24px; }
 .search-mode.active { display: block; }
 
 .search-label {
   display: block;
   font-size: 13px;
-  color: var(--text-3);
+  color: var(--text-2);
   margin-bottom: 10px;
 }
 
 .search-input {
   width: 100%;
   padding: 14px 16px;
-  background: var(--surface);
+  background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 8px;
   color: var(--text);
   font-size: 15px;
   font-family: var(--sans);
   outline: none;
   transition: border-color 0.2s;
 }
-.search-input:focus { border-color: var(--text-3); }
+.search-input:focus { border-color: rgba(196,53,42,0.55); }
 .search-input::placeholder { color: var(--text-3); }
 
 .search-btn {
   width: 100%;
   margin-top: 12px;
-  padding: 13px;
-  background: var(--text);
+  padding: 14px;
+  background: var(--accent);
   border: none;
-  border-radius: var(--radius);
-  color: var(--bg);
+  border-radius: 8px;
+  color: #fff;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   font-family: var(--sans);
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: filter 0.2s, opacity 0.2s;
   letter-spacing: 0.3px;
 }
-.search-btn:hover { opacity: 0.85; }
+.search-btn:hover { filter: brightness(1.12); }
+.search-btn:disabled { opacity: 0.55; cursor: wait; }
 
 .search-hints {
-  margin-top: 10px;
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
   font-size: 12px;
   color: var(--text-3);
-  line-height: 1.8;
 }
 .search-hint {
+  padding: 6px 13px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
   cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: color 0.2s;
-  margin-right: 6px;
+  color: var(--text-2);
+  transition: all 0.2s;
+  user-select: none;
 }
-.search-hint:hover { color: var(--text-2); }
+.search-hint:hover { border-color: var(--text-3); color: var(--text); }
 
 /* ─── AUTOCOMPLETE ─── */
 .autocomplete-wrap { position: relative; }
 
 .autocomplete-list {
   position: absolute;
-  top: calc(100% - 1px);
+  top: calc(100% + 6px);
   left: 0; right: 0;
-  background: var(--surface);
+  background: var(--surface-2);
   border: 1px solid var(--border);
-  border-top: none;
-  border-radius: 0 0 var(--radius) var(--radius);
-  max-height: 260px;
+  border-radius: 8px;
+  max-height: 264px;
   overflow-y: auto;
   z-index: 50;
   display: none;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.5);
 }
 .autocomplete-list.open { display: block; }
 
 .autocomplete-item {
-  padding: 10px 16px;
+  padding: 11px 16px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -815,7 +820,7 @@ footer {
   transition: background 0.15s;
 }
 .autocomplete-item:hover,
-.autocomplete-item.focused { background: var(--surface-2); }
+.autocomplete-item.focused { background: rgba(255,255,255,0.06); }
 
 .ac-title { font-size: 14px; font-weight: 500; color: var(--text); }
 .ac-year { font-size: 13px; color: var(--text-3); margin-left: 12px; flex-shrink: 0; }
@@ -861,6 +866,24 @@ footer {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* ─── AI "WHY IT FITS" ─── */
+.card-why {
+  font-family: var(--serif); font-style: italic;
+  font-size: 15px; color: rgba(255,255,255,0.85);
+  line-height: 1.45; margin-bottom: 8px;
+}
+
+.beyond-note {
+  font-size: 13px; color: var(--text-3);
+  margin: -4px 0 14px;
+  font-family: var(--serif); font-style: italic;
+}
+.beyond-note a {
+  color: var(--text-2); text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.beyond-note a:hover { color: var(--text); }
 
 /* ─── SEARCH RESULTS CONTEXT ─── */
 .results-context {
@@ -910,10 +933,12 @@ footer {
 /* ─── RESPONSIVE ─── */
 @media (max-width: 768px) {
   nav { height: 50px; }
-  .hero { padding-top: 72px; }
-  .hero h1 { font-size: 28px; }
+  .hero { padding: 96px 16px 40px; }
+  .hero h1 { font-size: 32px; }
+  .hero-sub { font-size: 15px; margin-bottom: 28px; }
   .search-input { font-size: 16px; }
   .search-panel { max-width: 100%; }
+  .search-mode { padding: 18px 16px 18px; }
   .sort-bar { gap: 2px; }
   .sort-btn { padding: 5px 10px; font-size: 11px; }
   .pill { font-size: 13px; padding: 7px 14px; }
@@ -958,8 +983,9 @@ footer {
 </nav>
 
 <header class="hero">
+  <div class="hero-eyebrow">A Field Guide to Fear</div>
   <h1>Horror that <em>gets you.</em></h1>
-  <p>Not everyone fears the same thing. Match films to your taste — folk rituals, cosmic dread, psychological terror, body horror — and find where to stream them.</p>
+  <p class="hero-sub">Not everyone fears the same thing. Tell us the dread you're after — folk rituals, cosmic void, slow-burn grief — and we'll find films you can actually stream.</p>
   <div class="search-panel">
     <div class="search-tabs">
       <button class="search-tab active" data-mode="mood" onclick="switchTab('mood')">Search by mood</button>
@@ -967,13 +993,13 @@ footer {
     </div>
     <div class="search-mode active" id="moodMode">
       <label class="search-label">What kind of horror are you in the mood for?</label>
-      <input type="text" class="search-input" id="moodInput" placeholder="atmospheric folk horror with dread...">
+      <input type="text" class="search-input" id="moodInput" placeholder="asian folk horror, slow burn, nothing too gory...">
       <button class="search-btn" onclick="searchMood()">Search</button>
       <div class="search-hints">
-        Try: <span class="search-hint" onclick="fillMood(this)">slow-burn psychological</span>
-        <span class="search-hint" onclick="fillMood(this)">scary supernatural</span>
-        <span class="search-hint" onclick="fillMood(this)">gory cosmic body horror</span>
-        <span class="search-hint" onclick="fillMood(this)">atmospheric isolation</span>
+        <span class="search-hint" onclick="fillMood(this)">asian folk</span>
+        <span class="search-hint" onclick="fillMood(this)">like Hereditary but scarier</span>
+        <span class="search-hint" onclick="fillMood(this)">date night, not too disturbing</span>
+        <span class="search-hint" onclick="fillMood(this)">found footage</span>
       </div>
     </div>
     <div class="search-mode" id="similarMode">
@@ -984,6 +1010,7 @@ footer {
       </div>
     </div>
   </div>
+  <div class="hero-meta">63 hand-picked films · intensity-rated · streaming included</div>
 </header>
 
 <div class="container">
@@ -1040,6 +1067,7 @@ footer {
       <span class="results-query" id="resultsQuery"></span>
       <button class="start-over" onclick="startOver()">Start over</button>
     </div>
+    <div class="beyond-note" id="beyondNote" style="display:none"></div>
     <div class="sort-bar">
       <span class="sort-label">Sort</span>
       <button class="sort-btn active" data-sort="match" onclick="setSort('match')">Best Match</button>
@@ -1237,77 +1265,14 @@ footer {
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="movies.js"></script>
 <script>
 const TMDB = 'https://image.tmdb.org/t/p/w342';
 const SUPABASE_URL = 'https://tkomadaiuhqgsnlixgtw.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_nmap6xPXEztMqK-wEmr3Bw_qpTO1KBJ';
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const M = [
-  { t:'Hereditary', y:2018, d:'Ari Aster', tags:['a24','occult','grief','slow-burn','atmospheric'], p:'/4GFPuL14eXi66V96xBWY73Y9PfR.jpg', rt:89, imdb:7.3, mc:87, yt:'V6wWKNij_1M', str:['Apple TV+','Paramount+'], scare:4, gore:2, dread:5, obscure:false },
-  { t:'Midsommar', y:2019, d:'Ari Aster', tags:['a24','folk','cult','grief','atmospheric'], p:'/7LEI8ulZzO5gy9Ww2NVCrKmHeDZ.jpg', rt:83, imdb:7.1, mc:72, yt:'1Vnghdsjmd0', str:['Apple TV+'], scare:3, gore:4, dread:5, obscure:false },
-  { t:'The Witch', y:2015, d:'Robert Eggers', tags:['folk','religious','slow-burn','witch','isolation','a24'], p:'/zap5hpFCWSvdWSuPGAQyjUv2wAC.jpg', rt:90, imdb:6.9, mc:83, yt:'iQXmlf3Sefg', str:['Paramount+','Shudder'], scare:2, gore:1, dread:5, obscure:false },
-  { t:'Saint Maud', y:2019, d:'Rose Glass', tags:['religious','psychological','slow-burn','isolation','a24'], p:'/ArNYeeDFLVye7JpqLElYdbE6fOa.jpg', rt:93, imdb:6.7, mc:80, yt:'EtOtCljOPSc', str:['Hulu','Paramount+'], scare:3, gore:2, dread:5, obscure:true },
-  { t:'The Exorcist', y:1973, d:'William Friedkin', tags:['religious','possession','supernatural'], p:'/4ucLGcXVVSVnsfkGtbLY4XAius8.jpg', rt:84, imdb:8.1, mc:82, yt:'YDGw1MTEe9k', str:['Max','Peacock'], scare:5, gore:3, dread:4, obscure:false },
-  { t:'Annihilation', y:2018, d:'Alex Garland', tags:['cosmic','body-horror','atmospheric','psychological'], p:'/d3qcpfNwbAMCNqWDHzPQsUYiUgS.jpg', rt:88, imdb:6.8, mc:79, yt:'89OP78l9oF0', str:['Paramount+','Hulu'], scare:3, gore:3, dread:5, obscure:false },
-  { t:'The Thing', y:1982, d:'John Carpenter', tags:['body-horror','creature','isolation','paranoia'], p:'/tzGY49kseSE9QAKk47uuDGwnSCu.jpg', rt:82, imdb:8.2, mc:57, yt:'5ftmr17M-a4', str:['Peacock'], scare:4, gore:5, dread:4, obscure:false },
-  { t:'Possessor', y:2020, d:'Brandon Cronenberg', tags:['body-horror','psychological','gore','cosmic'], p:'/xC9GZeJZ3NagdkGg9nLQx0aPG6J.jpg', rt:94, imdb:6.5, mc:76, yt:'N0gU0OmeLLg', str:['Hulu'], scare:3, gore:5, dread:4, obscure:true },
-  { t:'Suspiria', y:1977, d:'Dario Argento', tags:['giallo','witch','supernatural','atmospheric','gore'], p:'/sEcvc9h1X3hYZdFgtiiKMm6RB3f.jpg', rt:93, imdb:7.4, mc:null, yt:'QoMuni6jHok', str:['Tubi','Shudder'], scare:4, gore:4, dread:4, obscure:false },
-  { t:'Ringu', y:1998, d:'Hideo Nakata', tags:['j-horror','supernatural','psychological','atmospheric'], p:'/1YINof6kN5yRdePEbcU5360ejoq.jpg', rt:97, imdb:7.2, mc:null, yt:'JKFbUFBLEaE', str:['Shudder'], scare:4, gore:1, dread:5, obscure:false },
-  { t:'Pulse', y:2001, d:'Kiyoshi Kurosawa', tags:['j-horror','supernatural','isolation','cosmic','atmospheric'], p:'/c3zEimDraIyMSasPMGDaNOrhnzn.jpg', rt:73, imdb:6.5, mc:null, yt:'WLIv7HnZ_fE', str:['Shudder'], scare:2, gore:1, dread:5, obscure:true },
-  { t:'The Wicker Man', y:1973, d:'Robin Hardy', tags:['folk','cult','religious','isolation'], p:'/wwtrXRL8SiOWxhwLEvw7iBgYh0g.jpg', rt:92, imdb:7.5, mc:null, yt:'a4CQEORhgfQ', str:['Tubi'], scare:2, gore:1, dread:4, obscure:false },
-  { t:'Apostle', y:2018, d:'Gareth Evans', tags:['folk','cult','religious','gore'], p:'/rd269f2Yftxxam3EOJPYVwrvjIJ.jpg', rt:79, imdb:6.3, mc:null, yt:'SqHIBOysPK0', str:['Netflix'], scare:3, gore:5, dread:3, obscure:true },
-  { t:'Lamb', y:2021, d:'V. Jóhannsson', tags:['folk','atmospheric','slow-burn','isolation','a24'], p:'/gP9yviboTGWGolqUZKIB1UkF1C2.jpg', rt:86, imdb:6.3, mc:72, yt:'aBEfEVN01mQ', str:['Prime Video'], scare:1, gore:1, dread:4, obscure:true },
-  { t:'Possum', y:2018, d:'Matthew Holness', tags:['dolls','psychological','atmospheric','slow-burn'], p:'/5QOFKSpE7KacBriU95fxG6hmmvr.jpg', rt:85, imdb:5.6, mc:null, yt:'yBbV3L3MKiI', str:['Shudder'], scare:2, gore:1, dread:5, obscure:true },
-  { t:'Dead Silence', y:2007, d:'James Wan', tags:['dolls','supernatural','atmospheric'], p:'/rvcUVdATIHKZt7BSSttUkKbeBXN.jpg', rt:21, imdb:6.2, mc:35, yt:'z-1Lmi2XBIY', str:['Peacock'], scare:4, gore:2, dread:3, obscure:false },
-  { t:'Annabelle: Creation', y:2017, d:'David Sandberg', tags:['dolls','supernatural','possession','religious'], p:'/tb86j8jVCVsdZnzf8I6cIi65IeM.jpg', rt:69, imdb:6.5, mc:62, yt:'KisPhy7T__Q', str:['Max','Netflix'], scare:4, gore:2, dread:3, obscure:false },
-  { t:'The Boy', y:2016, d:'W.B. Bell', tags:['dolls','isolation','psychological','supernatural'], p:'/kW2vgzhyWXQu5UxNzebPokipBqH.jpg', rt:30, imdb:6.0, mc:41, yt:'XGaLR6iIBXE', str:['Netflix'], scare:3, gore:1, dread:3, obscure:false },
-  { t:'Mandy', y:2018, d:'Panos Cosmatos', tags:['cult','revenge','atmospheric','cosmic','gore'], p:'/m0yf7J7HsKeK6E81SMRcX8vx6mH.jpg', rt:91, imdb:6.5, mc:81, yt:'rI054ow6KJk', str:['Shudder','Tubi'], scare:3, gore:4, dread:4, obscure:true },
-  { t:'Color Out of Space', y:2019, d:'Richard Stanley', tags:['cosmic','body-horror','isolation','atmospheric'], p:'/k7rD7LzlsPS4jmE6Siah0QO4tAc.jpg', rt:86, imdb:6.1, mc:65, yt:'agnpaFLo0to', str:['Shudder'], scare:3, gore:4, dread:4, obscure:true },
-  { t:'The Lighthouse', y:2019, d:'Robert Eggers', tags:['cosmic','isolation','psychological','atmospheric','a24'], p:'/yAKNmpcUweGH6WMCEWenwU9PsbE.jpg', rt:90, imdb:7.4, mc:83, yt:'Hyag7lR8CPA', str:['Prime Video'], scare:2, gore:1, dread:5, obscure:false },
-  { t:'It Follows', y:2014, d:'D.R. Mitchell', tags:['supernatural','slow-burn','atmospheric','psychological'], p:'/iwnQ1JH1wdWrGYkgWySptJ5284A.jpg', rt:95, imdb:6.8, mc:83, yt:'HkZYbOH0ujw', str:['Paramount+','Tubi'], scare:3, gore:1, dread:5, obscure:false },
-  { t:'The Ritual', y:2017, d:'David Bruckner', tags:['folk','creature','isolation','grief'], p:'/9022CYEGqYETCeXN1oE3uwYJWub.jpg', rt:74, imdb:6.3, mc:null, yt:'Vfugwq2uoa0', str:['Netflix'], scare:3, gore:2, dread:4, obscure:false },
-  { t:'X', y:2022, d:'Ti West', tags:['slasher','a24','gore','isolation'], p:'/lopZSVtXzhFY603E9OqF7O1YKsh.jpg', rt:95, imdb:6.6, mc:79, yt:'Awg_AEXDYIE', str:['Paramount+','Showtime'], scare:4, gore:5, dread:3, obscure:false },
-  { t:'Pearl', y:2022, d:'Ti West', tags:['slasher','psychological','a24','isolation'], p:'/z5uIG81pXyHKg7cUFIu84Wjn4NS.jpg', rt:92, imdb:7.0, mc:80, yt:'sPHCKTMDrnk', str:['Paramount+','Showtime'], scare:3, gore:3, dread:4, obscure:false },
-  { t:'Talk to Me', y:2022, d:'Philippou Bros.', tags:['possession','supernatural','a24','grief'], p:'/kdPMUMJzyYAc4roD52qavX0nLIC.jpg', rt:95, imdb:7.1, mc:76, yt:'aLAKMy2qlO8', str:['Prime Video','Paramount+'], scare:5, gore:3, dread:4, obscure:false },
-  { t:'The Conjuring', y:2013, d:'James Wan', tags:['supernatural','possession','religious'], p:'/wVYREutTvI2tmxr6ujrHT704wGF.jpg', rt:86, imdb:7.5, mc:68, yt:'k10ETZ41q5o', str:['Max','Netflix'], scare:5, gore:2, dread:3, obscure:false },
-  { t:'Bone Tomahawk', y:2015, d:'S.C. Zahler', tags:['gore','isolation','slow-burn','creature'], p:'/4MmTHpn2Y8emqvBgvOjufImUmKZ.jpg', rt:91, imdb:7.1, mc:72, yt:'0ZbwtHi-KSE', str:['Tubi','Pluto TV'], scare:3, gore:5, dread:3, obscure:true },
-  { t:'I Saw the Devil', y:2010, d:'Kim Jee-woon', tags:['revenge','psychological','gore','slasher'], p:'/zp5NrmYp80axIGiEiYPmm1CW6uH.jpg', rt:81, imdb:7.8, mc:69, yt:'xwWgp1bqVwE', str:['Tubi','Shudder'], scare:4, gore:5, dread:3, obscure:true },
-  { t:'Under the Skin', y:2013, d:'Jonathan Glazer', tags:['cosmic','atmospheric','slow-burn','a24','body-horror'], p:'/55wmcXJIDYITr7JDijJTdvwSaAv.jpg', rt:85, imdb:6.3, mc:78, yt:'NoSWbyvdhHw', str:['Max'], scare:2, gore:2, dread:5, obscure:true },
-  { t:'Terrifier 2', y:2022, d:'Damien Leone', tags:['slasher','gore','dolls'], p:'/qEAlwXbYk6IHA4ztoS2XFFaa7Xo.jpg', rt:54, imdb:6.1, mc:null, yt:'h7GlMsfUMHM', str:['Screambox','Tubi'], scare:5, gore:5, dread:1, obscure:false },
-  { t:'The Void', y:2016, d:'Gillespie & Kostanski', tags:['cosmic','body-horror','cult','creature'], p:'/2WhZAPi3vomEQdzAPIYTvmvWaxI.jpg', rt:75, imdb:5.8, mc:null, yt:'0lrGCeHnq5Y', str:['Tubi','Shudder'], scare:3, gore:4, dread:4, obscure:true },
-  { t:'Tumbbad', y:2018, d:'Rahi Anil Barve', tags:['folk','atmospheric','creature','slow-burn'], p:'/vzjZAKozbDplHWcQXbXo0APKxst.jpg', rt:88, imdb:8.2, mc:null, yt:'sN75MPxgvX8', str:['Prime Video'], scare:3, gore:2, dread:5, obscure:true },
-  { t:'The Orphanage', y:2007, d:'J.A. Bayona', tags:['supernatural','grief','atmospheric','slow-burn'], p:'/vIpi1KtHLXUOfSVC2m6MqpjSPgL.jpg', rt:87, imdb:7.4, mc:74, yt:'wfBjoASfbFU', str:['Max','Tubi'], scare:3, gore:1, dread:5, obscure:false },
-  { t:'Barbarian', y:2022, d:'Zach Cregger', tags:['isolation','psychological','creature','gore'], p:'/idT5mnqPcJgSkvpDX7pJffBzdVH.jpg', rt:92, imdb:7.0, mc:80, yt:'MPN7yzQoj0g', str:['Max','Hulu'], scare:5, gore:4, dread:4, obscure:false },
-  { t:'Get Out', y:2017, d:'Jordan Peele', tags:['psychological','slow-burn','supernatural'], p:'/tFXcEccSQMf3lfhfXKSU9iRBpa3.jpg', rt:98, imdb:7.7, mc:85, yt:'sRfnevzM9kQ', str:['Peacock'], scare:3, gore:2, dread:5, obscure:false },
-  { t:'The Shining', y:1980, d:'Stanley Kubrick', tags:['psychological','isolation','atmospheric','supernatural'], p:'/uAR0AWqhQL1hQa69UDEbb2rE5Wx.jpg', rt:83, imdb:8.4, mc:66, yt:'S014oGZiSdI', str:['Max'], scare:4, gore:3, dread:5, obscure:false },
-  { t:'Alien', y:1979, d:'Ridley Scott', tags:['creature','isolation','atmospheric','slow-burn'], p:'/vfrQk5IPloGg1v9Rzbh2Eg3VGyM.jpg', rt:98, imdb:8.5, mc:89, yt:'62wYNUg5ed4', str:['Hulu'], scare:5, gore:3, dread:5, obscure:false },
-  { t:'Psycho', y:1960, d:'Alfred Hitchcock', tags:['psychological','slasher'], p:'/yz4QVqPx3h1hD1DfqqQkCq3rmxW.jpg', rt:96, imdb:8.5, mc:97, yt:'ULOCG0YXPwY', str:['Peacock'], scare:4, gore:2, dread:4, obscure:false },
-  { t:'Rosemary\'s Baby', y:1968, d:'Roman Polanski', tags:['occult','psychological','slow-burn'], p:'/uYgvlHceRFjAFbsNeMInYcLZLUb.jpg', rt:96, imdb:8.0, mc:96, yt:'NoXLXMbOgiU', str:['Paramount+'], scare:3, gore:1, dread:5, obscure:false },
-  { t:'The Texas Chain Saw Massacre', y:1974, d:'Tobe Hooper', tags:['slasher','isolation','gore'], p:'/1gw7RCYyRqginNo5D9PMPQQw7QB.jpg', rt:89, imdb:7.5, mc:87, yt:'Q6GEBm2utN0', str:['Tubi','Shudder'], scare:5, gore:5, dread:3, obscure:false },
-  { t:'Halloween', y:1978, d:'John Carpenter', tags:['slasher','atmospheric'], p:'/wijlZ3HaYMvlDTPqJoTCWKFkCPU.jpg', rt:96, imdb:7.7, mc:85, yt:'2Orp73nufs0', str:['Shudder','Peacock'], scare:4, gore:2, dread:4, obscure:false },
-  { t:'A Quiet Place', y:2018, d:'John Krasinski', tags:['creature','atmospheric','isolation'], p:'/nAU74GmpUk7t5iklEp3bufwDq4n.jpg', rt:96, imdb:7.5, mc:82, yt:'p9wE8dyzEJE', str:['Paramount+'], scare:4, gore:2, dread:5, obscure:false },
-  { t:'The Babadook', y:2014, d:'Jennifer Kent', tags:['psychological','grief','supernatural'], p:'/qt3fqapeo94TfvMyld8P7gkpXLz.jpg', rt:98, imdb:6.8, mc:86, yt:'uLdqc4SFVsA', str:['Tubi','Shudder'], scare:3, gore:1, dread:5, obscure:false },
-  { t:'The Blair Witch Project', y:1999, d:'Myrick & Sánchez', tags:['found-footage','folk','isolation','atmospheric'], p:'/9050VGrYjYrEjpOvDZVAngLbg1f.jpg', rt:86, imdb:6.5, mc:81, yt:'AcTh2YItSaM', str:['Paramount+'], scare:2, gore:1, dread:5, obscure:false },
-  { t:'The Descent', y:2005, d:'Neil Marshall', tags:['creature','isolation','gore','atmospheric'], p:'/ztlqrY7VgFIFmtzVsh3TPYiXCdF.jpg', rt:86, imdb:7.2, mc:80, yt:'T4_wHfz2qUA', str:['Tubi','Pluto TV'], scare:5, gore:4, dread:4, obscure:false },
-  { t:'Nope', y:2022, d:'Jordan Peele', tags:['cosmic','creature','atmospheric'], p:'/AcKVlWaNVVVFQwro3nLXqPljcYA.jpg', rt:83, imdb:6.8, mc:77, yt:'In8fuzj3gck', str:['Peacock'], scare:3, gore:2, dread:4, obscure:false },
-  { t:'Train to Busan', y:2016, d:'Sang-ho Yeon', tags:['zombie','grief','isolation'], p:'/vNVFt6dtcqnI7hqa6LFBUibuFiw.jpg', rt:94, imdb:7.6, mc:null, yt:'tNlEwztHqtE', str:['Shudder','Tubi'], scare:4, gore:3, dread:3, obscure:false },
-  { t:'The Wailing', y:2016, d:'Na Hong-jin', tags:['folk','supernatural','religious','atmospheric'], p:'/RbymxgEM5SpDfO2Io2JMFG10Vi.jpg', rt:99, imdb:7.4, mc:81, yt:'43uAputjI4k', str:['Prime Video','Shudder'], scare:4, gore:3, dread:5, obscure:true },
-  { t:'A Tale of Two Sisters', y:2003, d:'Kim Jee-woon', tags:['psychological','supernatural','atmospheric','slow-burn'], p:'/n82A7mfaWZHajDo2VhYyQpRbwvu.jpg', rt:85, imdb:7.1, mc:null, yt:'SGy-_Iwbpvw', str:['Shudder'], scare:3, gore:1, dread:5, obscure:true },
-  { t:'The Substance', y:2024, d:'Coralie Fargeat', tags:['body-horror','psychological','gore'], p:'/uYJvxMWMb9W4zIY3cbM50sj3dpC.jpg', rt:89, imdb:7.3, mc:74, yt:'U-RxVJrLKrk', str:['Mubi'], scare:3, gore:5, dread:4, obscure:false },
-  { t:'Longlegs', y:2024, d:'Osgood Perkins', tags:['psychological','occult','atmospheric'], p:'/qZPLK5ktRKa3CL4sKRZtj8UlPYc.jpg', rt:86, imdb:6.7, mc:76, yt:'jnCefPQIH98', str:['Hulu'], scare:4, gore:2, dread:5, obscure:false },
-  { t:'Late Night with the Devil', y:2023, d:'Cameron Cairnes', tags:['supernatural','possession','atmospheric'], p:'/hqcexYHbiTBfDIdDWxrxPtVndBX.jpg', rt:97, imdb:7.1, mc:77, yt:'BJ46x_e8TB0', str:['Shudder'], scare:4, gore:2, dread:4, obscure:false },
-  { t:'Oddity', y:2024, d:'Damian McCarthy', tags:['supernatural','psychological','atmospheric'], p:'/aOsPclgSiOqhndI2Xp2ksz2g9n6.jpg', rt:95, imdb:6.6, mc:77, yt:'7KduJUygxKE', str:['Shudder'], scare:4, gore:2, dread:5, obscure:true },
-  { t:'Nosferatu', y:2024, d:'Robert Eggers', tags:['supernatural','atmospheric','slow-burn'], p:'/5qGIxdEO841C0tdY8vOdLoRVrr0.jpg', rt:84, imdb:7.1, mc:75, yt:'b59rxDB_JRg', str:['Peacock'], scare:3, gore:2, dread:5, obscure:false },
-  { t:'Raw', y:2016, d:'Julia Ducournau', tags:['body-horror','psychological','gore'], p:'/dKxW1pscn4YghRYkIso8wt6NkhI.jpg', rt:91, imdb:7.0, mc:81, yt:'yn9eBMjjPcc', str:['Shudder'], scare:3, gore:4, dread:4, obscure:true },
-  { t:'[REC]', y:2007, d:'Jaume Balagueró', tags:['found-footage','zombie','isolation'], p:'/hgyJR4sgMsee6xMFM3xYiG6cDCh.jpg', rt:89, imdb:7.4, mc:73, yt:'OeaUokzE9fI', str:['Tubi'], scare:5, gore:4, dread:4, obscure:false },
-  { t:'Ju-On: The Grudge', y:2002, d:'Takashi Shimizu', tags:['j-horror','supernatural','atmospheric'], p:'/bW7E4cLWh0elRRbp2VCrtXrY1if.jpg', rt:63, imdb:6.7, mc:null, yt:'hGynIx4Dd3c', str:['Shudder'], scare:4, gore:1, dread:4, obscure:false },
-  { t:'Audition', y:1999, d:'Takashi Miike', tags:['j-horror','psychological','gore','slow-burn'], p:'/eGfsSXizR11tTHVo0kuOOFPAxZt.jpg', rt:85, imdb:7.1, mc:73, yt:'2wr_om5LsuI', str:['Shudder'], scare:4, gore:5, dread:5, obscure:true },
-  { t:'Noroi: The Curse', y:2005, d:'Kōji Shiraishi', tags:['j-horror','found-footage','supernatural','atmospheric'], p:'/vA7uZSMx8VL6LIuNFPnymwkRPBV.jpg', rt:87, imdb:7.1, mc:null, yt:'ixVC1LYEMbM', str:['Shudder'], scare:3, gore:1, dread:5, obscure:true },
-  { t:'Dark Water', y:2002, d:'Hideo Nakata', tags:['j-horror','supernatural','grief','atmospheric'], p:'/hErQSzvfemQDawgMvbNmN1UgcCA.jpg', rt:74, imdb:6.6, mc:null, yt:'Y97-o-rTKn4', str:['Shudder'], scare:2, gore:1, dread:5, obscure:true },
-  { t:'Shutter', y:2004, d:'B. Pisanthanakun', tags:['supernatural','psychological','atmospheric'], p:'/zUyaVtyugDaDHtOC6kCMJhbZsWu.jpg', rt:61, imdb:7.0, mc:null, yt:'-ucjPeQDUoQ', str:['Shudder'], scare:4, gore:1, dread:4, obscure:true },
-  { t:'Incantation', y:2022, d:'Kevin Ko', tags:['found-footage','folk','supernatural','religious'], p:'/cWz28oGV3cSajWdziVQbqrYCmnX.jpg', rt:73, imdb:6.4, mc:null, yt:'HnyNZdcL_GY', str:['Netflix'], scare:4, gore:2, dread:5, obscure:true },
-];
+/* M is loaded from movies.js */
 
 const STREAM_COLORS = {
   'Netflix':'#E50914','Shudder':'#3D6298','Hulu':'#1CE783','Prime Video':'#00A8E1',
@@ -1618,7 +1583,7 @@ function renderGrid() {
       .map(([i,s]) => ({ movie: M[i], score: s }));
     const moodText = document.getElementById('moodInput').value;
     ctx.style.display = 'flex';
-    qEl.innerHTML = `Results for <em>"${moodText}"</em> <span style="color:var(--text-3)">(${list.length})</span>`;
+    qEl.innerHTML = `Results for <em>"${escAttr(moodText)}"</em> <span style="color:var(--text-3)">(${list.length})</span>`;
   } else {
     list = M.map(m => ({ movie: m, score: 0 }));
     ctx.style.display = 'none';
@@ -1639,6 +1604,16 @@ function renderGrid() {
       });
       list.sort((a,b) => b.score - a.score);
     }
+  }
+
+  const note = document.getElementById('beyondNote');
+  if (searchMode === 'mood' && moodBeyond.length) {
+    note.style.display = 'block';
+    note.innerHTML = 'Beyond our library, worth hunting down: ' + moodBeyond.map(b =>
+      `<a href="https://letterboxd.com/search/films/${encodeURIComponent(b.title)}/" target="_blank" rel="noopener"><em>${escAttr(b.title)}</em>${b.year ? ` (${b.year})` : ''}</a>`
+    ).join(' · ');
+  } else {
+    note.style.display = 'none';
   }
 
   if (gemsOnly) list = list.filter(({ movie: m }) => m.obscure);
@@ -1676,7 +1651,8 @@ function renderGrid() {
 
   grid.innerHTML = list.map(({ movie: m, score }, i) => {
     const idx = M.indexOf(m);
-    return cardHTML(m, idx, score, i === 0 && list.length > 4);
+    const featured = i === 0 && (list.length > 4 || searchMode === 'mood');
+    return cardHTML(m, idx, score, featured);
   }).join('');
 }
 
@@ -1685,13 +1661,15 @@ function cardHTML(m, idx, score, featured) {
   const isFav = u.favs.includes(idx);
   const mainTag = m.tags[0];
   const streamText = m.str && m.str.length ? m.str.slice(0,2).join(' · ') : '';
-  return `<div class="card${featured ? ' featured' : ''}" onclick="openModal(${idx})">
+  const why = searchMode === 'mood' ? MOOD_WHY[idx] : null;
+  return `<div class="card${featured ? ' featured' : ''}" onclick="openModal(${idx})"${why && !featured ? ` title="${escAttr(why)}"` : ''}>
     <div class="poster">
       <img src="${TMDB}${m.p}" alt="${m.t}" loading="lazy">
       <span class="card-tag">${mainTag}</span>
       ${m.obscure ? '<div class="gem-badge">Hidden Gem</div>' : ''}
       <button class="card-fav${isFav?' saved':''}" onclick="toggleFav(${idx},event)">${isFav?'♥':'♡'}</button>
       <div class="card-overlay">
+        ${why && featured ? `<div class="card-why">“${escAttr(why)}”</div>` : ''}
         <div class="title">${m.t}</div>
         <div class="meta">${m.y} · ${m.d}</div>
         ${m.imdb ? `<div class="card-score">
@@ -1816,10 +1794,54 @@ function parseMood(text) {
   return scores;
 }
 
-function searchMood() {
+const MOOD_WHY = {};   // movie idx -> AI "why it fits"
+let moodBeyond = [];   // AI suggestions outside the library
+
+function escAttr(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+}
+
+async function searchMood() {
   const text = document.getElementById('moodInput').value.trim();
   if (!text) return;
-  moodScores = parseMood(text);
+  const btn = document.querySelector('#moodMode .search-btn');
+  const orig = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Consulting the archive…';
+
+  let scores = null;
+  Object.keys(MOOD_WHY).forEach(k => delete MOOD_WHY[k]);
+  moodBeyond = [];
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 55000);
+    const r = await fetch('/api/mood-search', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: text }),
+      signal: ctrl.signal,
+    });
+    clearTimeout(timer);
+    if (r.ok) {
+      const data = await r.json();
+      if (Array.isArray(data.matches) && data.matches.length) {
+        scores = new Map();
+        data.matches.forEach((m, i) => {
+          if (Number.isInteger(m.id) && m.id >= 0 && m.id < M.length) {
+            scores.set(m.id, 100 - i);
+            if (m.why) MOOD_WHY[m.id] = m.why;
+          }
+        });
+        moodBeyond = Array.isArray(data.beyond) ? data.beyond.slice(0, 2) : [];
+      }
+    }
+  } catch (e) { /* API down or timeout — fall back to local matching */ }
+
+  btn.disabled = false;
+  btn.textContent = orig;
+  if (!scores || !scores.size) scores = parseMood(text);
+
+  moodScores = scores;
   searchMode = 'mood';
   similarTo = null;
   currentSort = 'match';
