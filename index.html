@@ -701,6 +701,212 @@ footer {
   margin-top: 48px; letter-spacing: 1px;
 }
 
+/* ─── SEARCH PANEL ─── */
+.search-panel {
+  max-width: 560px;
+  margin-top: 20px;
+}
+
+.search-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.search-tab {
+  flex: 1;
+  padding: 12px 0;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-3);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  letter-spacing: 0.3px;
+}
+
+.search-tab:hover { color: var(--text-2); }
+.search-tab.active { color: var(--text); border-bottom-color: var(--accent); }
+
+.search-mode { display: none; }
+.search-mode.active { display: block; }
+
+.search-label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-3);
+  margin-bottom: 10px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 15px;
+  font-family: var(--sans);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-input:focus { border-color: var(--text-3); }
+.search-input::placeholder { color: var(--text-3); }
+
+.search-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 13px;
+  background: var(--text);
+  border: none;
+  border-radius: var(--radius);
+  color: var(--bg);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--sans);
+  cursor: pointer;
+  transition: opacity 0.2s;
+  letter-spacing: 0.3px;
+}
+.search-btn:hover { opacity: 0.85; }
+
+.search-hints {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--text-3);
+  line-height: 1.8;
+}
+.search-hint {
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+  margin-right: 6px;
+}
+.search-hint:hover { color: var(--text-2); }
+
+/* ─── AUTOCOMPLETE ─── */
+.autocomplete-wrap { position: relative; }
+
+.autocomplete-list {
+  position: absolute;
+  top: calc(100% - 1px);
+  left: 0; right: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  max-height: 260px;
+  overflow-y: auto;
+  z-index: 50;
+  display: none;
+}
+.autocomplete-list.open { display: block; }
+
+.autocomplete-item {
+  padding: 10px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.15s;
+}
+.autocomplete-item:hover,
+.autocomplete-item.focused { background: var(--surface-2); }
+
+.ac-title { font-size: 14px; font-weight: 500; color: var(--text); }
+.ac-year { font-size: 13px; color: var(--text-3); margin-left: 12px; flex-shrink: 0; }
+
+/* ─── SORT BAR ─── */
+.sort-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.sort-label {
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-right: 8px;
+  font-weight: 500;
+}
+
+.sort-btn {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  background: none;
+  border: 1px solid transparent;
+  color: var(--text-3);
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: all 0.2s;
+}
+.sort-btn:hover { color: var(--text-2); }
+.sort-btn.active { border-color: var(--text-2); color: var(--text); background: var(--surface-2); }
+
+/* ─── CARD STREAMING ─── */
+.card-overlay .card-stream {
+  font-size: 10px;
+  color: rgba(255,255,255,0.45);
+  margin-top: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── SEARCH RESULTS CONTEXT ─── */
+.results-context {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.results-query {
+  font-size: 15px;
+  color: var(--text-2);
+  font-family: var(--serif);
+}
+.results-query em { font-style: italic; color: var(--text); }
+
+.start-over {
+  font-size: 12px;
+  color: var(--text-3);
+  cursor: pointer;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-family: var(--sans);
+  transition: all 0.2s;
+}
+.start-over:hover { border-color: var(--text-3); color: var(--text-2); }
+
+/* ─── START FROM A FAVOURITE ─── */
+.fav-sub {
+  font-size: 13px;
+  color: var(--text-3);
+  margin-top: -12px;
+  margin-bottom: 14px;
+  font-style: italic;
+  font-family: var(--serif);
+}
+
+.fav-row .card {
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+.fav-row .card:hover { border-color: var(--accent); }
+
 /* ─── RESPONSIVE ─── */
 @media (max-width: 768px) {
   nav { height: 50px; }
@@ -751,9 +957,29 @@ footer {
 <header class="hero">
   <h1>Horror that <em>gets you.</em></h1>
   <p>Not everyone fears the same thing. Match films to your taste — folk rituals, cosmic dread, psychological terror, body horror — and find where to stream them.</p>
-  <div class="search-wrap">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input type="text" class="search" id="search" placeholder="Search films, directors, elements...">
+  <div class="search-panel">
+    <div class="search-tabs">
+      <button class="search-tab active" data-mode="mood" onclick="switchTab('mood')">Search by mood</button>
+      <button class="search-tab" data-mode="similar" onclick="switchTab('similar')">Films like...</button>
+    </div>
+    <div class="search-mode active" id="moodMode">
+      <label class="search-label">What kind of horror are you in the mood for?</label>
+      <input type="text" class="search-input" id="moodInput" placeholder="atmospheric folk horror with dread...">
+      <button class="search-btn" onclick="searchMood()">Search</button>
+      <div class="search-hints">
+        Try: <span class="search-hint" onclick="fillMood(this)">slow-burn psychological</span>
+        <span class="search-hint" onclick="fillMood(this)">scary supernatural</span>
+        <span class="search-hint" onclick="fillMood(this)">gory cosmic body horror</span>
+        <span class="search-hint" onclick="fillMood(this)">atmospheric isolation</span>
+      </div>
+    </div>
+    <div class="search-mode" id="similarMode">
+      <label class="search-label">Which horror film do you want more of?</label>
+      <div class="autocomplete-wrap">
+        <input type="text" class="search-input" id="filmInput" placeholder="Start typing a film name..." autocomplete="off">
+        <div class="autocomplete-list" id="acList"></div>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -766,6 +992,15 @@ footer {
       <span class="count" id="collCount"></span>
     </div>
     <div class="hscroll" id="collRow"></div>
+  </section>
+
+  <!-- START FROM A FAVOURITE -->
+  <section id="favStart">
+    <div class="section-head">
+      <h2>Start from a favourite</h2>
+    </div>
+    <p class="fav-sub">Tap a film to find similar horror</p>
+    <div class="hscroll fav-row" id="favRow"></div>
   </section>
 
   <!-- FILTER BAR + GRID -->
@@ -795,6 +1030,18 @@ footer {
         <button class="toggle" id="gemToggle" onclick="toggleGems()"></button>
         Hidden gems only
       </div>
+    </div>
+    <div class="results-context" id="resultsContext" style="display:none">
+      <span class="results-query" id="resultsQuery"></span>
+      <button class="start-over" onclick="startOver()">Start over</button>
+    </div>
+    <div class="sort-bar">
+      <span class="sort-label">Sort</span>
+      <button class="sort-btn active" data-sort="match" onclick="setSort('match')">Best Match</button>
+      <button class="sort-btn" data-sort="rating" onclick="setSort('rating')">Top Rated</button>
+      <button class="sort-btn" data-sort="newest" onclick="setSort('newest')">Newest</button>
+      <button class="sort-btn" data-sort="oldest" onclick="setSort('oldest')">Oldest</button>
+      <button class="sort-btn" data-sort="obscure" onclick="setSort('obscure')">Most Obscure</button>
     </div>
     <div class="section-head">
       <h2 id="gridLabel">All Films</h2>
@@ -1279,6 +1526,35 @@ const LISTS = [
 let active = new Set();
 let query = '';
 let gemsOnly = false;
+let currentSort = 'match';
+let searchMode = 'browse'; // 'browse' | 'mood' | 'similar'
+let similarTo = null; // index into M when in "similar" mode
+let moodScores = null; // Map<movieIndex, score> when mood search active
+
+const MOOD_KEYWORDS = {
+  'scary':['scare',4],'terrifying':['scare',5],'frightening':['scare',4],
+  'gory':['gore',3],'bloody':['gore',3],'violent':['gore',3],'graphic':['gore',3],
+  'atmospheric':['dread',4],'creepy':['dread',4],'unsettling':['dread',4],
+  'eerie':['dread',4],'dark':['dread',3],'disturbing':['dread',3],
+  'intense':['scare',3],'dread':['dread',4],'dreamy':['dread',3],
+};
+const TAG_ALIASES = {
+  'slow':'slow-burn','patient':'slow-burn','meditative':'slow-burn',
+  'body':'body-horror','japanese':'j-horror','korean':'revenge',
+  'puppets':'dolls','puppet':'dolls','doll':'dolls',
+  'witch':'folk','witchcraft':'folk','ritual':'folk','rituals':'folk',
+  'alien':'cosmic','lovecraft':'cosmic','lovecraftian':'cosmic',
+  'mind':'psychological','mental':'psychological',
+  'ghost':'supernatural','haunted':'supernatural','haunting':'supernatural',
+  'demon':'possession','demonic':'possession',
+  'revenge':'revenge','cult':'cult','cults':'cult',
+  'folk':'folk','cosmic':'cosmic','psychological':'psychological',
+  'supernatural':'supernatural','religious':'religious',
+  'isolation':'isolation','possession':'possession',
+  'slasher':'slasher','gore':'gore','grief':'grief',
+  'a24':'a24','giallo':'giallo','occult':'occult',
+  'creature':'creature','paranoia':'paranoia',
+};
 
 function toggleGems() {
   gemsOnly = !gemsOnly;
@@ -1287,33 +1563,69 @@ function toggleGems() {
 }
 
 function renderGrid() {
-  let list = [...M];
+  let list = [];
+  const ctx = document.getElementById('resultsContext');
+  const qEl = document.getElementById('resultsQuery');
 
-  if (query) {
-    const q = query.toLowerCase();
-    list = list.filter(m =>
-      m.t.toLowerCase().includes(q) ||
-      m.d.toLowerCase().includes(q) ||
-      m.tags.some(t => t.includes(q))
-    );
+  if (searchMode === 'similar' && similarTo !== null) {
+    const ref = M[similarTo];
+    const sims = similar(ref);
+    list = sims.map(s => ({ movie: s.m, score: s.score }));
+    ctx.style.display = 'flex';
+    qEl.innerHTML = `Films like <em>${ref.t}</em> <span style="color:var(--text-3)">(${list.length})</span>`;
+  } else if (searchMode === 'mood' && moodScores) {
+    list = [...moodScores.entries()]
+      .filter(([,s]) => s > 0)
+      .sort((a,b) => b[1] - a[1])
+      .map(([i,s]) => ({ movie: M[i], score: s }));
+    const moodText = document.getElementById('moodInput').value;
+    ctx.style.display = 'flex';
+    qEl.innerHTML = `Results for <em>"${moodText}"</em> <span style="color:var(--text-3)">(${list.length})</span>`;
+  } else {
+    list = M.map(m => ({ movie: m, score: 0 }));
+    ctx.style.display = 'none';
+
+    if (query) {
+      const q = query.toLowerCase();
+      list = list.filter(({ movie: m }) =>
+        m.t.toLowerCase().includes(q) ||
+        m.d.toLowerCase().includes(q) ||
+        m.tags.some(t => t.includes(q))
+      );
+    }
+
+    if (active.size > 0) {
+      list = list.filter(({ movie: m }) => [...active].some(f => m.tags.includes(f)));
+      list.forEach(item => {
+        item.score = [...active].filter(f => item.movie.tags.includes(f)).length;
+      });
+      list.sort((a,b) => b.score - a.score);
+    }
   }
 
-  if (active.size > 0) {
-    list = list.filter(m => [...active].some(f => m.tags.includes(f)));
-    list.sort((a,b) => {
-      const sa = [...active].filter(f => a.tags.includes(f)).length;
-      const sb = [...active].filter(f => b.tags.includes(f)).length;
-      return sb - sa;
-    });
-  }
+  if (gemsOnly) list = list.filter(({ movie: m }) => m.obscure);
 
-  if (gemsOnly) list = list.filter(m => m.obscure);
+  if (currentSort !== 'match') {
+    const sorters = {
+      rating: (a,b) => (b.movie.imdb||0) - (a.movie.imdb||0),
+      newest: (a,b) => b.movie.y - a.movie.y,
+      oldest: (a,b) => a.movie.y - b.movie.y,
+      obscure: (a,b) => (b.movie.obscure?1:0) - (a.movie.obscure?1:0) || (b.movie.imdb||0) - (a.movie.imdb||0),
+    };
+    if (sorters[currentSort]) list.sort(sorters[currentSort]);
+  }
 
   const grid = document.getElementById('grid');
   const empty = document.getElementById('empty');
 
-  document.getElementById('gridLabel').textContent =
-    gemsOnly ? 'Hidden Gems' : active.size > 0 ? 'Matching Films' : 'All Films';
+  if (searchMode === 'similar') {
+    document.getElementById('gridLabel').textContent = 'Similar Films';
+  } else if (searchMode === 'mood') {
+    document.getElementById('gridLabel').textContent = 'Matching Films';
+  } else {
+    document.getElementById('gridLabel').textContent =
+      gemsOnly ? 'Hidden Gems' : active.size > 0 ? 'Matching Films' : 'All Films';
+  }
   document.getElementById('gridCount').textContent = list.length + ' films';
   document.getElementById('clearBtn').style.display = active.size > 0 ? 'inline' : 'none';
 
@@ -1324,18 +1636,17 @@ function renderGrid() {
   }
   empty.classList.remove('show');
 
-  grid.innerHTML = list.map((m, i) => {
+  grid.innerHTML = list.map(({ movie: m, score }, i) => {
     const idx = M.indexOf(m);
-    const matchN = active.size ? [...active].filter(f => m.tags.includes(f)).length : 0;
-    const matchP = active.size ? Math.round((matchN / active.size) * 100) : 0;
-    return cardHTML(m, idx, matchP, i === 0);
+    return cardHTML(m, idx, score, i === 0 && list.length > 4);
   }).join('');
 }
 
-function cardHTML(m, idx, matchP, featured) {
+function cardHTML(m, idx, score, featured) {
   const u = loadUser();
   const isFav = u.favs.includes(idx);
   const mainTag = m.tags[0];
+  const streamText = m.str && m.str.length ? m.str.slice(0,2).join(' · ') : '';
   return `<div class="card${featured ? ' featured' : ''}" onclick="openModal(${idx})">
     <div class="poster">
       <img src="${TMDB}${m.p}" alt="${m.t}" loading="lazy">
@@ -1349,6 +1660,7 @@ function cardHTML(m, idx, matchP, featured) {
           <span class="stars">${imdbStars(m.imdb)}</span>
           <span class="score-num">${m.imdb}</span>
         </div>` : ''}
+        ${streamText ? `<div class="card-stream">${streamText}</div>` : ''}
       </div>
     </div>
   </div>`;
@@ -1410,20 +1722,190 @@ document.querySelectorAll('.pill[data-t]').forEach(el => {
   });
 });
 
-document.getElementById('search').addEventListener('input', e => {
-  query = e.target.value;
-  renderGrid();
-});
-
 function clearAll() {
   active.clear(); query = '';
-  document.getElementById('search').value = '';
   document.querySelectorAll('.pill.on').forEach(p => p.classList.remove('on'));
   renderGrid();
 }
 
 function applyList(indices) {
   document.getElementById('browse').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ─── TAB SWITCHING ───
+function switchTab(mode) {
+  document.querySelectorAll('.search-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+  document.getElementById('moodMode').classList.toggle('active', mode === 'mood');
+  document.getElementById('similarMode').classList.toggle('active', mode === 'similar');
+  if (mode === 'mood') {
+    document.getElementById('moodInput').focus();
+  } else {
+    document.getElementById('filmInput').focus();
+  }
+}
+
+// ─── MOOD SEARCH ───
+function parseMood(text) {
+  const words = text.toLowerCase().replace(/[^\w\s-]/g, '').split(/\s+/).filter(Boolean);
+  const matchedTags = new Set();
+  const intensityFilters = [];
+
+  for (const w of words) {
+    if (TAG_ALIASES[w]) matchedTags.add(TAG_ALIASES[w]);
+    if (MOOD_KEYWORDS[w]) {
+      const [dim, min] = MOOD_KEYWORDS[w];
+      intensityFilters.push({ dim, min });
+    }
+  }
+
+  const scores = new Map();
+  M.forEach((m, i) => {
+    let s = 0;
+    for (const tag of matchedTags) {
+      if (m.tags.includes(tag)) s += 3;
+    }
+    for (const { dim, min } of intensityFilters) {
+      const val = dim === 'scare' ? m.scare : dim === 'gore' ? m.gore : m.dread;
+      if (val >= min) s += 2;
+    }
+    for (const w of words) {
+      if (m.t.toLowerCase().includes(w)) s += 2;
+      if (m.d.toLowerCase().includes(w)) s += 1;
+    }
+    scores.set(i, s);
+  });
+
+  return scores;
+}
+
+function searchMood() {
+  const text = document.getElementById('moodInput').value.trim();
+  if (!text) return;
+  moodScores = parseMood(text);
+  searchMode = 'mood';
+  similarTo = null;
+  currentSort = 'match';
+  document.querySelectorAll('.sort-btn').forEach(b => b.classList.toggle('active', b.dataset.sort === 'match'));
+  renderGrid();
+  document.getElementById('browse').scrollIntoView({ behavior: 'smooth' });
+}
+
+function fillMood(el) {
+  document.getElementById('moodInput').value = el.textContent;
+  searchMood();
+}
+
+document.getElementById('moodInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') searchMood();
+});
+
+// ─── FILMS LIKE (AUTOCOMPLETE) ───
+let acFocused = -1;
+
+function updateAutocomplete() {
+  const val = document.getElementById('filmInput').value.trim().toLowerCase();
+  const list = document.getElementById('acList');
+
+  if (val.length < 2) {
+    list.classList.remove('open');
+    return;
+  }
+
+  const matches = M.map((m, i) => ({ m, i }))
+    .filter(({ m }) => m.t.toLowerCase().includes(val) || m.d.toLowerCase().includes(val))
+    .slice(0, 8);
+
+  if (!matches.length) {
+    list.classList.remove('open');
+    return;
+  }
+
+  acFocused = -1;
+  list.innerHTML = matches.map(({ m, i }) =>
+    `<div class="autocomplete-item" data-idx="${i}" onclick="selectFilm(${i})">
+      <span class="ac-title">${m.t}</span>
+      <span class="ac-year">${m.y}</span>
+    </div>`
+  ).join('');
+  list.classList.add('open');
+}
+
+function selectFilm(idx) {
+  const m = M[idx];
+  document.getElementById('filmInput').value = m.t;
+  document.getElementById('acList').classList.remove('open');
+  similarTo = idx;
+  searchMode = 'similar';
+  moodScores = null;
+  currentSort = 'match';
+  document.querySelectorAll('.sort-btn').forEach(b => b.classList.toggle('active', b.dataset.sort === 'match'));
+  renderGrid();
+  document.getElementById('browse').scrollIntoView({ behavior: 'smooth' });
+}
+
+document.getElementById('filmInput').addEventListener('input', updateAutocomplete);
+
+document.getElementById('filmInput').addEventListener('keydown', e => {
+  const list = document.getElementById('acList');
+  const items = list.querySelectorAll('.autocomplete-item');
+  if (!items.length) return;
+
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    acFocused = Math.min(acFocused + 1, items.length - 1);
+    items.forEach((it, i) => it.classList.toggle('focused', i === acFocused));
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    acFocused = Math.max(acFocused - 1, 0);
+    items.forEach((it, i) => it.classList.toggle('focused', i === acFocused));
+  } else if (e.key === 'Enter' && acFocused >= 0) {
+    e.preventDefault();
+    selectFilm(+items[acFocused].dataset.idx);
+  }
+});
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.autocomplete-wrap')) {
+    document.getElementById('acList').classList.remove('open');
+  }
+});
+
+// ─── SORT ───
+function setSort(sort) {
+  currentSort = sort;
+  document.querySelectorAll('.sort-btn').forEach(b => b.classList.toggle('active', b.dataset.sort === sort));
+  renderGrid();
+}
+
+// ─── START OVER ───
+function startOver() {
+  searchMode = 'browse';
+  similarTo = null;
+  moodScores = null;
+  currentSort = 'match';
+  document.getElementById('moodInput').value = '';
+  document.getElementById('filmInput').value = '';
+  document.querySelectorAll('.sort-btn').forEach(b => b.classList.toggle('active', b.dataset.sort === 'match'));
+  active.clear();
+  document.querySelectorAll('.pill.on').forEach(p => p.classList.remove('on'));
+  renderGrid();
+}
+
+// ─── START FROM A FAVOURITE ───
+function renderFavStart() {
+  const popular = [0,1,2,4,6,9,20,21,23,24,25,26,28,34];
+  document.getElementById('favRow').innerHTML = popular.map(idx => {
+    const m = M[idx];
+    return `<div class="card" onclick="selectFilm(${idx})">
+      <div class="poster">
+        <img src="${TMDB}${m.p}" alt="${m.t}" loading="lazy">
+        <div class="card-overlay">
+          <div class="title">${m.t}</div>
+          <div class="meta">${m.y}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 // ─── MODAL ───
@@ -1578,10 +2060,13 @@ function closeModal(e) {
 }
 
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
+  if (e.key === 'Escape') {
+    closeModal();
+    document.getElementById('acList').classList.remove('open');
+  }
   if (e.key === '/' && !e.target.matches('input')) {
     e.preventDefault();
-    document.getElementById('search').focus();
+    document.getElementById('moodInput').focus();
   }
 });
 
@@ -1600,6 +2085,7 @@ renderGrid();
 renderLists();
 renderHered();
 renderCollection();
+renderFavStart();
 checkUrlMovie();
 
 sb.auth.onAuthStateChange(async (event, session) => {
@@ -1614,5 +2100,7 @@ sb.auth.onAuthStateChange(async (event, session) => {
   }
 });
 </script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>
