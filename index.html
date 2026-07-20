@@ -912,7 +912,10 @@ footer {
   nav { height: 50px; }
   .hero { padding-top: 72px; }
   .hero h1 { font-size: 28px; }
-  .search { font-size: 16px; }
+  .search-input { font-size: 16px; }
+  .search-panel { max-width: 100%; }
+  .sort-bar { gap: 2px; }
+  .sort-btn { padding: 5px 10px; font-size: 11px; }
   .pill { font-size: 13px; padding: 7px 14px; }
   .grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 240px; gap: 10px; }
   .card.featured { grid-column: span 2; grid-row: span 1; }
@@ -1018,6 +1021,8 @@ footer {
       <span class="pill" data-t="slow-burn">Slow-Burn</span>
       <span class="pill" data-t="slasher">Slasher</span>
       <span class="pill" data-t="j-horror">J-Horror</span>
+      <span class="pill" data-t="zombie">Zombie</span>
+      <span class="pill" data-t="found-footage">Found Footage</span>
       <span class="pill" data-t="possession">Possession</span>
       <span class="pill" data-t="isolation">Isolation</span>
       <span class="pill" data-t="gore">Gore</span>
@@ -1170,7 +1175,7 @@ footer {
 <noscript>
 <div style="max-width:800px;margin:40px auto;padding:20px;color:#e5e5e5;font-family:sans-serif">
 <h2>All Horror Films on WhatScares</h2>
-<p>Horror matched to your taste. Browse 35+ films filterable by what actually scares you — folk rituals, cosmic dread, psychological terror, body horror, gore — with streaming info for every title.</p>
+<p>Horror matched to your taste. Browse 60+ films filterable by what actually scares you — folk rituals, cosmic dread, psychological terror, body horror, gore — with streaming info for every title.</p>
 <ul>
 <li><strong>Hereditary</strong> (2018) — Dir. Ari Aster — IMDb 7.3 — Elements: a24, occult, grief, slow-burn, atmospheric</li>
 <li><strong>Midsommar</strong> (2019) — Dir. Ari Aster — IMDb 7.1 — Elements: a24, folk, cult, grief, atmospheric</li>
@@ -1274,12 +1279,41 @@ const M = [
   { t:'Tumbbad', y:2018, d:'Rahi Anil Barve', tags:['folk','atmospheric','creature','slow-burn'], p:'/vzjZAKozbDplHWcQXbXo0APKxst.jpg', rt:88, imdb:8.2, mc:null, yt:'sN75MPxgvX8', str:['Prime Video'], scare:3, gore:2, dread:5, obscure:true },
   { t:'The Orphanage', y:2007, d:'J.A. Bayona', tags:['supernatural','grief','atmospheric','slow-burn'], p:'/vIpi1KtHLXUOfSVC2m6MqpjSPgL.jpg', rt:87, imdb:7.4, mc:74, yt:'wfBjoASfbFU', str:['Max','Tubi'], scare:3, gore:1, dread:5, obscure:false },
   { t:'Barbarian', y:2022, d:'Zach Cregger', tags:['isolation','psychological','creature','gore'], p:'/idT5mnqPcJgSkvpDX7pJffBzdVH.jpg', rt:92, imdb:7.0, mc:80, yt:'MPN7yzQoj0g', str:['Max','Hulu'], scare:5, gore:4, dread:4, obscure:false },
+  { t:'Get Out', y:2017, d:'Jordan Peele', tags:['psychological','slow-burn','supernatural'], p:'/tFXcEccSQMf3lfhfXKSU9iRBpa3.jpg', rt:98, imdb:7.7, mc:85, yt:'sRfnevzM9kQ', str:['Peacock'], scare:3, gore:2, dread:5, obscure:false },
+  { t:'The Shining', y:1980, d:'Stanley Kubrick', tags:['psychological','isolation','atmospheric','supernatural'], p:'/uAR0AWqhQL1hQa69UDEbb2rE5Wx.jpg', rt:83, imdb:8.4, mc:66, yt:'S014oGZiSdI', str:['Max'], scare:4, gore:3, dread:5, obscure:false },
+  { t:'Alien', y:1979, d:'Ridley Scott', tags:['creature','isolation','atmospheric','slow-burn'], p:'/vfrQk5IPloGg1v9Rzbh2Eg3VGyM.jpg', rt:98, imdb:8.5, mc:89, yt:'62wYNUg5ed4', str:['Hulu'], scare:5, gore:3, dread:5, obscure:false },
+  { t:'Psycho', y:1960, d:'Alfred Hitchcock', tags:['psychological','slasher'], p:'/yz4QVqPx3h1hD1DfqqQkCq3rmxW.jpg', rt:96, imdb:8.5, mc:97, yt:'ULOCG0YXPwY', str:['Peacock'], scare:4, gore:2, dread:4, obscure:false },
+  { t:'Rosemary\'s Baby', y:1968, d:'Roman Polanski', tags:['occult','psychological','slow-burn'], p:'/uYgvlHceRFjAFbsNeMInYcLZLUb.jpg', rt:96, imdb:8.0, mc:96, yt:'NoXLXMbOgiU', str:['Paramount+'], scare:3, gore:1, dread:5, obscure:false },
+  { t:'The Texas Chain Saw Massacre', y:1974, d:'Tobe Hooper', tags:['slasher','isolation','gore'], p:'/1gw7RCYyRqginNo5D9PMPQQw7QB.jpg', rt:89, imdb:7.5, mc:87, yt:'Q6GEBm2utN0', str:['Tubi','Shudder'], scare:5, gore:5, dread:3, obscure:false },
+  { t:'Halloween', y:1978, d:'John Carpenter', tags:['slasher','atmospheric'], p:'/wijlZ3HaYMvlDTPqJoTCWKFkCPU.jpg', rt:96, imdb:7.7, mc:85, yt:'2Orp73nufs0', str:['Shudder','Peacock'], scare:4, gore:2, dread:4, obscure:false },
+  { t:'A Quiet Place', y:2018, d:'John Krasinski', tags:['creature','atmospheric','isolation'], p:'/nAU74GmpUk7t5iklEp3bufwDq4n.jpg', rt:96, imdb:7.5, mc:82, yt:'p9wE8dyzEJE', str:['Paramount+'], scare:4, gore:2, dread:5, obscure:false },
+  { t:'The Babadook', y:2014, d:'Jennifer Kent', tags:['psychological','grief','supernatural'], p:'/qt3fqapeo94TfvMyld8P7gkpXLz.jpg', rt:98, imdb:6.8, mc:86, yt:'uLdqc4SFVsA', str:['Tubi','Shudder'], scare:3, gore:1, dread:5, obscure:false },
+  { t:'The Blair Witch Project', y:1999, d:'Myrick & Sánchez', tags:['found-footage','folk','isolation','atmospheric'], p:'/9050VGrYjYrEjpOvDZVAngLbg1f.jpg', rt:86, imdb:6.5, mc:81, yt:'AcTh2YItSaM', str:['Paramount+'], scare:2, gore:1, dread:5, obscure:false },
+  { t:'The Descent', y:2005, d:'Neil Marshall', tags:['creature','isolation','gore','atmospheric'], p:'/ztlqrY7VgFIFmtzVsh3TPYiXCdF.jpg', rt:86, imdb:7.2, mc:80, yt:'T4_wHfz2qUA', str:['Tubi','Pluto TV'], scare:5, gore:4, dread:4, obscure:false },
+  { t:'Nope', y:2022, d:'Jordan Peele', tags:['cosmic','creature','atmospheric'], p:'/AcKVlWaNVVVFQwro3nLXqPljcYA.jpg', rt:83, imdb:6.8, mc:77, yt:'In8fuzj3gck', str:['Peacock'], scare:3, gore:2, dread:4, obscure:false },
+  { t:'Train to Busan', y:2016, d:'Sang-ho Yeon', tags:['zombie','grief','isolation'], p:'/vNVFt6dtcqnI7hqa6LFBUibuFiw.jpg', rt:94, imdb:7.6, mc:null, yt:'tNlEwztHqtE', str:['Shudder','Tubi'], scare:4, gore:3, dread:3, obscure:false },
+  { t:'The Wailing', y:2016, d:'Na Hong-jin', tags:['folk','supernatural','religious','atmospheric'], p:'/RbymxgEM5SpDfO2Io2JMFG10Vi.jpg', rt:99, imdb:7.4, mc:81, yt:'43uAputjI4k', str:['Prime Video','Shudder'], scare:4, gore:3, dread:5, obscure:true },
+  { t:'A Tale of Two Sisters', y:2003, d:'Kim Jee-woon', tags:['psychological','supernatural','atmospheric','slow-burn'], p:'/n82A7mfaWZHajDo2VhYyQpRbwvu.jpg', rt:85, imdb:7.1, mc:null, yt:'SGy-_Iwbpvw', str:['Shudder'], scare:3, gore:1, dread:5, obscure:true },
+  { t:'The Substance', y:2024, d:'Coralie Fargeat', tags:['body-horror','psychological','gore'], p:'/uYJvxMWMb9W4zIY3cbM50sj3dpC.jpg', rt:89, imdb:7.3, mc:74, yt:'U-RxVJrLKrk', str:['Mubi'], scare:3, gore:5, dread:4, obscure:false },
+  { t:'Longlegs', y:2024, d:'Osgood Perkins', tags:['psychological','occult','atmospheric'], p:'/qZPLK5ktRKa3CL4sKRZtj8UlPYc.jpg', rt:86, imdb:6.7, mc:76, yt:'jnCefPQIH98', str:['Hulu'], scare:4, gore:2, dread:5, obscure:false },
+  { t:'Late Night with the Devil', y:2023, d:'Cameron Cairnes', tags:['supernatural','possession','atmospheric'], p:'/hqcexYHbiTBfDIdDWxrxPtVndBX.jpg', rt:97, imdb:7.1, mc:77, yt:'BJ46x_e8TB0', str:['Shudder'], scare:4, gore:2, dread:4, obscure:false },
+  { t:'Oddity', y:2024, d:'Damian McCarthy', tags:['supernatural','psychological','atmospheric'], p:'/aOsPclgSiOqhndI2Xp2ksz2g9n6.jpg', rt:95, imdb:6.6, mc:77, yt:'7KduJUygxKE', str:['Shudder'], scare:4, gore:2, dread:5, obscure:true },
+  { t:'Nosferatu', y:2024, d:'Robert Eggers', tags:['supernatural','atmospheric','slow-burn'], p:'/5qGIxdEO841C0tdY8vOdLoRVrr0.jpg', rt:84, imdb:7.1, mc:75, yt:'b59rxDB_JRg', str:['Peacock'], scare:3, gore:2, dread:5, obscure:false },
+  { t:'Raw', y:2016, d:'Julia Ducournau', tags:['body-horror','psychological','gore'], p:'/dKxW1pscn4YghRYkIso8wt6NkhI.jpg', rt:91, imdb:7.0, mc:81, yt:'yn9eBMjjPcc', str:['Shudder'], scare:3, gore:4, dread:4, obscure:true },
+  { t:'[REC]', y:2007, d:'Jaume Balagueró', tags:['found-footage','zombie','isolation'], p:'/hgyJR4sgMsee6xMFM3xYiG6cDCh.jpg', rt:89, imdb:7.4, mc:73, yt:'OeaUokzE9fI', str:['Tubi'], scare:5, gore:4, dread:4, obscure:false },
+  { t:'Ju-On: The Grudge', y:2002, d:'Takashi Shimizu', tags:['j-horror','supernatural','atmospheric'], p:'/bW7E4cLWh0elRRbp2VCrtXrY1if.jpg', rt:63, imdb:6.7, mc:null, yt:'hGynIx4Dd3c', str:['Shudder'], scare:4, gore:1, dread:4, obscure:false },
+  { t:'Audition', y:1999, d:'Takashi Miike', tags:['j-horror','psychological','gore','slow-burn'], p:'/eGfsSXizR11tTHVo0kuOOFPAxZt.jpg', rt:85, imdb:7.1, mc:73, yt:'2wr_om5LsuI', str:['Shudder'], scare:4, gore:5, dread:5, obscure:true },
+  { t:'Noroi: The Curse', y:2005, d:'Kōji Shiraishi', tags:['j-horror','found-footage','supernatural','atmospheric'], p:'/vA7uZSMx8VL6LIuNFPnymwkRPBV.jpg', rt:87, imdb:7.1, mc:null, yt:'ixVC1LYEMbM', str:['Shudder'], scare:3, gore:1, dread:5, obscure:true },
+  { t:'Dark Water', y:2002, d:'Hideo Nakata', tags:['j-horror','supernatural','grief','atmospheric'], p:'/hErQSzvfemQDawgMvbNmN1UgcCA.jpg', rt:74, imdb:6.6, mc:null, yt:'Y97-o-rTKn4', str:['Shudder'], scare:2, gore:1, dread:5, obscure:true },
+  { t:'Shutter', y:2004, d:'B. Pisanthanakun', tags:['supernatural','psychological','atmospheric'], p:'/zUyaVtyugDaDHtOC6kCMJhbZsWu.jpg', rt:61, imdb:7.0, mc:null, yt:'-ucjPeQDUoQ', str:['Shudder'], scare:4, gore:1, dread:4, obscure:true },
+  { t:'Incantation', y:2022, d:'Kevin Ko', tags:['found-footage','folk','supernatural','religious'], p:'/cWz28oGV3cSajWdziVQbqrYCmnX.jpg', rt:73, imdb:6.4, mc:null, yt:'HnyNZdcL_GY', str:['Netflix'], scare:4, gore:2, dread:5, obscure:true },
 ];
 
 const STREAM_COLORS = {
   'Netflix':'#E50914','Shudder':'#3D6298','Hulu':'#1CE783','Prime Video':'#00A8E1',
   'Max':'#002BE7','Paramount+':'#0064FF','Apple TV+':'#555','Peacock':'#000',
-  'Tubi':'#FA382F','Showtime':'#B10000','Pluto TV':'#FFCB00','Screambox':'#8B0000'
+  'Tubi':'#FA382F','Showtime':'#B10000','Pluto TV':'#FFCB00','Screambox':'#8B0000',
+  'Mubi':'#0B1E3E'
 };
 
 // ─── USER DATA ───
@@ -1451,6 +1485,10 @@ function rateMovie(idx, stars, e) {
   upsertMovie(idx);
   renderGrid();
   renderCollection();
+  const modalStars = document.querySelector('.modal-stars-wrap');
+  if (modalStars) {
+    modalStars.innerHTML = `<span class="rate-label">Your rating</span>${starsHTML(idx, 'modal')}`;
+  }
 }
 
 function starsHTML(idx, size) {
