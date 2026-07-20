@@ -53,7 +53,7 @@ export default async function handler(req, res) {
   if (!query) return res.status(400).json({ error: 'query required' });
   if (query.length > 200) return res.status(400).json({ error: 'query too long (max 200 chars)' });
 
-  const key = process.env.MINIMAX_API_KEY;
+  const key = (process.env.MINIMAX_API_KEY || '').trim();
   if (!key) return res.status(503).json({ error: 'search not configured' });
 
   const cacheKey = query.toLowerCase();
@@ -69,7 +69,10 @@ export default async function handler(req, res) {
   } catch (err) {
     console.error('mood-search failed:', err.message);
     const body = { error: 'search unavailable' };
-    if (req.headers['x-ws-debug'] === '1') body.detail = String(err.message).slice(0, 300);
+    if (req.headers['x-ws-debug'] === '1') {
+      body.detail = String(err.message).slice(0, 300);
+      body.keyInfo = `${key.slice(0, 8)}…${key.slice(-4)} len=${key.length}`;
+    }
     return res.status(502).json(body);
   }
 }
