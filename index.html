@@ -118,6 +118,41 @@ section { margin-bottom: 48px; }
   font-size: 13px; color: var(--text-3);
 }
 
+/* ─── GENRE RAIL (Douban-style) ─── */
+.browse-layout { display: flex; gap: 28px; align-items: flex-start; }
+
+.genre-rail {
+  flex: 0 0 150px;
+  position: sticky; top: 68px;
+  max-height: calc(100vh - 84px); overflow-y: auto;
+  display: flex; flex-direction: column; gap: 2px;
+  padding-right: 12px; border-right: 1px solid var(--border);
+  scrollbar-width: none;
+}
+.genre-rail::-webkit-scrollbar { display: none; }
+
+.rail-item {
+  display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  padding: 9px 12px;
+  background: none; border: none;
+  border-left: 2px solid transparent;
+  border-radius: 0 8px 8px 0;
+  color: var(--text-3); font-size: 13px; font-family: var(--sans);
+  cursor: pointer; text-align: left;
+  transition: all 0.15s; letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+.rail-item:hover { color: var(--text-2); background: var(--surface); }
+.rail-item.on {
+  color: var(--text); background: var(--surface-2);
+  border-left-color: var(--accent); font-weight: 600;
+}
+
+.rail-count { font-size: 11px; color: var(--text-3); opacity: 0.75; font-weight: 400; }
+.rail-item.on .rail-count { color: var(--text-2); }
+
+.browse-main { flex: 1; min-width: 0; }
+
 /* ─── FILTER BAR ─── */
 .filter-bar {
   display: flex; align-items: center; gap: 8px;
@@ -940,6 +975,20 @@ footer {
   .search-panel { max-width: 100%; }
   .search-mode { padding: 18px 16px 18px; }
   .sort-bar { gap: 2px; }
+  .browse-layout { display: block; }
+  .genre-rail {
+    position: static; max-height: none;
+    flex-direction: row; overflow-x: auto;
+    border-right: none; border-bottom: 1px solid var(--border);
+    padding: 0 0 12px; margin-bottom: 16px; gap: 6px;
+  }
+  .rail-item {
+    flex: 0 0 auto;
+    border-left: none; border: 1px solid var(--border);
+    border-radius: 20px; padding: 7px 14px;
+  }
+  .rail-item.on { border-color: var(--accent); background: var(--accent-soft); }
+  .rail-count { display: none; }
   .sort-btn { padding: 5px 10px; font-size: 11px; }
   .pill { font-size: 13px; padding: 7px 14px; }
   .grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 240px; gap: 10px; }
@@ -958,6 +1007,7 @@ footer {
 }
 
 @media (max-width: 480px) {
+  .nav-links { display: none; }
   .grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; gap: 8px; }
   .card.featured { grid-column: span 2; }
   .card-overlay { padding: 40px 10px 10px; }
@@ -1033,55 +1083,38 @@ footer {
     <div class="hscroll fav-row" id="favRow"></div>
   </section>
 
-  <!-- FILTER BAR + GRID -->
+  <!-- GENRE RAIL + GRID -->
   <section id="browse">
-    <div class="filter-bar" id="filterBar">
-      <span class="pill" data-t="a24">A24</span>
-      <span class="pill" data-t="folk">Folk</span>
-      <span class="pill" data-t="religious">Religious</span>
-      <span class="pill" data-t="dolls">Dolls</span>
-      <span class="pill" data-t="cult">Cults</span>
-      <span class="pill" data-t="cosmic">Cosmic</span>
-      <span class="pill" data-t="psychological">Psychological</span>
-      <span class="pill" data-t="supernatural">Supernatural</span>
-      <span class="pill" data-t="body-horror">Body Horror</span>
-      <span class="pill" data-t="slow-burn">Slow-Burn</span>
-      <span class="pill" data-t="slasher">Slasher</span>
-      <span class="pill" data-t="j-horror">J-Horror</span>
-      <span class="pill" data-t="zombie">Zombie</span>
-      <span class="pill" data-t="found-footage">Found Footage</span>
-      <span class="pill" data-t="possession">Possession</span>
-      <span class="pill" data-t="isolation">Isolation</span>
-      <span class="pill" data-t="gore">Gore</span>
-      <span class="pill" data-t="grief">Grief</span>
-      <span class="pill-sep"></span>
-      <button class="clear-btn" id="clearBtn" style="display:none" onclick="clearAll()">Clear</button>
-    </div>
-    <div class="filter-extras">
-      <div class="toggle-wrap">
-        <button class="toggle" id="gemToggle" onclick="toggleGems()"></button>
-        Hidden gems only
+    <div class="browse-layout">
+      <aside class="genre-rail" id="genreRail" role="navigation" aria-label="Genres"></aside>
+      <div class="browse-main">
+        <div class="filter-extras">
+          <div class="toggle-wrap">
+            <button class="toggle" id="gemToggle" onclick="toggleGems()"></button>
+            Hidden gems only
+          </div>
+        </div>
+        <div class="results-context" id="resultsContext" style="display:none">
+          <span class="results-query" id="resultsQuery"></span>
+          <button class="start-over" onclick="startOver()">Start over</button>
+        </div>
+        <div class="beyond-note" id="beyondNote" style="display:none"></div>
+        <div class="sort-bar">
+          <span class="sort-label">Sort</span>
+          <button class="sort-btn active" data-sort="match" onclick="setSort('match')">Best Match</button>
+          <button class="sort-btn" data-sort="rating" onclick="setSort('rating')">Top Rated</button>
+          <button class="sort-btn" data-sort="newest" onclick="setSort('newest')">Newest</button>
+          <button class="sort-btn" data-sort="oldest" onclick="setSort('oldest')">Oldest</button>
+          <button class="sort-btn" data-sort="obscure" onclick="setSort('obscure')">Most Obscure</button>
+        </div>
+        <div class="section-head">
+          <h2 id="gridLabel">All Films</h2>
+          <span class="count" id="gridCount"></span>
+        </div>
+        <div class="grid" id="grid"></div>
+        <div class="empty" id="empty"><p>Nothing here yet — try different elements.</p></div>
       </div>
     </div>
-    <div class="results-context" id="resultsContext" style="display:none">
-      <span class="results-query" id="resultsQuery"></span>
-      <button class="start-over" onclick="startOver()">Start over</button>
-    </div>
-    <div class="beyond-note" id="beyondNote" style="display:none"></div>
-    <div class="sort-bar">
-      <span class="sort-label">Sort</span>
-      <button class="sort-btn active" data-sort="match" onclick="setSort('match')">Best Match</button>
-      <button class="sort-btn" data-sort="rating" onclick="setSort('rating')">Top Rated</button>
-      <button class="sort-btn" data-sort="newest" onclick="setSort('newest')">Newest</button>
-      <button class="sort-btn" data-sort="oldest" onclick="setSort('oldest')">Oldest</button>
-      <button class="sort-btn" data-sort="obscure" onclick="setSort('obscure')">Most Obscure</button>
-    </div>
-    <div class="section-head">
-      <h2 id="gridLabel">All Films</h2>
-      <span class="count" id="gridCount"></span>
-    </div>
-    <div class="grid" id="grid"></div>
-    <div class="empty" id="empty"><p>Nothing here yet — try different elements.</p></div>
   </section>
 
   <!-- CURATED LISTS -->
@@ -1636,11 +1669,11 @@ function renderGrid() {
   } else if (searchMode === 'mood') {
     document.getElementById('gridLabel').textContent = 'Matching Films';
   } else {
+    const activeGenre = GENRES.find(g => g.t && active.has(g.t));
     document.getElementById('gridLabel').textContent =
-      gemsOnly ? 'Hidden Gems' : active.size > 0 ? 'Matching Films' : 'All Films';
+      gemsOnly ? 'Hidden Gems' : activeGenre ? activeGenre.label : active.size > 0 ? 'Matching Films' : 'All Films';
   }
   document.getElementById('gridCount').textContent = list.length + ' films';
-  document.getElementById('clearBtn').style.display = active.size > 0 ? 'inline' : 'none';
 
   if (!list.length) {
     grid.innerHTML = '';
@@ -1729,18 +1762,55 @@ function similar(movie) {
 
 // ─── INTERACTIONS ───
 
-document.querySelectorAll('.pill[data-t]').forEach(el => {
-  el.addEventListener('click', () => {
-    const t = el.dataset.t;
-    active.has(t) ? active.delete(t) : active.add(t);
-    el.classList.toggle('on');
-    renderGrid();
-  });
-});
+// ─── GENRE RAIL ───
+const GENRES = [
+  { t: null, label: 'All Films' },
+  { t: 'folk', label: 'Folk' },
+  { t: 'j-horror', label: 'J-Horror' },
+  { t: 'k-horror', label: 'K-Horror' },
+  { t: 'hk-horror', label: 'HK / Taiwan' },
+  { t: 'psychological', label: 'Psychological' },
+  { t: 'supernatural', label: 'Supernatural' },
+  { t: 'cosmic', label: 'Cosmic' },
+  { t: 'body-horror', label: 'Body Horror' },
+  { t: 'slasher', label: 'Slasher' },
+  { t: 'found-footage', label: 'Found Footage' },
+  { t: 'zombie', label: 'Zombie' },
+  { t: 'possession', label: 'Possession' },
+  { t: 'religious', label: 'Religious' },
+  { t: 'cult', label: 'Cults' },
+  { t: 'dolls', label: 'Dolls' },
+  { t: 'gore', label: 'Gore' },
+  { t: 'slow-burn', label: 'Slow-Burn' },
+  { t: 'a24', label: 'A24' },
+];
+let railActive = null;
+
+function renderRail() {
+  document.getElementById('genreRail').innerHTML = GENRES.map(g => {
+    const count = g.t ? M.filter(m => m.tags.includes(g.t)).length : M.length;
+    if (g.t && count === 0) return '';
+    const on = g.t === railActive;
+    return `<button class="rail-item${on ? ' on' : ''}" onclick="selectGenre(${g.t ? `'${g.t}'` : 'null'})">
+      ${g.label}<span class="rail-count">${count}</span>
+    </button>`;
+  }).join('');
+}
+
+function selectGenre(tag) {
+  railActive = tag;
+  active = tag ? new Set([tag]) : new Set();
+  searchMode = 'browse';
+  similarTo = null;
+  moodScores = null;
+  renderRail();
+  renderGrid();
+}
 
 function clearAll() {
   active.clear(); query = '';
-  document.querySelectorAll('.pill.on').forEach(p => p.classList.remove('on'));
+  railActive = null;
+  renderRail();
   renderGrid();
 }
 
@@ -1947,7 +2017,8 @@ function startOver() {
   document.getElementById('filmInput').value = '';
   document.querySelectorAll('.sort-btn').forEach(b => b.classList.toggle('active', b.dataset.sort === 'match'));
   active.clear();
-  document.querySelectorAll('.pill.on').forEach(p => p.classList.remove('on'));
+  railActive = null;
+  renderRail();
   renderGrid();
 }
 
@@ -2141,12 +2212,15 @@ function checkUrlMovie() {
 }
 
 // ─── INIT ───
+renderRail();
 renderGrid();
 renderLists();
 renderHered();
 renderCollection();
 renderFavStart();
 checkUrlMovie();
+document.querySelector('.hero-meta').textContent =
+  `${M.length} hand-picked films · intensity-rated · streaming included`;
 
 sb.auth.onAuthStateChange(async (event, session) => {
   const user = session?.user || null;

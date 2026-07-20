@@ -560,6 +560,7 @@ export const CATALOG = [
     "year": 2010,
     "director": "Kim Jee-woon",
     "tags": [
+      "k-horror",
       "revenge",
       "psychological",
       "gore",
@@ -920,6 +921,7 @@ export const CATALOG = [
     "year": 2016,
     "director": "Sang-ho Yeon",
     "tags": [
+      "k-horror",
       "zombie",
       "grief",
       "isolation"
@@ -939,6 +941,7 @@ export const CATALOG = [
     "year": 2016,
     "director": "Na Hong-jin",
     "tags": [
+      "k-horror",
       "folk",
       "supernatural",
       "religious",
@@ -959,6 +962,7 @@ export const CATALOG = [
     "year": 2003,
     "director": "Kim Jee-woon",
     "tags": [
+      "k-horror",
       "psychological",
       "supernatural",
       "atmospheric",
@@ -1209,5 +1213,1216 @@ export const CATALOG = [
     "streaming": [
       "Netflix"
     ]
+  },
+  {
+    "id": 63,
+    "title": "Exhuma",
+    "year": 2024,
+    "director": "Jang Jae-hyun",
+    "tags": [
+      "k-horror",
+      "folk",
+      "supernatural",
+      "occult"
+    ],
+    "scare": 3,
+    "gore": 2,
+    "dread": 4,
+    "gem": false,
+    "streaming": [
+      "Shudder"
+    ]
+  },
+  {
+    "id": 64,
+    "title": "Gonjiam: Haunted Asylum",
+    "year": 2018,
+    "director": "Jung Bum-shik",
+    "tags": [
+      "k-horror",
+      "found-footage",
+      "supernatural",
+      "isolation"
+    ],
+    "scare": 4,
+    "gore": 1,
+    "dread": 4,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 65,
+    "title": "Thirst",
+    "year": 2009,
+    "director": "Park Chan-wook",
+    "tags": [
+      "k-horror",
+      "vampire",
+      "body-horror",
+      "religious"
+    ],
+    "scare": 3,
+    "gore": 4,
+    "dread": 3,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 66,
+    "title": "The Host",
+    "year": 2006,
+    "director": "Bong Joon-ho",
+    "tags": [
+      "k-horror",
+      "creature",
+      "grief"
+    ],
+    "scare": 3,
+    "gore": 3,
+    "dread": 2,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 67,
+    "title": "Sleep",
+    "year": 2023,
+    "director": "Jason Yu",
+    "tags": [
+      "k-horror",
+      "psychological",
+      "possession",
+      "slow-burn"
+    ],
+    "scare": 3,
+    "gore": 1,
+    "dread": 4,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 68,
+    "title": "Bedevilled",
+    "year": 2010,
+    "director": "Jang Cheol-soo",
+    "tags": [
+      "k-horror",
+      "revenge",
+      "isolation",
+      "gore"
+    ],
+    "scare": 3,
+    "gore": 4,
+    "dread": 4,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 69,
+    "title": "The Call",
+    "year": 2020,
+    "director": "Lee Chung-hyun",
+    "tags": [
+      "k-horror",
+      "psychological",
+      "slasher"
+    ],
+    "scare": 3,
+    "gore": 3,
+    "dread": 3,
+    "gem": false,
+    "streaming": [
+      "Netflix"
+    ]
+  },
+  {
+    "id": 70,
+    "title": "The Quiet Family",
+    "year": 1998,
+    "director": "Kim Jee-woon",
+    "tags": [
+      "k-horror",
+      "isolation"
+    ],
+    "scare": 2,
+    "gore": 3,
+    "dread": 2,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 71,
+    "title": "Cure",
+    "year": 1997,
+    "director": "Kiyoshi Kurosawa",
+    "tags": [
+      "j-horror",
+      "psychological",
+      "slow-burn",
+      "atmospheric"
+    ],
+    "scare": 3,
+    "gore": 2,
+    "dread": 5,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 72,
+    "title": "Kwaidan",
+    "year": 1964,
+    "director": "Masaki Kobayashi",
+    "tags": [
+      "j-horror",
+      "folk",
+      "supernatural",
+      "atmospheric",
+      "slow-burn"
+    ],
+    "scare": 2,
+    "gore": 1,
+    "dread": 3,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 73,
+    "title": "Onibaba",
+    "year": 1964,
+    "director": "Kaneto Shindo",
+    "tags": [
+      "j-horror",
+      "folk",
+      "atmospheric",
+      "isolation"
+    ],
+    "scare": 3,
+    "gore": 2,
+    "dread": 4,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 74,
+    "title": "House",
+    "year": 1977,
+    "director": "Nobuhiko Obayashi",
+    "tags": [
+      "j-horror",
+      "supernatural",
+      "witch"
+    ],
+    "scare": 2,
+    "gore": 3,
+    "dread": 2,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 75,
+    "title": "One Cut of the Dead",
+    "year": 2017,
+    "director": "Shinichiro Ueda",
+    "tags": [
+      "j-horror",
+      "zombie",
+      "found-footage"
+    ],
+    "scare": 1,
+    "gore": 2,
+    "dread": 1,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 76,
+    "title": "Tetsuo: The Iron Man",
+    "year": 1989,
+    "director": "Shinya Tsukamoto",
+    "tags": [
+      "j-horror",
+      "body-horror",
+      "gore"
+    ],
+    "scare": 3,
+    "gore": 4,
+    "dread": 4,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 77,
+    "title": "Rigor Mortis",
+    "year": 2013,
+    "director": "Juno Mak",
+    "tags": [
+      "hk-horror",
+      "vampire",
+      "supernatural",
+      "atmospheric"
+    ],
+    "scare": 3,
+    "gore": 3,
+    "dread": 4,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 78,
+    "title": "Mr. Vampire",
+    "year": 1985,
+    "director": "Ricky Lau",
+    "tags": [
+      "hk-horror",
+      "vampire",
+      "supernatural",
+      "zombie"
+    ],
+    "scare": 2,
+    "gore": 2,
+    "dread": 1,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 79,
+    "title": "Out of the Dark",
+    "year": 1995,
+    "director": "Jeffrey Lau",
+    "tags": [
+      "hk-horror",
+      "supernatural",
+      "possession"
+    ],
+    "scare": 2,
+    "gore": 2,
+    "dread": 2,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 80,
+    "title": "Double Vision",
+    "year": 2002,
+    "director": "Chen Kuo-fu",
+    "tags": [
+      "hk-horror",
+      "cult",
+      "religious",
+      "psychological"
+    ],
+    "scare": 3,
+    "gore": 4,
+    "dread": 4,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 81,
+    "title": "The Eye",
+    "year": 2002,
+    "director": "Pang Brothers",
+    "tags": [
+      "hk-horror",
+      "supernatural",
+      "psychological"
+    ],
+    "scare": 4,
+    "gore": 1,
+    "dread": 4,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 82,
+    "title": "Dumplings",
+    "year": 2004,
+    "director": "Fruit Chan",
+    "tags": [
+      "hk-horror",
+      "body-horror",
+      "psychological"
+    ],
+    "scare": 2,
+    "gore": 3,
+    "dread": 4,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 83,
+    "title": "Detention",
+    "year": 2019,
+    "director": "John Hsu",
+    "tags": [
+      "hk-horror",
+      "supernatural",
+      "psychological",
+      "atmospheric"
+    ],
+    "scare": 3,
+    "gore": 2,
+    "dread": 4,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 84,
+    "title": "The Sadness",
+    "year": 2021,
+    "director": "Rob Jabbaz",
+    "tags": [
+      "hk-horror",
+      "zombie",
+      "gore"
+    ],
+    "scare": 4,
+    "gore": 5,
+    "dread": 3,
+    "gem": true,
+    "streaming": [
+      "Shudder"
+    ]
+  },
+  {
+    "id": 85,
+    "title": "The Medium",
+    "year": 2021,
+    "director": "Banjong Pisanthanakun",
+    "tags": [
+      "folk",
+      "found-footage",
+      "possession",
+      "supernatural"
+    ],
+    "scare": 4,
+    "gore": 3,
+    "dread": 5,
+    "gem": false,
+    "streaming": [
+      "Shudder"
+    ]
+  },
+  {
+    "id": 86,
+    "title": "Satan's Slaves",
+    "year": 2017,
+    "director": "Joko Anwar",
+    "tags": [
+      "supernatural",
+      "religious",
+      "possession",
+      "atmospheric"
+    ],
+    "scare": 4,
+    "gore": 2,
+    "dread": 4,
+    "gem": true,
+    "streaming": [
+      "Shudder"
+    ]
+  },
+  {
+    "id": 87,
+    "title": "Impetigore",
+    "year": 2019,
+    "director": "Joko Anwar",
+    "tags": [
+      "folk",
+      "supernatural",
+      "isolation"
+    ],
+    "scare": 3,
+    "gore": 3,
+    "dread": 4,
+    "gem": true,
+    "streaming": [
+      "Shudder"
+    ]
+  },
+  {
+    "id": 88,
+    "title": "Bulbbul",
+    "year": 2020,
+    "director": "Anvita Dutt",
+    "tags": [
+      "folk",
+      "supernatural",
+      "revenge",
+      "atmospheric"
+    ],
+    "scare": 2,
+    "gore": 2,
+    "dread": 3,
+    "gem": true,
+    "streaming": [
+      "Netflix"
+    ]
+  },
+  {
+    "id": 89,
+    "title": "Stree",
+    "year": 2018,
+    "director": "Amar Kaushik",
+    "tags": [
+      "folk",
+      "supernatural"
+    ],
+    "scare": 2,
+    "gore": 1,
+    "dread": 2,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 90,
+    "title": "Under the Shadow",
+    "year": 2016,
+    "director": "Babak Anvari",
+    "tags": [
+      "supernatural",
+      "psychological",
+      "isolation",
+      "atmospheric"
+    ],
+    "scare": 3,
+    "gore": 1,
+    "dread": 4,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 91,
+    "title": "A Girl Walks Home Alone at Night",
+    "year": 2014,
+    "director": "Ana Lily Amirpour",
+    "tags": [
+      "vampire",
+      "atmospheric",
+      "slow-burn"
+    ],
+    "scare": 2,
+    "gore": 2,
+    "dread": 3,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 92,
+    "title": "Terrified",
+    "year": 2017,
+    "director": "Demián Rugna",
+    "tags": [
+      "supernatural",
+      "atmospheric"
+    ],
+    "scare": 5,
+    "gore": 3,
+    "dread": 4,
+    "gem": true,
+    "streaming": [
+      "Shudder"
+    ]
+  },
+  {
+    "id": 93,
+    "title": "When Evil Lurks",
+    "year": 2023,
+    "director": "Demián Rugna",
+    "tags": [
+      "possession",
+      "gore",
+      "folk"
+    ],
+    "scare": 4,
+    "gore": 5,
+    "dread": 4,
+    "gem": false,
+    "streaming": [
+      "Shudder"
+    ]
+  },
+  {
+    "id": 94,
+    "title": "Tigers Are Not Afraid",
+    "year": 2017,
+    "director": "Issa López",
+    "tags": [
+      "supernatural",
+      "grief",
+      "atmospheric"
+    ],
+    "scare": 2,
+    "gore": 2,
+    "dread": 3,
+    "gem": true,
+    "streaming": [
+      "Shudder"
+    ]
+  },
+  {
+    "id": 95,
+    "title": "Possession",
+    "year": 1981,
+    "director": "Andrzej Żuławski",
+    "tags": [
+      "psychological",
+      "body-horror",
+      "cult",
+      "atmospheric"
+    ],
+    "scare": 3,
+    "gore": 3,
+    "dread": 5,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 96,
+    "title": "Don't Look Now",
+    "year": 1973,
+    "director": "Nicolas Roeg",
+    "tags": [
+      "psychological",
+      "grief",
+      "slow-burn",
+      "atmospheric"
+    ],
+    "scare": 3,
+    "gore": 2,
+    "dread": 4,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 97,
+    "title": "Eyes Without a Face",
+    "year": 1960,
+    "director": "Georges Franju",
+    "tags": [
+      "body-horror",
+      "psychological",
+      "atmospheric",
+      "slow-burn"
+    ],
+    "scare": 2,
+    "gore": 2,
+    "dread": 4,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 98,
+    "title": "Let the Right One In",
+    "year": 2008,
+    "director": "Tomas Alfredson",
+    "tags": [
+      "vampire",
+      "slow-burn",
+      "atmospheric",
+      "grief"
+    ],
+    "scare": 2,
+    "gore": 3,
+    "dread": 3,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 99,
+    "title": "Martyrs",
+    "year": 2008,
+    "director": "Pascal Laugier",
+    "tags": [
+      "gore",
+      "psychological",
+      "cult",
+      "revenge"
+    ],
+    "scare": 4,
+    "gore": 5,
+    "dread": 5,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 100,
+    "title": "Inside",
+    "year": 2007,
+    "director": "Bustillo & Maury",
+    "tags": [
+      "gore",
+      "slasher",
+      "isolation"
+    ],
+    "scare": 4,
+    "gore": 5,
+    "dread": 4,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 101,
+    "title": "Deep Red",
+    "year": 1975,
+    "director": "Dario Argento",
+    "tags": [
+      "giallo",
+      "slasher",
+      "psychological"
+    ],
+    "scare": 3,
+    "gore": 3,
+    "dread": 3,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 102,
+    "title": "The Beyond",
+    "year": 1981,
+    "director": "Lucio Fulci",
+    "tags": [
+      "supernatural",
+      "gore",
+      "cosmic",
+      "atmospheric"
+    ],
+    "scare": 3,
+    "gore": 5,
+    "dread": 4,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 103,
+    "title": "Kill List",
+    "year": 2011,
+    "director": "Ben Wheatley",
+    "tags": [
+      "cult",
+      "folk",
+      "psychological",
+      "slow-burn"
+    ],
+    "scare": 3,
+    "gore": 4,
+    "dread": 4,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 104,
+    "title": "The Devil's Backbone",
+    "year": 2001,
+    "director": "Guillermo del Toro",
+    "tags": [
+      "supernatural",
+      "grief",
+      "atmospheric"
+    ],
+    "scare": 3,
+    "gore": 2,
+    "dread": 3,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 105,
+    "title": "Goodnight Mommy",
+    "year": 2014,
+    "director": "Franz & Fiala",
+    "tags": [
+      "psychological",
+      "isolation",
+      "slow-burn"
+    ],
+    "scare": 3,
+    "gore": 3,
+    "dread": 4,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 106,
+    "title": "Speak No Evil",
+    "year": 2022,
+    "director": "Christian Tafdrup",
+    "tags": [
+      "psychological",
+      "slow-burn"
+    ],
+    "scare": 3,
+    "gore": 3,
+    "dread": 5,
+    "gem": true,
+    "streaming": [
+      "Shudder"
+    ]
+  },
+  {
+    "id": 107,
+    "title": "Carrie",
+    "year": 1976,
+    "director": "Brian De Palma",
+    "tags": [
+      "psychological",
+      "supernatural",
+      "religious"
+    ],
+    "scare": 3,
+    "gore": 3,
+    "dread": 3,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 108,
+    "title": "The Omen",
+    "year": 1976,
+    "director": "Richard Donner",
+    "tags": [
+      "religious",
+      "occult",
+      "supernatural"
+    ],
+    "scare": 3,
+    "gore": 3,
+    "dread": 3,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 109,
+    "title": "Poltergeist",
+    "year": 1982,
+    "director": "Tobe Hooper",
+    "tags": [
+      "supernatural",
+      "possession"
+    ],
+    "scare": 3,
+    "gore": 2,
+    "dread": 2,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 110,
+    "title": "A Nightmare on Elm Street",
+    "year": 1984,
+    "director": "Wes Craven",
+    "tags": [
+      "slasher",
+      "supernatural"
+    ],
+    "scare": 4,
+    "gore": 3,
+    "dread": 3,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 111,
+    "title": "Hellraiser",
+    "year": 1987,
+    "director": "Clive Barker",
+    "tags": [
+      "body-horror",
+      "gore",
+      "supernatural",
+      "occult"
+    ],
+    "scare": 3,
+    "gore": 5,
+    "dread": 3,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 112,
+    "title": "The Fly",
+    "year": 1986,
+    "director": "David Cronenberg",
+    "tags": [
+      "body-horror",
+      "gore"
+    ],
+    "scare": 3,
+    "gore": 5,
+    "dread": 4,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 113,
+    "title": "Re-Animator",
+    "year": 1985,
+    "director": "Stuart Gordon",
+    "tags": [
+      "body-horror",
+      "gore",
+      "zombie"
+    ],
+    "scare": 2,
+    "gore": 5,
+    "dread": 2,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 114,
+    "title": "Evil Dead II",
+    "year": 1987,
+    "director": "Sam Raimi",
+    "tags": [
+      "possession",
+      "gore",
+      "supernatural"
+    ],
+    "scare": 3,
+    "gore": 4,
+    "dread": 2,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 115,
+    "title": "Candyman",
+    "year": 1992,
+    "director": "Bernard Rose",
+    "tags": [
+      "supernatural",
+      "slasher",
+      "psychological"
+    ],
+    "scare": 3,
+    "gore": 3,
+    "dread": 3,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 116,
+    "title": "Scream",
+    "year": 1996,
+    "director": "Wes Craven",
+    "tags": [
+      "slasher"
+    ],
+    "scare": 3,
+    "gore": 3,
+    "dread": 2,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 117,
+    "title": "The Others",
+    "year": 2001,
+    "director": "Alejandro Amenábar",
+    "tags": [
+      "supernatural",
+      "psychological",
+      "slow-burn",
+      "atmospheric"
+    ],
+    "scare": 3,
+    "gore": 1,
+    "dread": 4,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 118,
+    "title": "28 Days Later",
+    "year": 2002,
+    "director": "Danny Boyle",
+    "tags": [
+      "zombie",
+      "isolation"
+    ],
+    "scare": 4,
+    "gore": 4,
+    "dread": 4,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 119,
+    "title": "Session 9",
+    "year": 2001,
+    "director": "Brad Anderson",
+    "tags": [
+      "psychological",
+      "atmospheric",
+      "slow-burn"
+    ],
+    "scare": 3,
+    "gore": 1,
+    "dread": 5,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 120,
+    "title": "Sinister",
+    "year": 2012,
+    "director": "Scott Derrickson",
+    "tags": [
+      "supernatural",
+      "occult",
+      "found-footage"
+    ],
+    "scare": 5,
+    "gore": 3,
+    "dread": 4,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 121,
+    "title": "Insidious",
+    "year": 2010,
+    "director": "James Wan",
+    "tags": [
+      "supernatural",
+      "possession"
+    ],
+    "scare": 4,
+    "gore": 1,
+    "dread": 3,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 122,
+    "title": "The House of the Devil",
+    "year": 2009,
+    "director": "Ti West",
+    "tags": [
+      "occult",
+      "cult",
+      "slow-burn",
+      "isolation"
+    ],
+    "scare": 3,
+    "gore": 3,
+    "dread": 4,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 123,
+    "title": "Lake Mungo",
+    "year": 2008,
+    "director": "Joel Anderson",
+    "tags": [
+      "found-footage",
+      "grief",
+      "supernatural",
+      "slow-burn"
+    ],
+    "scare": 3,
+    "gore": 1,
+    "dread": 5,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 124,
+    "title": "Paranormal Activity",
+    "year": 2007,
+    "director": "Oren Peli",
+    "tags": [
+      "found-footage",
+      "supernatural",
+      "possession"
+    ],
+    "scare": 4,
+    "gore": 1,
+    "dread": 3,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 125,
+    "title": "The Cabin in the Woods",
+    "year": 2011,
+    "director": "Drew Goddard",
+    "tags": [
+      "slasher",
+      "zombie",
+      "cosmic"
+    ],
+    "scare": 3,
+    "gore": 4,
+    "dread": 1,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 126,
+    "title": "The Autopsy of Jane Doe",
+    "year": 2016,
+    "director": "André Øvredal",
+    "tags": [
+      "supernatural",
+      "witch",
+      "isolation"
+    ],
+    "scare": 4,
+    "gore": 3,
+    "dread": 4,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 127,
+    "title": "Hush",
+    "year": 2016,
+    "director": "Mike Flanagan",
+    "tags": [
+      "slasher",
+      "isolation"
+    ],
+    "scare": 4,
+    "gore": 3,
+    "dread": 3,
+    "gem": false,
+    "streaming": [
+      "Netflix"
+    ]
+  },
+  {
+    "id": 128,
+    "title": "Creep",
+    "year": 2014,
+    "director": "Patrick Brice",
+    "tags": [
+      "found-footage",
+      "psychological",
+      "slasher"
+    ],
+    "scare": 3,
+    "gore": 1,
+    "dread": 4,
+    "gem": true,
+    "streaming": [
+      "Netflix"
+    ]
+  },
+  {
+    "id": 129,
+    "title": "It",
+    "year": 2017,
+    "director": "Andy Muschietti",
+    "tags": [
+      "creature",
+      "supernatural"
+    ],
+    "scare": 4,
+    "gore": 3,
+    "dread": 2,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 130,
+    "title": "Us",
+    "year": 2019,
+    "director": "Jordan Peele",
+    "tags": [
+      "psychological",
+      "slasher"
+    ],
+    "scare": 4,
+    "gore": 3,
+    "dread": 3,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 131,
+    "title": "Hell House LLC",
+    "year": 2015,
+    "director": "Stephen Cognetti",
+    "tags": [
+      "found-footage",
+      "supernatural",
+      "dolls"
+    ],
+    "scare": 4,
+    "gore": 1,
+    "dread": 4,
+    "gem": true,
+    "streaming": []
+  },
+  {
+    "id": 132,
+    "title": "His House",
+    "year": 2020,
+    "director": "Remi Weekes",
+    "tags": [
+      "supernatural",
+      "grief",
+      "psychological"
+    ],
+    "scare": 4,
+    "gore": 2,
+    "dread": 4,
+    "gem": false,
+    "streaming": [
+      "Netflix"
+    ]
+  },
+  {
+    "id": 133,
+    "title": "The Dark and the Wicked",
+    "year": 2020,
+    "director": "Bryan Bertino",
+    "tags": [
+      "possession",
+      "supernatural",
+      "isolation",
+      "grief"
+    ],
+    "scare": 4,
+    "gore": 3,
+    "dread": 5,
+    "gem": true,
+    "streaming": [
+      "Shudder"
+    ]
+  },
+  {
+    "id": 134,
+    "title": "Smile",
+    "year": 2022,
+    "director": "Parker Finn",
+    "tags": [
+      "psychological",
+      "supernatural"
+    ],
+    "scare": 5,
+    "gore": 3,
+    "dread": 3,
+    "gem": false,
+    "streaming": []
+  },
+  {
+    "id": 135,
+    "title": "M3GAN",
+    "year": 2022,
+    "director": "Gerard Johnstone",
+    "tags": [
+      "dolls",
+      "slasher"
+    ],
+    "scare": 2,
+    "gore": 2,
+    "dread": 1,
+    "gem": false,
+    "streaming": []
   }
 ];
