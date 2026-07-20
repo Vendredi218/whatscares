@@ -6,13 +6,13 @@ const MODEL = process.env.MINIMAX_MODEL || 'MiniMax-M3';
 
 function catalogLines() {
   return CATALOG.map(m =>
-    `${m.id}|${m.title}|${m.year}|${m.director}|${m.tags.join(',')}|scare${m.scare} gore${m.gore} dread${m.dread}|${m.gem ? 'gem' : '-'}|${m.streaming.join(',') || '-'}`
+    `${m.id}|${m.title}|${m.year}|${m.director}|${m.tags.join(',')}|scare${m.scare} gore${m.gore} dread${m.dread}|${m.gem ? 'gem' : '-'}|${m.streaming.join(',') || '-'}|imdb${m.imdb ?? '-'} douban${m.douban ?? '-'}`
   ).join('\n');
 }
 
 const SYSTEM_PROMPT = `You are the search engine of WhatScares, a horror-film discovery site with a fixed catalog.
 
-CATALOG — one film per line, format: id|title|year|director|tags|intensity 0-5|hidden gem|streaming:
+CATALOG — one film per line, format: id|title|year|director|tags|intensity 0-5|hidden gem|streaming|ratings (imdb /10, douban /10):
 ${catalogLines()}
 
 TASK

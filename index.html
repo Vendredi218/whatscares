@@ -274,6 +274,31 @@ section { margin-bottom: 48px; }
 .card-fav:hover { color: var(--accent); }
 .card-fav.saved { color: var(--accent); opacity: 1; }
 
+/* want / seen quick actions */
+.card-actions {
+  position: absolute; top: 8px; right: 8px; z-index: 3;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.card-act {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(0,0,0,0.55); border: none;
+  color: rgba(255,255,255,0.85); font-size: 15px; line-height: 1;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(6px);
+  opacity: 0; transition: opacity 0.2s, background 0.2s, color 0.2s;
+}
+.card:hover .card-act, .card-act.on-want, .card-act.on-seen { opacity: 1; }
+.card-act:hover { background: rgba(0,0,0,0.8); }
+.card-act.on-want { background: var(--accent); color: #fff; }
+.card-act.on-seen { background: var(--gold); color: #1a1400; }
+
+.coll-block { margin-bottom: 28px; }
+.coll-block:last-child { margin-bottom: 0; }
+.coll-cn {
+  font-family: var(--sans); font-size: 13px; color: var(--text-3);
+  font-weight: 400; margin-left: 6px; letter-spacing: 1px;
+}
+
 /* card overlay — text on image */
 .card-overlay {
   position: absolute;
@@ -511,6 +536,8 @@ a.list-card { text-decoration: none; color: inherit; }
 .r-rt { background: #FA320A; color: white; }
 .r-imdb { background: #F5C518; color: #000; }
 .r-meta { background: #66CC33; color: #fff; }
+.r-pop { background: #E6A23C; color: #3a2000; font-size: 12px; }
+.r-douban { background: #007722; color: #fff; font-size: 11px; }
 .rating-badge .r-score { font-weight: 600; font-size: 14px; }
 .rating-badge .r-label { color: var(--text-3); font-size: 11px; }
 
@@ -585,6 +612,7 @@ a.list-card { text-decoration: none; color: inherit; }
 }
 .modal-fav:hover { border-color: var(--text-3); color: var(--text); }
 .modal-fav.saved { border-color: var(--accent); color: var(--accent); }
+.modal-fav.saved-seen { border-color: var(--gold); color: var(--gold); }
 
 .modal-stars { display: flex; gap: 2px; align-items: center; }
 .modal-stars .star {
@@ -1070,11 +1098,20 @@ footer {
 
   <!-- MY COLLECTION -->
   <section class="my-collection" id="myCollection">
-    <div class="section-head">
-      <h2>My Collection</h2>
-      <span class="count" id="collCount"></span>
+    <div class="coll-block" id="wantBlock" style="display:none">
+      <div class="section-head">
+        <h2>Watchlist <span class="coll-cn">想看</span></h2>
+        <span class="count" id="wantCount"></span>
+      </div>
+      <div class="hscroll" id="wantRow"></div>
     </div>
-    <div class="hscroll" id="collRow"></div>
+    <div class="coll-block" id="seenBlock" style="display:none">
+      <div class="section-head">
+        <h2>Watched <span class="coll-cn">看过</span></h2>
+        <span class="count" id="seenCount"></span>
+      </div>
+      <div class="hscroll" id="seenRow"></div>
+    </div>
   </section>
 
   <!-- START FROM A FAVOURITE -->
@@ -1320,8 +1357,17 @@ const STREAM_COLORS = {
 // ─── USER DATA ───
 const USER_KEY = 'whatscares_user';
 function loadUser() {
-  try { return JSON.parse(localStorage.getItem(USER_KEY)) || { favs: [], ratings: {} }; }
-  catch { return { favs: [], ratings: {} }; }
+  try {
+    const u = JSON.parse(localStorage.getItem(USER_KEY)) || {};
+    if (!u.want) {
+      // migrate old schema: favs -> watchlist, rated films -> watched
+      u.seen = Object.keys(u.ratings || {}).map(Number);
+      u.want = (u.favs || []).filter(i => !u.seen.includes(i));
+      delete u.favs;
+    }
+    u.want = u.want || []; u.seen = u.seen || []; u.ratings = u.ratings || {};
+    return u;
+  } catch { return { want: [], seen: [], ratings: {} }; }
 }
 function saveUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
 
@@ -1426,31 +1472,43 @@ function updateNavUser(user) {
 }
 
 // ─── SUPABASE SYNC ───
+function statusOf(u, idx) {
+  return u.seen.includes(idx) ? 'seen' : u.want.includes(idx) ? 'want' : null;
+}
+// DB uses 'watched'/'want_to_watch' (see supabase-setup.sql check constraint)
+const DB_STATUS = { seen: 'watched', want: 'want_to_watch' };
+const FROM_DB_STATUS = { watched: 'seen', want_to_watch: 'want' };
+
 async function syncToSupabase(userId) {
   const local = loadUser();
-  const allIdxs = new Set([...local.favs, ...Object.keys(local.ratings).map(Number)]);
+  const allIdxs = new Set([...local.want, ...local.seen, ...Object.keys(local.ratings).map(Number)]);
   if (!allIdxs.size) return;
 
   const rows = [...allIdxs].map(idx => ({
     user_id: userId,
     movie_idx: idx,
-    is_favorite: local.favs.includes(idx),
-    rating: local.ratings[idx] || 0
+    is_favorite: local.want.includes(idx),
+    rating: local.ratings[idx] || 0,
+    status: DB_STATUS[statusOf(local, idx)] || null
   }));
 
-  await sb.from('user_movies').upsert(rows, { onConflict: 'user_id,movie_idx' });
+  const { error } = await sb.from('user_movies').upsert(rows, { onConflict: 'user_id,movie_idx' });
+  if (error) {
+    // legacy schema without status column
+    await sb.from('user_movies').upsert(rows.map(({ status, ...r }) => r), { onConflict: 'user_id,movie_idx' });
+  }
 }
 
 async function loadFromSupabase(userId) {
   const { data } = await sb.from('user_movies').select('*').eq('user_id', userId);
   if (!data || !data.length) return;
 
-  const local = loadUser();
-  const u = { favs: [...local.favs], ratings: { ...local.ratings } };
-
+  const u = loadUser();
   for (const row of data) {
-    if (row.is_favorite && !u.favs.includes(row.movie_idx)) u.favs.push(row.movie_idx);
-    if (row.rating > 0 && !u.ratings[row.movie_idx]) u.ratings[row.movie_idx] = row.rating;
+    const idx = row.movie_idx;
+    if (row.rating > 0 && !u.ratings[idx]) u.ratings[idx] = row.rating;
+    const st = FROM_DB_STATUS[row.status] || (row.rating > 0 ? 'seen' : row.is_favorite ? 'want' : null);
+    if (st && !statusOf(u, idx)) u[st].push(idx);
   }
   saveUser(u);
 }
@@ -1458,19 +1516,31 @@ async function loadFromSupabase(userId) {
 async function upsertMovie(idx) {
   if (!currentUser) return;
   const u = loadUser();
-  await sb.from('user_movies').upsert({
+  const base = {
     user_id: currentUser.id,
     movie_idx: idx,
-    is_favorite: u.favs.includes(idx),
+    is_favorite: u.want.includes(idx),
     rating: u.ratings[idx] || 0
-  }, { onConflict: 'user_id,movie_idx' });
+  };
+  const { error } = await sb.from('user_movies').upsert({ ...base, status: DB_STATUS[statusOf(u, idx)] || null }, { onConflict: 'user_id,movie_idx' });
+  if (error) {
+    await sb.from('user_movies').upsert(base, { onConflict: 'user_id,movie_idx' });
+  }
 }
 
-function toggleFav(idx, e) {
+function setStatus(idx, status, e) {
   if (e) e.stopPropagation();
   const u = loadUser();
-  const i = u.favs.indexOf(idx);
-  i === -1 ? u.favs.push(idx) : u.favs.splice(i, 1);
+  const list = u[status];
+  const other = u[status === 'want' ? 'seen' : 'want'];
+  const i = list.indexOf(idx);
+  if (i === -1) {
+    list.push(idx);
+    const j = other.indexOf(idx);
+    if (j !== -1) other.splice(j, 1);
+  } else {
+    list.splice(i, 1);
+  }
   saveUser(u);
   upsertMovie(idx);
   renderGrid();
@@ -1482,6 +1552,12 @@ function rateMovie(idx, stars, e) {
   const u = loadUser();
   u.ratings[idx] = u.ratings[idx] === stars ? 0 : stars;
   if (u.ratings[idx] === 0) delete u.ratings[idx];
+  if (u.ratings[idx]) {
+    // rating a film means you've watched it
+    if (!u.seen.includes(idx)) u.seen.push(idx);
+    const j = u.want.indexOf(idx);
+    if (j !== -1) u.want.splice(j, 1);
+  }
   saveUser(u);
   upsertMovie(idx);
   renderGrid();
@@ -1524,33 +1600,43 @@ function imdbStars(score) {
   return '★'.repeat(full) + '☆'.repeat(5 - full);
 }
 
+function collCardHTML(idx, u) {
+  const m = M[idx];
+  const r = u.ratings[idx] || 0;
+  return `<div class="card" onclick="openModal(${idx})">
+    <div class="poster">
+      <img src="${TMDB}${m.p}" alt="${m.t}" loading="lazy">
+      <div class="card-overlay">
+        <div class="title">${m.t}</div>
+        <div class="meta">${m.y}${r ? ' · ' + '★'.repeat(r) : ''}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
 function renderCollection() {
   const u = loadUser();
   const sec = document.getElementById('myCollection');
-  const row = document.getElementById('collRow');
-  const count = document.getElementById('collCount');
-  const all = [...u.favs, ...Object.keys(u.ratings).map(Number)];
-  const unique = [...new Set(all)].filter(i => i >= 0 && i < M.length);
+  const valid = i => i >= 0 && i < M.length;
+  const want = u.want.filter(valid);
+  const seen = u.seen.filter(valid);
 
-  if (!unique.length) {
-    sec.classList.remove('has-items');
-    return;
+  const wantBlock = document.getElementById('wantBlock');
+  const seenBlock = document.getElementById('seenBlock');
+
+  wantBlock.style.display = want.length ? 'block' : 'none';
+  seenBlock.style.display = seen.length ? 'block' : 'none';
+  sec.classList.toggle('has-items', !!(want.length || seen.length));
+  if (!want.length && !seen.length) return;
+
+  if (want.length) {
+    document.getElementById('wantCount').textContent = want.length + ' films';
+    document.getElementById('wantRow').innerHTML = want.map(i => collCardHTML(i, u)).join('');
   }
-  sec.classList.add('has-items');
-  count.textContent = unique.length + ' films';
-  row.innerHTML = unique.map(idx => {
-    const m = M[idx];
-    const r = u.ratings[idx] || 0;
-    return `<div class="card" onclick="openModal(${idx})">
-      <div class="poster">
-        <img src="${TMDB}${m.p}" alt="${m.t}" loading="lazy">
-        <div class="card-overlay">
-          <div class="title">${m.t}</div>
-          <div class="meta">${m.y}${r ? ' · ' + '★'.repeat(r) : ''}</div>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
+  if (seen.length) {
+    document.getElementById('seenCount').textContent = seen.length + ' films';
+    document.getElementById('seenRow').innerHTML = seen.map(i => collCardHTML(i, u)).join('');
+  }
 }
 
 const LISTS = [
@@ -1694,7 +1780,8 @@ function renderGrid() {
 
 function cardHTML(m, idx, score, featured) {
   const u = loadUser();
-  const isFav = u.favs.includes(idx);
+  const isWant = u.want.includes(idx);
+  const isSeen = u.seen.includes(idx);
   const mainTag = m.tags[0];
   const streamText = m.str && m.str.length ? m.str.slice(0,2).join(' · ') : '';
   const why = searchMode === 'mood' ? MOOD_WHY[idx] : null;
@@ -1703,7 +1790,10 @@ function cardHTML(m, idx, score, featured) {
       <img src="${TMDB}${m.p}" alt="${m.t}" loading="lazy">
       <span class="card-tag">${mainTag}</span>
       ${m.obscure ? '<div class="gem-badge">Hidden Gem</div>' : ''}
-      <button class="card-fav${isFav?' saved':''}" onclick="toggleFav(${idx},event)">${isFav?'♥':'♡'}</button>
+      <div class="card-actions">
+        <button class="card-act${isWant ? ' on-want' : ''}" title="${isWant ? 'On watchlist' : 'Add to watchlist'}" onclick="setStatus(${idx},'want',event)">+</button>
+        <button class="card-act${isSeen ? ' on-seen' : ''}" title="${isSeen ? 'Watched' : 'Mark as watched'}" onclick="setStatus(${idx},'seen',event)">✓</button>
+      </div>
       <div class="card-overlay">
         ${why && featured ? `<div class="card-why">“${escAttr(why)}”</div>` : ''}
         <div class="title">${m.t}</div>
@@ -2058,9 +2148,12 @@ function openModal(idx) {
     </div>
   `;
 
+  const fmtVotes = n => !n ? '' : n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1000 ? Math.round(n / 1000) + 'k' : String(n);
   const ratingsHTML = `<div class="ratings-row">
+    ${m.imdb ? `<div class="rating-badge"><div class="r-icon r-imdb">IM</div><span class="r-score">${m.imdb}</span><span class="r-label">${m.iv ? fmtVotes(m.iv) + ' ratings' : 'IMDb'}</span></div>` : ''}
+    ${m.db ? `<div class="rating-badge"><div class="r-icon r-douban">豆</div><span class="r-score">${m.db}</span><span class="r-label">${m.dv ? fmtVotes(m.dv) + ' ratings' : 'Douban'}</span></div>` : ''}
     ${m.rt ? `<div class="rating-badge"><div class="r-icon r-rt">RT</div><span class="r-score">${m.rt}%</span><span class="r-label">Tomatometer</span></div>` : ''}
-    ${m.imdb ? `<div class="rating-badge"><div class="r-icon r-imdb">IM</div><span class="r-score">${m.imdb}</span><span class="r-label">IMDb</span></div>` : ''}
+    ${m.pc ? `<div class="rating-badge"><div class="r-icon r-pop">🍿</div><span class="r-score">${m.pc}%</span><span class="r-label">Audience</span></div>` : ''}
     ${m.mc ? `<div class="rating-badge"><div class="r-icon r-meta">MC</div><span class="r-score">${m.mc}</span><span class="r-label">Metacritic</span></div>` : ''}
   </div>`;
 
@@ -2099,11 +2192,15 @@ function openModal(idx) {
   </div>`;
 
   const u = loadUser();
-  const isFav = u.favs.includes(idx);
+  const isWant = u.want.includes(idx);
+  const isSeen = u.seen.includes(idx);
   const userActionsHTML = `<div class="modal-section">
     <div class="modal-user-actions">
-      <button class="modal-fav${isFav?' saved':''}" onclick="toggleFav(${idx},event);openModal(${idx})">
-        ${isFav?'♥ Saved':'♡ Save'}
+      <button class="modal-fav${isWant ? ' saved' : ''}" onclick="setStatus(${idx},'want',event);openModal(${idx})">
+        ${isWant ? '✓ On Watchlist' : '+ Watchlist'}
+      </button>
+      <button class="modal-fav modal-seen${isSeen ? ' saved-seen' : ''}" onclick="setStatus(${idx},'seen',event);openModal(${idx})">
+        ${isSeen ? '✓ Watched' : 'Watched?'}
       </button>
       <div class="modal-stars-wrap">
         <span class="rate-label">Your rating</span>

@@ -20,7 +20,9 @@ export const CATALOG = [
     "streaming": [
       "Apple TV+",
       "Paramount+"
-    ]
+    ],
+    "imdb": 7.3,
+    "douban": 7.4
   },
   {
     "id": 1,
@@ -40,7 +42,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Apple TV+"
-    ]
+    ],
+    "imdb": 7.1,
+    "douban": 7
   },
   {
     "id": 2,
@@ -62,7 +66,9 @@ export const CATALOG = [
     "streaming": [
       "Paramount+",
       "Shudder"
-    ]
+    ],
+    "imdb": 7,
+    "douban": 7.1
   },
   {
     "id": 3,
@@ -83,7 +89,9 @@ export const CATALOG = [
     "streaming": [
       "Hulu",
       "Paramount+"
-    ]
+    ],
+    "imdb": 6.6,
+    "douban": null
   },
   {
     "id": 4,
@@ -102,7 +110,9 @@ export const CATALOG = [
     "streaming": [
       "Max",
       "Peacock"
-    ]
+    ],
+    "imdb": 8.1,
+    "douban": 7.7
   },
   {
     "id": 5,
@@ -122,7 +132,9 @@ export const CATALOG = [
     "streaming": [
       "Paramount+",
       "Hulu"
-    ]
+    ],
+    "imdb": 6.8,
+    "douban": 7.2
   },
   {
     "id": 6,
@@ -141,7 +153,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Peacock"
-    ]
+    ],
+    "imdb": 8.2,
+    "douban": 8.2
   },
   {
     "id": 7,
@@ -160,7 +174,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Hulu"
-    ]
+    ],
+    "imdb": 6.5,
+    "douban": 6
   },
   {
     "id": 8,
@@ -181,7 +197,9 @@ export const CATALOG = [
     "streaming": [
       "Tubi",
       "Shudder"
-    ]
+    ],
+    "imdb": 7.3,
+    "douban": 7.6
   },
   {
     "id": 9,
@@ -200,7 +218,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 7.2,
+    "douban": 7.6
   },
   {
     "id": 10,
@@ -220,7 +240,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 6.6,
+    "douban": 7.3
   },
   {
     "id": 11,
@@ -239,7 +261,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Tubi"
-    ]
+    ],
+    "imdb": 7.5,
+    "douban": 8
   },
   {
     "id": 12,
@@ -258,7 +282,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Netflix"
-    ]
+    ],
+    "imdb": 6.3,
+    "douban": 6.3
   },
   {
     "id": 13,
@@ -278,7 +304,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Prime Video"
-    ]
+    ],
+    "imdb": 6.3,
+    "douban": 5.9
   },
   {
     "id": 14,
@@ -297,7 +325,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 5.8,
+    "douban": 5.1
   },
   {
     "id": 15,
@@ -315,7 +345,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Peacock"
-    ]
+    ],
+    "imdb": 6.2,
+    "douban": 7.9
   },
   {
     "id": 16,
@@ -335,7 +367,9 @@ export const CATALOG = [
     "streaming": [
       "Max",
       "Netflix"
-    ]
+    ],
+    "imdb": 6.5,
+    "douban": 6.9
   },
   {
     "id": 17,
@@ -354,7 +388,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Netflix"
-    ]
+    ],
+    "imdb": 6,
+    "douban": 6.2
   },
   {
     "id": 18,
@@ -375,7 +411,9 @@ export const CATALOG = [
     "streaming": [
       "Shudder",
       "Tubi"
-    ]
+    ],
+    "imdb": 6.5,
+    "douban": 5.4
   },
   {
     "id": 19,
@@ -394,7 +432,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 6.1,
+    "douban": 6.5
   },
   {
     "id": 20,
@@ -414,7 +454,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Prime Video"
-    ]
+    ],
+    "imdb": 7.4,
+    "douban": 7.3
   },
   {
     "id": 21,
@@ -434,7 +476,9 @@ export const CATALOG = [
     "streaming": [
       "Paramount+",
       "Tubi"
-    ]
+    ],
+    "imdb": 6.8,
+    "douban": 6.4
   },
   {
     "id": 22,
@@ -453,7 +497,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Netflix"
-    ]
+    ],
+    "imdb": 6.4,
+    "douban": 6.3
   },
   {
     "id": 23,
@@ -473,7 +519,9 @@ export const CATALOG = [
     "streaming": [
       "Paramount+",
       "Showtime"
-    ]
+    ],
+    "imdb": 6.5,
+    "douban": 6.4
   },
   {
     "id": 24,
@@ -493,7 +541,9 @@ export const CATALOG = [
     "streaming": [
       "Paramount+",
       "Showtime"
-    ]
+    ],
+    "imdb": 7,
+    "douban": 7.6
   },
   {
     "id": 25,
@@ -513,7 +563,9 @@ export const CATALOG = [
     "streaming": [
       "Prime Video",
       "Paramount+"
-    ]
+    ],
+    "imdb": 7.1,
+    "douban": 6.3
   },
   {
     "id": 26,
@@ -532,7 +584,9 @@ export const CATALOG = [
     "streaming": [
       "Max",
       "Netflix"
-    ]
+    ],
+    "imdb": 7.5,
+    "douban": 8.1
   },
   {
     "id": 27,
@@ -552,7 +606,9 @@ export const CATALOG = [
     "streaming": [
       "Tubi",
       "Pluto TV"
-    ]
+    ],
+    "imdb": 7.1,
+    "douban": 7
   },
   {
     "id": 28,
@@ -573,7 +629,9 @@ export const CATALOG = [
     "streaming": [
       "Tubi",
       "Shudder"
-    ]
+    ],
+    "imdb": 7.8,
+    "douban": 7.9
   },
   {
     "id": 29,
@@ -593,7 +651,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Max"
-    ]
+    ],
+    "imdb": 6.3,
+    "douban": 6.3
   },
   {
     "id": 30,
@@ -612,7 +672,9 @@ export const CATALOG = [
     "streaming": [
       "Screambox",
       "Tubi"
-    ]
+    ],
+    "imdb": 6,
+    "douban": 5.9
   },
   {
     "id": 31,
@@ -632,7 +694,9 @@ export const CATALOG = [
     "streaming": [
       "Tubi",
       "Shudder"
-    ]
+    ],
+    "imdb": 5.9,
+    "douban": 6.2
   },
   {
     "id": 32,
@@ -651,7 +715,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Prime Video"
-    ]
+    ],
+    "imdb": 8.2,
+    "douban": 7.5
   },
   {
     "id": 33,
@@ -671,7 +737,9 @@ export const CATALOG = [
     "streaming": [
       "Max",
       "Tubi"
-    ]
+    ],
+    "imdb": 7.4,
+    "douban": 7.4
   },
   {
     "id": 34,
@@ -691,7 +759,9 @@ export const CATALOG = [
     "streaming": [
       "Max",
       "Hulu"
-    ]
+    ],
+    "imdb": 7,
+    "douban": 6.8
   },
   {
     "id": 35,
@@ -709,7 +779,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Peacock"
-    ]
+    ],
+    "imdb": 7.8,
+    "douban": 7.8
   },
   {
     "id": 36,
@@ -728,7 +800,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Max"
-    ]
+    ],
+    "imdb": 8.4,
+    "douban": 8.3
   },
   {
     "id": 37,
@@ -747,7 +821,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Hulu"
-    ]
+    ],
+    "imdb": 8.4,
+    "douban": 8.3
   },
   {
     "id": 38,
@@ -764,7 +840,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Peacock"
-    ]
+    ],
+    "imdb": 8.5,
+    "douban": 9
   },
   {
     "id": 39,
@@ -782,7 +860,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Paramount+"
-    ]
+    ],
+    "imdb": 8,
+    "douban": 8.2
   },
   {
     "id": 40,
@@ -801,7 +881,9 @@ export const CATALOG = [
     "streaming": [
       "Tubi",
       "Shudder"
-    ]
+    ],
+    "imdb": 7.4,
+    "douban": 7.2
   },
   {
     "id": 41,
@@ -819,7 +901,9 @@ export const CATALOG = [
     "streaming": [
       "Shudder",
       "Peacock"
-    ]
+    ],
+    "imdb": 7.7,
+    "douban": 6.8
   },
   {
     "id": 42,
@@ -837,7 +921,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Paramount+"
-    ]
+    ],
+    "imdb": 7.5,
+    "douban": 6.3
   },
   {
     "id": 43,
@@ -856,7 +942,9 @@ export const CATALOG = [
     "streaming": [
       "Tubi",
       "Shudder"
-    ]
+    ],
+    "imdb": 6.8,
+    "douban": 6.6
   },
   {
     "id": 44,
@@ -875,7 +963,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Paramount+"
-    ]
+    ],
+    "imdb": 6.5,
+    "douban": 6.4
   },
   {
     "id": 45,
@@ -895,7 +985,9 @@ export const CATALOG = [
     "streaming": [
       "Tubi",
       "Pluto TV"
-    ]
+    ],
+    "imdb": 7.2,
+    "douban": null
   },
   {
     "id": 46,
@@ -913,7 +1005,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Peacock"
-    ]
+    ],
+    "imdb": 6.8,
+    "douban": 6.9
   },
   {
     "id": 47,
@@ -933,7 +1027,9 @@ export const CATALOG = [
     "streaming": [
       "Shudder",
       "Tubi"
-    ]
+    ],
+    "imdb": 7.6,
+    "douban": 8.6
   },
   {
     "id": 48,
@@ -954,7 +1050,9 @@ export const CATALOG = [
     "streaming": [
       "Prime Video",
       "Shudder"
-    ]
+    ],
+    "imdb": 7.4,
+    "douban": 7.3
   },
   {
     "id": 49,
@@ -974,7 +1072,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 7.1,
+    "douban": 7.2
   },
   {
     "id": 50,
@@ -992,7 +1092,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Mubi"
-    ]
+    ],
+    "imdb": 7.2,
+    "douban": 7.5
   },
   {
     "id": 51,
@@ -1010,7 +1112,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Hulu"
-    ]
+    ],
+    "imdb": 6.5,
+    "douban": null
   },
   {
     "id": 52,
@@ -1028,7 +1132,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 7,
+    "douban": null
   },
   {
     "id": 53,
@@ -1046,7 +1152,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 6.7,
+    "douban": null
   },
   {
     "id": 54,
@@ -1064,7 +1172,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Peacock"
-    ]
+    ],
+    "imdb": 7.1,
+    "douban": 5.9
   },
   {
     "id": 55,
@@ -1082,7 +1192,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 6.9,
+    "douban": 7.1
   },
   {
     "id": 56,
@@ -1100,7 +1212,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Tubi"
-    ]
+    ],
+    "imdb": 7.4,
+    "douban": 7.6
   },
   {
     "id": 57,
@@ -1118,7 +1232,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 6.7,
+    "douban": 7.6
   },
   {
     "id": 58,
@@ -1137,7 +1253,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 7.1,
+    "douban": null
   },
   {
     "id": 59,
@@ -1156,7 +1274,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 6.8,
+    "douban": 7.2
   },
   {
     "id": 60,
@@ -1175,7 +1295,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 6.7,
+    "douban": 6.9
   },
   {
     "id": 61,
@@ -1193,7 +1315,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 7,
+    "douban": null
   },
   {
     "id": 62,
@@ -1212,7 +1336,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Netflix"
-    ]
+    ],
+    "imdb": 6.3,
+    "douban": 6.9
   },
   {
     "id": 63,
@@ -1231,7 +1357,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 6.9,
+    "douban": 6.7
   },
   {
     "id": 64,
@@ -1248,7 +1376,9 @@ export const CATALOG = [
     "gore": 1,
     "dread": 4,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.5,
+    "douban": 6.3
   },
   {
     "id": 65,
@@ -1265,7 +1395,9 @@ export const CATALOG = [
     "gore": 4,
     "dread": 3,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.1,
+    "douban": 7.5
   },
   {
     "id": 66,
@@ -1281,7 +1413,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 2,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.1,
+    "douban": 7.6
   },
   {
     "id": 67,
@@ -1298,7 +1432,9 @@ export const CATALOG = [
     "gore": 1,
     "dread": 4,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.5,
+    "douban": 6
   },
   {
     "id": 68,
@@ -1315,7 +1451,9 @@ export const CATALOG = [
     "gore": 4,
     "dread": 4,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.2,
+    "douban": 8.6
   },
   {
     "id": 69,
@@ -1333,7 +1471,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Netflix"
-    ]
+    ],
+    "imdb": 7.1,
+    "douban": 7.6
   },
   {
     "id": 70,
@@ -1348,7 +1488,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 2,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7,
+    "douban": 7.2
   },
   {
     "id": 71,
@@ -1365,7 +1507,9 @@ export const CATALOG = [
     "gore": 2,
     "dread": 5,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.5,
+    "douban": 8.2
   },
   {
     "id": 72,
@@ -1383,7 +1527,9 @@ export const CATALOG = [
     "gore": 1,
     "dread": 3,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.9,
+    "douban": 8.6
   },
   {
     "id": 73,
@@ -1400,7 +1546,9 @@ export const CATALOG = [
     "gore": 2,
     "dread": 4,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.8,
+    "douban": 8.1
   },
   {
     "id": 74,
@@ -1416,7 +1564,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 2,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.2,
+    "douban": 7.5
   },
   {
     "id": 75,
@@ -1432,7 +1582,9 @@ export const CATALOG = [
     "gore": 2,
     "dread": 1,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.6,
+    "douban": 8.2
   },
   {
     "id": 76,
@@ -1448,7 +1600,9 @@ export const CATALOG = [
     "gore": 4,
     "dread": 4,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.9,
+    "douban": 7.2
   },
   {
     "id": 77,
@@ -1465,7 +1619,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 4,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.3,
+    "douban": 8
   },
   {
     "id": 78,
@@ -1482,7 +1638,9 @@ export const CATALOG = [
     "gore": 2,
     "dread": 1,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.2,
+    "douban": 8.5
   },
   {
     "id": 79,
@@ -1498,7 +1656,9 @@ export const CATALOG = [
     "gore": 2,
     "dread": 2,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.8,
+    "douban": 8.1
   },
   {
     "id": 80,
@@ -1515,7 +1675,9 @@ export const CATALOG = [
     "gore": 4,
     "dread": 4,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.4,
+    "douban": 7.7
   },
   {
     "id": 81,
@@ -1531,7 +1693,9 @@ export const CATALOG = [
     "gore": 1,
     "dread": 4,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.6,
+    "douban": 7.3
   },
   {
     "id": 82,
@@ -1547,7 +1711,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 4,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.7,
+    "douban": 6.8
   },
   {
     "id": 83,
@@ -1564,7 +1730,9 @@ export const CATALOG = [
     "gore": 2,
     "dread": 4,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.6,
+    "douban": null
   },
   {
     "id": 84,
@@ -1582,7 +1750,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 6.5,
+    "douban": null
   },
   {
     "id": 85,
@@ -1601,7 +1771,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 6.5,
+    "douban": 6.5
   },
   {
     "id": 86,
@@ -1620,7 +1792,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 6.5,
+    "douban": 6.2
   },
   {
     "id": 87,
@@ -1638,7 +1812,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 6.6,
+    "douban": null
   },
   {
     "id": 88,
@@ -1657,7 +1833,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Netflix"
-    ]
+    ],
+    "imdb": 6.6,
+    "douban": null
   },
   {
     "id": 89,
@@ -1672,7 +1850,9 @@ export const CATALOG = [
     "gore": 1,
     "dread": 2,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.5,
+    "douban": 6.2
   },
   {
     "id": 90,
@@ -1689,7 +1869,9 @@ export const CATALOG = [
     "gore": 1,
     "dread": 4,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.8,
+    "douban": 6.4
   },
   {
     "id": 91,
@@ -1705,7 +1887,9 @@ export const CATALOG = [
     "gore": 2,
     "dread": 3,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.9,
+    "douban": 6.8
   },
   {
     "id": 92,
@@ -1722,7 +1906,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 6.5,
+    "douban": null
   },
   {
     "id": 93,
@@ -1740,7 +1926,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 6.9,
+    "douban": null
   },
   {
     "id": 94,
@@ -1758,7 +1946,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 6.9,
+    "douban": null
   },
   {
     "id": 95,
@@ -1775,7 +1965,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 5,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.2,
+    "douban": 8
   },
   {
     "id": 96,
@@ -1792,7 +1984,9 @@ export const CATALOG = [
     "gore": 2,
     "dread": 4,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.1,
+    "douban": 7.2
   },
   {
     "id": 97,
@@ -1809,7 +2003,9 @@ export const CATALOG = [
     "gore": 2,
     "dread": 4,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.6,
+    "douban": 7.5
   },
   {
     "id": 98,
@@ -1826,7 +2022,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 3,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.8,
+    "douban": 7.6
   },
   {
     "id": 99,
@@ -1843,7 +2041,9 @@ export const CATALOG = [
     "gore": 5,
     "dread": 5,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7,
+    "douban": 6.7
   },
   {
     "id": 100,
@@ -1859,7 +2059,9 @@ export const CATALOG = [
     "gore": 5,
     "dread": 4,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.7,
+    "douban": 6.4
   },
   {
     "id": 101,
@@ -1875,7 +2077,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 3,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.5,
+    "douban": 7.7
   },
   {
     "id": 102,
@@ -1892,7 +2096,9 @@ export const CATALOG = [
     "gore": 5,
     "dread": 4,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.5,
+    "douban": null
   },
   {
     "id": 103,
@@ -1909,7 +2115,9 @@ export const CATALOG = [
     "gore": 4,
     "dread": 4,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.3,
+    "douban": null
   },
   {
     "id": 104,
@@ -1925,7 +2133,9 @@ export const CATALOG = [
     "gore": 2,
     "dread": 3,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.3,
+    "douban": 7.2
   },
   {
     "id": 105,
@@ -1941,7 +2151,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 4,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.7,
+    "douban": null
   },
   {
     "id": 106,
@@ -1958,7 +2170,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 6.7,
+    "douban": 5.9
   },
   {
     "id": 107,
@@ -1974,7 +2188,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 3,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.4,
+    "douban": 7.6
   },
   {
     "id": 108,
@@ -1990,7 +2206,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 3,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.5,
+    "douban": 7.4
   },
   {
     "id": 109,
@@ -2005,7 +2223,9 @@ export const CATALOG = [
     "gore": 2,
     "dread": 2,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.3,
+    "douban": 6.8
   },
   {
     "id": 110,
@@ -2020,7 +2240,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 3,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.4,
+    "douban": 7.5
   },
   {
     "id": 111,
@@ -2037,7 +2259,9 @@ export const CATALOG = [
     "gore": 5,
     "dread": 3,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.9,
+    "douban": null
   },
   {
     "id": 112,
@@ -2052,7 +2276,9 @@ export const CATALOG = [
     "gore": 5,
     "dread": 4,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.6,
+    "douban": 7.5
   },
   {
     "id": 113,
@@ -2068,7 +2294,9 @@ export const CATALOG = [
     "gore": 5,
     "dread": 2,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.1,
+    "douban": 7.4
   },
   {
     "id": 114,
@@ -2084,7 +2312,9 @@ export const CATALOG = [
     "gore": 4,
     "dread": 2,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.6,
+    "douban": 7.3
   },
   {
     "id": 115,
@@ -2100,7 +2330,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 3,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.8,
+    "douban": 6.7
   },
   {
     "id": 116,
@@ -2114,7 +2346,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 2,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.4,
+    "douban": 7.2
   },
   {
     "id": 117,
@@ -2131,7 +2365,9 @@ export const CATALOG = [
     "gore": 1,
     "dread": 4,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.6,
+    "douban": 8.2
   },
   {
     "id": 118,
@@ -2146,7 +2382,9 @@ export const CATALOG = [
     "gore": 4,
     "dread": 4,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.5,
+    "douban": 7.2
   },
   {
     "id": 119,
@@ -2162,7 +2400,9 @@ export const CATALOG = [
     "gore": 1,
     "dread": 5,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.3,
+    "douban": 6.5
   },
   {
     "id": 120,
@@ -2178,7 +2418,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 4,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.8,
+    "douban": 6.9
   },
   {
     "id": 121,
@@ -2193,7 +2435,9 @@ export const CATALOG = [
     "gore": 1,
     "dread": 3,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.8,
+    "douban": 7.9
   },
   {
     "id": 122,
@@ -2210,7 +2454,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 4,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.3,
+    "douban": 5.4
   },
   {
     "id": 123,
@@ -2227,7 +2473,9 @@ export const CATALOG = [
     "gore": 1,
     "dread": 5,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.2,
+    "douban": 6.8
   },
   {
     "id": 124,
@@ -2243,7 +2491,9 @@ export const CATALOG = [
     "gore": 1,
     "dread": 3,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.3,
+    "douban": null
   },
   {
     "id": 125,
@@ -2259,7 +2509,9 @@ export const CATALOG = [
     "gore": 4,
     "dread": 1,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7,
+    "douban": 7.6
   },
   {
     "id": 126,
@@ -2275,7 +2527,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 4,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.8,
+    "douban": 7.6
   },
   {
     "id": 127,
@@ -2292,7 +2546,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Netflix"
-    ]
+    ],
+    "imdb": 6.6,
+    "douban": 6.3
   },
   {
     "id": 128,
@@ -2310,7 +2566,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Netflix"
-    ]
+    ],
+    "imdb": 6.3,
+    "douban": 6.3
   },
   {
     "id": 129,
@@ -2325,7 +2583,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 2,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 7.3,
+    "douban": 7.5
   },
   {
     "id": 130,
@@ -2340,7 +2600,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 3,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.8,
+    "douban": 6.4
   },
   {
     "id": 131,
@@ -2356,7 +2618,9 @@ export const CATALOG = [
     "gore": 1,
     "dread": 4,
     "gem": true,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.4,
+    "douban": 6.6
   },
   {
     "id": 132,
@@ -2374,7 +2638,9 @@ export const CATALOG = [
     "gem": false,
     "streaming": [
       "Netflix"
-    ]
+    ],
+    "imdb": 6.4,
+    "douban": 6
   },
   {
     "id": 133,
@@ -2393,7 +2659,9 @@ export const CATALOG = [
     "gem": true,
     "streaming": [
       "Shudder"
-    ]
+    ],
+    "imdb": 6.1,
+    "douban": 5.6
   },
   {
     "id": 134,
@@ -2408,7 +2676,9 @@ export const CATALOG = [
     "gore": 3,
     "dread": 3,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.5,
+    "douban": 6.4
   },
   {
     "id": 135,
@@ -2423,6 +2693,8 @@ export const CATALOG = [
     "gore": 2,
     "dread": 1,
     "gem": false,
-    "streaming": []
+    "streaming": [],
+    "imdb": 6.3,
+    "douban": 6
   }
 ];
