@@ -552,5 +552,14 @@ footer {
 
 <footer>WhatScares — horror matched to your taste</footer>
 
+<script>
+document.querySelectorAll('.hero-feature, .dual-card, .editorial-item').forEach(el => {
+  const h = el.querySelector('h2, h3');
+  if (!h) return;
+  const slug = h.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+  el.style.cursor = 'pointer';
+  el.addEventListener('click', () => { window.location.href = '/?movie=' + slug; });
+});
+</script>
 </body>
 </html>

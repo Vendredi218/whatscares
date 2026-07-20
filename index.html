@@ -1585,11 +1585,22 @@ document.addEventListener('keydown', e => {
   }
 });
 
+// ─── URL PARAM → AUTO-OPEN MODAL ───
+function slugify(t) { return t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
+function checkUrlMovie() {
+  const p = new URLSearchParams(window.location.search);
+  const slug = p.get('movie');
+  if (!slug) return;
+  const idx = M.findIndex(m => slugify(m.t) === slug);
+  if (idx >= 0) openModal(idx);
+}
+
 // ─── INIT ───
 renderGrid();
 renderLists();
 renderHered();
 renderCollection();
+checkUrlMovie();
 
 sb.auth.onAuthStateChange(async (event, session) => {
   const user = session?.user || null;
