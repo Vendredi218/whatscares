@@ -7,15 +7,20 @@
 <meta name="description" content="The smartest way to find horror movies. Tell us what scares you — folk rituals, cosmic dread, psychological terror, body horror — and we'll match you with films + where to stream them.">
 <meta name="keywords" content="horror movie recommendations, find horror movies, best horror films, A24 horror, folk horror, cosmic horror, psychological horror, body horror, gore horror, slow-burn horror, J-horror, where to stream horror movies">
 <link rel="canonical" href="https://whatscares.com/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:title" content="WhatScares — Horror Movies Matched to Your Taste">
 <meta property="og:description" content="The smartest way to find horror. Tell us your taste — folk, cosmic, psychological, gore — and we match you with films + where to stream them.">
+<meta property="og:image" content="https://whatscares.com/og-image.png">
 <meta property="og:site_name" content="WhatScares">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="WhatScares — Horror Movies Matched to Your Taste">
 <meta name="twitter:description" content="The smartest way to find horror. Tell us your taste — folk, cosmic, psychological, gore — and we match you with films + where to stream them.">
+<meta name="twitter:image" content="https://whatscares.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -173,45 +178,58 @@ section { margin-bottom: 48px; }
 /* ─── MOVIE GRID ─── */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 28px 16px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-auto-rows: 300px;
+  gap: 12px;
 }
 
-.card { cursor: pointer; }
+.card {
+  cursor: pointer;
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
 
 .card .poster {
-  position: relative; aspect-ratio: 2/3;
-  border-radius: var(--radius); overflow: hidden;
+  position: relative;
+  width: 100%; height: 100%;
+  overflow: hidden;
   background: var(--surface-2);
-  margin-bottom: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover .poster {
-  transform: scale(1.03);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
 }
 
 .card .poster img {
   width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.4s ease;
 }
 
-.card .poster .fallback {
-  width: 100%; height: 100%; position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px; color: var(--text-3);
+.card:hover .poster img {
+  transform: scale(1.05);
+}
+
+/* featured first card */
+.card.featured {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+/* category tag */
+.card-tag {
+  position: absolute; top: 10px; left: 10px; z-index: 3;
+  padding: 3px 10px; border-radius: 3px;
+  font-size: 11px; font-weight: 600; text-transform: capitalize;
+  background: var(--accent); color: white;
 }
 
 /* gem badge */
 .gem-badge {
-  position: absolute; top: 8px; left: 8px; z-index: 2;
+  position: absolute; top: 10px; right: 42px; z-index: 3;
   padding: 3px 8px; border-radius: 3px;
   font-size: 10px; font-weight: 500; letter-spacing: 0.5px;
   background: rgba(0,0,0,0.65); color: rgba(255,255,255,0.8);
   backdrop-filter: blur(8px);
 }
 
-/* fav overlay — only shows on hover */
+/* fav button */
 .card-fav {
   position: absolute; top: 8px; right: 8px; z-index: 3;
   width: 32px; height: 32px; border-radius: 50%;
@@ -225,86 +243,122 @@ section { margin-bottom: 48px; }
 .card-fav:hover { color: var(--accent); }
 .card-fav.saved { color: var(--accent); opacity: 1; }
 
-/* ─── CARD INFO (below poster, Douban style) ─── */
-.card .info { padding: 0 2px; }
-
-.card .title {
-  font-size: 15px; font-weight: 500;
-  color: var(--text); line-height: 1.35;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  margin-bottom: 3px;
+/* card overlay — text on image */
+.card-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 60px 14px 14px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.88));
+  z-index: 2;
 }
 
-.card .meta {
-  font-size: 13px; color: var(--text-3); line-height: 1.4;
+.card-overlay .title {
+  font-size: 15px; font-weight: 600;
+  color: white; line-height: 1.3;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
 }
 
-.card .card-score {
+.card-overlay .meta {
+  font-size: 12px; color: rgba(255,255,255,0.65);
+  margin-top: 3px;
+}
+
+.card-overlay .card-score {
   display: flex; align-items: center; gap: 6px;
   margin-top: 4px;
 }
 
-.card .card-score .stars {
-  color: var(--gold); font-size: 11px; letter-spacing: 1px;
+.card-overlay .card-score .stars {
+  color: var(--gold); font-size: 10px; letter-spacing: 1px;
 }
 
-.card .card-score .score-num {
-  font-size: 13px; font-weight: 500; color: var(--text-2);
+.card-overlay .card-score .score-num {
+  font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.75);
 }
 
-.card .user-rating {
-  font-size: 11px; color: var(--gold); margin-top: 3px;
-  letter-spacing: 0.5px;
+.card.featured .card-overlay {
+  padding: 80px 20px 20px;
 }
 
-.card .match {
-  font-size: 12px; color: var(--text-2); margin-top: 3px;
-  font-style: italic; font-family: var(--serif);
+.card.featured .card-overlay .title {
+  font-size: 26px; font-weight: 500;
+  font-family: var(--serif);
 }
 
-/* card tags on hover */
-.card .poster .hover-tags {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  padding: 24px 10px 10px;
-  background: linear-gradient(transparent, rgba(0,0,0,0.85));
-  display: flex; flex-wrap: wrap; gap: 4px;
-  opacity: 0; transition: opacity 0.25s;
+.card.featured .card-overlay .meta {
+  font-size: 14px; margin-top: 6px;
 }
-.card:hover .hover-tags { opacity: 1; }
-.hover-tags span {
-  font-size: 10px; padding: 2px 7px;
-  background: rgba(255,255,255,0.12); border-radius: 3px;
-  color: rgba(255,255,255,0.75);
+
+.card.featured .card-overlay .card-score .stars {
+  font-size: 12px;
+}
+
+.card.featured .card-overlay .card-score .score-num {
+  font-size: 14px;
 }
 
 /* ─── CURATED LISTS ─── */
 .lists-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 200px;
   gap: 12px;
 }
 
 .list-card {
-  display: flex; gap: 16px; align-items: center;
-  padding: 16px 20px; background: var(--surface);
-  border: 1px solid var(--border); border-radius: var(--radius);
-  cursor: pointer; transition: background 0.2s, border-color 0.2s;
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  display: block;
 }
-.list-card:hover { background: var(--surface-2); border-color: var(--text-3); }
+
+.list-card .list-card-bg {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.4s ease;
+  filter: brightness(0.8);
+}
+
+.list-card:hover .list-card-bg {
+  transform: scale(1.05);
+  filter: brightness(0.7);
+}
+
+.list-card.list-featured {
+  grid-row: span 2;
+}
+
+.list-card-tag {
+  position: absolute; top: 10px; left: 10px; z-index: 2;
+  padding: 3px 10px; border-radius: 3px;
+  font-size: 11px; font-weight: 600;
+  background: var(--accent); color: white;
+}
+
+.list-card-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 48px 14px 14px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.9));
+  z-index: 1;
+}
+
+.list-card-overlay h3 {
+  font-family: var(--serif);
+  font-size: 16px; font-weight: 500;
+  color: white; line-height: 1.3;
+}
+
+.list-card.list-featured .list-card-overlay h3 {
+  font-size: 22px;
+}
+
+.list-card-overlay p {
+  font-size: 12px; color: rgba(255,255,255,0.6);
+  margin-top: 4px;
+}
+
 a.list-card { text-decoration: none; color: inherit; }
-
-.list-posters { display: flex; gap: 3px; flex-shrink: 0; }
-.list-posters .mini {
-  width: 32px; height: 48px; border-radius: 3px;
-  overflow: hidden; background: var(--surface-2);
-}
-.list-posters .mini img { width: 100%; height: 100%; object-fit: cover; }
-
-.list-info h3 {
-  font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 3px;
-}
-.list-info p {
-  font-size: 12px; color: var(--text-3);
-}
 
 .see-all {
   font-size: 13px; color: var(--text-3); text-decoration: none;
@@ -314,12 +368,12 @@ a.list-card { text-decoration: none; color: inherit; }
 
 /* ─── HORIZONTAL SCROLL ROW ─── */
 .hscroll {
-  display: flex; gap: 16px; overflow-x: auto;
+  display: flex; gap: 12px; overflow-x: auto;
   padding-bottom: 8px; scroll-snap-type: x mandatory;
   -ms-overflow-style: none; scrollbar-width: none;
 }
 .hscroll::-webkit-scrollbar { display: none; }
-.hscroll .card { flex: 0 0 150px; scroll-snap-align: start; }
+.hscroll .card { flex: 0 0 150px; height: 225px; scroll-snap-align: start; }
 
 /* ─── MODAL ─── */
 .backdrop {
@@ -520,6 +574,123 @@ a.list-card { text-decoration: none; color: inherit; }
 .empty.show { display: block; }
 .empty p { font-size: 15px; font-family: var(--serif); font-style: italic; }
 
+/* ─── AUTH MODAL ─── */
+.auth-backdrop {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(0,0,0,0.85); backdrop-filter: blur(12px);
+  display: none; align-items: center; justify-content: center;
+}
+.auth-backdrop.open { display: flex; }
+
+.auth-modal {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; max-width: 380px; width: 100%;
+  padding: 36px 32px; position: relative;
+}
+
+.auth-modal h2 {
+  font-family: var(--serif); font-size: 24px; font-weight: 500;
+  text-align: center; margin-bottom: 24px;
+}
+
+.auth-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: transparent; border: none;
+  color: var(--text-2); font-size: 16px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: color 0.2s;
+}
+.auth-close:hover { color: var(--text); }
+
+.auth-google {
+  width: 100%; padding: 10px; border: 1px solid var(--border);
+  border-radius: var(--radius); background: transparent;
+  color: var(--text); font-size: 14px; font-family: var(--sans);
+  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+  transition: border-color 0.2s;
+}
+.auth-google:hover { border-color: var(--text-3); }
+.auth-google svg { flex-shrink: 0; }
+
+.auth-divider {
+  display: flex; align-items: center; gap: 12px;
+  margin: 20px 0; color: var(--text-3); font-size: 12px;
+}
+.auth-divider::before, .auth-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+
+.auth-form input {
+  width: 100%; padding: 10px 14px; margin-bottom: 12px;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius); color: var(--text);
+  font-size: 14px; font-family: var(--sans); outline: none;
+}
+.auth-form input:focus { border-color: var(--text-3); }
+.auth-form input::placeholder { color: var(--text-3); }
+
+.auth-submit {
+  width: 100%; padding: 10px; border: none;
+  border-radius: var(--radius); background: var(--accent);
+  color: white; font-size: 14px; font-weight: 500;
+  font-family: var(--sans); cursor: pointer;
+  transition: opacity 0.2s;
+}
+.auth-submit:hover { opacity: 0.9; }
+.auth-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.auth-toggle {
+  text-align: center; margin-top: 16px;
+  font-size: 13px; color: var(--text-3);
+}
+.auth-toggle a { color: var(--text); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+
+.auth-error {
+  background: rgba(196,53,42,0.15); border: 1px solid rgba(196,53,42,0.3);
+  border-radius: var(--radius); padding: 8px 12px;
+  font-size: 13px; color: #d45; margin-bottom: 12px;
+  display: none;
+}
+.auth-error.show { display: block; }
+
+/* nav user */
+.nav-user { display: flex; align-items: center; gap: 12px; }
+
+.auth-btn {
+  padding: 6px 16px; border: 1px solid var(--border);
+  border-radius: var(--radius); background: transparent;
+  color: var(--text-2); font-size: 13px; font-family: var(--sans);
+  cursor: pointer; transition: all 0.2s;
+}
+.auth-btn:hover { border-color: var(--text-3); color: var(--text); }
+
+.user-menu {
+  display: flex; align-items: center; gap: 8px;
+  cursor: pointer; position: relative;
+}
+.user-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--accent); display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 600; color: white;
+  overflow: hidden;
+}
+.user-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.user-name { font-size: 13px; color: var(--text-2); }
+.user-dropdown {
+  position: absolute; top: 100%; right: 0; margin-top: 8px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 4px;
+  min-width: 140px; display: none; z-index: 10;
+}
+.user-menu:hover .user-dropdown { display: block; }
+.user-dropdown button {
+  width: 100%; padding: 8px 12px; background: none; border: none;
+  color: var(--text-2); font-size: 13px; font-family: var(--sans);
+  cursor: pointer; text-align: left; border-radius: 4px;
+}
+.user-dropdown button:hover { background: var(--surface-2); color: var(--text); }
+
 /* ─── FOOTER ─── */
 footer {
   border-top: 1px solid var(--border);
@@ -535,12 +706,13 @@ footer {
   .hero h1 { font-size: 28px; }
   .search { font-size: 16px; }
   .pill { font-size: 13px; padding: 7px 14px; }
-  .grid { grid-template-columns: repeat(3, 1fr); gap: 20px 12px; }
-  .card .title { font-size: 13px; }
-  .card .meta { font-size: 11px; }
-  .card .card-score .score-num { font-size: 12px; }
-  .card .card-score .stars { font-size: 9px; }
-  .lists-grid { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 240px; gap: 10px; }
+  .card.featured { grid-column: span 2; grid-row: span 1; }
+  .card.featured .card-overlay .title { font-size: 20px; }
+  .card-overlay .title { font-size: 14px; }
+  .card-overlay .meta { font-size: 11px; }
+  .lists-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 180px; }
+  .list-card.list-featured { grid-column: span 2; grid-row: span 1; }
   .section-head h2 { font-size: 20px; }
   .modal-body { padding: 20px; }
   .modal-hero .modal-title-wrap { left: 20px; right: 20px; }
@@ -550,20 +722,27 @@ footer {
 }
 
 @media (max-width: 480px) {
-  .grid { grid-template-columns: repeat(2, 1fr); gap: 16px 10px; }
-  .card .title { font-size: 13px; }
-  .hscroll .card { flex: 0 0 120px; }
+  .grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; gap: 8px; }
+  .card.featured { grid-column: span 2; }
+  .card-overlay { padding: 40px 10px 10px; }
+  .card-overlay .title { font-size: 13px; }
+  .lists-grid { grid-template-columns: 1fr; grid-auto-rows: 160px; }
+  .list-card.list-featured { grid-column: span 1; }
+  .hscroll .card { flex: 0 0 120px; height: 180px; }
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="brand"><em>D</em>READ</div>
+  <div class="brand">What<em>Scares</em></div>
   <div class="nav-links">
     <a href="#" class="active">Discover</a>
     <a href="#collections">Collections</a>
     <a href="#browse">Browse</a>
+  </div>
+  <div class="nav-user" id="navUser">
+    <button class="auth-btn" onclick="openAuth()">Sign In</button>
   </div>
 </nav>
 
@@ -652,6 +831,29 @@ footer {
     <a href="/lists/best-religious-horror-movies.html" style="color:var(--text-3);font-size:11px;text-decoration:none">Best Religious Horror</a>
   </nav>
 </footer>
+
+<!-- AUTH MODAL -->
+<div class="auth-backdrop" id="authBackdrop" onclick="closeAuth(event)">
+  <div class="auth-modal" onclick="event.stopPropagation()">
+    <button class="auth-close" onclick="closeAuth()">✕</button>
+    <h2 id="authTitle">Sign In</h2>
+    <div class="auth-error" id="authError"></div>
+    <button class="auth-google" onclick="signInGoogle()">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      Continue with Google
+    </button>
+    <div class="auth-divider"><span>or</span></div>
+    <form class="auth-form" id="authForm" onsubmit="handleAuth(event)">
+      <input type="email" id="authEmail" placeholder="Email" required>
+      <input type="password" id="authPassword" placeholder="Password" required minlength="6">
+      <button type="submit" class="auth-submit" id="authSubmit">Sign In</button>
+    </form>
+    <p class="auth-toggle">
+      <span id="authToggleText">Don't have an account?</span>
+      <a onclick="toggleAuthMode(event)" id="authToggleLink">Sign Up</a>
+    </p>
+  </div>
+</div>
 
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
@@ -780,8 +982,12 @@ footer {
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 const TMDB = 'https://image.tmdb.org/t/p/w342';
+const SUPABASE_URL = 'https://tkomadaiuhqgsnlixgtw.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_nmap6xPXEztMqK-wEmr3Bw_qpTO1KBJ';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const M = [
   { t:'Hereditary', y:2018, d:'Ari Aster', tags:['a24','occult','grief','slow-burn','atmospheric'], p:'/4GFPuL14eXi66V96xBWY73Y9PfR.jpg', rt:89, imdb:7.3, mc:87, yt:'V6wWKNij_1M', str:['Apple TV+','Paramount+'], scare:4, gore:2, dread:5, obscure:false },
@@ -828,12 +1034,153 @@ const STREAM_COLORS = {
 };
 
 // ─── USER DATA ───
-const USER_KEY = 'dread_user';
+const USER_KEY = 'whatscares_user';
 function loadUser() {
   try { return JSON.parse(localStorage.getItem(USER_KEY)) || { favs: [], ratings: {} }; }
   catch { return { favs: [], ratings: {} }; }
 }
 function saveUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+
+let currentUser = null;
+
+// ─── AUTH UI ───
+function openAuth() {
+  document.getElementById('authBackdrop').classList.add('open');
+  document.getElementById('authError').classList.remove('show');
+  document.getElementById('authEmail').value = '';
+  document.getElementById('authPassword').value = '';
+}
+
+function closeAuth(e) {
+  if (e && e.target !== document.getElementById('authBackdrop') && e.type === 'click') return;
+  document.getElementById('authBackdrop').classList.remove('open');
+}
+
+function toggleAuthMode(e) {
+  if (e) e.preventDefault();
+  const title = document.getElementById('authTitle');
+  const submit = document.getElementById('authSubmit');
+  const toggle = document.getElementById('authToggleText');
+  const link = document.getElementById('authToggleLink');
+  document.getElementById('authError').classList.remove('show');
+  if (title.textContent === 'Sign In') {
+    title.textContent = 'Sign Up';
+    submit.textContent = 'Sign Up';
+    toggle.textContent = 'Already have an account?';
+    link.textContent = 'Sign In';
+  } else {
+    title.textContent = 'Sign In';
+    submit.textContent = 'Sign In';
+    toggle.textContent = "Don't have an account?";
+    link.textContent = 'Sign Up';
+  }
+}
+
+function showAuthError(msg) {
+  const el = document.getElementById('authError');
+  el.textContent = msg;
+  el.classList.add('show');
+}
+
+async function signInGoogle() {
+  const { error } = await sb.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: window.location.origin }
+  });
+  if (error) showAuthError(error.message);
+}
+
+async function handleAuth(e) {
+  e.preventDefault();
+  const email = document.getElementById('authEmail').value;
+  const password = document.getElementById('authPassword').value;
+  const isSignUp = document.getElementById('authTitle').textContent === 'Sign Up';
+  const btn = document.getElementById('authSubmit');
+  btn.disabled = true;
+
+  if (isSignUp) {
+    const { error } = await sb.auth.signUp({ email, password });
+    btn.disabled = false;
+    if (error) return showAuthError(error.message);
+    showAuthError('');
+    document.getElementById('authError').classList.remove('show');
+    closeAuth();
+    alert('Check your email for a confirmation link!');
+  } else {
+    const { error } = await sb.auth.signInWithPassword({ email, password });
+    btn.disabled = false;
+    if (error) return showAuthError(error.message);
+    closeAuth();
+  }
+}
+
+async function signOut() {
+  await sb.auth.signOut();
+  currentUser = null;
+  updateNavUser(null);
+  renderGrid();
+  renderCollection();
+}
+
+function updateNavUser(user) {
+  const nav = document.getElementById('navUser');
+  if (user) {
+    const name = user.user_metadata?.full_name || user.email?.split('@')[0] || 'User';
+    const avatar = user.user_metadata?.avatar_url;
+    const initial = name.charAt(0).toUpperCase();
+    nav.innerHTML = `
+      <div class="user-menu">
+        <div class="user-avatar">${avatar ? `<img src="${avatar}" alt="">` : initial}</div>
+        <span class="user-name">${name}</span>
+        <div class="user-dropdown">
+          <button onclick="signOut()">Sign Out</button>
+        </div>
+      </div>`;
+  } else {
+    nav.innerHTML = '<button class="auth-btn" onclick="openAuth()">Sign In</button>';
+  }
+}
+
+// ─── SUPABASE SYNC ───
+async function syncToSupabase(userId) {
+  const local = loadUser();
+  const allIdxs = new Set([...local.favs, ...Object.keys(local.ratings).map(Number)]);
+  if (!allIdxs.size) return;
+
+  const rows = [...allIdxs].map(idx => ({
+    user_id: userId,
+    movie_idx: idx,
+    is_favorite: local.favs.includes(idx),
+    rating: local.ratings[idx] || 0
+  }));
+
+  await sb.from('user_movies').upsert(rows, { onConflict: 'user_id,movie_idx' });
+}
+
+async function loadFromSupabase(userId) {
+  const { data } = await sb.from('user_movies').select('*').eq('user_id', userId);
+  if (!data || !data.length) return;
+
+  const local = loadUser();
+  const u = { favs: [...local.favs], ratings: { ...local.ratings } };
+
+  for (const row of data) {
+    if (row.is_favorite && !u.favs.includes(row.movie_idx)) u.favs.push(row.movie_idx);
+    if (row.rating > 0 && !u.ratings[row.movie_idx]) u.ratings[row.movie_idx] = row.rating;
+  }
+  saveUser(u);
+}
+
+async function upsertMovie(idx) {
+  if (!currentUser) return;
+  const u = loadUser();
+  await sb.from('user_movies').upsert({
+    user_id: currentUser.id,
+    movie_idx: idx,
+    is_favorite: u.favs.includes(idx),
+    rating: u.ratings[idx] || 0
+  }, { onConflict: 'user_id,movie_idx' });
+}
 
 function toggleFav(idx, e) {
   if (e) e.stopPropagation();
@@ -841,6 +1188,7 @@ function toggleFav(idx, e) {
   const i = u.favs.indexOf(idx);
   i === -1 ? u.favs.push(idx) : u.favs.splice(i, 1);
   saveUser(u);
+  upsertMovie(idx);
   renderGrid();
   renderCollection();
 }
@@ -851,6 +1199,7 @@ function rateMovie(idx, stars, e) {
   u.ratings[idx] = u.ratings[idx] === stars ? 0 : stars;
   if (u.ratings[idx] === 0) delete u.ratings[idx];
   saveUser(u);
+  upsertMovie(idx);
   renderGrid();
   renderCollection();
 }
@@ -904,13 +1253,13 @@ function renderCollection() {
   row.innerHTML = unique.map(idx => {
     const m = M[idx];
     const r = u.ratings[idx] || 0;
-    return `<div class="card" onclick="openModal(${idx})" style="flex:0 0 140px">
+    return `<div class="card" onclick="openModal(${idx})">
       <div class="poster">
         <img src="${TMDB}${m.p}" alt="${m.t}" loading="lazy">
-      </div>
-      <div class="info">
-        <div class="title">${m.t}</div>
-        <div class="meta">${m.y}${r ? ' · ' + '★'.repeat(r) : ''}</div>
+        <div class="card-overlay">
+          <div class="title">${m.t}</div>
+          <div class="meta">${m.y}${r ? ' · ' + '★'.repeat(r) : ''}</div>
+        </div>
       </div>
     </div>`;
   }).join('');
@@ -973,54 +1322,54 @@ function renderGrid() {
   }
   empty.classList.remove('show');
 
-  grid.innerHTML = list.map((m) => {
+  grid.innerHTML = list.map((m, i) => {
     const idx = M.indexOf(m);
     const matchN = active.size ? [...active].filter(f => m.tags.includes(f)).length : 0;
     const matchP = active.size ? Math.round((matchN / active.size) * 100) : 0;
-    return cardHTML(m, idx, matchP);
+    return cardHTML(m, idx, matchP, i === 0);
   }).join('');
 }
 
-function cardHTML(m, idx, matchP) {
+function cardHTML(m, idx, matchP, featured) {
   const u = loadUser();
   const isFav = u.favs.includes(idx);
-  const r = u.ratings[idx] || 0;
-  return `<div class="card" onclick="openModal(${idx})">
+  const mainTag = m.tags[0];
+  return `<div class="card${featured ? ' featured' : ''}" onclick="openModal(${idx})">
     <div class="poster">
       <img src="${TMDB}${m.p}" alt="${m.t}" loading="lazy">
+      <span class="card-tag">${mainTag}</span>
       ${m.obscure ? '<div class="gem-badge">Hidden Gem</div>' : ''}
       <button class="card-fav${isFav?' saved':''}" onclick="toggleFav(${idx},event)">${isFav?'♥':'♡'}</button>
-      <div class="hover-tags">${m.tags.slice(0,4).map(t=>`<span>${t}</span>`).join('')}</div>
-    </div>
-    <div class="info">
-      <div class="title">${m.t}</div>
-      <div class="meta">${m.y} · ${m.d}</div>
-      ${m.imdb ? `<div class="card-score">
-        <span class="stars">${imdbStars(m.imdb)}</span>
-        <span class="score-num">${m.imdb}</span>
-      </div>` : ''}
-      ${r ? `<div class="user-rating">Your: ${'★'.repeat(r)}${'☆'.repeat(5-r)}</div>` : ''}
-      ${matchP ? `<div class="match">${matchP}% match</div>` : ''}
+      <div class="card-overlay">
+        <div class="title">${m.t}</div>
+        <div class="meta">${m.y} · ${m.d}</div>
+        ${m.imdb ? `<div class="card-score">
+          <span class="stars">${imdbStars(m.imdb)}</span>
+          <span class="score-num">${m.imdb}</span>
+        </div>` : ''}
+      </div>
     </div>
   </div>`;
 }
 
 function renderLists() {
-  document.getElementById('lists').innerHTML = LISTS.map(l => {
+  const TMDB_LG = 'https://image.tmdb.org/t/p/w780';
+  document.getElementById('lists').innerHTML = LISTS.map((l, i) => {
+    const heroMovie = M[l.movies[0]];
+    const tagLabel = l.desc.includes('Community') ? 'Community' : 'Staff pick';
+    const filmCount = l.desc.split('·')[0].trim();
     const inner = `
-      <div class="list-posters">
-        ${l.movies.slice(0,3).map(i => `<div class="mini">
-          <img src="${TMDB}${M[i].p}" alt="${M[i].t}" loading="lazy">
-        </div>`).join('')}
-      </div>
-      <div class="list-info">
+      <img src="${TMDB_LG}${heroMovie.p}" alt="${l.title}" loading="lazy" class="list-card-bg">
+      <span class="list-card-tag">${tagLabel}</span>
+      <div class="list-card-overlay">
         <h3>${l.title}</h3>
-        <p>${l.desc}</p>
+        <p>${filmCount}</p>
       </div>`;
+    const cls = `list-card${i === 0 ? ' list-featured' : ''}`;
     if (l.href) {
-      return `<a class="list-card" href="${l.href}">${inner}</a>`;
+      return `<a class="${cls}" href="${l.href}">${inner}</a>`;
     }
-    return `<div class="list-card" onclick="applyList(${JSON.stringify(l.movies).replace(/"/g,'&quot;')})">${inner}</div>`;
+    return `<div class="${cls}" onclick="applyList(${JSON.stringify(l.movies).replace(/"/g,'&quot;')})">${inner}</div>`;
   }).join('');
 }
 
@@ -1028,13 +1377,13 @@ function renderHered() {
   const sim = similar(M[0]).slice(0,8);
   document.getElementById('heredRow').innerHTML = sim.map(s => {
     const idx = M.indexOf(s.m);
-    return `<div class="card" onclick="openModal(${idx})" style="flex:0 0 150px">
+    return `<div class="card" onclick="openModal(${idx})">
       <div class="poster">
         <img src="${TMDB}${s.m.p}" alt="${s.m.t}" loading="lazy">
-      </div>
-      <div class="info">
-        <div class="title">${s.m.t}</div>
-        <div class="meta">${s.m.y} · ${s.score}% match</div>
+        <div class="card-overlay">
+          <div class="title">${s.m.t}</div>
+          <div class="meta">${s.m.y} · ${s.score}% match</div>
+        </div>
       </div>
     </div>`;
   }).join('');
@@ -1239,6 +1588,18 @@ renderGrid();
 renderLists();
 renderHered();
 renderCollection();
+
+sb.auth.onAuthStateChange(async (event, session) => {
+  const user = session?.user || null;
+  currentUser = user;
+  updateNavUser(user);
+  if (user && (event === 'SIGNED_IN' || event === 'INITIAL_SESSION')) {
+    await syncToSupabase(user.id);
+    await loadFromSupabase(user.id);
+    renderGrid();
+    renderCollection();
+  }
+});
 </script>
 </body>
 </html>
