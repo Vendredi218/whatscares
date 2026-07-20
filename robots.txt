@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Allow: /lists/
+
+Sitemap: https://whatscares.com/sitemap.xml

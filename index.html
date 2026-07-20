@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WhatScares — Horror Movies Matched to Your Taste | Smart Recommendations</title>
+<meta name="description" content="The smartest way to find horror movies. Tell us what scares you — folk rituals, cosmic dread, psychological terror, body horror — and we'll match you with films + where to stream them.">
+<meta name="keywords" content="horror movie recommendations, find horror movies, best horror films, A24 horror, folk horror, cosmic horror, psychological horror, body horror, gore horror, slow-burn horror, J-horror, where to stream horror movies">
+<link rel="canonical" href="https://whatscares.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WhatScares — Horror Movies Matched to Your Taste">
+<meta property="og:description" content="The smartest way to find horror. Tell us your taste — folk, cosmic, psychological, gore — and we match you with films + where to stream them.">
+<meta property="og:site_name" content="WhatScares">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="WhatScares — Horror Movies Matched to Your Taste">
+<meta name="twitter:description" content="The smartest way to find horror. Tell us your taste — folk, cosmic, psychological, gore — and we match you with films + where to stream them.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0d0d0d;
+  --surface: #141414;
+  --surface-2: #1a1a1a;
+  --border: #222;
+  --text: #e5e5e5;
+  --text-2: #999;
+  --text-3: #555;
+  --accent: #c4352a;
+  --accent-soft: rgba(196,53,42,0.12);
+  --gold: #e2b616;
+  --sans: 'Inter', -apple-system, system-ui, sans-serif;
+  --serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --radius: 6px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg); color: var(--text);
+  font-family: var(--sans); -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(20px, 4vw, 48px); height: 56px;
+  background: rgba(13,13,13,0.85); backdrop-filter: blur(24px) saturate(1.4);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.brand {
+  font-family: var(--sans); font-weight: 600;
+  font-size: 14px; letter-spacing: 6px; text-transform: uppercase;
+}
+.brand em { font-style: normal; color: var(--accent); }
+
+.nav-links { display: flex; gap: 28px; }
+.nav-links a {
+  font-size: 13px; font-weight: 400; color: var(--text-3);
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+/* ─── HERO ─── */
+.hero {
+  padding: 96px clamp(20px, 4vw, 48px) 28px;
+  max-width: 640px;
+}
+
+.hero h1 {
+  font-family: var(--serif); font-size: clamp(32px, 5vw, 42px); font-weight: 400;
+  line-height: 1.2; margin-bottom: 8px; letter-spacing: -0.5px;
+}
+.hero h1 em { font-style: italic; color: var(--text-2); }
+
+.hero p {
+  font-family: var(--serif); font-size: 15px; font-style: italic;
+  color: var(--text-3); margin-bottom: 24px;
+}
+
+/* ─── SEARCH ─── */
+.search-wrap { position: relative; max-width: 420px; }
+
+.search {
+  width: 100%; padding: 12px 16px 12px 40px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); color: var(--text);
+  font-size: 14px; font-family: var(--sans); outline: none;
+  transition: border-color 0.2s;
+}
+.search:focus { border-color: var(--text-3); }
+.search::placeholder { color: var(--text-3); }
+
+.search-wrap svg {
+  position: absolute; left: 13px; top: 50%;
+  transform: translateY(-50%); color: var(--text-3);
+  pointer-events: none; opacity: 0.5;
+}
+
+/* ─── LAYOUT ─── */
+.container { max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px); }
+
+section { margin-bottom: 48px; }
+
+.section-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.section-head h2 {
+  font-family: var(--serif); font-size: 24px; font-weight: 500;
+}
+
+.section-head .count {
+  font-size: 13px; color: var(--text-3);
+}
+
+/* ─── FILTER BAR ─── */
+.filter-bar {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 12px; flex-wrap: wrap;
+  padding: 12px 0 0;
+}
+
+.pill {
+  padding: 7px 16px; border-radius: 20px;
+  font-size: 13px; font-weight: 400;
+  cursor: pointer; transition: all 0.2s;
+  border: 1px solid var(--border);
+  color: var(--text-2); background: transparent;
+  user-select: none;
+}
+.pill:hover { border-color: var(--text-3); color: var(--text); }
+.pill.on { background: var(--text); border-color: var(--text); color: var(--bg); font-weight: 500; }
+
+.pill-sep { width: 1px; height: 20px; background: var(--border); margin: 0 4px; }
+
+.clear-btn {
+  font-size: 12px; color: var(--text-3); cursor: pointer;
+  margin-left: 4px; background: none; border: none;
+  font-family: var(--sans); text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.clear-btn:hover { color: var(--text); }
+
+.filter-extras {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 16px;
+}
+
+.toggle-wrap {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--text-3);
+}
+
+.toggle {
+  width: 32px; height: 18px; border-radius: 9px;
+  background: var(--border); border: none; cursor: pointer;
+  position: relative; transition: background 0.2s; padding: 0;
+}
+.toggle::after {
+  content: ''; position: absolute;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--text-3); top: 2px; left: 2px;
+  transition: transform 0.2s, background 0.2s;
+}
+.toggle.on { background: var(--accent); }
+.toggle.on::after { transform: translateX(14px); background: white; }
+
+/* ─── MOVIE GRID ─── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 28px 16px;
+}
+
+.card { cursor: pointer; }
+
+.card .poster {
+  position: relative; aspect-ratio: 2/3;
+  border-radius: var(--radius); overflow: hidden;
+  background: var(--surface-2);
+  margin-bottom: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover .poster {
+  transform: scale(1.03);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+}
+
+.card .poster img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+
+.card .poster .fallback {
+  width: 100%; height: 100%; position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; color: var(--text-3);
+}
+
+/* gem badge */
+.gem-badge {
+  position: absolute; top: 8px; left: 8px; z-index: 2;
+  padding: 3px 8px; border-radius: 3px;
+  font-size: 10px; font-weight: 500; letter-spacing: 0.5px;
+  background: rgba(0,0,0,0.65); color: rgba(255,255,255,0.8);
+  backdrop-filter: blur(8px);
+}
+
+/* fav overlay — only shows on hover */
+.card-fav {
+  position: absolute; top: 8px; right: 8px; z-index: 3;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(0,0,0,0.55); border: none;
+  color: var(--text-2); font-size: 16px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(6px);
+  opacity: 0; transition: opacity 0.2s, color 0.2s;
+}
+.card:hover .card-fav { opacity: 1; }
+.card-fav:hover { color: var(--accent); }
+.card-fav.saved { color: var(--accent); opacity: 1; }
+
+/* ─── CARD INFO (below poster, Douban style) ─── */
+.card .info { padding: 0 2px; }
+
+.card .title {
+  font-size: 15px; font-weight: 500;
+  color: var(--text); line-height: 1.35;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin-bottom: 3px;
+}
+
+.card .meta {
+  font-size: 13px; color: var(--text-3); line-height: 1.4;
+}
+
+.card .card-score {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 4px;
+}
+
+.card .card-score .stars {
+  color: var(--gold); font-size: 11px; letter-spacing: 1px;
+}
+
+.card .card-score .score-num {
+  font-size: 13px; font-weight: 500; color: var(--text-2);
+}
+
+.card .user-rating {
+  font-size: 11px; color: var(--gold); margin-top: 3px;
+  letter-spacing: 0.5px;
+}
+
+.card .match {
+  font-size: 12px; color: var(--text-2); margin-top: 3px;
+  font-style: italic; font-family: var(--serif);
+}
+
+/* card tags on hover */
+.card .poster .hover-tags {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 24px 10px 10px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  display: flex; flex-wrap: wrap; gap: 4px;
+  opacity: 0; transition: opacity 0.25s;
+}
+.card:hover .hover-tags { opacity: 1; }
+.hover-tags span {
+  font-size: 10px; padding: 2px 7px;
+  background: rgba(255,255,255,0.12); border-radius: 3px;
+  color: rgba(255,255,255,0.75);
+}
+
+/* ─── CURATED LISTS ─── */
+.lists-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 12px;
+}
+
+.list-card {
+  display: flex; gap: 16px; align-items: center;
+  padding: 16px 20px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  cursor: pointer; transition: background 0.2s, border-color 0.2s;
+}
+.list-card:hover { background: var(--surface-2); border-color: var(--text-3); }
+a.list-card { text-decoration: none; color: inherit; }
+
+.list-posters { display: flex; gap: 3px; flex-shrink: 0; }
+.list-posters .mini {
+  width: 32px; height: 48px; border-radius: 3px;
+  overflow: hidden; background: var(--surface-2);
+}
+.list-posters .mini img { width: 100%; height: 100%; object-fit: cover; }
+
+.list-info h3 {
+  font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 3px;
+}
+.list-info p {
+  font-size: 12px; color: var(--text-3);
+}
+
+.see-all {
+  font-size: 13px; color: var(--text-3); text-decoration: none;
+  transition: color 0.2s;
+}
+.see-all:hover { color: var(--text); }
+
+/* ─── HORIZONTAL SCROLL ROW ─── */
+.hscroll {
+  display: flex; gap: 16px; overflow-x: auto;
+  padding-bottom: 8px; scroll-snap-type: x mandatory;
+  -ms-overflow-style: none; scrollbar-width: none;
+}
+.hscroll::-webkit-scrollbar { display: none; }
+.hscroll .card { flex: 0 0 150px; scroll-snap-align: start; }
+
+/* ─── MODAL ─── */
+.backdrop {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.85); backdrop-filter: blur(12px);
+  display: none; align-items: flex-start; justify-content: center;
+  padding: 60px 20px 40px; overflow-y: auto;
+}
+.backdrop.open { display: flex; }
+
+.modal {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; max-width: 560px; width: 100%;
+  overflow: hidden;
+}
+
+.modal-hero { height: 240px; position: relative; overflow: hidden; }
+.modal-hero img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.4) saturate(0.8);
+}
+
+.modal-hero .modal-gradient {
+  position: absolute; inset: 0;
+  background: linear-gradient(transparent 30%, var(--surface));
+}
+
+.modal-hero .modal-title-wrap {
+  position: absolute; bottom: 24px; left: 28px; right: 28px;
+}
+.modal-hero .modal-title-wrap h2 {
+  font-family: var(--serif); font-size: 30px; font-weight: 500;
+}
+.modal-hero .modal-title-wrap .sub {
+  font-size: 13px; color: var(--text-2); margin-top: 4px;
+}
+
+.modal-close {
+  position: absolute; top: 14px; right: 14px; z-index: 10;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(0,0,0,0.5); border: none;
+  color: var(--text-2); font-size: 16px;
+  cursor: pointer; display: flex;
+  align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.modal-close:hover { background: rgba(0,0,0,0.8); color: var(--text); }
+
+.modal-body { padding: 24px 28px 32px; }
+
+.modal-label {
+  font-size: 11px; font-weight: 500; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--text-3);
+  margin-bottom: 12px;
+}
+
+.modal-section {
+  margin-bottom: 24px; padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.modal-section:last-child { border-bottom: none; padding-bottom: 0; }
+
+.modal-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.modal-tags span {
+  padding: 5px 12px; font-size: 12px;
+  border: 1px solid var(--border); border-radius: 20px;
+  color: var(--text-2);
+}
+
+/* Similar films */
+.similar-row {
+  display: flex; gap: 12px; overflow-x: auto; padding-bottom: 4px;
+}
+.similar-row::-webkit-scrollbar { display: none; }
+
+.sim-card { flex: 0 0 90px; cursor: pointer; }
+.sim-card:hover .sim-poster { transform: scale(1.03); }
+
+.sim-poster {
+  aspect-ratio: 2/3; border-radius: 4px;
+  overflow: hidden; margin-bottom: 6px;
+  background: var(--surface-2); transition: transform 0.3s;
+}
+.sim-poster img { width: 100%; height: 100%; object-fit: cover; }
+
+.sim-title {
+  font-size: 12px; font-weight: 500; color: var(--text-2);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.sim-match { font-size: 11px; color: var(--text-3); }
+
+/* ─── RATINGS ─── */
+.ratings-row { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+
+.rating-badge {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px;
+}
+.rating-badge .r-icon {
+  width: 20px; height: 20px; border-radius: 3px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 700; flex-shrink: 0;
+}
+.r-rt { background: #FA320A; color: white; }
+.r-imdb { background: #F5C518; color: #000; }
+.r-meta { background: #66CC33; color: #fff; }
+.rating-badge .r-score { font-weight: 600; font-size: 14px; }
+.rating-badge .r-label { color: var(--text-3); font-size: 11px; }
+
+/* ─── TRAILER ─── */
+.trailer-wrap {
+  position: relative; padding-top: 56.25%;
+  border-radius: var(--radius); overflow: hidden; background: #000;
+}
+.trailer-wrap iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; border: none;
+}
+
+/* ─── STREAMING ─── */
+.stream-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.stream-badge {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border: 1px solid var(--border);
+  border-radius: 20px; background: transparent;
+  font-size: 12px; color: var(--text-2);
+  transition: border-color 0.2s;
+}
+.stream-badge:hover { border-color: var(--text-3); }
+.stream-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+/* ─── INTENSITY ─── */
+.intensity-row { display: flex; gap: 32px; flex-wrap: wrap; }
+.intensity-item { display: flex; flex-direction: column; gap: 6px; }
+.intensity-label {
+  font-size: 10px; color: var(--text-3);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.intensity-dots { display: flex; gap: 4px; }
+.intensity-dots .dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--border);
+}
+.intensity-dots .dot.on { background: var(--accent); }
+
+/* ─── "MORE LIKE THIS BUT" ─── */
+.but-section { margin-top: 0; }
+.but-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.but-chip {
+  padding: 5px 12px; font-size: 12px; border-radius: 20px;
+  cursor: pointer; transition: all 0.2s; user-select: none;
+}
+.but-keep {
+  background: transparent; border: 1px solid rgba(255,255,255,0.15);
+  color: var(--text-2);
+}
+.but-keep:hover, .but-keep.active { border-color: var(--text-2); color: var(--text); }
+.but-drop {
+  background: var(--accent-soft); border: 1px solid rgba(196,53,42,0.3);
+  color: #d45; text-decoration: line-through;
+}
+.but-drop:hover, .but-drop.active { background: rgba(196,53,42,0.18); }
+.but-results { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.but-results-label {
+  font-size: 10px; color: var(--text-3); margin-bottom: 10px;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+
+/* ─── MODAL USER ACTIONS ─── */
+.modal-user-actions { display: flex; align-items: center; gap: 16px; }
+
+.modal-fav {
+  padding: 8px 16px; border: 1px solid var(--border);
+  background: transparent; color: var(--text-2);
+  font-size: 13px; font-family: var(--sans);
+  cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; gap: 6px;
+  border-radius: var(--radius);
+}
+.modal-fav:hover { border-color: var(--text-3); color: var(--text); }
+.modal-fav.saved { border-color: var(--accent); color: var(--accent); }
+
+.modal-stars { display: flex; gap: 2px; align-items: center; }
+.modal-stars .star {
+  font-size: 20px; cursor: pointer; color: #2a2a2a;
+  transition: color 0.15s;
+}
+.modal-stars .star.on { color: var(--gold); }
+.modal-stars .star:hover { color: var(--gold); }
+.modal-stars-wrap { display: flex; align-items: center; gap: 8px; }
+.modal-stars-wrap .rate-label { font-size: 12px; color: var(--text-3); }
+
+/* ─── MY COLLECTION ─── */
+.my-collection { display: none; }
+.my-collection.has-items { display: block; }
+
+/* ─── EMPTY ─── */
+.empty { text-align: center; padding: 80px 20px; color: var(--text-3); display: none; }
+.empty.show { display: block; }
+.empty p { font-size: 15px; font-family: var(--serif); font-style: italic; }
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px; text-align: center;
+  font-size: 11px; color: var(--text-3);
+  margin-top: 48px; letter-spacing: 1px;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  nav { height: 50px; }
+  .hero { padding-top: 72px; }
+  .hero h1 { font-size: 28px; }
+  .search { font-size: 16px; }
+  .pill { font-size: 13px; padding: 7px 14px; }
+  .grid { grid-template-columns: repeat(3, 1fr); gap: 20px 12px; }
+  .card .title { font-size: 13px; }
+  .card .meta { font-size: 11px; }
+  .card .card-score .score-num { font-size: 12px; }
+  .card .card-score .stars { font-size: 9px; }
+  .lists-grid { grid-template-columns: 1fr; }
+  .section-head h2 { font-size: 20px; }
+  .modal-body { padding: 20px; }
+  .modal-hero .modal-title-wrap { left: 20px; right: 20px; }
+  .modal-hero .modal-title-wrap h2 { font-size: 24px; }
+  .nav-links a { font-size: 12px; }
+  .nav-links { gap: 20px; }
+}
+
+@media (max-width: 480px) {
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 16px 10px; }
+  .card .title { font-size: 13px; }
+  .hscroll .card { flex: 0 0 120px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand"><em>D</em>READ</div>
+  <div class="nav-links">
+    <a href="#" class="active">Discover</a>
+    <a href="#collections">Collections</a>
+    <a href="#browse">Browse</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <h1>Horror that <em>gets you.</em></h1>
+  <p>Not everyone fears the same thing. Match films to your taste — folk rituals, cosmic dread, psychological terror, body horror — and find where to stream them.</p>
+  <div class="search-wrap">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" class="search" id="search" placeholder="Search films, directors, elements...">
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- MY COLLECTION -->
+  <section class="my-collection" id="myCollection">
+    <div class="section-head">
+      <h2>My Collection</h2>
+      <span class="count" id="collCount"></span>
+    </div>
+    <div class="hscroll" id="collRow"></div>
+  </section>
+
+  <!-- FILTER BAR + GRID -->
+  <section id="browse">
+    <div class="filter-bar" id="filterBar">
+      <span class="pill" data-t="a24">A24</span>
+      <span class="pill" data-t="folk">Folk</span>
+      <span class="pill" data-t="religious">Religious</span>
+      <span class="pill" data-t="dolls">Dolls</span>
+      <span class="pill" data-t="cult">Cults</span>
+      <span class="pill" data-t="cosmic">Cosmic</span>
+      <span class="pill" data-t="psychological">Psychological</span>
+      <span class="pill" data-t="supernatural">Supernatural</span>
+      <span class="pill" data-t="body-horror">Body Horror</span>
+      <span class="pill" data-t="slow-burn">Slow-Burn</span>
+      <span class="pill" data-t="slasher">Slasher</span>
+      <span class="pill" data-t="j-horror">J-Horror</span>
+      <span class="pill" data-t="possession">Possession</span>
+      <span class="pill" data-t="isolation">Isolation</span>
+      <span class="pill" data-t="gore">Gore</span>
+      <span class="pill" data-t="grief">Grief</span>
+      <span class="pill-sep"></span>
+      <button class="clear-btn" id="clearBtn" style="display:none" onclick="clearAll()">Clear</button>
+    </div>
+    <div class="filter-extras">
+      <div class="toggle-wrap">
+        <button class="toggle" id="gemToggle" onclick="toggleGems()"></button>
+        Hidden gems only
+      </div>
+    </div>
+    <div class="section-head">
+      <h2 id="gridLabel">All Films</h2>
+      <span class="count" id="gridCount"></span>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty"><p>Nothing here yet — try different elements.</p></div>
+  </section>
+
+  <!-- CURATED LISTS -->
+  <section id="collections">
+    <div class="section-head">
+      <h2>Curated Lists</h2>
+      <a href="#" class="see-all">See all</a>
+    </div>
+    <div class="lists-grid" id="lists"></div>
+  </section>
+
+  <!-- HORIZONTAL ROW -->
+  <section>
+    <div class="section-head">
+      <h2>If You Liked <em style="font-family:var(--serif);font-style:italic;color:var(--text-2)">Hereditary</em></h2>
+    </div>
+    <div class="hscroll" id="heredRow"></div>
+  </section>
+
+</div>
+
+<footer>
+  <div>WhatScares — horror matched to your taste</div>
+  <nav aria-label="SEO lists" style="margin-top:16px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+    <a href="/lists/best-a24-horror-films.html" style="color:var(--text-3);font-size:11px;text-decoration:none">Best A24 Horror Films</a>
+    <a href="/lists/best-folk-horror-movies.html" style="color:var(--text-3);font-size:11px;text-decoration:none">Best Folk Horror Movies</a>
+    <a href="/lists/best-cosmic-horror-movies.html" style="color:var(--text-3);font-size:11px;text-decoration:none">Best Cosmic Horror Movies</a>
+    <a href="/lists/best-slow-burn-horror-movies.html" style="color:var(--text-3);font-size:11px;text-decoration:none">Best Slow-Burn Horror</a>
+    <a href="/lists/best-religious-horror-movies.html" style="color:var(--text-3);font-size:11px;text-decoration:none">Best Religious Horror</a>
+  </nav>
+</footer>
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "WhatScares",
+  "url": "https://whatscares.com/",
+  "description": "The smartest way to find horror movies. Match films to your taste — folk, cosmic, psychological, gore — and find where to stream them.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://whatscares.com/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Horror Movies on WhatScares",
+  "description": "A curated collection of 35 horror films organized by elements, not genres.",
+  "numberOfItems": 35,
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"item":{"@type":"Movie","name":"Hereditary","dateCreated":"2018","director":{"@type":"Person","name":"Ari Aster"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"7.3","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":2,"item":{"@type":"Movie","name":"Midsommar","dateCreated":"2019","director":{"@type":"Person","name":"Ari Aster"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"7.1","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":3,"item":{"@type":"Movie","name":"The Witch","dateCreated":"2015","director":{"@type":"Person","name":"Robert Eggers"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"6.9","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":4,"item":{"@type":"Movie","name":"Saint Maud","dateCreated":"2019","director":{"@type":"Person","name":"Rose Glass"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"6.7","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":5,"item":{"@type":"Movie","name":"The Exorcist","dateCreated":"1973","director":{"@type":"Person","name":"William Friedkin"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"8.1","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":6,"item":{"@type":"Movie","name":"Annihilation","dateCreated":"2018","director":{"@type":"Person","name":"Alex Garland"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"6.8","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":7,"item":{"@type":"Movie","name":"The Thing","dateCreated":"1982","director":{"@type":"Person","name":"John Carpenter"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"8.2","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":8,"item":{"@type":"Movie","name":"Possessor","dateCreated":"2020","director":{"@type":"Person","name":"Brandon Cronenberg"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"6.5","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":9,"item":{"@type":"Movie","name":"Suspiria","dateCreated":"1977","director":{"@type":"Person","name":"Dario Argento"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"7.4","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":10,"item":{"@type":"Movie","name":"Ringu","dateCreated":"1998","director":{"@type":"Person","name":"Hideo Nakata"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"7.2","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":11,"item":{"@type":"Movie","name":"Pulse","dateCreated":"2001","director":{"@type":"Person","name":"Kiyoshi Kurosawa"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"6.5","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":12,"item":{"@type":"Movie","name":"The Wicker Man","dateCreated":"1973","director":{"@type":"Person","name":"Robin Hardy"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"7.5","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":13,"item":{"@type":"Movie","name":"Apostle","dateCreated":"2018","director":{"@type":"Person","name":"Gareth Evans"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"6.3","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":14,"item":{"@type":"Movie","name":"Lamb","dateCreated":"2021","director":{"@type":"Person","name":"Valdimar Jóhannsson"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"6.3","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":15,"item":{"@type":"Movie","name":"Possum","dateCreated":"2018","director":{"@type":"Person","name":"Matthew Holness"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"5.6","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":16,"item":{"@type":"Movie","name":"Dead Silence","dateCreated":"2007","director":{"@type":"Person","name":"James Wan"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"6.2","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":17,"item":{"@type":"Movie","name":"Annabelle: Creation","dateCreated":"2017","director":{"@type":"Person","name":"David Sandberg"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"6.5","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":18,"item":{"@type":"Movie","name":"The Boy","dateCreated":"2016","director":{"@type":"Person","name":"William Brent Bell"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"6.0","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":19,"item":{"@type":"Movie","name":"Mandy","dateCreated":"2018","director":{"@type":"Person","name":"Panos Cosmatos"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"6.5","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":20,"item":{"@type":"Movie","name":"Color Out of Space","dateCreated":"2019","director":{"@type":"Person","name":"Richard Stanley"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"6.1","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":21,"item":{"@type":"Movie","name":"The Lighthouse","dateCreated":"2019","director":{"@type":"Person","name":"Robert Eggers"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"7.4","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":22,"item":{"@type":"Movie","name":"It Follows","dateCreated":"2014","director":{"@type":"Person","name":"David Robert Mitchell"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"6.8","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":23,"item":{"@type":"Movie","name":"The Ritual","dateCreated":"2017","director":{"@type":"Person","name":"David Bruckner"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"6.3","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":24,"item":{"@type":"Movie","name":"X","dateCreated":"2022","director":{"@type":"Person","name":"Ti West"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"6.6","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":25,"item":{"@type":"Movie","name":"Pearl","dateCreated":"2022","director":{"@type":"Person","name":"Ti West"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"7.0","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":26,"item":{"@type":"Movie","name":"Talk to Me","dateCreated":"2022","director":{"@type":"Person","name":"Danny Philippou"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"7.1","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":27,"item":{"@type":"Movie","name":"The Conjuring","dateCreated":"2013","director":{"@type":"Person","name":"James Wan"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"7.5","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":28,"item":{"@type":"Movie","name":"Bone Tomahawk","dateCreated":"2015","director":{"@type":"Person","name":"S. Craig Zahler"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"7.1","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":29,"item":{"@type":"Movie","name":"I Saw the Devil","dateCreated":"2010","director":{"@type":"Person","name":"Kim Jee-woon"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"7.8","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":30,"item":{"@type":"Movie","name":"Under the Skin","dateCreated":"2013","director":{"@type":"Person","name":"Jonathan Glazer"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"6.3","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":31,"item":{"@type":"Movie","name":"Terrifier 2","dateCreated":"2022","director":{"@type":"Person","name":"Damien Leone"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"6.1","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":32,"item":{"@type":"Movie","name":"The Void","dateCreated":"2016","director":{"@type":"Person","name":"Jeremy Gillespie"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"5.8","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":33,"item":{"@type":"Movie","name":"Tumbbad","dateCreated":"2018","director":{"@type":"Person","name":"Rahi Anil Barve"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"8.2","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":34,"item":{"@type":"Movie","name":"The Orphanage","dateCreated":"2007","director":{"@type":"Person","name":"J.A. Bayona"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"7.4","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}},
+    {"@type":"ListItem","position":35,"item":{"@type":"Movie","name":"Barbarian","dateCreated":"2022","director":{"@type":"Person","name":"Zach Cregger"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"7.0","bestRating":"10","ratingCount":1,"reviewCount":1},"genre":["Horror"]}}
+  ]
+}
+</script>
+
+<!-- noscript: static content for crawlers -->
+<noscript>
+<div style="max-width:800px;margin:40px auto;padding:20px;color:#e5e5e5;font-family:sans-serif">
+<h2>All Horror Films on WhatScares</h2>
+<p>Horror matched to your taste. Browse 35+ films filterable by what actually scares you — folk rituals, cosmic dread, psychological terror, body horror, gore — with streaming info for every title.</p>
+<ul>
+<li><strong>Hereditary</strong> (2018) — Dir. Ari Aster — IMDb 7.3 — Elements: a24, occult, grief, slow-burn, atmospheric</li>
+<li><strong>Midsommar</strong> (2019) — Dir. Ari Aster — IMDb 7.1 — Elements: a24, folk, cult, grief, atmospheric</li>
+<li><strong>The Witch</strong> (2015) — Dir. Robert Eggers — IMDb 6.9 — Elements: folk, religious, slow-burn, witch, isolation, a24</li>
+<li><strong>Saint Maud</strong> (2019) — Dir. Rose Glass — IMDb 6.7 — Elements: religious, psychological, slow-burn, isolation, a24</li>
+<li><strong>The Exorcist</strong> (1973) — Dir. William Friedkin — IMDb 8.1 — Elements: religious, possession, supernatural</li>
+<li><strong>Annihilation</strong> (2018) — Dir. Alex Garland — IMDb 6.8 — Elements: cosmic, body-horror, atmospheric, psychological</li>
+<li><strong>The Thing</strong> (1982) — Dir. John Carpenter — IMDb 8.2 — Elements: body-horror, creature, isolation, paranoia</li>
+<li><strong>Possessor</strong> (2020) — Dir. Brandon Cronenberg — IMDb 6.5 — Elements: body-horror, psychological, gore, cosmic</li>
+<li><strong>Suspiria</strong> (1977) — Dir. Dario Argento — IMDb 7.4 — Elements: giallo, witch, supernatural, atmospheric, gore</li>
+<li><strong>Ringu</strong> (1998) — Dir. Hideo Nakata — IMDb 7.2 — Elements: j-horror, supernatural, psychological, atmospheric</li>
+<li><strong>Pulse</strong> (2001) — Dir. Kiyoshi Kurosawa — IMDb 6.5 — Elements: j-horror, supernatural, isolation, cosmic, atmospheric</li>
+<li><strong>The Wicker Man</strong> (1973) — Dir. Robin Hardy — IMDb 7.5 — Elements: folk, cult, religious, isolation</li>
+<li><strong>Apostle</strong> (2018) — Dir. Gareth Evans — IMDb 6.3 — Elements: folk, cult, religious, gore</li>
+<li><strong>Lamb</strong> (2021) — Dir. Valdimar Jóhannsson — IMDb 6.3 — Elements: folk, atmospheric, slow-burn, isolation, a24</li>
+<li><strong>Possum</strong> (2018) — Dir. Matthew Holness — IMDb 5.6 — Elements: dolls, psychological, atmospheric, slow-burn</li>
+<li><strong>Dead Silence</strong> (2007) — Dir. James Wan — IMDb 6.2 — Elements: dolls, supernatural, atmospheric</li>
+<li><strong>Annabelle: Creation</strong> (2017) — Dir. David Sandberg — IMDb 6.5 — Elements: dolls, supernatural, possession, religious</li>
+<li><strong>The Boy</strong> (2016) — Dir. William Brent Bell — IMDb 6.0 — Elements: dolls, isolation, psychological, supernatural</li>
+<li><strong>Mandy</strong> (2018) — Dir. Panos Cosmatos — IMDb 6.5 — Elements: cult, revenge, atmospheric, cosmic, gore</li>
+<li><strong>Color Out of Space</strong> (2019) — Dir. Richard Stanley — IMDb 6.1 — Elements: cosmic, body-horror, isolation, atmospheric</li>
+<li><strong>The Lighthouse</strong> (2019) — Dir. Robert Eggers — IMDb 7.4 — Elements: cosmic, isolation, psychological, atmospheric, a24</li>
+<li><strong>It Follows</strong> (2014) — Dir. David Robert Mitchell — IMDb 6.8 — Elements: supernatural, slow-burn, atmospheric, psychological</li>
+<li><strong>The Ritual</strong> (2017) — Dir. David Bruckner — IMDb 6.3 — Elements: folk, creature, isolation, grief</li>
+<li><strong>X</strong> (2022) — Dir. Ti West — IMDb 6.6 — Elements: slasher, a24, gore, isolation</li>
+<li><strong>Pearl</strong> (2022) — Dir. Ti West — IMDb 7.0 — Elements: slasher, psychological, a24, isolation</li>
+<li><strong>Talk to Me</strong> (2022) — Dir. Danny Philippou — IMDb 7.1 — Elements: possession, supernatural, a24, grief</li>
+<li><strong>The Conjuring</strong> (2013) — Dir. James Wan — IMDb 7.5 — Elements: supernatural, possession, religious</li>
+<li><strong>Bone Tomahawk</strong> (2015) — Dir. S. Craig Zahler — IMDb 7.1 — Elements: gore, isolation, slow-burn, creature</li>
+<li><strong>I Saw the Devil</strong> (2010) — Dir. Kim Jee-woon — IMDb 7.8 — Elements: revenge, psychological, gore, slasher</li>
+<li><strong>Under the Skin</strong> (2013) — Dir. Jonathan Glazer — IMDb 6.3 — Elements: cosmic, atmospheric, slow-burn, a24, body-horror</li>
+<li><strong>Terrifier 2</strong> (2022) — Dir. Damien Leone — IMDb 6.1 — Elements: slasher, gore, dolls</li>
+<li><strong>The Void</strong> (2016) — Dir. Jeremy Gillespie — IMDb 5.8 — Elements: cosmic, body-horror, cult, creature</li>
+<li><strong>Tumbbad</strong> (2018) — Dir. Rahi Anil Barve — IMDb 8.2 — Elements: folk, atmospheric, creature, slow-burn</li>
+<li><strong>The Orphanage</strong> (2007) — Dir. J.A. Bayona — IMDb 7.4 — Elements: supernatural, grief, atmospheric, slow-burn</li>
+<li><strong>Barbarian</strong> (2022) — Dir. Zach Cregger — IMDb 7.0 — Elements: isolation, psychological, creature, gore</li>
+</ul>
+<h3>Curated Lists</h3>
+<ul>
+<li><a href="/lists/best-a24-horror-films.html">Best A24 Horror Films, Ranked</a></li>
+<li><a href="/lists/best-folk-horror-movies.html">Best Folk Horror Movies of All Time</a></li>
+<li><a href="/lists/best-cosmic-horror-movies.html">Best Cosmic Horror Movies</a></li>
+<li><a href="/lists/best-slow-burn-horror-movies.html">Best Slow-Burn Horror Movies</a></li>
+<li><a href="/lists/best-religious-horror-movies.html">Best Religious Horror Movies</a></li>
+</ul>
+</div>
+</noscript>
+
+<!-- MODAL -->
+<div class="backdrop" id="backdrop" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-hero" id="modalHero">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-gradient"></div>
+      <div class="modal-title-wrap" id="modalTitle"></div>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+const TMDB = 'https://image.tmdb.org/t/p/w342';
+
+const M = [
+  { t:'Hereditary', y:2018, d:'Ari Aster', tags:['a24','occult','grief','slow-burn','atmospheric'], p:'/4GFPuL14eXi66V96xBWY73Y9PfR.jpg', rt:89, imdb:7.3, mc:87, yt:'V6wWKNij_1M', str:['Apple TV+','Paramount+'], scare:4, gore:2, dread:5, obscure:false },
+  { t:'Midsommar', y:2019, d:'Ari Aster', tags:['a24','folk','cult','grief','atmospheric'], p:'/7LEI8ulZzO5gy9Ww2NVCrKmHeDZ.jpg', rt:83, imdb:7.1, mc:72, yt:'1Vnghdsjmd0', str:['Apple TV+'], scare:3, gore:4, dread:5, obscure:false },
+  { t:'The Witch', y:2015, d:'Robert Eggers', tags:['folk','religious','slow-burn','witch','isolation','a24'], p:'/zap5hpFCWSvdWSuPGAQyjUv2wAC.jpg', rt:90, imdb:6.9, mc:83, yt:'iQXmlf3Sefg', str:['Paramount+','Shudder'], scare:2, gore:1, dread:5, obscure:false },
+  { t:'Saint Maud', y:2019, d:'Rose Glass', tags:['religious','psychological','slow-burn','isolation','a24'], p:'/ArNYeeDFLVye7JpqLElYdbE6fOa.jpg', rt:93, imdb:6.7, mc:80, yt:'EtOtCljOPSc', str:['Hulu','Paramount+'], scare:3, gore:2, dread:5, obscure:true },
+  { t:'The Exorcist', y:1973, d:'William Friedkin', tags:['religious','possession','supernatural'], p:'/4ucLGcXVVSVnsfkGtbLY4XAius8.jpg', rt:84, imdb:8.1, mc:82, yt:'YDGw1MTEe9k', str:['Max','Peacock'], scare:5, gore:3, dread:4, obscure:false },
+  { t:'Annihilation', y:2018, d:'Alex Garland', tags:['cosmic','body-horror','atmospheric','psychological'], p:'/d3qcpfNwbAMCNqWDHzPQsUYiUgS.jpg', rt:88, imdb:6.8, mc:79, yt:'89OP78l9oF0', str:['Paramount+','Hulu'], scare:3, gore:3, dread:5, obscure:false },
+  { t:'The Thing', y:1982, d:'John Carpenter', tags:['body-horror','creature','isolation','paranoia'], p:'/tzGY49kseSE9QAKk47uuDGwnSCu.jpg', rt:82, imdb:8.2, mc:57, yt:'5ftmr17M-a4', str:['Peacock'], scare:4, gore:5, dread:4, obscure:false },
+  { t:'Possessor', y:2020, d:'Brandon Cronenberg', tags:['body-horror','psychological','gore','cosmic'], p:'/xC9GZeJZ3NagdkGg9nLQx0aPG6J.jpg', rt:94, imdb:6.5, mc:76, yt:'N0gU0OmeLLg', str:['Hulu'], scare:3, gore:5, dread:4, obscure:true },
+  { t:'Suspiria', y:1977, d:'Dario Argento', tags:['giallo','witch','supernatural','atmospheric','gore'], p:'/sEcvc9h1X3hYZdFgtiiKMm6RB3f.jpg', rt:93, imdb:7.4, mc:null, yt:'QoMuni6jHok', str:['Tubi','Shudder'], scare:4, gore:4, dread:4, obscure:false },
+  { t:'Ringu', y:1998, d:'Hideo Nakata', tags:['j-horror','supernatural','psychological','atmospheric'], p:'/1YINof6kN5yRdePEbcU5360ejoq.jpg', rt:97, imdb:7.2, mc:null, yt:'JKFbUFBLEaE', str:['Shudder'], scare:4, gore:1, dread:5, obscure:false },
+  { t:'Pulse', y:2001, d:'Kiyoshi Kurosawa', tags:['j-horror','supernatural','isolation','cosmic','atmospheric'], p:'/c3zEimDraIyMSasPMGDaNOrhnzn.jpg', rt:73, imdb:6.5, mc:null, yt:'WLIv7HnZ_fE', str:['Shudder'], scare:2, gore:1, dread:5, obscure:true },
+  { t:'The Wicker Man', y:1973, d:'Robin Hardy', tags:['folk','cult','religious','isolation'], p:'/wwtrXRL8SiOWxhwLEvw7iBgYh0g.jpg', rt:92, imdb:7.5, mc:null, yt:'a4CQEORhgfQ', str:['Tubi'], scare:2, gore:1, dread:4, obscure:false },
+  { t:'Apostle', y:2018, d:'Gareth Evans', tags:['folk','cult','religious','gore'], p:'/rd269f2Yftxxam3EOJPYVwrvjIJ.jpg', rt:79, imdb:6.3, mc:null, yt:'SqHIBOysPK0', str:['Netflix'], scare:3, gore:5, dread:3, obscure:true },
+  { t:'Lamb', y:2021, d:'V. Jóhannsson', tags:['folk','atmospheric','slow-burn','isolation','a24'], p:'/gP9yviboTGWGolqUZKIB1UkF1C2.jpg', rt:86, imdb:6.3, mc:72, yt:'aBEfEVN01mQ', str:['Prime Video'], scare:1, gore:1, dread:4, obscure:true },
+  { t:'Possum', y:2018, d:'Matthew Holness', tags:['dolls','psychological','atmospheric','slow-burn'], p:'/5QOFKSpE7KacBriU95fxG6hmmvr.jpg', rt:85, imdb:5.6, mc:null, yt:'yBbV3L3MKiI', str:['Shudder'], scare:2, gore:1, dread:5, obscure:true },
+  { t:'Dead Silence', y:2007, d:'James Wan', tags:['dolls','supernatural','atmospheric'], p:'/rvcUVdATIHKZt7BSSttUkKbeBXN.jpg', rt:21, imdb:6.2, mc:35, yt:'z-1Lmi2XBIY', str:['Peacock'], scare:4, gore:2, dread:3, obscure:false },
+  { t:'Annabelle: Creation', y:2017, d:'David Sandberg', tags:['dolls','supernatural','possession','religious'], p:'/tb86j8jVCVsdZnzf8I6cIi65IeM.jpg', rt:69, imdb:6.5, mc:62, yt:'KisPhy7T__Q', str:['Max','Netflix'], scare:4, gore:2, dread:3, obscure:false },
+  { t:'The Boy', y:2016, d:'W.B. Bell', tags:['dolls','isolation','psychological','supernatural'], p:'/kW2vgzhyWXQu5UxNzebPokipBqH.jpg', rt:30, imdb:6.0, mc:41, yt:'XGaLR6iIBXE', str:['Netflix'], scare:3, gore:1, dread:3, obscure:false },
+  { t:'Mandy', y:2018, d:'Panos Cosmatos', tags:['cult','revenge','atmospheric','cosmic','gore'], p:'/m0yf7J7HsKeK6E81SMRcX8vx6mH.jpg', rt:91, imdb:6.5, mc:81, yt:'rI054ow6KJk', str:['Shudder','Tubi'], scare:3, gore:4, dread:4, obscure:true },
+  { t:'Color Out of Space', y:2019, d:'Richard Stanley', tags:['cosmic','body-horror','isolation','atmospheric'], p:'/k7rD7LzlsPS4jmE6Siah0QO4tAc.jpg', rt:86, imdb:6.1, mc:65, yt:'agnpaFLo0to', str:['Shudder'], scare:3, gore:4, dread:4, obscure:true },
+  { t:'The Lighthouse', y:2019, d:'Robert Eggers', tags:['cosmic','isolation','psychological','atmospheric','a24'], p:'/yAKNmpcUweGH6WMCEWenwU9PsbE.jpg', rt:90, imdb:7.4, mc:83, yt:'Hyag7lR8CPA', str:['Prime Video'], scare:2, gore:1, dread:5, obscure:false },
+  { t:'It Follows', y:2014, d:'D.R. Mitchell', tags:['supernatural','slow-burn','atmospheric','psychological'], p:'/iwnQ1JH1wdWrGYkgWySptJ5284A.jpg', rt:95, imdb:6.8, mc:83, yt:'HkZYbOH0ujw', str:['Paramount+','Tubi'], scare:3, gore:1, dread:5, obscure:false },
+  { t:'The Ritual', y:2017, d:'David Bruckner', tags:['folk','creature','isolation','grief'], p:'/9022CYEGqYETCeXN1oE3uwYJWub.jpg', rt:74, imdb:6.3, mc:null, yt:'Vfugwq2uoa0', str:['Netflix'], scare:3, gore:2, dread:4, obscure:false },
+  { t:'X', y:2022, d:'Ti West', tags:['slasher','a24','gore','isolation'], p:'/lopZSVtXzhFY603E9OqF7O1YKsh.jpg', rt:95, imdb:6.6, mc:79, yt:'Awg_AEXDYIE', str:['Paramount+','Showtime'], scare:4, gore:5, dread:3, obscure:false },
+  { t:'Pearl', y:2022, d:'Ti West', tags:['slasher','psychological','a24','isolation'], p:'/z5uIG81pXyHKg7cUFIu84Wjn4NS.jpg', rt:92, imdb:7.0, mc:80, yt:'sPHCKTMDrnk', str:['Paramount+','Showtime'], scare:3, gore:3, dread:4, obscure:false },
+  { t:'Talk to Me', y:2022, d:'Philippou Bros.', tags:['possession','supernatural','a24','grief'], p:'/kdPMUMJzyYAc4roD52qavX0nLIC.jpg', rt:95, imdb:7.1, mc:76, yt:'aLAKMy2qlO8', str:['Prime Video','Paramount+'], scare:5, gore:3, dread:4, obscure:false },
+  { t:'The Conjuring', y:2013, d:'James Wan', tags:['supernatural','possession','religious'], p:'/wVYREutTvI2tmxr6ujrHT704wGF.jpg', rt:86, imdb:7.5, mc:68, yt:'k10ETZ41q5o', str:['Max','Netflix'], scare:5, gore:2, dread:3, obscure:false },
+  { t:'Bone Tomahawk', y:2015, d:'S.C. Zahler', tags:['gore','isolation','slow-burn','creature'], p:'/4MmTHpn2Y8emqvBgvOjufImUmKZ.jpg', rt:91, imdb:7.1, mc:72, yt:'0ZbwtHi-KSE', str:['Tubi','Pluto TV'], scare:3, gore:5, dread:3, obscure:true },
+  { t:'I Saw the Devil', y:2010, d:'Kim Jee-woon', tags:['revenge','psychological','gore','slasher'], p:'/zp5NrmYp80axIGiEiYPmm1CW6uH.jpg', rt:81, imdb:7.8, mc:69, yt:'xwWgp1bqVwE', str:['Tubi','Shudder'], scare:4, gore:5, dread:3, obscure:true },
+  { t:'Under the Skin', y:2013, d:'Jonathan Glazer', tags:['cosmic','atmospheric','slow-burn','a24','body-horror'], p:'/55wmcXJIDYITr7JDijJTdvwSaAv.jpg', rt:85, imdb:6.3, mc:78, yt:'NoSWbyvdhHw', str:['Max'], scare:2, gore:2, dread:5, obscure:true },
+  { t:'Terrifier 2', y:2022, d:'Damien Leone', tags:['slasher','gore','dolls'], p:'/qEAlwXbYk6IHA4ztoS2XFFaa7Xo.jpg', rt:54, imdb:6.1, mc:null, yt:'h7GlMsfUMHM', str:['Screambox','Tubi'], scare:5, gore:5, dread:1, obscure:false },
+  { t:'The Void', y:2016, d:'Gillespie & Kostanski', tags:['cosmic','body-horror','cult','creature'], p:'/2WhZAPi3vomEQdzAPIYTvmvWaxI.jpg', rt:75, imdb:5.8, mc:null, yt:'0lrGCeHnq5Y', str:['Tubi','Shudder'], scare:3, gore:4, dread:4, obscure:true },
+  { t:'Tumbbad', y:2018, d:'Rahi Anil Barve', tags:['folk','atmospheric','creature','slow-burn'], p:'/vzjZAKozbDplHWcQXbXo0APKxst.jpg', rt:88, imdb:8.2, mc:null, yt:'sN75MPxgvX8', str:['Prime Video'], scare:3, gore:2, dread:5, obscure:true },
+  { t:'The Orphanage', y:2007, d:'J.A. Bayona', tags:['supernatural','grief','atmospheric','slow-burn'], p:'/vIpi1KtHLXUOfSVC2m6MqpjSPgL.jpg', rt:87, imdb:7.4, mc:74, yt:'wfBjoASfbFU', str:['Max','Tubi'], scare:3, gore:1, dread:5, obscure:false },
+  { t:'Barbarian', y:2022, d:'Zach Cregger', tags:['isolation','psychological','creature','gore'], p:'/idT5mnqPcJgSkvpDX7pJffBzdVH.jpg', rt:92, imdb:7.0, mc:80, yt:'MPN7yzQoj0g', str:['Max','Hulu'], scare:5, gore:4, dread:4, obscure:false },
+];
+
+const STREAM_COLORS = {
+  'Netflix':'#E50914','Shudder':'#3D6298','Hulu':'#1CE783','Prime Video':'#00A8E1',
+  'Max':'#002BE7','Paramount+':'#0064FF','Apple TV+':'#555','Peacock':'#000',
+  'Tubi':'#FA382F','Showtime':'#B10000','Pluto TV':'#FFCB00','Screambox':'#8B0000'
+};
+
+// ─── USER DATA ───
+const USER_KEY = 'dread_user';
+function loadUser() {
+  try { return JSON.parse(localStorage.getItem(USER_KEY)) || { favs: [], ratings: {} }; }
+  catch { return { favs: [], ratings: {} }; }
+}
+function saveUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+
+function toggleFav(idx, e) {
+  if (e) e.stopPropagation();
+  const u = loadUser();
+  const i = u.favs.indexOf(idx);
+  i === -1 ? u.favs.push(idx) : u.favs.splice(i, 1);
+  saveUser(u);
+  renderGrid();
+  renderCollection();
+}
+
+function rateMovie(idx, stars, e) {
+  if (e) e.stopPropagation();
+  const u = loadUser();
+  u.ratings[idx] = u.ratings[idx] === stars ? 0 : stars;
+  if (u.ratings[idx] === 0) delete u.ratings[idx];
+  saveUser(u);
+  renderGrid();
+  renderCollection();
+}
+
+function starsHTML(idx, size) {
+  const u = loadUser();
+  const r = u.ratings[idx] || 0;
+  const cls = size === 'modal' ? 'modal-stars' : 'card-stars';
+  return `<div class="${cls}" onclick="event.stopPropagation()">
+    ${[1,2,3,4,5].map(s =>
+      `<span class="star${s<=r?' on':''}" onclick="rateMovie(${idx},${s},event)"
+        onmouseenter="previewStars(this,${s})" onmouseleave="resetStars(this,${idx})">★</span>`
+    ).join('')}
+  </div>`;
+}
+
+function previewStars(el, n) {
+  const container = el.parentElement;
+  container.querySelectorAll('.star').forEach((s, i) => {
+    s.style.color = i < n ? 'var(--gold)' : '';
+  });
+}
+
+function resetStars(el, idx) {
+  const container = el.parentElement;
+  container.querySelectorAll('.star').forEach((s, i) => {
+    s.style.color = '';
+  });
+}
+
+function imdbStars(score) {
+  if (!score) return '';
+  const full = Math.round(score / 2);
+  return '★'.repeat(full) + '☆'.repeat(5 - full);
+}
+
+function renderCollection() {
+  const u = loadUser();
+  const sec = document.getElementById('myCollection');
+  const row = document.getElementById('collRow');
+  const count = document.getElementById('collCount');
+  const all = [...u.favs, ...Object.keys(u.ratings).map(Number)];
+  const unique = [...new Set(all)].filter(i => i >= 0 && i < M.length);
+
+  if (!unique.length) {
+    sec.classList.remove('has-items');
+    return;
+  }
+  sec.classList.add('has-items');
+  count.textContent = unique.length + ' films';
+  row.innerHTML = unique.map(idx => {
+    const m = M[idx];
+    const r = u.ratings[idx] || 0;
+    return `<div class="card" onclick="openModal(${idx})" style="flex:0 0 140px">
+      <div class="poster">
+        <img src="${TMDB}${m.p}" alt="${m.t}" loading="lazy">
+      </div>
+      <div class="info">
+        <div class="title">${m.t}</div>
+        <div class="meta">${m.y}${r ? ' · ' + '★'.repeat(r) : ''}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+const LISTS = [
+  { title: 'A24 Films That Will Ruin Your Week', desc: '11 films · Community pick', movies: [0,1,2,20], href: '/lists/best-a24-horror-films.html' },
+  { title: 'Religious Horror Essentials', desc: '6 films · Staff pick', movies: [4,3,2,12], href: '/lists/best-religious-horror-movies.html' },
+  { title: 'Dolls, Puppets & Wrong Things', desc: '4 films · Staff pick', movies: [14,15,16,17] },
+  { title: 'Cosmic Dread Beyond Comprehension', desc: '8 films · Community pick', movies: [5,19,20,10], href: '/lists/best-cosmic-horror-movies.html' },
+  { title: 'Folk Horror Deep Cuts', desc: '7 films · Staff pick', movies: [2,1,11,22], href: '/lists/best-folk-horror-movies.html' },
+  { title: 'Slow-Burn Horror', desc: '10 films · Staff pick', movies: [0,2,3,13], href: '/lists/best-slow-burn-horror-movies.html' },
+];
+
+let active = new Set();
+let query = '';
+let gemsOnly = false;
+
+function toggleGems() {
+  gemsOnly = !gemsOnly;
+  document.getElementById('gemToggle').classList.toggle('on', gemsOnly);
+  renderGrid();
+}
+
+function renderGrid() {
+  let list = [...M];
+
+  if (query) {
+    const q = query.toLowerCase();
+    list = list.filter(m =>
+      m.t.toLowerCase().includes(q) ||
+      m.d.toLowerCase().includes(q) ||
+      m.tags.some(t => t.includes(q))
+    );
+  }
+
+  if (active.size > 0) {
+    list = list.filter(m => [...active].some(f => m.tags.includes(f)));
+    list.sort((a,b) => {
+      const sa = [...active].filter(f => a.tags.includes(f)).length;
+      const sb = [...active].filter(f => b.tags.includes(f)).length;
+      return sb - sa;
+    });
+  }
+
+  if (gemsOnly) list = list.filter(m => m.obscure);
+
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('empty');
+
+  document.getElementById('gridLabel').textContent =
+    gemsOnly ? 'Hidden Gems' : active.size > 0 ? 'Matching Films' : 'All Films';
+  document.getElementById('gridCount').textContent = list.length + ' films';
+  document.getElementById('clearBtn').style.display = active.size > 0 ? 'inline' : 'none';
+
+  if (!list.length) {
+    grid.innerHTML = '';
+    empty.classList.add('show');
+    return;
+  }
+  empty.classList.remove('show');
+
+  grid.innerHTML = list.map((m) => {
+    const idx = M.indexOf(m);
+    const matchN = active.size ? [...active].filter(f => m.tags.includes(f)).length : 0;
+    const matchP = active.size ? Math.round((matchN / active.size) * 100) : 0;
+    return cardHTML(m, idx, matchP);
+  }).join('');
+}
+
+function cardHTML(m, idx, matchP) {
+  const u = loadUser();
+  const isFav = u.favs.includes(idx);
+  const r = u.ratings[idx] || 0;
+  return `<div class="card" onclick="openModal(${idx})">
+    <div class="poster">
+      <img src="${TMDB}${m.p}" alt="${m.t}" loading="lazy">
+      ${m.obscure ? '<div class="gem-badge">Hidden Gem</div>' : ''}
+      <button class="card-fav${isFav?' saved':''}" onclick="toggleFav(${idx},event)">${isFav?'♥':'♡'}</button>
+      <div class="hover-tags">${m.tags.slice(0,4).map(t=>`<span>${t}</span>`).join('')}</div>
+    </div>
+    <div class="info">
+      <div class="title">${m.t}</div>
+      <div class="meta">${m.y} · ${m.d}</div>
+      ${m.imdb ? `<div class="card-score">
+        <span class="stars">${imdbStars(m.imdb)}</span>
+        <span class="score-num">${m.imdb}</span>
+      </div>` : ''}
+      ${r ? `<div class="user-rating">Your: ${'★'.repeat(r)}${'☆'.repeat(5-r)}</div>` : ''}
+      ${matchP ? `<div class="match">${matchP}% match</div>` : ''}
+    </div>
+  </div>`;
+}
+
+function renderLists() {
+  document.getElementById('lists').innerHTML = LISTS.map(l => {
+    const inner = `
+      <div class="list-posters">
+        ${l.movies.slice(0,3).map(i => `<div class="mini">
+          <img src="${TMDB}${M[i].p}" alt="${M[i].t}" loading="lazy">
+        </div>`).join('')}
+      </div>
+      <div class="list-info">
+        <h3>${l.title}</h3>
+        <p>${l.desc}</p>
+      </div>`;
+    if (l.href) {
+      return `<a class="list-card" href="${l.href}">${inner}</a>`;
+    }
+    return `<div class="list-card" onclick="applyList(${JSON.stringify(l.movies).replace(/"/g,'&quot;')})">${inner}</div>`;
+  }).join('');
+}
+
+function renderHered() {
+  const sim = similar(M[0]).slice(0,8);
+  document.getElementById('heredRow').innerHTML = sim.map(s => {
+    const idx = M.indexOf(s.m);
+    return `<div class="card" onclick="openModal(${idx})" style="flex:0 0 150px">
+      <div class="poster">
+        <img src="${TMDB}${s.m.p}" alt="${s.m.t}" loading="lazy">
+      </div>
+      <div class="info">
+        <div class="title">${s.m.t}</div>
+        <div class="meta">${s.m.y} · ${s.score}% match</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function similar(movie) {
+  return M.filter(m => m !== movie).map(m => {
+    const shared = movie.tags.filter(t => m.tags.includes(t)).length;
+    const total = new Set([...movie.tags, ...m.tags]).size;
+    return { m, score: Math.round((shared / total) * 100) };
+  }).sort((a,b) => b.score - a.score);
+}
+
+// ─── INTERACTIONS ───
+
+document.querySelectorAll('.pill[data-t]').forEach(el => {
+  el.addEventListener('click', () => {
+    const t = el.dataset.t;
+    active.has(t) ? active.delete(t) : active.add(t);
+    el.classList.toggle('on');
+    renderGrid();
+  });
+});
+
+document.getElementById('search').addEventListener('input', e => {
+  query = e.target.value;
+  renderGrid();
+});
+
+function clearAll() {
+  active.clear(); query = '';
+  document.getElementById('search').value = '';
+  document.querySelectorAll('.pill.on').forEach(p => p.classList.remove('on'));
+  renderGrid();
+}
+
+function applyList(indices) {
+  document.getElementById('browse').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ─── MODAL ───
+
+function openModal(idx) {
+  const m = M[idx];
+  const sim = similar(m).slice(0,5);
+
+  document.getElementById('modalHero').innerHTML = `
+    <img src="${TMDB}${m.p}" alt="${m.t}">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-gradient"></div>
+    <div class="modal-title-wrap">
+      <h2>${m.t}</h2>
+      <div class="sub">${m.y} · ${m.d}</div>
+    </div>
+  `;
+
+  const ratingsHTML = `<div class="ratings-row">
+    ${m.rt ? `<div class="rating-badge"><div class="r-icon r-rt">RT</div><span class="r-score">${m.rt}%</span><span class="r-label">Tomatometer</span></div>` : ''}
+    ${m.imdb ? `<div class="rating-badge"><div class="r-icon r-imdb">IM</div><span class="r-score">${m.imdb}</span><span class="r-label">IMDb</span></div>` : ''}
+    ${m.mc ? `<div class="rating-badge"><div class="r-icon r-meta">MC</div><span class="r-score">${m.mc}</span><span class="r-label">Metacritic</span></div>` : ''}
+  </div>`;
+
+  const streamHTML = m.str && m.str.length ? `<div class="modal-section">
+    <div class="modal-label">Where to Watch</div>
+    <div class="stream-row">
+      ${m.str.map(s => `<div class="stream-badge"><span class="stream-dot" style="background:${STREAM_COLORS[s]||'#555'}"></span>${s}</div>`).join('')}
+    </div>
+  </div>` : '';
+
+  const intensityHTML = `<div class="modal-section">
+    <div class="modal-label">Intensity</div>
+    <div class="intensity-row">
+      ${[['Scare',m.scare],['Gore',m.gore],['Dread',m.dread]].map(([label,val]) =>
+        `<div class="intensity-item">
+          <div class="intensity-label">${label}</div>
+          <div class="intensity-dots">${Array.from({length:5},(_,i)=>`<span class="dot${i<val?' on':''}"></span>`).join('')}</div>
+        </div>`
+      ).join('')}
+    </div>
+  </div>`;
+
+  const trailerHTML = m.yt ? `<div class="modal-section">
+    <div class="modal-label">Trailer</div>
+    <div class="trailer-wrap">
+      <iframe src="https://www.youtube.com/embed/${m.yt}?rel=0&modestbranding=1" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>` : '';
+
+  const butHTML = `<div class="modal-section but-section">
+    <div class="modal-label">More like this, but...</div>
+    <div class="but-row" id="butRow">
+      ${m.tags.map(t => `<span class="but-chip but-keep active" data-tag="${t}" onclick="toggleBut(this,${idx})">${t}</span>`).join('')}
+    </div>
+    <div class="but-results" id="butResults"></div>
+  </div>`;
+
+  const u = loadUser();
+  const isFav = u.favs.includes(idx);
+  const userActionsHTML = `<div class="modal-section">
+    <div class="modal-user-actions">
+      <button class="modal-fav${isFav?' saved':''}" onclick="toggleFav(${idx},event);openModal(${idx})">
+        ${isFav?'♥ Saved':'♡ Save'}
+      </button>
+      <div class="modal-stars-wrap">
+        <span class="rate-label">Your rating</span>
+        ${starsHTML(idx, 'modal')}
+      </div>
+    </div>
+  </div>`;
+
+  document.getElementById('modalBody').innerHTML = `
+    <div class="modal-section">
+      <div class="modal-label">Ratings</div>
+      ${ratingsHTML}
+    </div>
+    ${userActionsHTML}
+    ${streamHTML}
+    ${intensityHTML}
+    ${trailerHTML}
+    <div class="modal-section">
+      <div class="modal-label">Elements</div>
+      <div class="modal-tags">${m.tags.map(t => `<span>${t}</span>`).join('')}</div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-label">Similar Films</div>
+      <div class="similar-row">
+        ${sim.map(s => {
+          const si = M.indexOf(s.m);
+          return `<div class="sim-card" onclick="event.stopPropagation();openModal(${si})">
+            <div class="sim-poster"><img src="${TMDB}${s.m.p}" alt="${s.m.t}" loading="lazy"></div>
+            <div class="sim-title">${s.m.t}</div>
+            <div class="sim-match">${s.score}% match</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+    ${butHTML}
+  `;
+
+  document.getElementById('backdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function toggleBut(el, idx) {
+  if (el.classList.contains('but-keep') && el.classList.contains('active')) {
+    el.classList.remove('but-keep','active');
+    el.classList.add('but-drop');
+  } else if (el.classList.contains('but-drop')) {
+    el.classList.remove('but-drop');
+    el.classList.add('but-keep','active');
+  }
+  updateButResults(idx);
+}
+
+function updateButResults(idx) {
+  const m = M[idx];
+  const keep = [...document.querySelectorAll('#butRow .but-keep')].map(e => e.dataset.tag);
+  const drop = [...document.querySelectorAll('#butRow .but-drop')].map(e => e.dataset.tag);
+
+  let results = M.filter(c => c !== m).map(c => {
+    const hasKeep = keep.filter(t => c.tags.includes(t)).length;
+    const hasDrop = drop.filter(t => c.tags.includes(t)).length;
+    return { m: c, score: hasKeep - hasDrop * 2 };
+  }).filter(r => r.score > 0).sort((a,b) => b.score - a.score).slice(0,4);
+
+  const container = document.getElementById('butResults');
+  if (!results.length) {
+    container.innerHTML = '<div class="but-results-label">Try toggling elements to find alternatives</div>';
+    return;
+  }
+  container.innerHTML = `
+    <div class="but-results-label">Based on your preferences</div>
+    <div class="similar-row">
+      ${results.map(r => {
+        const si = M.indexOf(r.m);
+        return `<div class="sim-card" onclick="event.stopPropagation();openModal(${si})">
+          <div class="sim-poster"><img src="${TMDB}${r.m.p}" alt="${r.m.t}" loading="lazy"></div>
+          <div class="sim-title">${r.m.t}</div>
+        </div>`;
+      }).join('')}
+    </div>`;
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('backdrop')) return;
+  const bd = document.getElementById('backdrop');
+  bd.querySelectorAll('iframe').forEach(f => f.src = '');
+  bd.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+  if (e.key === '/' && !e.target.matches('input')) {
+    e.preventDefault();
+    document.getElementById('search').focus();
+  }
+});
+
+// ─── INIT ───
+renderGrid();
+renderLists();
+renderHered();
+renderCollection();
+</script>
+</body>
+</html>
