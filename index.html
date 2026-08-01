@@ -21,25 +21,29 @@
 <meta name="twitter:image" content="https://whatscares.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/atmo.css">
+<script src="/atmo.js" defer></script>
 <style>
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg: #0d0d0d;
-  --surface: #141414;
-  --surface-2: #1a1a1a;
-  --border: #222;
-  --text: #e5e5e5;
-  --text-2: #999;
-  --text-3: #555;
-  --accent: #c4352a;
-  --accent-soft: rgba(196,53,42,0.12);
-  --gold: #e2b616;
+  --bg: #0c0a08;
+  --surface: #161310;
+  --surface-2: #1e1a15;
+  --border: #2b251d;
+  --text: #ece4d2;
+  --text-2: #a79c86;
+  --text-3: #6f6655;
+  --accent: #b5372a;
+  --accent-2: #e0573f;
+  --accent-soft: rgba(181,55,42,0.12);
+  --gold: #d99a45;
   --sans: 'Inter', -apple-system, system-ui, sans-serif;
   --serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
-  --radius: 6px;
+  --mono: 'Courier Prime', 'Courier New', monospace;
+  --radius: 3px;
 }
 
 html { scroll-behavior: smooth; }
@@ -1051,9 +1055,372 @@ footer {
   .list-card.list-featured { grid-column: span 1; }
   .hscroll .card { flex: 0 0 120px; height: 180px; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   FIELD GUIDE DESIGN SYSTEM — appended overrides win the cascade
+   ═══════════════════════════════════════════════════════════ */
+
+::selection { background: rgba(181,55,42,0.4); color: var(--text); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: #3a3226; }
+:focus-visible { outline: 2px solid rgba(224,87,63,0.65); outline-offset: 2px; }
+
+/* ─── NAV ─── */
+nav {
+  background: rgba(12,10,8,0.82);
+  border-bottom: 1px solid var(--border);
+  height: 56px;
+}
+.nav-links a {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+.nav-links a.threshold-nav {
+  color: var(--accent-2);
+  border-bottom: 1px dotted rgba(224,87,63,0.55);
+  padding-bottom: 2px;
+}
+.nav-links a.threshold-nav:hover { color: var(--text); }
+.nav-right { display: flex; align-items: center; gap: 14px; }
+.lights-btn {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-3); background: transparent;
+  border: 1px solid var(--border); border-radius: 20px;
+  padding: 6px 13px; cursor: pointer; transition: all 0.25s;
+}
+.lights-btn:hover { color: var(--text-2); border-color: var(--text-3); }
+body.lights-out .lights-btn { color: var(--gold); border-color: rgba(217,154,69,0.45); }
+
+/* ─── HERO: the corridor ─── */
+.hero {
+  position: relative; max-width: none; margin: 0; padding: 0;
+  min-height: 94vh; display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.hero-inner {
+  position: relative; z-index: 2; width: 100%;
+  max-width: 740px; padding: 140px 24px 110px;
+}
+.hero-corridor {
+  position: absolute; inset: 0; z-index: 1; overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+}
+.hero-corridor::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 68% 62% at 50% 48%,
+    rgba(12,10,8,0.94) 0%, rgba(12,10,8,0.6) 52%, rgba(12,10,8,0.28) 100%);
+}
+.hero-corridor .strip {
+  position: absolute; left: 0; display: flex; gap: 30px; width: max-content;
+}
+.hero-corridor .strip img {
+  width: 104px; aspect-ratio: 2/3; object-fit: cover;
+  border-radius: 2px; filter: brightness(0.2) saturate(0.6);
+}
+.hero-corridor .strip-a { top: 15%; animation: driftL 170s linear infinite; }
+.hero-corridor .strip-b { bottom: 13%; animation: driftR 210s linear infinite; }
+.hero-corridor .strip-b img { filter: brightness(0.15) saturate(0.5); }
+@keyframes driftL { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes driftR { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+.hero-eyebrow {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 4px; font-weight: 400;
+  color: var(--text-3); text-transform: uppercase;
+  display: flex; align-items: center; justify-content: center; gap: 18px;
+  margin-bottom: 34px;
+}
+.eyebrow-rule { width: 52px; height: 1px; background: var(--border); flex: none; }
+
+.hero h1, .hero-title {
+  font-size: clamp(46px, 7.2vw, 88px); line-height: 1.02;
+  letter-spacing: -1.5px; margin-bottom: 26px;
+}
+.hero h1 .w { display: inline-block; opacity: 0; }
+body.loaded .hero h1 .w { animation: wordIn 1s cubic-bezier(0.2, 0.7, 0.3, 1) forwards; }
+@keyframes wordIn {
+  0% { opacity: 0; filter: blur(10px); transform: translateY(14px); }
+  18% { opacity: 0.45; filter: blur(2px); }
+  30% { opacity: 0.12; }
+  45% { opacity: 1; }
+  55% { opacity: 0.55; }
+  70% { opacity: 1; }
+  100% { opacity: 1; filter: none; transform: none; }
+}
+.hero h1 em {
+  color: var(--accent-2);
+  text-shadow: 0 0 34px rgba(224,87,63,0.28);
+}
+.hero-sub { font-size: 17px; max-width: 540px; margin-bottom: 44px; }
+.hero-meta {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--text-3); margin-top: 26px;
+}
+
+.threshold-link {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 6px;
+  margin-top: 40px; text-decoration: none;
+}
+.tl-kicker {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--text-3);
+}
+.tl-main {
+  font-family: var(--serif); font-style: italic; font-size: 16px;
+  color: var(--text-2); border-bottom: 1px dotted rgba(181,55,42,0.7);
+  padding-bottom: 3px; transition: color 0.25s;
+}
+.threshold-link:hover .tl-main { color: var(--accent-2); }
+.tl-arrow { display: inline-block; transition: transform 0.25s; font-style: normal; }
+.threshold-link:hover .tl-arrow { transform: translateX(5px); }
+
+/* ─── SEARCH PANEL: the field kit ─── */
+.search-panel {
+  background: rgba(22,19,16,0.82); backdrop-filter: blur(16px);
+  border: 1px solid var(--border); border-radius: 4px;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.65), inset 0 1px 0 rgba(236,228,210,0.05);
+}
+.search-tab {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 2.5px;
+  text-transform: uppercase; padding: 17px 0;
+}
+.search-tab.active { color: var(--accent-2); border-bottom-color: var(--accent); }
+.search-label {
+  font-family: var(--serif); font-style: italic;
+  font-size: 15px; color: var(--text-2); margin-bottom: 12px;
+}
+.search-input {
+  background: rgba(12,10,8,0.72); border: 1px solid var(--border);
+  border-radius: 3px; font-family: var(--serif); font-style: italic;
+  font-size: 16px; padding: 15px 17px; color: var(--text);
+}
+.search-input:focus {
+  border-color: rgba(181,55,42,0.65);
+  box-shadow: 0 0 0 3px rgba(181,55,42,0.13);
+}
+.search-btn {
+  border-radius: 3px; font-family: var(--mono); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 3px; font-size: 13px; padding: 15px;
+}
+.search-btn:disabled::after { content: ''; animation: btnDots 1.2s steps(4) infinite; }
+@keyframes btnDots { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75% { content: '...'; } }
+.search-hints { font-size: 11px; }
+.search-hint {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.5px;
+  border-radius: 2px; padding: 6px 12px;
+}
+.autocomplete-list { background: var(--surface); border-radius: 3px; }
+.ac-year { font-family: var(--mono); font-size: 11px; }
+
+/* ─── SECTION HEADS: the plate system ─── */
+.container { counter-reset: plate; }
+.container section { margin-bottom: 78px; }
+.section-head {
+  counter-increment: plate;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+.section-head h2 { font-size: 27px; font-weight: 500; letter-spacing: -0.3px; }
+.section-head h2::before {
+  counter-increment: none;
+  content: 'PLATE ' counter(plate, upper-roman);
+  display: block; font-family: var(--mono); font-size: 10px;
+  letter-spacing: 3.5px; color: var(--accent-2); margin-bottom: 10px;
+}
+.section-head .count { font-family: var(--mono); font-size: 11px; letter-spacing: 1px; }
+.coll-cn { font-family: var(--mono); letter-spacing: 2px; }
+.see-all { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
+
+/* ─── GENRE RAIL: the taxonomy ─── */
+.rail-item {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 1.8px;
+  text-transform: uppercase; padding: 10px 14px; border-radius: 0 3px 3px 0;
+}
+.rail-item:hover { color: var(--text-2); background: rgba(30,26,21,0.6); }
+.rail-item.on {
+  color: var(--text); font-weight: 700;
+  background: linear-gradient(to right, rgba(181,55,42,0.14), transparent 85%);
+  border-left-color: var(--accent);
+}
+.rail-count { font-family: var(--mono); font-size: 10px; }
+
+.sort-label { font-family: var(--mono); letter-spacing: 2.5px; }
+.sort-btn {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px;
+  text-transform: uppercase; border-radius: 2px; padding: 6px 12px;
+}
+.sort-btn.active { border-color: rgba(224,87,63,0.5); color: var(--accent-2); background: rgba(181,55,42,0.08); }
+.toggle-wrap { font-family: var(--mono); font-size: 10px; letter-spacing: 1.8px; text-transform: uppercase; }
+
+/* ─── CARDS: specimens ─── */
+.grid { gap: 14px; }
+.card {
+  border: 1px solid var(--border); border-radius: 3px;
+  transition: border-color 0.3s ease;
+  background: var(--surface-2);
+}
+.card:hover { border-color: rgba(181,55,42,0.5); }
+.card .poster img { filter: saturate(0.85) contrast(1.06); }
+.card:hover .poster img { animation: imgGlitch 0.38s steps(3) 1; }
+@keyframes imgGlitch {
+  0% { clip-path: inset(0); transform: scale(1.05) translate(0, 0); }
+  25% { clip-path: inset(14% 0 62% 0); transform: scale(1.05) translate(-4px, 1px); }
+  50% { clip-path: inset(58% 0 10% 0); transform: scale(1.05) translate(4px, -1px); }
+  75% { clip-path: inset(32% 0 38% 0); transform: scale(1.05) translate(-2px, 0); }
+  100% { clip-path: inset(0); transform: scale(1.05) translate(0, 0); }
+}
+.card-tag {
+  background: rgba(12,10,8,0.8); border: 1px solid rgba(224,87,63,0.5);
+  color: var(--accent-2); font-family: var(--mono); font-size: 9px;
+  font-weight: 400; letter-spacing: 1.8px; text-transform: uppercase;
+  padding: 4px 8px; border-radius: 2px; backdrop-filter: blur(6px);
+}
+.gem-badge {
+  background: rgba(12,10,8,0.82); border: 1px solid rgba(217,154,69,0.55);
+  color: var(--gold); font-family: var(--mono); font-size: 9px;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 4px 8px; border-radius: 2px; transform: rotate(-2.5deg);
+  backdrop-filter: blur(6px);
+}
+.card-overlay {
+  background: linear-gradient(transparent, rgba(10,8,6,0.94));
+}
+.card-overlay .title { font-weight: 500; letter-spacing: 0.1px; }
+.card-overlay .meta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.5px; color: rgba(236,228,210,0.55); }
+.card-overlay .card-stream { font-family: var(--mono); font-size: 9px; letter-spacing: 0.5px; color: rgba(236,228,210,0.42); }
+.card.featured .card-overlay .title { letter-spacing: -0.3px; }
+
+/* vitals — scare/gore/dread revealed on hover (zero layout cost until shown) */
+.card-vitals {
+  display: flex; gap: 12px; margin-bottom: 0;
+  max-height: 0; overflow: hidden;
+  opacity: 0; transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease, max-height 0.3s ease, margin-bottom 0.3s ease;
+}
+.card:hover .card-vitals { max-height: 20px; margin-bottom: 9px; opacity: 1; transform: none; }
+.vital { display: flex; align-items: flex-end; gap: 2.5px; }
+.vital-label {
+  font-family: var(--mono); font-size: 8px; letter-spacing: 1px;
+  color: rgba(236,228,210,0.6); margin-right: 3px; line-height: 1;
+}
+.vital i { display: block; width: 3px; background: rgba(236,228,210,0.16); }
+.vital i.on { background: var(--accent-2); box-shadow: 0 0 5px rgba(224,87,63,0.45); }
+.vital i:nth-of-type(1) { height: 4px; }
+.vital i:nth-of-type(2) { height: 6px; }
+.vital i:nth-of-type(3) { height: 8px; }
+.vital i:nth-of-type(4) { height: 10px; }
+.vital i:nth-of-type(5) { height: 12px; }
+.vital i.g.on { background: var(--gold); box-shadow: 0 0 5px rgba(217,154,69,0.4); }
+
+.card-why { font-size: 16px; }
+.results-query { font-size: 16px; }
+.start-over { font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 2px; }
+.fav-sub { font-size: 14px; }
+
+/* ─── CURATED LISTS ─── */
+.list-card { border: 1px solid var(--border); border-radius: 3px; transition: border-color 0.3s; }
+.list-card:hover { border-color: rgba(181,55,42,0.5); }
+.list-card-tag {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  background: rgba(12,10,8,0.82); border: 1px solid rgba(224,87,63,0.5);
+  color: var(--accent-2); border-radius: 2px; padding: 4px 8px; font-weight: 400;
+}
+.list-card-overlay { background: linear-gradient(transparent, rgba(10,8,6,0.94)); }
+.list-card-overlay p { font-family: var(--mono); font-size: 10px; letter-spacing: 1px; }
+
+/* ─── MODAL: the specimen file ─── */
+.modal { border-radius: 5px; background: var(--surface); }
+.modal-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 3px;
+  color: var(--accent-2); font-weight: 400;
+}
+.modal-label::after { content: ' ———'; color: var(--border); letter-spacing: 0; }
+.rating-badge {
+  border: 1px solid var(--border); border-radius: 3px;
+  padding: 7px 11px; background: rgba(12,10,8,0.45);
+}
+.rating-badge .r-score { font-family: var(--mono); font-weight: 700; }
+.rating-badge .r-label { font-family: var(--mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; }
+.intensity-item {
+  border: 1px solid var(--border); border-radius: 3px;
+  padding: 10px 14px; background: rgba(12,10,8,0.45);
+}
+.intensity-label { font-family: var(--mono); letter-spacing: 2px; }
+.intensity-dots { gap: 3px; align-items: flex-end; height: 18px; }
+.intensity-dots .dot { width: 5px; border-radius: 1px; background: #2b251d; }
+.intensity-dots .dot:nth-child(1) { height: 5px; }
+.intensity-dots .dot:nth-child(2) { height: 8px; }
+.intensity-dots .dot:nth-child(3) { height: 11px; }
+.intensity-dots .dot:nth-child(4) { height: 14px; }
+.intensity-dots .dot:nth-child(5) { height: 17px; }
+.intensity-dots .dot.on { background: var(--accent-2); box-shadow: 0 0 7px rgba(224,87,63,0.4); }
+.modal-tags span {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px;
+  text-transform: uppercase; border-radius: 2px; padding: 5px 11px;
+}
+.stream-badge { border-radius: 2px; font-family: var(--mono); font-size: 10px; letter-spacing: 1px; }
+.modal-fav { font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 3px; }
+.sim-title { font-size: 11px; }
+.sim-match { font-family: var(--mono); font-size: 9px; letter-spacing: 1px; }
+.but-chip { font-family: var(--mono); font-size: 10px; letter-spacing: 1px; border-radius: 2px; }
+.modal-stars-wrap .rate-label { font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+
+/* ─── AUTH ─── */
+.auth-modal { border-radius: 5px; }
+.auth-form input { background: rgba(12,10,8,0.72); border-radius: 3px; }
+.auth-submit { font-family: var(--mono); text-transform: uppercase; letter-spacing: 2.5px; border-radius: 3px; }
+.auth-btn { font-family: var(--mono); letter-spacing: 1.5px; text-transform: uppercase; font-size: 10px; }
+
+/* ─── FOOTER ─── */
+footer {
+  font-family: var(--mono); letter-spacing: 2px; text-transform: uppercase;
+  font-size: 10px; padding: 52px 40px 44px;
+}
+.footer-colophon {
+  margin-bottom: 18px; color: var(--text-3);
+}
+.footer-colophon .colophon-rule {
+  display: block; width: 60px; height: 1px; background: var(--accent);
+  margin: 0 auto 18px;
+}
+
+/* ─── EMPTY ─── */
+.empty p { font-size: 17px; }
+
+/* ─── RESPONSIVE (design-system additions) ─── */
+@media (max-width: 768px) {
+  .hero { min-height: 88vh; }
+  .hero-inner { padding: 110px 18px 84px; }
+  .hero-eyebrow { letter-spacing: 2.5px; gap: 10px; }
+  .eyebrow-rule { width: 24px; }
+  .hero-corridor .strip img { width: 74px; }
+  .section-head h2 { font-size: 22px; }
+  .lights-btn { padding: 5px 10px; }
+  .nav-right { gap: 8px; }
+  .genre-rail { flex-basis: 106px; }
+  .rail-item { font-size: 9px; letter-spacing: 1px; padding: 9px 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 .w { opacity: 1 !important; animation: none !important; }
+  .hero-corridor .strip { animation: none !important; }
+  .card:hover .poster img { animation: none !important; }
+  .card-vitals { transition: none; }
+  html { scroll-behavior: auto; }
+}
 </style>
 </head>
 <body>
+
+<div class="atmo" aria-hidden="true">
+  <div class="flashlight" id="flashlight"></div>
+  <div class="vignette"></div>
+  <div class="flicker" id="flicker"></div>
+  <div class="grain" id="grain"></div>
+</div>
 
 <nav>
   <a href="/" class="brand"><svg class="brand-mark" viewBox="18 10 28 50" fill="currentColor" aria-hidden="true"><path d="M20.2 29.5A13 13 0 1 1 39.5 34.6C36 37.2 34.4 41 34.3 46L29.3 46C29.6 41.2 32.4 36.6 34.9 31.9A8.5 8.5 0 1 0 22.3 28.5Z"/><circle cx="32" cy="54" r="5" fill="#c4352a"/></svg>What<em>Scares</em></a>
@@ -1061,15 +1428,21 @@ footer {
     <a href="#" class="active">Discover</a>
     <a href="#collections">Collections</a>
     <a href="#browse">Browse</a>
+    <a href="/threshold.html" class="threshold-nav">The Threshold</a>
   </div>
-  <div class="nav-user" id="navUser">
-    <button class="auth-btn" onclick="openAuth()">Sign In</button>
+  <div class="nav-right">
+    <button class="lights-btn" id="lightsBtn" onclick="toggleLights()" aria-pressed="false">&#9680; lights out</button>
+    <div class="nav-user" id="navUser">
+      <button class="auth-btn" onclick="openAuth()">Sign In</button>
+    </div>
   </div>
 </nav>
 
 <header class="hero">
-  <div class="hero-eyebrow">A Field Guide to Fear</div>
-  <h1>Horror that <em>gets you.</em></h1>
+  <div class="hero-corridor" id="heroCorridor" aria-hidden="true"></div>
+  <div class="hero-inner">
+  <div class="hero-eyebrow"><span class="eyebrow-rule"></span><span>Field N&ordm; <span id="filmCount">136</span> — A Field Guide to Fear</span><span class="eyebrow-rule"></span></div>
+  <h1 id="heroTitle">Horror that <em>gets&nbsp;you.</em></h1>
   <p class="hero-sub">Not everyone fears the same thing. Tell us the dread you're after — folk rituals, cosmic void, slow-burn grief — and we'll find films you can actually stream.</p>
   <div class="search-panel">
     <div class="search-tabs">
@@ -1095,7 +1468,12 @@ footer {
       </div>
     </div>
   </div>
-  <div class="hero-meta">63 hand-picked films · intensity-rated · streaming included</div>
+  <div class="hero-meta">136 hand-picked films · intensity-rated · streaming included</div>
+  <a class="threshold-link" href="/threshold.html" id="thresholdLink">
+    <span class="tl-kicker">or skip the search</span>
+    <span class="tl-main">Cross the Threshold — a sixty-second calibration of fear <span class="tl-arrow">&rarr;</span></span>
+  </a>
+  </div>
 </header>
 
 <div class="container">
@@ -1181,7 +1559,8 @@ footer {
 </div>
 
 <footer>
-  <div>WhatScares — horror matched to your taste</div>
+  <div class="footer-colophon"><span class="colophon-rule"></span>WhatScares — a field guide to fear · printed in the dark</div>
+  <div>horror matched to your taste</div>
   <div role="navigation" aria-label="SEO lists" style="margin-top:16px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
     <a href="/lists/best-a24-horror-films.html" style="color:var(--text-3);font-size:11px;text-decoration:none">Best A24 Horror Films</a>
     <a href="/lists/best-folk-horror-movies.html" style="color:var(--text-3);font-size:11px;text-decoration:none">Best Folk Horror Movies</a>
@@ -1600,6 +1979,10 @@ function resetStars(el, idx) {
   });
 }
 
+function vitalHTML(label, val, ember) {
+  return `<span class="vital"><span class="vital-label">${label}</span>${Array.from({length:5},(_,i)=>`<i class="${i<val?'on':''}${ember?' g':''}"></i>`).join('')}</span>`;
+}
+
 function imdbStars(score) {
   if (!score) return '';
   const full = Math.round(score / 2);
@@ -1802,6 +2185,7 @@ function cardHTML(m, idx, score, featured) {
       </div>
       <div class="card-overlay">
         ${why && featured ? `<div class="card-why">“${escAttr(why)}”</div>` : ''}
+        <div class="card-vitals">${vitalHTML('S', m.scare)}${vitalHTML('G', m.gore, true)}${vitalHTML('D', m.dread)}</div>
         <div class="title">${m.t}</div>
         <div class="meta">${m.y} · ${m.d}</div>
         ${m.imdb ? `<div class="card-score">
@@ -2316,6 +2700,121 @@ function checkUrlMovie() {
   const idx = M.findIndex(m => slugify(m.t) === slug);
   if (idx >= 0) openModal(idx);
 }
+
+// ─── ATMOSPHERE & RITUAL ───
+(function () {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // hero corridor: two counter-drifting strips of near-dark posters
+  const corridor = document.getElementById('heroCorridor');
+  if (corridor) {
+    const step = Math.max(1, Math.floor(M.length / 18));
+    const picks = [];
+    for (let i = 0; i < M.length && picks.length < 18; i += step) picks.push(i);
+    const strip = (cls, arr) =>
+      `<div class="strip ${cls}">${[...arr, ...arr].map(i =>
+        `<img src="https://image.tmdb.org/t/p/w185${M[i].p}" alt="" loading="lazy">`).join('')}</div>`;
+    corridor.innerHTML = strip('strip-a', picks.slice(0, 9)) + strip('strip-b', picks.slice(9));
+  }
+
+  // hero title: wrap words for the flicker-in reveal
+  const title = document.getElementById('heroTitle');
+  if (title) {
+    const nodes = [...title.childNodes];
+    title.innerHTML = '';
+    let order = 0;
+    nodes.forEach(node => {
+      if (node.nodeType === 3) {
+        node.textContent.split(/(\s+)/).forEach(part => {
+          if (!part.trim()) { title.appendChild(document.createTextNode(part)); return; }
+          const s = document.createElement('span');
+          s.className = 'w'; s.textContent = part;
+          s.style.animationDelay = (0.12 * order++) + 's';
+          title.appendChild(s);
+        });
+      } else {
+        node.classList.add('w');
+        node.style.animationDelay = (0.12 * order++) + 's';
+        title.appendChild(node);
+      }
+    });
+    document.body.classList.add('loaded');
+  }
+
+  // typewriter placeholder: the archive suggests fears when idle
+  const moodEl = document.getElementById('moodInput');
+  if (moodEl && !reduced) {
+    const suggestions = [
+      'asian folk horror, slow burn, nothing too gory\u2026',
+      'like Hereditary but scarier\u2026',
+      'date night, not too disturbing\u2026',
+      'found footage that feels real\u2026',
+      'cosmic dread, no jump scares\u2026',
+      'something in Mandarin or Korean\u2026',
+    ];
+    let si = 0, ci = 0, deleting = false, timer = 0;
+    const tick = () => {
+      if (document.activeElement === moodEl || moodEl.value) { timer = setTimeout(tick, 900); return; }
+      const cur = suggestions[si];
+      ci += deleting ? -1 : 1;
+      moodEl.placeholder = cur.slice(0, ci) + (ci < cur.length ? '\u258c' : '');
+      let wait = deleting ? 16 : 42 + Math.random() * 40;
+      if (!deleting && ci === cur.length) { deleting = true; wait = 2100; }
+      else if (deleting && ci === 0) { deleting = false; si = (si + 1) % suggestions.length; wait = 500; }
+      timer = setTimeout(tick, wait);
+    };
+    setTimeout(tick, 1600);
+    moodEl.addEventListener('focus', () => { clearTimeout(timer); moodEl.placeholder = suggestions[0].slice(0, -1); });
+    moodEl.addEventListener('blur', () => { if (!moodEl.value) { clearTimeout(timer); timer = setTimeout(tick, 2400); } });
+  }
+
+  // darkroom develop: grid cards surface from blur after every render
+  const _renderGrid = renderGrid;
+  renderGrid = function () {
+    _renderGrid.apply(this, arguments);
+    if (reduced) return;
+    document.querySelectorAll('#grid .card').forEach((c, i) => {
+      const delay = 50 + Math.min(i, 24) * 30;
+      c.style.transition = 'none';
+      c.style.opacity = '0';
+      c.style.filter = 'blur(10px) brightness(0.35)';
+      setTimeout(() => {
+        c.style.transition = 'opacity 0.7s ease, filter 0.9s ease';
+        c.style.opacity = ''; c.style.filter = '';
+        setTimeout(() => { c.style.transition = ''; }, 950);
+      }, delay);
+    });
+  };
+
+  // searching disturbs the archive
+  const _searchMood = searchMood;
+  searchMood = function () {
+    if (window.atmoBurst) window.atmoBurst(2);
+    return _searchMood.apply(this, arguments);
+  };
+
+  // truthful film count in the eyebrow
+  const fc = document.getElementById('filmCount');
+  if (fc) fc.textContent = M.length;
+
+  // returning visitor: surface their diagnosis
+  try {
+    const diag = JSON.parse(localStorage.getItem('ws-diagnosis'));
+    if (diag && diag.archetype) {
+      const link = document.getElementById('thresholdLink');
+      link.innerHTML = `<span class="tl-kicker">diagnosed · field note ${diag.file || ''}</span>
+        <span class="tl-main">Your fear has a name: ${diag.archetype} — revisit the Threshold <span class="tl-arrow">&rarr;</span></span>`;
+    }
+  } catch (e) {}
+
+  // witching hour copy (runs after init sets hero-meta)
+  setTimeout(() => {
+    if (document.body.classList.contains('witching')) {
+      const hm = document.querySelector('.hero-meta');
+      if (hm) hm.textContent = 'the archive is open. it was always open.';
+    }
+  }, 0);
+})();
 
 // ─── INIT ───
 renderRail();

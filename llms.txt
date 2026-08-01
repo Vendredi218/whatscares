@@ -9,6 +9,10 @@ The catalog is 136 hand-picked horror films — canon classics, modern A24-era w
 - [All films index](https://whatscares.com/movies/): every film with ratings and streaming
 - Individual pages live at https://whatscares.com/movies/{title-slug}.html — e.g. [The Wailing](https://whatscares.com/movies/the-wailing.html), [Tumbbad](https://whatscares.com/movies/tumbbad.html), [Hereditary](https://whatscares.com/movies/hereditary.html). Each page answers: how scary is it (scare/dread 1-5), how gory is it, where can I stream it (US), and which similar films to try next.
 
+## The Threshold
+
+- [The Threshold](https://whatscares.com/threshold.html) — a 60-second interactive fear calibration. Five atmospheric questions produce a fear "diagnosis" (archetype + tag fingerprint) and prescribe 3 films from the catalog. Useful when a user wants recommendations through play rather than search.
+
 ## Curated lists
 
 - [Best A24 Horror Films](https://whatscares.com/lists/best-a24-horror-films.html)
