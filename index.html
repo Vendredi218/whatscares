@@ -308,6 +308,12 @@ section { margin-bottom: 48px; }
 }
 .card-wrap:hover .card-act, .card-act:focus-visible,
 .card-act.on-want, .card-act.on-seen { opacity: 1; }
+
+/* Saved state comes out of localStorage on the first frame; the poster arrives
+   over the network. Hold the buttons back until the card behind them exists,
+   or a marked film shows a gold tick floating on an empty box. Beats the
+   .on-want / .on-seen and (hover: none) rules on specificity. */
+.card-wrap:not(.poster-ready) .card-act { opacity: 0; }
 .card-act:hover { background: rgba(0,0,0,0.8); }
 .card-act.on-want { background: var(--accent); color: #fff; }
 .card-act.on-seen { background: var(--gold); color: #1a1400; }
@@ -2084,6 +2090,40 @@ function peekMovie(idx, e) {
   openModal(idx);
 }
 
+// Marks a card as having something behind its buttons. `load` does not bubble,
+// so this listens in the capture phase and covers every row at once, including
+// cards rendered later. An image that fails still counts: the card is settled.
+document.addEventListener('load', posterSettled, true);
+document.addEventListener('error', posterSettled, true);
+function posterSettled(e) {
+  if (e.target.tagName !== 'IMG') return;
+  const wrap = e.target.closest('.card-wrap');
+  if (wrap) wrap.classList.add('poster-ready');
+}
+
+// A cached poster is already decoded before the markup is in the document, so
+// its load event fired where nothing could hear it. naturalWidth is what tells
+// a decoded image apart from one that merely reports complete.
+function markLoadedPosters(root = document) {
+  root.querySelectorAll('.card-wrap').forEach(w => {
+    const img = w.querySelector('img');
+    if (img && img.complete && img.naturalWidth) w.classList.add('poster-ready');
+  });
+  scheduleFailOpen();
+}
+
+// If posters are blocked or the connection stalls, neither event ever fires,
+// and a permanently hidden button is worse than an early one. Document-wide on
+// purpose: scoping it to the caller's root let a later call cancel an earlier
+// row's reveal.
+let failOpenTimer = null;
+function scheduleFailOpen() {
+  clearTimeout(failOpenTimer);
+  failOpenTimer = setTimeout(() => {
+    document.querySelectorAll('.card-wrap').forEach(w => w.classList.add('poster-ready'));
+  }, 3000);
+}
+
 function setStatus(idx, status, e) {
   // The buttons sit next to an <a>, not inside it, but a stray bubbled click
   // on any surface should still never navigate.
@@ -2437,6 +2477,7 @@ function renderCollection() {
     document.getElementById('seenCount').textContent = seen.length + ' films';
     document.getElementById('seenRow').innerHTML = seen.map(i => collCardHTML(i, 'seen')).join('');
   }
+  markLoadedPosters(sec);
 }
 
 const LISTS = [
@@ -2579,6 +2620,7 @@ function renderGrid() {
     const featured = i === 0 && (list.length > 4 || searchMode === 'mood');
     return cardHTML(m, idx, score, featured);
   }).join('');
+  markLoadedPosters(grid);
 }
 
 function cardHTML(m, idx, score, featured) {
