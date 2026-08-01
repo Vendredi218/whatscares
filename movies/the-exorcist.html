@@ -88,6 +88,8 @@ a.tag:hover{border-color:var(--accent);color:var(--text)}
 .note-form button:disabled{opacity:.4;cursor:default}
 .note-form .count{font-family:var(--mono);font-size:12px;color:var(--text-3);font-variant-numeric:tabular-nums}
 .note-form .count.over{color:var(--accent)}
+.note-form .note-status{font-size:13.5px;color:var(--text-3)}
+.note-form .note-status.bad{color:var(--accent)}
 .rate-note{font-size:13.5px;color:var(--text-3);margin-top:10px}
 .rate-note a{color:var(--gold);border-bottom:1px solid rgba(125,92,13,.35)}
 @media (prefers-reduced-motion: reduce){.intensity .agg b.bump{animation:none}.intensity .pip{transition:none}}
@@ -249,6 +251,7 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
         <div class="foot">
           <button type="submit" id="noteSend" disabled>Post</button>
           <span class="count" id="noteCount">140</span>
+          <span class="note-status" id="noteStatus" role="status"></span>
         </div>
       </form>
     </section>
@@ -451,6 +454,7 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
   var area = document.getElementById('noteText');
   var send = document.getElementById('noteSend');
   var count = document.getElementById('noteCount');
+  var nstatus = document.getElementById('noteStatus');
   var LIMIT = 140;
 
   function esc(t) {
@@ -490,15 +494,22 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
     var text = area.value.trim();
     if (!text || text.length > LIMIT) return;
     send.disabled = true;
+    nstatus.textContent = ''; nstatus.classList.remove('bad');
     ensureUser().then(function (u) {
-      if (!u) { send.disabled = false; return; }
+      if (!u) { nstatus.textContent = 'Could not start a session - try again.'; nstatus.classList.add('bad'); send.disabled = false; return; }
       // upsert, so a second note replaces the first rather than stacking
       var row = Object.assign({ user_id: u.id, movie_idx: idx, note: text }, mine);
       return sb.from('user_ratings').upsert(row, { onConflict: 'user_id,movie_idx' })
         .then(function (r) {
-          if (r.error) { note.textContent = 'Could not post that - try again.'; send.disabled = false; return; }
+          if (r.error) {
+            nstatus.textContent = 'Could not post that - try again.';
+            nstatus.classList.add('bad');
+            send.disabled = false;
+            return;
+          }
           area.value = ''; count.textContent = LIMIT;
-          note.textContent = 'Posted. You can edit it by writing another.';
+          nstatus.classList.remove('bad');
+          nstatus.textContent = 'Posted. Write another to replace it.';
           return loadNotes();
         });
     });
