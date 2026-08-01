@@ -202,7 +202,7 @@ const headerHtml = `<header class="site"><div class="wrap">
 
 const footerHtml = `<footer class="site"><div class="wrap">
 <div class="row">
-<a href="/">WhatScares</a><a href="/movies/">All 136 films</a>
+<a href="/">WhatScares</a><a href="/movies/">All 136 films</a><a href="/articles/douban-vs-imdb-horror-ratings.html">Douban vs IMDb</a>
 </div>
 <div class="row">
 <a href="/lists/best-a24-horror-films.html">A24 Horror</a><a href="/lists/best-folk-horror-movies.html">Folk Horror</a><a href="/lists/best-cosmic-horror-movies.html">Cosmic Horror</a><a href="/lists/best-slow-burn-horror-movies.html">Slow-Burn Horror</a><a href="/lists/best-religious-horror-movies.html">Religious Horror</a>
@@ -388,9 +388,11 @@ function sitemap() {
     'best-a24-horror-films', 'best-folk-horror-movies', 'best-cosmic-horror-movies',
     'best-slow-burn-horror-movies', 'best-religious-horror-movies',
   ];
+  const articles = ['douban-vs-imdb-horror-ratings'];
   const urls = [
     entry(`${SITE}/`, LEGACY_LASTMOD, 'weekly', '1.0'),
     ...lists.map(l => entry(`${SITE}/lists/${l}.html`, LEGACY_LASTMOD, 'monthly', '0.8')),
+    ...articles.map(a => entry(`${SITE}/articles/${a}.html`, TODAY, 'monthly', '0.7')),
     entry(`${SITE}/movies/`, TODAY, 'weekly', '0.8'),
     ...movies.map(m => entry(`${SITE}/movies/${m.slug}.html`, TODAY, 'monthly', '0.6')),
   ];
@@ -402,4 +404,4 @@ mkdirSync(join(root, 'movies'), { recursive: true });
 for (const m of movies) writeFileSync(join(root, 'movies', `${m.slug}.html`), moviePage(m));
 writeFileSync(join(root, 'movies', 'index.html'), hubPage());
 writeFileSync(join(root, 'sitemap.xml'), sitemap());
-console.log(`Wrote ${movies.length} movie pages + movies/index.html + sitemap.xml (${movies.length + 7} URLs)`);
+console.log(`Wrote ${movies.length} movie pages + movies/index.html + sitemap.xml (${sitemap().match(/<url>/g).length} URLs)`);

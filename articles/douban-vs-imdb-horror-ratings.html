@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Douban vs IMDb: How Chinese Audiences Rate Horror Differently — a 117-Film Analysis | WhatScares</title>
+<meta name="description" content="We compared Douban and IMDb scores for 117 horror films. Overall averages nearly match — but individual films swing by ±1.7 points, and the swings are systematic. Includes the HK classics with 88× more Douban votes than IMDb votes.">
+<link rel="canonical" href="https://whatscares.com/articles/douban-vs-imdb-horror-ratings.html">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Same Films, Different Nightmares: Douban vs IMDb on 117 Horror Movies">
+<meta property="og:description" content="Chinese audiences rate Train to Busan a full point higher and Halloween a full point lower. The gaps are systematic — and some films IMDb has never heard of have 280k Douban ratings.">
+<meta property="og:image" content="https://whatscares.com/og-image.png">
+<meta property="og:url" content="https://whatscares.com/articles/douban-vs-imdb-horror-ratings.html">
+<meta property="og:site_name" content="WhatScares">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d0d0d;--surface:#141414;--surface-2:#1a1a1a;--border:#222;--text:#e5e5e5;--text-2:#999;--text-3:#555;--accent:#c4352a;--gold:#e2b616;--green:#2da44e;--sans:'Inter',-apple-system,system-ui,sans-serif;--serif:'EB Garamond',Georgia,serif;--radius:6px}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+header.site{border-bottom:1px solid var(--border);padding:16px 0}
+header.site .wrap{max-width:960px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:var(--serif);font-size:22px;font-weight:600;letter-spacing:.5px}
+.logo em{color:var(--accent);font-style:italic}
+nav.top a{color:var(--text-2);font-size:14px;margin-left:20px}
+nav.top a:hover{color:var(--text)}
+.kicker{color:var(--accent);font-size:12px;letter-spacing:2.5px;text-transform:uppercase;margin:48px 0 14px;font-weight:500}
+h1{font-family:var(--serif);font-size:44px;font-weight:600;line-height:1.12;margin-bottom:16px}
+.standfirst{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--text-2);line-height:1.5;margin-bottom:14px}
+.dateline{font-size:13px;color:var(--text-3);margin-bottom:40px}
+article p{font-size:16.5px;margin-bottom:20px;max-width:68ch}
+article p a{color:var(--gold);border-bottom:1px solid rgba(226,182,22,.3)}
+article p a:hover{border-bottom-color:var(--gold)}
+h2{font-family:var(--serif);font-size:28px;font-weight:600;margin:44px 0 16px}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+.stat b{display:block;font-size:26px;font-weight:600;font-family:var(--serif)}
+.stat span{font-size:12.5px;color:var(--text-2);line-height:1.4;display:block;margin-top:4px}
+.stat b.up{color:var(--green)}
+.stat b.down{color:var(--accent)}
+.tablewrap{overflow-x:auto;margin:24px 0}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:520px}
+th{text-align:left;color:var(--text-3);font-weight:500;font-size:12px;letter-spacing:.8px;text-transform:uppercase;padding:10px 12px;border-bottom:1px solid var(--border)}
+td{padding:10px 12px;border-bottom:1px solid var(--border)}
+td a{color:var(--text);border-bottom:1px dotted var(--text-3)}
+td a:hover{color:var(--gold);border-bottom-color:var(--gold)}
+td.num{font-variant-numeric:tabular-nums}
+.gap-pos{color:var(--green);font-weight:500}
+.gap-neg{color:var(--accent);font-weight:500}
+.note{background:var(--surface);border-left:3px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;font-size:14.5px;color:var(--text-2);margin:28px 0}
+.note b{color:var(--text)}
+ul.why{margin:0 0 20px 0;padding-left:0;list-style:none;max-width:68ch}
+ul.why li{padding:14px 0;border-bottom:1px solid var(--border);font-size:16px}
+ul.why li b{font-weight:500;color:var(--gold)}
+.cta{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin:44px 0}
+.cta p{margin-bottom:14px}
+.cta a.btn{display:inline-block;background:var(--accent);color:#fff;border-radius:var(--radius);padding:10px 20px;font-size:14.5px;font-weight:500;margin-right:12px}
+.cta a.plain{color:var(--text-2);font-size:14.5px}
+.cta a.plain:hover{color:var(--text)}
+footer.site{border-top:1px solid var(--border);padding:28px 0 40px;margin-top:60px;font-size:13px;color:var(--text-3)}
+footer.site .wrap{max-width:960px}
+footer.site a{color:var(--text-2);margin-right:16px}
+footer.site a:hover{color:var(--text)}
+footer.site .row{margin-bottom:10px}
+@media(max-width:640px){h1{font-size:32px}.stat-row{grid-template-columns:1fr 1fr}.kicker{margin-top:32px}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Same Films, Different Nightmares: Douban vs IMDb on 117 Horror Movies","description":"A data comparison of Douban and IMDb ratings across 117 horror films: which films Chinese audiences rate higher, which lower, and the HK classics with 88× more Douban votes than IMDb votes.","datePublished":"2026-08-01","dateModified":"2026-08-01","author":{"@type":"Organization","name":"WhatScares","url":"https://whatscares.com/"},"publisher":{"@type":"Organization","name":"WhatScares","url":"https://whatscares.com/"},"mainEntityOfPage":"https://whatscares.com/articles/douban-vs-imdb-horror-ratings.html","image":"https://whatscares.com/og-image.png"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"WhatScares","item":"https://whatscares.com/"},{"@type":"ListItem","position":2,"name":"Douban vs IMDb: Horror Ratings","item":"https://whatscares.com/articles/douban-vs-imdb-horror-ratings.html"}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap">
+<a class="logo" href="/">What<em>Scares</em></a>
+<nav class="top"><a href="/movies/">All Films</a><a href="/#collections">Lists</a><a href="/">Mood Search</a></nav>
+</div></header>
+
+<main class="wrap">
+<article>
+<div class="kicker">Data · Horror Across Two Internets</div>
+<h1>Same films, different nightmares</h1>
+<p class="standfirst">We put Douban and IMDb scores side by side for 117 horror films. The averages agree almost perfectly. The individual films do not — and the disagreements follow a pattern.</p>
+<p class="dateline">WhatScares · August 2026 · Data snapshot from our 136-film catalog</p>
+
+<p>Douban is China's dominant film platform — part IMDb, part Letterboxd, with rating counts that regularly reach the hundreds of thousands. Its scores almost never appear on English-language sites, which is a shame, because putting them next to IMDb's is like reading two reviews of the same haunted house written by people who walked through different doors.</p>
+
+<p>Every film in the <a href="/movies/">WhatScares catalog</a> shows IMDb, Rotten Tomatoes and Douban scores side by side. 117 of our 136 films have both an IMDb and a Douban score, which is enough to ask a real question: <em>do Chinese and Western audiences actually disagree about horror?</em></p>
+
+<div class="stat-row">
+<div class="stat"><b>+0.09</b><span>mean Douban−IMDb gap across all 117 films — in aggregate, near-perfect agreement</span></div>
+<div class="stat"><b class="up">+0.52</b><span>mean gap for Japanese, Korean and HK/Taiwan horror (29 films)</span></div>
+<div class="stat"><b class="down">−0.20</b><span>mean gap for 2020s releases (20 films) — recent hype doesn't travel</span></div>
+</div>
+
+<p>That first number is the methodological point: Douban voters are not systematically harsher or kinder than IMDb voters. Both platforms grade on a 0–10 scale, and across a hundred-plus films they land in the same place. Which makes the individual swings — up to 1.7 points in either direction — much more interesting. These aren't noise. They're taste.</p>
+
+<h2>What Douban loves more</h2>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>Film</th><th>Year</th><th>IMDb</th><th>Douban</th><th>Gap</th></tr></thead>
+<tbody>
+<tr><td><a href="/movies/dead-silence.html">Dead Silence</a></td><td>2007</td><td class="num">6.2</td><td class="num">7.9</td><td class="num gap-pos">+1.7</td></tr>
+<tr><td><a href="/movies/rigor-mortis.html">Rigor Mortis</a></td><td>2013</td><td class="num">6.3</td><td class="num">8.0</td><td class="num gap-pos">+1.7</td></tr>
+<tr><td><a href="/movies/bedevilled.html">Bedevilled</a></td><td>2010</td><td class="num">7.2</td><td class="num">8.6</td><td class="num gap-pos">+1.4</td></tr>
+<tr><td><a href="/movies/mr-vampire.html">Mr. Vampire</a></td><td>1985</td><td class="num">7.2</td><td class="num">8.5</td><td class="num gap-pos">+1.3</td></tr>
+<tr><td><a href="/movies/out-of-the-dark.html">Out of the Dark</a></td><td>1995</td><td class="num">6.8</td><td class="num">8.1</td><td class="num gap-pos">+1.3</td></tr>
+<tr><td><a href="/movies/double-vision.html">Double Vision</a></td><td>2002</td><td class="num">6.4</td><td class="num">7.7</td><td class="num gap-pos">+1.3</td></tr>
+<tr><td><a href="/movies/insidious.html">Insidious</a></td><td>2010</td><td class="num">6.8</td><td class="num">7.9</td><td class="num gap-pos">+1.1</td></tr>
+<tr><td><a href="/movies/train-to-busan.html">Train to Busan</a></td><td>2016</td><td class="num">7.6</td><td class="num">8.6</td><td class="num gap-pos">+1.0</td></tr>
+<tr><td><a href="/movies/ju-on-the-grudge.html">Ju-On: The Grudge</a></td><td>2002</td><td class="num">6.7</td><td class="num">7.6</td><td class="num gap-pos">+0.9</td></tr>
+<tr><td><a href="/movies/possession.html">Possession</a></td><td>1981</td><td class="num">7.2</td><td class="num">8.0</td><td class="num gap-pos">+0.8</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Three clusters jump out. First, the <b>Hong Kong canon</b>: <a href="/movies/mr-vampire.html">Mr. Vampire</a>'s hopping-corpse comedy, Stephen Chow's <a href="/movies/out-of-the-dark.html">Out of the Dark</a>, and <a href="/movies/rigor-mortis.html">Rigor Mortis</a> — Juno Mak's 2013 elegy for exactly that tradition. These films were childhood television and VCD-rental staples for a generation of Chinese viewers. On Douban they're heritage; on IMDb they're footnotes.</p>
+
+<p>Second, the <b>James Wan school of haunted-house craft</b>: <a href="/movies/dead-silence.html">Dead Silence</a> (+1.7!), <a href="/movies/insidious.html">Insidious</a> (+1.1), and <a href="/movies/the-conjuring.html">The Conjuring</a> (+0.6). Douban's horror crowd rewards mechanical scare-craft — setups that pay off, rules that hold — and doesn't dock points for being unfashionable. Dead Silence sits at 6.2 on IMDb, widely dismissed on release. Douban's 337,000 voters put it at 7.9.</p>
+
+<p>Third, <b>Korean genre cinema played straight</b>: <a href="/movies/train-to-busan.html">Train to Busan</a> and the island revenge film <a href="/movies/bedevilled.html">Bedevilled</a>, both at 8.6 — scores IMDb reserves for canonized classics. Story-forward, emotionally maximal horror does numbers on Douban.</p>
+
+<h2>What IMDb loves more</h2>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>Film</th><th>Year</th><th>IMDb</th><th>Douban</th><th>Gap</th></tr></thead>
+<tbody>
+<tr><td><a href="/movies/stree.html">Stree</a></td><td>2018</td><td class="num">7.5</td><td class="num">6.2</td><td class="num gap-neg">−1.3</td></tr>
+<tr><td><a href="/movies/nosferatu.html">Nosferatu</a></td><td>2024</td><td class="num">7.1</td><td class="num">5.9</td><td class="num gap-neg">−1.2</td></tr>
+<tr><td><a href="/movies/a-quiet-place.html">A Quiet Place</a></td><td>2018</td><td class="num">7.5</td><td class="num">6.3</td><td class="num gap-neg">−1.2</td></tr>
+<tr><td><a href="/movies/mandy.html">Mandy</a></td><td>2018</td><td class="num">6.5</td><td class="num">5.4</td><td class="num gap-neg">−1.1</td></tr>
+<tr><td><a href="/movies/the-house-of-the-devil.html">The House of the Devil</a></td><td>2009</td><td class="num">6.3</td><td class="num">5.4</td><td class="num gap-neg">−0.9</td></tr>
+<tr><td><a href="/movies/halloween.html">Halloween</a></td><td>1978</td><td class="num">7.7</td><td class="num">6.8</td><td class="num gap-neg">−0.9</td></tr>
+<tr><td><a href="/movies/speak-no-evil.html">Speak No Evil</a></td><td>2022</td><td class="num">6.7</td><td class="num">5.9</td><td class="num gap-neg">−0.8</td></tr>
+<tr><td><a href="/movies/talk-to-me.html">Talk to Me</a></td><td>2022</td><td class="num">7.1</td><td class="num">6.3</td><td class="num gap-neg">−0.8</td></tr>
+<tr><td><a href="/movies/tumbbad.html">Tumbbad</a></td><td>2018</td><td class="num">8.2</td><td class="num">7.5</td><td class="num gap-neg">−0.7</td></tr>
+<tr><td><a href="/movies/possum.html">Possum</a></td><td>2018</td><td class="num">5.8</td><td class="num">5.1</td><td class="num gap-neg">−0.7</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>The reverse list has its own logic. <b>Hype doesn't cross the firewall.</b> <a href="/movies/a-quiet-place.html">A Quiet Place</a> and <a href="/movies/nosferatu.html">Nosferatu</a> arrived in the West carried by enormous marketing moments; Douban voters met them cold, months later, as files on a hard drive, and graded the movie rather than the event.</p>
+
+<p><b>Vibes-forward filmmaking pays a toll.</b> <a href="/movies/mandy.html">Mandy</a>'s black-light doom, <a href="/movies/the-house-of-the-devil.html">The House of the Devil</a>'s deliberate slowness, <a href="/movies/possum.html">Possum</a>'s grey misery — films where atmosphere <em>is</em> the story get read on Douban as style without substance. Notably, this is not an "elevated horror" penalty across the board: <a href="/movies/hereditary.html">Hereditary</a> (7.3 → 7.4) and <a href="/movies/midsommar.html">Midsommar</a> (7.1 → 7.0) hold their scores almost exactly. Douban has no problem with slow and sad. It has a problem with slow and vague.</p>
+
+<p><b>Canon status doesn't transfer.</b> <a href="/movies/halloween.html">Halloween</a> invented the modern slasher, and that invention is precisely what you can't feel in 2026 without the history attached: on Douban it's a 6.8 film about a man who walks. Even <a href="/movies/the-exorcist.html">The Exorcist</a> drops from 8.1 to 7.7. Meanwhile <a href="/movies/psycho.html">Psycho</a> — 9.0, the highest Douban score in our catalog — shows the exemption clause: a perfect story survives any border crossing.</p>
+
+<p>And <a href="/movies/stree.html">Stree</a> and <a href="/movies/tumbbad.html">Tumbbad</a> are a reminder that voting blocs run both ways: IMDb's enormous Indian user base lifts Indian releases the way Douban's home crowd lifts Hong Kong ones. Every "global" score is somebody's home game.</p>
+
+<h2>The invisible canon</h2>
+
+<p>The score gaps are the polite part of the story. The vote counts are the rude part:</p>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>Film</th><th>Douban votes</th><th>IMDb votes</th><th>Ratio</th></tr></thead>
+<tbody>
+<tr><td><a href="/movies/out-of-the-dark.html">Out of the Dark</a> (1995)</td><td class="num">283,000</td><td class="num">3,200</td><td class="num gap-pos">88×</td></tr>
+<tr><td><a href="/movies/double-vision.html">Double Vision</a> (2002)</td><td class="num">183,000</td><td class="num">3,400</td><td class="num gap-pos">53×</td></tr>
+<tr><td><a href="/movies/rigor-mortis.html">Rigor Mortis</a> (2013)</td><td class="num">230,000</td><td class="num">7,000</td><td class="num gap-pos">33×</td></tr>
+<tr><td><a href="/movies/mr-vampire.html">Mr. Vampire</a> (1985)</td><td class="num">112,000</td><td class="num">5,400</td><td class="num gap-pos">21×</td></tr>
+<tr><td><a href="/movies/bedevilled.html">Bedevilled</a> (2010)</td><td class="num">311,000</td><td class="num">20,000</td><td class="num gap-pos">16×</td></tr>
+<tr><td><a href="/movies/the-medium.html">The Medium</a> (2021)</td><td class="num">158,000</td><td class="num">19,000</td><td class="num gap-pos">8.5×</td></tr>
+<tr><td><a href="/movies/gonjiam-haunted-asylum.html">Gonjiam: Haunted Asylum</a> (2018)</td><td class="num">215,000</td><td class="num">26,000</td><td class="num gap-pos">8.3×</td></tr>
+<tr><td><a href="/movies/incantation.html">Incantation</a> (2022)</td><td class="num">191,000</td><td class="num">31,000</td><td class="num gap-pos">6.2×</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Stephen Chow's <a href="/movies/out-of-the-dark.html">Out of the Dark</a> has been rated by more people on Douban than <a href="/movies/the-witch.html">The Witch</a> has on IMDb in some months — and by 88 times more people than have ever rated it on IMDb at all. This is a whole horror canon — jiangshi films, Taoist occult procedurals, Korean found-footage — that is mainstream in one hemisphere and functionally invisible in the other. If you've exhausted the Western catalog and want horror that a quarter-million people vouch for but nobody you know has seen, this table is a menu.</p>
+
+<div class="note"><b>Methodology, honestly:</b> our catalog is 136 hand-picked films, not a random sample — it skews toward films we think are worth watching, and 117 of them have scores on both platforms (Douban is missing several Western indies; IMDb barely registers some HK titles). Douban horror voters, like Letterboxd users, skew cinephile. Scores are a snapshot from August 2026, both on a 0–10 scale. We'd call the per-film gaps robust and the group means directional.</div>
+
+<h2>Why we track this</h2>
+
+<ul class="why">
+<li><b>A second opinion you can't get elsewhere.</b> When IMDb and Douban agree, you can trust the score. When they split, the gap itself tells you what kind of film it is — hype vehicle, craft object, or heritage piece.</li>
+<li><b>The gems hide in the gaps.</b> A film at IMDb 6.3 / Douban 8.0 isn't mediocre — it's mislabeled. That's how we surface hidden gems in the catalog.</li>
+<li><b>Horror taste is cultural.</b> Scare-craft travels; hype and canon status don't. Knowing which is which makes every score more useful.</li>
+</ul>
+
+<div class="cta">
+<p><b>Every film page on WhatScares shows IMDb, Rotten Tomatoes and Douban side by side</b> — plus how scary, gory and dread-heavy it actually is, and where to stream it.</p>
+<a class="btn" href="/">Search horror by mood</a>
+<a class="plain" href="/movies/">Browse all 136 films →</a>
+</div>
+
+</article>
+</main>
+
+<footer class="site"><div class="wrap">
+<div class="row">
+<a href="/">WhatScares</a><a href="/movies/">All 136 films</a><a href="/articles/douban-vs-imdb-horror-ratings.html">Douban vs IMDb</a>
+</div>
+<div class="row">
+<a href="/lists/best-a24-horror-films.html">A24 Horror</a><a href="/lists/best-folk-horror-movies.html">Folk Horror</a><a href="/lists/best-cosmic-horror-movies.html">Cosmic Horror</a><a href="/lists/best-slow-burn-horror-movies.html">Slow-Burn Horror</a><a href="/lists/best-religious-horror-movies.html">Religious Horror</a>
+</div>
+<div>Ratings shown are courtesy of their respective platforms. Intensity ratings (scare / gore / dread) are WhatScares editorial.</div>
+</div></footer>
+</body>
+</html>
