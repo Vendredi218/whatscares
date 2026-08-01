@@ -1,137 +1,273 @@
 movie_idx,title,jumps,gore,dread,note
-0,"Hereditary",,,,
-1,"Midsommar",,,,
-2,"The Witch",,,,
-3,"Saint Maud",,,,
-4,"The Exorcist",,,,
-5,"Annihilation",,,,
-6,"The Thing",,,,
-7,"Possessor",,,,
-8,"Suspiria",,,,
-9,"Ringu",,,,
-10,"Pulse",,,,
-11,"The Wicker Man",,,,
-12,"Apostle",,,,
-13,"Lamb",,,,
-14,"Possum",,,,
-15,"Dead Silence",,,,
-16,"Annabelle: Creation",,,,
-17,"The Boy",,,,
-18,"Mandy",,,,
-19,"Color Out of Space",,,,
-20,"The Lighthouse",,,,
-21,"It Follows",,,,
-22,"The Ritual",,,,
-23,"X",,,,
-24,"Pearl",,,,
-25,"Talk to Me",,,,
-26,"The Conjuring",,,,
-27,"Bone Tomahawk",,,,
-28,"I Saw the Devil",,,,
-29,"Under the Skin",,,,
-30,"Terrifier 2",,,,
-31,"The Void",,,,
-32,"Tumbbad",,,,
-33,"The Orphanage",,,,
-34,"Barbarian",,,,
-35,"Get Out",,,,
-36,"The Shining",,,,
-37,"Alien",,,,
-38,"Psycho",,,,
-39,"Rosemary's Baby",,,,
-40,"The Texas Chain Saw Massacre",,,,
-41,"Halloween",,,,
-42,"A Quiet Place",,,,
-43,"The Babadook",,,,
-44,"The Blair Witch Project",,,,
-45,"The Descent",,,,
-46,"Nope",,,,
-47,"Train to Busan",,,,
-48,"The Wailing",,,,
-49,"A Tale of Two Sisters",,,,
-50,"The Substance",,,,
-51,"Longlegs",,,,
-52,"Late Night with the Devil",,,,
-53,"Oddity",,,,
-54,"Nosferatu",,,,
-55,"Raw",,,,
-56,"[REC]",,,,
-57,"Ju-On: The Grudge",,,,
-58,"Audition",,,,
-59,"Noroi: The Curse",,,,
-60,"Dark Water",,,,
-61,"Shutter",,,,
-62,"Incantation",,,,
-63,"Exhuma",,,,
-64,"Gonjiam: Haunted Asylum",,,,
-65,"Thirst",,,,
-66,"The Host",,,,
-67,"Sleep",,,,
-68,"Bedevilled",,,,
-69,"The Call",,,,
-70,"The Quiet Family",,,,
-71,"Cure",,,,
-72,"Kwaidan",,,,
-73,"Onibaba",,,,
-74,"House",,,,
-75,"One Cut of the Dead",,,,
-76,"Tetsuo: The Iron Man",,,,
-77,"Rigor Mortis",,,,
-78,"Mr. Vampire",,,,
-79,"Out of the Dark",,,,
-80,"Double Vision",,,,
-81,"The Eye",,,,
-82,"Dumplings",,,,
-83,"Detention",,,,
-84,"The Sadness",,,,
-85,"The Medium",,,,
-86,"Satan's Slaves",,,,
-87,"Impetigore",,,,
-88,"Bulbbul",,,,
-89,"Stree",,,,
-90,"Under the Shadow",,,,
-91,"A Girl Walks Home Alone at Night",,,,
-92,"Terrified",,,,
-93,"When Evil Lurks",,,,
-94,"Tigers Are Not Afraid",,,,
-95,"Possession",,,,
-96,"Don't Look Now",,,,
-97,"Eyes Without a Face",,,,
-98,"Let the Right One In",,,,
-99,"Martyrs",,,,
-100,"Inside",,,,
-101,"Deep Red",,,,
-102,"The Beyond",,,,
-103,"Kill List",,,,
-104,"The Devil's Backbone",,,,
-105,"Goodnight Mommy",,,,
-106,"Speak No Evil",,,,
-107,"Carrie",,,,
-108,"The Omen",,,,
-109,"Poltergeist",,,,
-110,"A Nightmare on Elm Street",,,,
-111,"Hellraiser",,,,
-112,"The Fly",,,,
-113,"Re-Animator",,,,
-114,"Evil Dead II",,,,
-115,"Candyman",,,,
-116,"Scream",,,,
-117,"The Others",,,,
-118,"28 Days Later",,,,
-119,"Session 9",,,,
-120,"Sinister",,,,
-121,"Insidious",,,,
-122,"The House of the Devil",,,,
-123,"Lake Mungo",,,,
-124,"Paranormal Activity",,,,
-125,"The Cabin in the Woods",,,,
-126,"The Autopsy of Jane Doe",,,,
-127,"Hush",,,,
-128,"Creep",,,,
-129,"It",,,,
-130,"Us",,,,
-131,"Hell House LLC",,,,
-132,"His House",,,,
-133,"The Dark and the Wicked",,,,
-134,"Smile",,,,
-135,"M3GAN",,,,
+0,"Hereditary",4,2,5,editorial 1/2
+0,"Hereditary",4,2,5,editorial 2/2
+1,"Midsommar",3,4,5,editorial 1/2
+1,"Midsommar",3,4,5,editorial 2/2
+2,"The Witch",2,1,5,editorial 1/2
+2,"The Witch",2,1,5,editorial 2/2
+3,"Saint Maud",3,2,5,editorial 1/2
+3,"Saint Maud",3,2,5,editorial 2/2
+4,"The Exorcist",5,3,4,editorial 1/2
+4,"The Exorcist",5,3,4,editorial 2/2
+5,"Annihilation",3,3,5,editorial 1/2
+5,"Annihilation",3,3,5,editorial 2/2
+6,"The Thing",4,5,4,editorial 1/2
+6,"The Thing",4,5,4,editorial 2/2
+7,"Possessor",3,5,4,editorial 1/2
+7,"Possessor",3,5,4,editorial 2/2
+8,"Suspiria",4,4,4,editorial 1/2
+8,"Suspiria",4,4,4,editorial 2/2
+9,"Ringu",4,1,5,editorial 1/2
+9,"Ringu",4,1,5,editorial 2/2
+10,"Pulse",2,1,5,editorial 1/2
+10,"Pulse",2,1,5,editorial 2/2
+11,"The Wicker Man",2,1,4,editorial 1/2
+11,"The Wicker Man",2,1,4,editorial 2/2
+12,"Apostle",3,5,3,editorial 1/2
+12,"Apostle",3,5,3,editorial 2/2
+13,"Lamb",1,1,4,editorial 1/2
+13,"Lamb",1,1,4,editorial 2/2
+14,"Possum",2,1,5,editorial 1/2
+14,"Possum",2,1,5,editorial 2/2
+15,"Dead Silence",4,2,3,editorial 1/2
+15,"Dead Silence",4,2,3,editorial 2/2
+16,"Annabelle: Creation",4,2,3,editorial 1/2
+16,"Annabelle: Creation",4,2,3,editorial 2/2
+17,"The Boy",3,1,3,editorial 1/2
+17,"The Boy",3,1,3,editorial 2/2
+18,"Mandy",3,4,4,editorial 1/2
+18,"Mandy",3,4,4,editorial 2/2
+19,"Color Out of Space",3,4,4,editorial 1/2
+19,"Color Out of Space",3,4,4,editorial 2/2
+20,"The Lighthouse",2,1,5,editorial 1/2
+20,"The Lighthouse",2,1,5,editorial 2/2
+21,"It Follows",3,1,5,editorial 1/2
+21,"It Follows",3,1,5,editorial 2/2
+22,"The Ritual",3,2,4,editorial 1/2
+22,"The Ritual",3,2,4,editorial 2/2
+23,"X",4,5,3,editorial 1/2
+23,"X",4,5,3,editorial 2/2
+24,"Pearl",3,3,4,editorial 1/2
+24,"Pearl",3,3,4,editorial 2/2
+25,"Talk to Me",5,3,4,editorial 1/2
+25,"Talk to Me",5,3,4,editorial 2/2
+26,"The Conjuring",5,2,3,editorial 1/2
+26,"The Conjuring",5,2,3,editorial 2/2
+27,"Bone Tomahawk",3,5,3,editorial 1/2
+27,"Bone Tomahawk",3,5,3,editorial 2/2
+28,"I Saw the Devil",4,5,3,editorial 1/2
+28,"I Saw the Devil",4,5,3,editorial 2/2
+29,"Under the Skin",2,2,5,editorial 1/2
+29,"Under the Skin",2,2,5,editorial 2/2
+30,"Terrifier 2",5,5,1,editorial 1/2
+30,"Terrifier 2",5,5,1,editorial 2/2
+31,"The Void",3,4,4,editorial 1/2
+31,"The Void",3,4,4,editorial 2/2
+32,"Tumbbad",3,2,5,editorial 1/2
+32,"Tumbbad",3,2,5,editorial 2/2
+33,"The Orphanage",3,1,5,editorial 1/2
+33,"The Orphanage",3,1,5,editorial 2/2
+34,"Barbarian",5,4,4,editorial 1/2
+34,"Barbarian",5,4,4,editorial 2/2
+35,"Get Out",3,2,5,editorial 1/2
+35,"Get Out",3,2,5,editorial 2/2
+36,"The Shining",4,3,5,editorial 1/2
+36,"The Shining",4,3,5,editorial 2/2
+37,"Alien",5,3,5,editorial 1/2
+37,"Alien",5,3,5,editorial 2/2
+38,"Psycho",4,2,4,editorial 1/2
+38,"Psycho",4,2,4,editorial 2/2
+39,"Rosemary's Baby",3,1,5,editorial 1/2
+39,"Rosemary's Baby",3,1,5,editorial 2/2
+40,"The Texas Chain Saw Massacre",5,5,3,editorial 1/2
+40,"The Texas Chain Saw Massacre",5,5,3,editorial 2/2
+41,"Halloween",4,2,4,editorial 1/2
+41,"Halloween",4,2,4,editorial 2/2
+42,"A Quiet Place",4,2,5,editorial 1/2
+42,"A Quiet Place",4,2,5,editorial 2/2
+43,"The Babadook",3,1,5,editorial 1/2
+43,"The Babadook",3,1,5,editorial 2/2
+44,"The Blair Witch Project",2,1,5,editorial 1/2
+44,"The Blair Witch Project",2,1,5,editorial 2/2
+45,"The Descent",5,4,4,editorial 1/2
+45,"The Descent",5,4,4,editorial 2/2
+46,"Nope",3,2,4,editorial 1/2
+46,"Nope",3,2,4,editorial 2/2
+47,"Train to Busan",4,3,3,editorial 1/2
+47,"Train to Busan",4,3,3,editorial 2/2
+48,"The Wailing",4,3,5,editorial 1/2
+48,"The Wailing",4,3,5,editorial 2/2
+49,"A Tale of Two Sisters",3,1,5,editorial 1/2
+49,"A Tale of Two Sisters",3,1,5,editorial 2/2
+50,"The Substance",3,5,4,editorial 1/2
+50,"The Substance",3,5,4,editorial 2/2
+51,"Longlegs",4,2,5,editorial 1/2
+51,"Longlegs",4,2,5,editorial 2/2
+52,"Late Night with the Devil",4,2,4,editorial 1/2
+52,"Late Night with the Devil",4,2,4,editorial 2/2
+53,"Oddity",4,2,5,editorial 1/2
+53,"Oddity",4,2,5,editorial 2/2
+54,"Nosferatu",3,2,5,editorial 1/2
+54,"Nosferatu",3,2,5,editorial 2/2
+55,"Raw",3,4,4,editorial 1/2
+55,"Raw",3,4,4,editorial 2/2
+56,"[REC]",5,4,4,editorial 1/2
+56,"[REC]",5,4,4,editorial 2/2
+57,"Ju-On: The Grudge",4,1,4,editorial 1/2
+57,"Ju-On: The Grudge",4,1,4,editorial 2/2
+58,"Audition",4,5,5,editorial 1/2
+58,"Audition",4,5,5,editorial 2/2
+59,"Noroi: The Curse",3,1,5,editorial 1/2
+59,"Noroi: The Curse",3,1,5,editorial 2/2
+60,"Dark Water",2,1,5,editorial 1/2
+60,"Dark Water",2,1,5,editorial 2/2
+61,"Shutter",4,1,4,editorial 1/2
+61,"Shutter",4,1,4,editorial 2/2
+62,"Incantation",4,2,5,editorial 1/2
+62,"Incantation",4,2,5,editorial 2/2
+63,"Exhuma",3,2,4,editorial 1/2
+63,"Exhuma",3,2,4,editorial 2/2
+64,"Gonjiam: Haunted Asylum",4,1,4,editorial 1/2
+64,"Gonjiam: Haunted Asylum",4,1,4,editorial 2/2
+65,"Thirst",3,4,3,editorial 1/2
+65,"Thirst",3,4,3,editorial 2/2
+66,"The Host",3,3,2,editorial 1/2
+66,"The Host",3,3,2,editorial 2/2
+67,"Sleep",3,1,4,editorial 1/2
+67,"Sleep",3,1,4,editorial 2/2
+68,"Bedevilled",3,4,4,editorial 1/2
+68,"Bedevilled",3,4,4,editorial 2/2
+69,"The Call",3,3,3,editorial 1/2
+69,"The Call",3,3,3,editorial 2/2
+70,"The Quiet Family",2,3,2,editorial 1/2
+70,"The Quiet Family",2,3,2,editorial 2/2
+71,"Cure",3,2,5,editorial 1/2
+71,"Cure",3,2,5,editorial 2/2
+72,"Kwaidan",2,1,3,editorial 1/2
+72,"Kwaidan",2,1,3,editorial 2/2
+73,"Onibaba",3,2,4,editorial 1/2
+73,"Onibaba",3,2,4,editorial 2/2
+74,"House",2,3,2,editorial 1/2
+74,"House",2,3,2,editorial 2/2
+75,"One Cut of the Dead",1,2,1,editorial 1/2
+75,"One Cut of the Dead",1,2,1,editorial 2/2
+76,"Tetsuo: The Iron Man",3,4,4,editorial 1/2
+76,"Tetsuo: The Iron Man",3,4,4,editorial 2/2
+77,"Rigor Mortis",3,3,4,editorial 1/2
+77,"Rigor Mortis",3,3,4,editorial 2/2
+78,"Mr. Vampire",2,2,1,editorial 1/2
+78,"Mr. Vampire",2,2,1,editorial 2/2
+79,"Out of the Dark",2,2,2,editorial 1/2
+79,"Out of the Dark",2,2,2,editorial 2/2
+80,"Double Vision",3,4,4,editorial 1/2
+80,"Double Vision",3,4,4,editorial 2/2
+81,"The Eye",4,1,4,editorial 1/2
+81,"The Eye",4,1,4,editorial 2/2
+82,"Dumplings",2,3,4,editorial 1/2
+82,"Dumplings",2,3,4,editorial 2/2
+83,"Detention",3,2,4,editorial 1/2
+83,"Detention",3,2,4,editorial 2/2
+84,"The Sadness",4,5,3,editorial 1/2
+84,"The Sadness",4,5,3,editorial 2/2
+85,"The Medium",4,3,5,editorial 1/2
+85,"The Medium",4,3,5,editorial 2/2
+86,"Satan's Slaves",4,2,4,editorial 1/2
+86,"Satan's Slaves",4,2,4,editorial 2/2
+87,"Impetigore",3,3,4,editorial 1/2
+87,"Impetigore",3,3,4,editorial 2/2
+88,"Bulbbul",2,2,3,editorial 1/2
+88,"Bulbbul",2,2,3,editorial 2/2
+89,"Stree",2,1,2,editorial 1/2
+89,"Stree",2,1,2,editorial 2/2
+90,"Under the Shadow",3,1,4,editorial 1/2
+90,"Under the Shadow",3,1,4,editorial 2/2
+91,"A Girl Walks Home Alone at Night",2,2,3,editorial 1/2
+91,"A Girl Walks Home Alone at Night",2,2,3,editorial 2/2
+92,"Terrified",5,3,4,editorial 1/2
+92,"Terrified",5,3,4,editorial 2/2
+93,"When Evil Lurks",4,5,4,editorial 1/2
+93,"When Evil Lurks",4,5,4,editorial 2/2
+94,"Tigers Are Not Afraid",2,2,3,editorial 1/2
+94,"Tigers Are Not Afraid",2,2,3,editorial 2/2
+95,"Possession",3,3,5,editorial 1/2
+95,"Possession",3,3,5,editorial 2/2
+96,"Don't Look Now",3,2,4,editorial 1/2
+96,"Don't Look Now",3,2,4,editorial 2/2
+97,"Eyes Without a Face",2,2,4,editorial 1/2
+97,"Eyes Without a Face",2,2,4,editorial 2/2
+98,"Let the Right One In",2,3,3,editorial 1/2
+98,"Let the Right One In",2,3,3,editorial 2/2
+99,"Martyrs",4,5,5,editorial 1/2
+99,"Martyrs",4,5,5,editorial 2/2
+100,"Inside",4,5,4,editorial 1/2
+100,"Inside",4,5,4,editorial 2/2
+101,"Deep Red",3,3,3,editorial 1/2
+101,"Deep Red",3,3,3,editorial 2/2
+102,"The Beyond",3,5,4,editorial 1/2
+102,"The Beyond",3,5,4,editorial 2/2
+103,"Kill List",3,4,4,editorial 1/2
+103,"Kill List",3,4,4,editorial 2/2
+104,"The Devil's Backbone",3,2,3,editorial 1/2
+104,"The Devil's Backbone",3,2,3,editorial 2/2
+105,"Goodnight Mommy",3,3,4,editorial 1/2
+105,"Goodnight Mommy",3,3,4,editorial 2/2
+106,"Speak No Evil",3,3,5,editorial 1/2
+106,"Speak No Evil",3,3,5,editorial 2/2
+107,"Carrie",3,3,3,editorial 1/2
+107,"Carrie",3,3,3,editorial 2/2
+108,"The Omen",3,3,3,editorial 1/2
+108,"The Omen",3,3,3,editorial 2/2
+109,"Poltergeist",3,2,2,editorial 1/2
+109,"Poltergeist",3,2,2,editorial 2/2
+110,"A Nightmare on Elm Street",4,3,3,editorial 1/2
+110,"A Nightmare on Elm Street",4,3,3,editorial 2/2
+111,"Hellraiser",3,5,3,editorial 1/2
+111,"Hellraiser",3,5,3,editorial 2/2
+112,"The Fly",3,5,4,editorial 1/2
+112,"The Fly",3,5,4,editorial 2/2
+113,"Re-Animator",2,5,2,editorial 1/2
+113,"Re-Animator",2,5,2,editorial 2/2
+114,"Evil Dead II",3,4,2,editorial 1/2
+114,"Evil Dead II",3,4,2,editorial 2/2
+115,"Candyman",3,3,3,editorial 1/2
+115,"Candyman",3,3,3,editorial 2/2
+116,"Scream",3,3,2,editorial 1/2
+116,"Scream",3,3,2,editorial 2/2
+117,"The Others",3,1,4,editorial 1/2
+117,"The Others",3,1,4,editorial 2/2
+118,"28 Days Later",4,4,4,editorial 1/2
+118,"28 Days Later",4,4,4,editorial 2/2
+119,"Session 9",3,1,5,editorial 1/2
+119,"Session 9",3,1,5,editorial 2/2
+120,"Sinister",5,3,4,editorial 1/2
+120,"Sinister",5,3,4,editorial 2/2
+121,"Insidious",4,1,3,editorial 1/2
+121,"Insidious",4,1,3,editorial 2/2
+122,"The House of the Devil",3,3,4,editorial 1/2
+122,"The House of the Devil",3,3,4,editorial 2/2
+123,"Lake Mungo",3,1,5,editorial 1/2
+123,"Lake Mungo",3,1,5,editorial 2/2
+124,"Paranormal Activity",4,1,3,editorial 1/2
+124,"Paranormal Activity",4,1,3,editorial 2/2
+125,"The Cabin in the Woods",3,4,1,editorial 1/2
+125,"The Cabin in the Woods",3,4,1,editorial 2/2
+126,"The Autopsy of Jane Doe",4,3,4,editorial 1/2
+126,"The Autopsy of Jane Doe",4,3,4,editorial 2/2
+127,"Hush",4,3,3,editorial 1/2
+127,"Hush",4,3,3,editorial 2/2
+128,"Creep",3,1,4,editorial 1/2
+128,"Creep",3,1,4,editorial 2/2
+129,"It",4,3,2,editorial 1/2
+129,"It",4,3,2,editorial 2/2
+130,"Us",4,3,3,editorial 1/2
+130,"Us",4,3,3,editorial 2/2
+131,"Hell House LLC",4,1,4,editorial 1/2
+131,"Hell House LLC",4,1,4,editorial 2/2
+132,"His House",4,2,4,editorial 1/2
+132,"His House",4,2,4,editorial 2/2
+133,"The Dark and the Wicked",4,3,5,editorial 1/2
+133,"The Dark and the Wicked",4,3,5,editorial 2/2
+134,"Smile",5,3,3,editorial 1/2
+134,"Smile",5,3,3,editorial 2/2
+135,"M3GAN",2,2,1,editorial 1/2
+135,"M3GAN",2,2,1,editorial 2/2

@@ -580,19 +580,6 @@ a.list-card { text-decoration: none; color: inherit; }
 .stream-badge:hover { border-color: var(--text-3); }
 .stream-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 
-/* ─── INTENSITY ─── */
-.intensity-row { display: flex; gap: 32px; flex-wrap: wrap; }
-.intensity-item { display: flex; flex-direction: column; gap: 6px; }
-.intensity-label {
-  font-size: 12.5px; color: var(--text-3);
-  letter-spacing: 1px; text-transform: uppercase;
-}
-.intensity-dots { display: flex; gap: 4px; }
-.intensity-dots .dot {
-  width: 7px; height: 7px; border-radius: 50%; background: var(--border);
-}
-.intensity-dots .dot.on { background: var(--accent); }
-
 /* ─── "MORE LIKE THIS BUT" ─── */
 .but-section { margin-top: 0; }
 .but-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
@@ -638,8 +625,6 @@ a.list-card { text-decoration: none; color: inherit; }
 }
 .modal-stars .star.on { color: var(--gold); }
 .modal-stars .star:hover { color: var(--gold); }
-.modal-stars-wrap { display: flex; align-items: center; gap: 8px; }
-.modal-stars-wrap .rate-label { font-size: 13.5px; color: var(--text-3); }
 
 /* ─── MY COLLECTION ─── */
 .my-collection { display: none; }
@@ -1361,19 +1346,6 @@ body.loaded .hero h1 .w { animation: wordIn 1s cubic-bezier(0.2, 0.7, 0.3, 1) fo
 }
 .rating-badge .r-score { font-family: var(--mono); font-weight: 700; }
 .rating-badge .r-label { font-family: var(--mono); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
-.intensity-item {
-  border: 1px solid var(--border); border-radius: 3px;
-  padding: 10px 14px; background: var(--field);
-}
-.intensity-label { font-family: var(--mono); letter-spacing: 1.4px; }
-.intensity-dots { gap: 3px; align-items: flex-end; height: 18px; }
-.intensity-dots .dot { width: 5px; border-radius: 1px; background: #2b251d; }
-.intensity-dots .dot:nth-child(1) { height: 5px; }
-.intensity-dots .dot:nth-child(2) { height: 8px; }
-.intensity-dots .dot:nth-child(3) { height: 11px; }
-.intensity-dots .dot:nth-child(4) { height: 14px; }
-.intensity-dots .dot:nth-child(5) { height: 17px; }
-.intensity-dots .dot.on { background: var(--accent-2); box-shadow: 0 0 7px rgba(224,87,63,0.4); }
 .modal-tags span {
   font-family: var(--mono); font-size: 12.5px; letter-spacing: 1.1px;
   text-transform: uppercase; border-radius: 2px; padding: 5px 11px;
@@ -1383,7 +1355,6 @@ body.loaded .hero h1 .w { animation: wordIn 1s cubic-bezier(0.2, 0.7, 0.3, 1) fo
 .sim-title { font-size: 13px; }
 .sim-match { font-family: var(--mono); font-size: 12px; letter-spacing: 1px; }
 .but-chip { font-family: var(--mono); font-size: 12.5px; letter-spacing: 1px; border-radius: 2px; }
-.modal-stars-wrap .rate-label { font-family: var(--mono); font-size: 12.5px; letter-spacing: 1px; text-transform: uppercase; }
 
 /* ─── AUTH ─── */
 .auth-modal { border-radius: 5px; }
@@ -1427,6 +1398,76 @@ footer {
   .card:hover .poster img { animation: none !important; }
   .card-vitals { transition: none; }
   html { scroll-behavior: auto; }
+}
+
+/* ─── WHATSCARES RATINGS ─── */
+.ws-rating-section {
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--field);
+  padding: 20px;
+}
+.ws-rating-section .modal-label { margin-bottom: 16px; }
+.ws-rating-overall {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+.ws-score-line { display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; }
+.ws-score {
+  font-family: var(--serif);
+  font-size: 34px;
+  line-height: 1;
+  color: var(--text);
+}
+.ws-your-score { font-family: var(--serif); font-size: 20px; line-height: 1; color: var(--gold); }
+.ws-score-max, .ws-votes, .ws-rating-hint {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .7px;
+  color: var(--text-3);
+  text-transform: uppercase;
+}
+.ws-rating-control { display: flex; align-items: center; gap: 9px; }
+.ws-rating-control .modal-stars .star { font-size: 19px; }
+.ws-dimensions { display: grid; gap: 0; }
+.ws-dimension-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.ws-dimension-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.ws-dimension-name {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.1px;
+  color: var(--text);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.ws-dimension-meta { font-family: var(--mono); font-size: 10.5px; letter-spacing: .4px; color: var(--text-3); }
+.ws-dimension-row .modal-stars .star { font-size: 16px; }
+/* unrated stars were still the pre-redesign near-black; on cream they read as filled */
+.modal-stars .star { color: var(--border); }
+.ws-rate-note {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .4px;
+  color: var(--text-3);
+  margin: 14px 0 0;
+}
+
+@media (max-width: 520px) {
+  .ws-rating-section { padding: 16px; }
+  .ws-rating-overall { align-items: flex-start; flex-direction: column; }
+  .ws-dimension-row { align-items: flex-start; flex-direction: column; gap: 8px; }
 }
 </style>
 </head>
@@ -1768,8 +1809,9 @@ function loadUser() {
       delete u.favs;
     }
     u.want = u.want || []; u.seen = u.seen || []; u.ratings = u.ratings || {};
+    u.dimensionRatings = u.dimensionRatings || {};
     return u;
-  } catch { return { want: [], seen: [], ratings: {} }; }
+  } catch { return { want: [], seen: [], ratings: {}, dimensionRatings: {} }; }
 }
 function saveUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
 
@@ -1849,6 +1891,7 @@ async function handleAuth(e) {
 async function signOut() {
   await sb.auth.signOut();
   currentUser = null;
+  ratingUser = null;
   updateNavUser(null);
   renderGrid();
   renderCollection();
@@ -1949,37 +1992,198 @@ function setStatus(idx, status, e) {
   renderCollection();
 }
 
-function rateMovie(idx, stars, e) {
-  if (e) e.stopPropagation();
-  const u = loadUser();
-  u.ratings[idx] = u.ratings[idx] === stars ? 0 : stars;
-  if (u.ratings[idx] === 0) delete u.ratings[idx];
-  if (u.ratings[idx]) {
-    // rating a film means you've watched it
-    if (!u.seen.includes(idx)) u.seen.push(idx);
-    const j = u.want.indexOf(idx);
-    if (j !== -1) u.want.splice(j, 1);
+// ─── INTENSITY RATING ───
+// The three fear dimensions are the only thing a visitor rates. The number at
+// the top is the mean of them, not a fourth axis.
+// The DB columns (jumps/gore/dread) and the catalog fields (scare/gore/dread)
+// disagree on one name. The mapping lives here and nowhere else.
+const RATING_DIMENSIONS = [
+  { key: 'jumps', field: 'scare', label: 'Jump scares' },
+  { key: 'gore',  field: 'gore',  label: 'Gore'        },
+  { key: 'dread', field: 'dread', label: 'Dread'       }
+];
+
+// Crowd totals and this visitor's own picks, for the one film whose modal is
+// open. Everything here is scoped by `idx` so a slow response can never paint
+// into a modal the visitor has already moved past.
+let wsRating = { idx: null, stats: null, mine: {}, note: '' };
+// Any Supabase session, anonymous ones included. Ratings attach to this;
+// `currentUser` stays reserved for real accounts (collection sync, the nav).
+let ratingUser = null;
+
+function ratingState(idx, key) {
+  if (key === 'overall') {
+    const dims = RATING_DIMENSIONS.map(d => ratingState(idx, d.key));
+    const mine = dims.filter(d => d.userScore);
+    return {
+      score: dims.reduce((sum, d) => sum + d.score, 0) / dims.length,
+      votes: Math.round(dims.reduce((sum, d) => sum + d.votes, 0) / dims.length),
+      userScore: mine.length ? mine.reduce((sum, d) => sum + d.userScore, 0) / mine.length : 0
+    };
   }
-  saveUser(u);
-  upsertMovie(idx);
-  renderGrid();
-  renderCollection();
-  const modalStars = document.querySelector('.modal-stars-wrap');
-  if (modalStars) {
-    modalStars.innerHTML = `<span class="rate-label">Your rating</span>${starsHTML(idx, 'modal')}`;
-  }
+
+  const dim = RATING_DIMENSIONS.find(d => d.key === key);
+  const live = wsRating.idx === idx ? wsRating : null;
+  const stats = live && live.stats;
+
+  // Our editorial read sits in user_ratings as two offline votes, so the crowd
+  // average already carries it and needs no prior bolted on here. The catalog
+  // value only covers the moment before the stats request lands, or if it fails.
+  return {
+    score: stats && stats[key + '_avg'] != null ? Number(stats[key + '_avg']) : M[idx][dim.field],
+    votes: stats ? stats.votes : 0,
+    userScore: (live && live.mine[key]) || 0
+  };
 }
 
-function starsHTML(idx, size) {
-  const u = loadUser();
-  const r = u.ratings[idx] || 0;
-  const cls = size === 'modal' ? 'modal-stars' : 'card-stars';
-  return `<div class="${cls}" onclick="event.stopPropagation()">
-    ${[1,2,3,4,5].map(s =>
-      `<span class="star${s<=r?' on':''}" onclick="rateMovie(${idx},${s},event)"
-        onmouseenter="previewStars(this,${s})" onmouseleave="resetStars(this,${idx})">★</span>`
+function ratingStarsHTML(idx, key) {
+  const { userScore } = ratingState(idx, key);
+  return `<div class="modal-stars" onclick="event.stopPropagation()">
+    ${[1,2,3,4,5].map(score =>
+      `<span class="star${score <= userScore ? ' on' : ''}" onclick="rateDimension(${idx},'${key}',${score},event)"
+        onmouseenter="previewStars(this,${score})" onmouseleave="resetStars(this,${idx})">★</span>`
     ).join('')}
   </div>`;
+}
+
+function whatScaresRatingHTML(idx) {
+  const overall = ratingState(idx, 'overall');
+  return `<div class="modal-section ws-rating-section" id="whatScaresRatingPanel">
+    <div class="modal-label">Intensity</div>
+    <div class="ws-rating-overall">
+      <div class="ws-score-line">
+        <span class="ws-score">${overall.score.toFixed(1)}</span>
+        <span class="ws-score-max">/ 5</span>
+        <span class="ws-votes">${overall.votes ? `· ${overall.votes} rating${overall.votes === 1 ? '' : 's'}` : ''}</span>
+      </div>
+      <div class="ws-rating-control">
+        <span class="ws-rating-hint">${overall.userScore ? 'Yours' : 'Rate it below'}</span>
+        ${overall.userScore ? `<span class="ws-your-score">${overall.userScore.toFixed(1)}</span>` : ''}
+      </div>
+    </div>
+    <div class="ws-dimensions">
+      ${RATING_DIMENSIONS.map(({ key, label }) => {
+        const state = ratingState(idx, key);
+        return `<div class="ws-dimension-row">
+          <div>
+            <span class="ws-dimension-name">${label}</span>
+            <span class="ws-dimension-meta">${state.score.toFixed(1)} / 5${state.votes ? ` · ${state.votes} rating${state.votes === 1 ? '' : 's'}` : ''}</span>
+          </div>
+          ${ratingStarsHTML(idx, key)}
+        </div>`;
+      }).join('')}
+    </div>
+    <p class="ws-rate-note">${wsRating.note}</p>
+  </div>`;
+}
+
+function refreshWhatScaresRating(idx) {
+  if (wsRating.idx !== idx) return;
+  const panel = document.getElementById('whatScaresRatingPanel');
+  if (panel) panel.outerHTML = whatScaresRatingHTML(idx);
+}
+
+// Runs before the modal renders, so the panel paints this film's saved picks
+// straight away instead of the previous film's.
+function prepWhatScaresRating(idx) {
+  wsRating = {
+    idx,
+    stats: null,
+    mine: { ...(loadUser().dimensionRatings[idx] || {}) },
+    note: 'Tap a star to rate. One rating per person.'
+  };
+}
+
+// Crowd totals and the stored row land after the modal is already on screen.
+function hydrateWhatScaresRating(idx) {
+  sb.from('movie_rating_stats').select('*').eq('movie_idx', idx).maybeSingle()
+    .then(r => {
+      if (wsRating.idx !== idx) return;
+      wsRating.stats = r.data;
+      refreshWhatScaresRating(idx);
+    });
+
+  if (!ratingUser) return;
+  sb.from('user_ratings').select('jumps,gore,dread')
+    .eq('user_id', ratingUser.id).eq('movie_idx', idx).maybeSingle()
+    .then(r => {
+      if (!r.data || wsRating.idx !== idx) return;
+      // The row wins over the local mirror wholesale, so a save that failed
+      // earlier cannot leave a phantom star behind.
+      const mine = {};
+      RATING_DIMENSIONS.forEach(d => { if (r.data[d.key]) mine[d.key] = r.data[d.key]; });
+      wsRating.mine = mine;
+      wsRating.note = 'Your rating is saved. Change it any time.';
+      persistDimensionsLocally(idx);
+      refreshWhatScaresRating(idx);
+    });
+}
+
+// localStorage mirrors the DB so the stars are already correct on the next
+// open, before any round trip resolves.
+function persistDimensionsLocally(idx) {
+  const u = loadUser();
+  if (Object.keys(wsRating.mine).length) u.dimensionRatings[idx] = { ...wsRating.mine };
+  else delete u.dimensionRatings[idx];
+  saveUser(u);
+}
+
+async function ensureRatingUser() {
+  if (ratingUser) return ratingUser;
+  const { data, error } = await sb.auth.signInAnonymously();
+  if (error) return null;
+  ratingUser = data.user;
+  return ratingUser;
+}
+
+function rateDimension(idx, key, stars, e) {
+  if (e) e.stopPropagation();
+  if (wsRating.idx !== idx) prepWhatScaresRating(idx);
+
+  const previous = { ...wsRating.mine };
+  if (wsRating.mine[key] === stars) delete wsRating.mine[key];
+  else wsRating.mine[key] = stars;
+
+  // Paint first — the round trip must never gate the feedback.
+  persistDimensionsLocally(idx);
+  wsRating.note = 'Saving…';
+  refreshWhatScaresRating(idx);
+
+  saveDimensionRating(idx, previous);
+}
+
+async function saveDimensionRating(idx, previous) {
+  const user = await ensureRatingUser();
+  if (!user) return revertDimensions(idx, previous, 'Could not start a session — try again.');
+
+  // Send all three columns every time: a partial upsert would leave a cleared
+  // dimension sitting at its old value in the DB.
+  const scores = {};
+  RATING_DIMENSIONS.forEach(d => { scores[d.key] = wsRating.mine[d.key] || null; });
+
+  // The at_least_one_score constraint rejects an all-null row, so clearing
+  // your last dimension has to delete the row rather than update it.
+  const { error } = Object.values(scores).some(Boolean)
+    ? await sb.from('user_ratings').upsert(
+        { user_id: user.id, movie_idx: idx, ...scores }, { onConflict: 'user_id,movie_idx' })
+    : await sb.from('user_ratings').delete().eq('user_id', user.id).eq('movie_idx', idx);
+
+  if (error) return revertDimensions(idx, previous, 'Could not save that — try again.');
+  if (wsRating.idx !== idx) return;
+
+  wsRating.note = 'Saved. Change it any time.';
+  const { data } = await sb.from('movie_rating_stats').select('*').eq('movie_idx', idx).maybeSingle();
+  if (wsRating.idx !== idx) return;
+  wsRating.stats = data;
+  refreshWhatScaresRating(idx);
+}
+
+function revertDimensions(idx, previous, note) {
+  if (wsRating.idx !== idx) return;
+  wsRating.mine = previous;
+  wsRating.note = note;
+  persistDimensionsLocally(idx);
+  refreshWhatScaresRating(idx);
 }
 
 function previewStars(el, n) {
@@ -2006,15 +2210,14 @@ function imdbStars(score) {
   return '★'.repeat(full) + '☆'.repeat(5 - full);
 }
 
-function collCardHTML(idx, u) {
+function collCardHTML(idx) {
   const m = M[idx];
-  const r = u.ratings[idx] || 0;
   return `<a class="card" href="/movies/${slugify(m.t)}.html">
     <div class="poster">
       <img src="${TMDB}${m.p}" alt="${m.t}" loading="lazy">
       <div class="card-overlay">
         <div class="title">${m.t}</div>
-        <div class="meta">${m.y}${r ? ' · ' + '★'.repeat(r) : ''}</div>
+        <div class="meta">${m.y}</div>
       </div>
     </div>
   </a>`;
@@ -2037,11 +2240,11 @@ function renderCollection() {
 
   if (want.length) {
     document.getElementById('wantCount').textContent = want.length + ' films';
-    document.getElementById('wantRow').innerHTML = want.map(i => collCardHTML(i, u)).join('');
+    document.getElementById('wantRow').innerHTML = want.map(i => collCardHTML(i)).join('');
   }
   if (seen.length) {
     document.getElementById('seenCount').textContent = seen.length + ' films';
-    document.getElementById('seenRow').innerHTML = seen.map(i => collCardHTML(i, u)).join('');
+    document.getElementById('seenRow').innerHTML = seen.map(i => collCardHTML(i)).join('');
   }
 }
 
@@ -2551,6 +2754,7 @@ function renderFavStart() {
 function openModal(idx) {
   const m = M[idx];
   const sim = similar(m).slice(0,5);
+  prepWhatScaresRating(idx);
 
   document.getElementById('modalHero').innerHTML = `
     <img src="${TMDB}${m.p}" alt="${m.t}">
@@ -2578,18 +2782,6 @@ function openModal(idx) {
     </div>
   </div>` : '';
 
-  const intensityHTML = `<div class="modal-section">
-    <div class="modal-label">Intensity</div>
-    <div class="intensity-row">
-      ${[['Scare',m.scare],['Gore',m.gore],['Dread',m.dread]].map(([label,val]) =>
-        `<div class="intensity-item">
-          <div class="intensity-label">${label}</div>
-          <div class="intensity-dots">${Array.from({length:5},(_,i)=>`<span class="dot${i<val?' on':''}"></span>`).join('')}</div>
-        </div>`
-      ).join('')}
-    </div>
-  </div>`;
-
   const trailerHTML = m.yt ? `<div class="modal-section">
     <div class="modal-label">Trailer</div>
     <div class="trailer-wrap">
@@ -2616,10 +2808,6 @@ function openModal(idx) {
       <button class="modal-fav modal-seen${isSeen ? ' saved-seen' : ''}" onclick="setStatus(${idx},'seen',event);openModal(${idx})">
         ${isSeen ? '✓ Watched' : 'Watched?'}
       </button>
-      <div class="modal-stars-wrap">
-        <span class="rate-label">Your rating</span>
-        ${starsHTML(idx, 'modal')}
-      </div>
     </div>
   </div>`;
 
@@ -2628,9 +2816,9 @@ function openModal(idx) {
       <div class="modal-label">Ratings</div>
       ${ratingsHTML}
     </div>
+    ${whatScaresRatingHTML(idx)}
     ${userActionsHTML}
     ${streamHTML}
-    ${intensityHTML}
     ${trailerHTML}
     <div class="modal-section">
       <div class="modal-label">Elements</div>
@@ -2654,6 +2842,7 @@ function openModal(idx) {
 
   document.getElementById('backdrop').classList.add('open');
   document.body.style.overflow = 'hidden';
+  hydrateWhatScaresRating(idx);
 }
 
 function toggleBut(el, idx) {
@@ -2854,11 +3043,15 @@ document.querySelector('.hero-meta').textContent =
 
 sb.auth.onAuthStateChange(async (event, session) => {
   const user = session?.user || null;
-  currentUser = user;
-  updateNavUser(user);
-  if (user && (event === 'SIGNED_IN' || event === 'INITIAL_SESSION')) {
-    await syncToSupabase(user.id);
-    await loadFromSupabase(user.id);
+  // An anonymous session exists only so intensity ratings have a row to hang
+  // on. It is not an account, so the nav and the collection sync ignore it.
+  const account = user && !user.is_anonymous ? user : null;
+  ratingUser = user;
+  currentUser = account;
+  updateNavUser(account);
+  if (account && (event === 'SIGNED_IN' || event === 'INITIAL_SESSION')) {
+    await syncToSupabase(account.id);
+    await loadFromSupabase(account.id);
     renderGrid();
     renderCollection();
   }
