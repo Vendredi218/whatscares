@@ -2,9 +2,10 @@
 import { CATALOG } from './_catalog.mjs';
 
 // Both providers speak the OpenAI chat-completions shape, so switching is just
-// a key, a host and a model id. OpenRouter wins when its key is present.
+// a key, a host and a model id. MiniMax is the default; set MOOD_PROVIDER=openrouter
+// to try DeepSeek without a deploy.
 const OPENROUTER_KEY = process.env.DEEPSEEK_OPENROUTER;
-const USE_OPENROUTER = !!OPENROUTER_KEY;
+const USE_OPENROUTER = !!OPENROUTER_KEY && process.env.MOOD_PROVIDER === 'openrouter';
 
 const BASE_URL = USE_OPENROUTER
   ? (process.env.OPENROUTER_BASE_URL || 'https://openrouter.ai/api/v1')
