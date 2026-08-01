@@ -465,7 +465,12 @@ ${footerHtml}
   box.querySelectorAll('.pip').forEach(function (p) {
     p.addEventListener('click', function () {
       var dim = p.closest('.row').dataset.dim, v = +p.dataset.v;
-      ensureUser().then(function (u) { if (u) save(dim, v); });
+      var prev = mine[dim] || 0;
+      paint(dim, v);                       // paint first: a first-time rater would
+      ensureUser().then(function (u) {     // otherwise wait a round-trip for the anon session
+        if (u) save(dim, v);
+        else paint(dim, prev);
+      });
     });
   });
 
