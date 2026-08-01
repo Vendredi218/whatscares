@@ -1,17 +1,10 @@
 -- Ratings collected off-platform from one rater (john_s), imported as source=offline.
--- Gore of 0 is a real answer ("no gore at all"), so the range check is widened first.
+-- The scale has no zero state (one pip is the minimum), so five gore scores
+-- recorded as 0 were entered as 1.
 
-alter table public.user_ratings drop constraint if exists user_ratings_jumps_check;
-alter table public.user_ratings drop constraint if exists user_ratings_gore_check;
-alter table public.user_ratings drop constraint if exists user_ratings_dread_check;
-alter table public.user_ratings add constraint user_ratings_jumps_check check (jumps between 0 and 5);
-alter table public.user_ratings add constraint user_ratings_gore_check  check (gore  between 0 and 5);
-alter table public.user_ratings add constraint user_ratings_dread_check check (dread between 0 and 5);
-
--- clear anything left from testing
 delete from public.user_ratings;
 
-insert into public.user_ratings (movie_idx, jumps, gore, dread, source, user_id) 
+insert into public.user_ratings (movie_idx, jumps, gore, dread, source, user_id)
 select v.movie_idx, v.jumps, v.gore, v.dread, 'offline', null
 from (values
   (56, 4, 3, 4),
@@ -64,7 +57,7 @@ from (values
   (57, 4, 1, 4),
   (103, 2, 4, 5),
   (72, 1, 1, 3),
-  (123, 1, 0, 5),
+  (123, 1, 1, 5),
   (13, 1, 2, 4),
   (52, 3, 2, 4),
   (98, 2, 3, 3),
@@ -76,11 +69,12 @@ from (values
   (78, 2, 1, 1),
   (46, 3, 2, 4),
   (59, 2, 2, 5),
+  (54, 1, 1, 3),
   (53, 4, 2, 4),
   (75, 2, 2, 1),
   (73, 2, 1, 4),
   (79, 3, 2, 2),
-  (124, 4, 0, 4),
+  (124, 4, 1, 4),
   (24, 2, 3, 3),
   (109, 4, 2, 3),
   (95, 2, 3, 5),
@@ -111,7 +105,7 @@ from (values
   (126, 4, 3, 4),
   (43, 3, 1, 4),
   (102, 2, 5, 3),
-  (44, 2, 0, 4),
+  (44, 2, 1, 4),
   (17, 3, 1, 3),
   (125, 3, 4, 2),
   (69, 3, 3, 4),
@@ -128,7 +122,7 @@ from (values
   (85, 3, 3, 5),
   (108, 3, 3, 4),
   (33, 3, 1, 4),
-  (117, 3, 0, 4),
+  (117, 3, 1, 4),
   (70, 2, 3, 2),
   (22, 3, 2, 4),
   (84, 3, 5, 4),

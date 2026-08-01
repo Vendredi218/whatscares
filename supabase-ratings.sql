@@ -9,9 +9,9 @@ create table if not exists public.user_ratings (
   user_id     uuid references auth.users(id) on delete cascade,
   source      text not null default 'app' check (source in ('app', 'offline')),
   movie_idx   integer not null,
-  jumps       smallint check (jumps  between 0 and 5),
-  gore        smallint check (gore   between 0 and 5),
-  dread       smallint check (dread  between 0 and 5),
+  jumps       smallint check (jumps  between 1 and 5),
+  gore        smallint check (gore   between 1 and 5),
+  dread       smallint check (dread  between 1 and 5),
   created_at  timestamptz not null default now(),
   updated_at  timestamptz not null default now(),
   -- One vote per person per film, enforced in the database. Front-end checks
@@ -69,8 +69,6 @@ grant select on public.movie_rating_stats to anon, authenticated;
 
 -- Sanity check after running:
 --   select * from public.movie_rating_stats order by votes desc limit 5;
-
--- 0 is a real answer for gore ("none at all"), so the floor is 0 rather than 1.
 
 -- ─────────────────────────────────────────────────────────────
 -- MIGRATION: if you already ran the first version of this file, the partial
