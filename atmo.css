@@ -8,7 +8,8 @@
 /* lights-out is a full dark mode: the palette flips, then the beam sits on top */
 body.lights-out { --bg:#0c0a08;--surface:#161310;--surface-2:#1e1a15;--border:#2b251d;--text:#ece4d2;--text-2:#a79c86;--text-3:#6f6655;--accent:#b5372a;--accent-2:#e0573f;--gold:#d99a45;
   --chrome:rgba(10,10,10,0.92); --panel:rgba(22,19,16,0.86);
-  --field:rgba(12,10,8,0.72); --hover:rgba(30,26,21,0.6); }
+  --field:rgba(12,10,8,0.72); --hover:rgba(30,26,21,0.6);
+  --ink:#ece4d2; --dim-jumps:#e0663a; --dim-gore:#c4342b; --dim-dread:#8fa3a3; }
 body.lights-out .vignette { opacity: 1; }
 
 /* flashlight — lights-out mode, follows cursor */

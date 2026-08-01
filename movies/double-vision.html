@@ -21,7 +21,7 @@
 <script src="/atmo.js" defer></script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--bg: #e9e3d5;--surface: #f4f0e6;--surface-2: #dcd3c0;--border: #cdc2ab;--text: #191512;--text-2: #584f44;--text-3: #6b6153;--accent: #a82e22;--accent-2: #c4432f;--gold: #7d5c0d;--sans:'Inter',-apple-system,system-ui,sans-serif;--serif:'EB Garamond',Georgia,serif;--mono:'Courier Prime','Courier New',monospace;--chrome:rgba(238,233,222,0.90);--panel:rgba(244,240,230,0.92);--field:rgba(255,253,247,0.78);--hover:rgba(205,194,171,0.45);--radius:3px}
+:root{--bg: #e9e3d5;--surface: #f4f0e6;--surface-2: #dcd3c0;--border: #cdc2ab;--text: #191512;--text-2: #584f44;--text-3: #6b6153;--accent: #a82e22;--accent-2: #c4432f;--gold: #7d5c0d;--sans:'Inter',-apple-system,system-ui,sans-serif;--serif:'EB Garamond',Georgia,serif;--mono:'Courier Prime','Courier New',monospace;--dim-jumps:#a33d15;--dim-gore:#8e1f1a;--dim-dread:#3f4a4a;--chrome:rgba(238,233,222,0.90);--panel:rgba(244,240,230,0.92);--field:rgba(255,253,247,0.78);--hover:rgba(205,194,171,0.45);--radius:3px}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:960px;margin:0 auto;padding:0 20px}
@@ -54,7 +54,12 @@ a.tag:hover{border-color:var(--accent);color:var(--text)}
 .intensity .lbl{font-family:var(--mono);font-size:12.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-3);font-weight:700;width:64px;flex:none}
 .intensity .pips{display:flex;gap:7px}
 .intensity .pip{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border);background:none;padding:0;cursor:pointer;transition:transform .12s,background .12s,border-color .12s}
-.intensity .pip.on{background:var(--accent);border-color:var(--accent)}
+[data-dim="jumps"] .pip.on{background:var(--dim-jumps);border-color:var(--dim-jumps)}
+[data-dim="gore"]  .pip.on{background:var(--dim-gore);border-color:var(--dim-gore)}
+[data-dim="dread"] .pip.on{background:var(--dim-dread);border-color:var(--dim-dread)}
+[data-dim="jumps"] .lbl{color:var(--dim-jumps)}
+[data-dim="gore"]  .lbl{color:var(--dim-gore)}
+[data-dim="dread"] .lbl{color:var(--dim-dread)}
 .intensity .row:hover .pip{border-color:var(--text-3)}
 .intensity .pip:hover,.intensity .pip:focus-visible{transform:scale(1.22);border-color:var(--accent);outline:none}
 .intensity .pip.mine{box-shadow:0 0 0 2px var(--bg),0 0 0 3.5px var(--gold)}
@@ -65,6 +70,15 @@ a.tag:hover{border-color:var(--accent);color:var(--text)}
 .rate-note{font-size:13.5px;color:var(--text-3);margin-top:10px}
 .rate-note a{color:var(--gold);border-bottom:1px solid rgba(125,92,13,.35)}
 @media (prefers-reduced-motion: reduce){.intensity .agg b.bump{animation:none}.intensity .pip{transition:none}}
+
+/* Same watchlist / watched state as the home page, on the page you land on. */
+.watch-actions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+.wact{display:inline-flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:8px 14px;font-family:inherit;font-size:15px;color:var(--text-2);cursor:pointer;transition:border-color .18s,color .18s,background .18s}
+.wact:hover{border-color:var(--text-3);color:var(--text)}
+.wact .ico{font-size:15px;line-height:1}
+.wact.on-want{border-color:var(--accent);color:var(--accent);background:rgba(181,55,42,.08)}
+.wact.on-seen{border-color:var(--gold);color:var(--gold);background:rgba(217,154,69,.1)}
+.wact-note{font-size:13.5px;color:var(--text-3);align-self:center}
 
 .intensity .row{display:flex;align-items:center;gap:12px;font-size: 15.5px;margin-bottom:4px}
 .intensity .row span.lbl{width:60px;color:var(--text-2)}
@@ -184,6 +198,15 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
       </div>
       <p class="rate-note" id="rateNote">Tap a dot to add your rating.</p>
     </div>
+    <div class="watch-actions" data-idx="80">
+      <button class="wact" type="button" data-act="want" aria-pressed="false">
+        <span class="ico">+</span><span class="lbl">Watchlist</span>
+      </button>
+      <button class="wact" type="button" data-act="seen" aria-pressed="false">
+        <span class="ico">✓</span><span class="lbl">Watched?</span>
+      </button>
+      <span class="wact-note" id="wactNote"></span>
+    </div>
     <p class="stream">Not on major US streamers — check digital rental.</p>
     
   </div>
@@ -240,6 +263,69 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
   var sb = window.supabase.createClient(
     'https://tkomadaiuhqgsnlixgtw.supabase.co',
     'sb_publishable_nmap6xPXEztMqK-wEmr3Bw_qpTO1KBJ');
+  // Watchlist / watched share localStorage with the home page - same key, same
+  // shape. The home page is where a signed-in visitor's collection syncs up to
+  // Supabase, so writing locally here is enough; the next visit pushes it.
+  var USER_KEY = 'whatscares_user';
+  function loadColl() {
+    try {
+      var u = JSON.parse(localStorage.getItem(USER_KEY)) || {};
+      u.want = u.want || []; u.seen = u.seen || [];
+      u.ratings = u.ratings || {}; u.dimensionRatings = u.dimensionRatings || {};
+      return u;
+    } catch (err) { return { want: [], seen: [], ratings: {}, dimensionRatings: {} }; }
+  }
+  function saveColl(u) { try { localStorage.setItem(USER_KEY, JSON.stringify(u)); } catch (err) {} }
+
+  var bar = document.querySelector('.watch-actions');
+  var barIdx = bar ? +bar.dataset.idx : -1;
+  var wnote = document.getElementById('wactNote');
+  var WACT = {
+    want: { on: 'On Watchlist', off: 'Watchlist', icoOn: '✓', icoOff: '+' },
+    seen: { on: 'Watched', off: 'Watched?', icoOn: '✓', icoOff: '✓' }
+  };
+
+  function renderBar() {
+    if (!bar) return;
+    var u = loadColl();
+    Array.prototype.forEach.call(bar.querySelectorAll('.wact'), function (b) {
+      var k = b.dataset.act, on = u[k].indexOf(barIdx) !== -1;
+      b.classList.toggle('on-' + k, on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.querySelector('.lbl').textContent = on ? WACT[k].on : WACT[k].off;
+      b.querySelector('.ico').textContent = on ? WACT[k].icoOn : WACT[k].icoOff;
+    });
+  }
+
+  // Returns whether anything changed, so a rating can file a film under
+  // watched without also un-filing one that was already there.
+  function applyColl(k, add) {
+    if (!bar) return false;
+    var u = loadColl(), list = u[k], other = u[k === 'want' ? 'seen' : 'want'];
+    var i = list.indexOf(barIdx);
+    if (add && i === -1) {
+      list.push(barIdx);
+      var j = other.indexOf(barIdx);
+      if (j !== -1) other.splice(j, 1);
+    } else if (!add && i !== -1) {
+      list.splice(i, 1);
+    } else { return false; }
+    saveColl(u); renderBar(); return true;
+  }
+
+  if (bar) {
+    Array.prototype.forEach.call(bar.querySelectorAll('.wact'), function (b) {
+      b.addEventListener('click', function () {
+        var k = b.dataset.act, add = loadColl()[k].indexOf(barIdx) === -1;
+        applyColl(k, add);
+        wnote.textContent = add
+          ? (k === 'want' ? 'Saved to your watchlist.' : 'Filed under watched.')
+          : 'Removed.';
+      });
+    });
+    renderBar();
+  }
+
   var box = document.querySelector('.intensity');
   if (!box) return;
   var idx = +box.dataset.idx, DIMS = ['jumps', 'gore', 'dread'];
@@ -305,6 +391,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
       var dim = p.closest('.row').dataset.dim, v = +p.dataset.v;
       var prev = mine[dim] || 0;
       mine[dim] = v; render(dim);
+      // Scoring a film is a statement that you have seen it.
+      if (applyColl('seen', true) && wnote) wnote.textContent = 'Filed under watched.';
       ensureUser().then(function (u) {
         if (u) save(dim, v);
         else { if (prev) mine[dim] = prev; else delete mine[dim]; render(dim); }

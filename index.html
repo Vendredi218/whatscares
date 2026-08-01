@@ -47,6 +47,10 @@
   --panel: rgba(244,240,230,0.92);
   --field: rgba(255,253,247,0.78);
   --hover: rgba(205,194,171,0.45);
+  --ink: #2c2620;
+  --dim-jumps: #a33d15;
+  --dim-gore: #8e1f1a;
+  --dim-dread: #3f4a4a;
   --radius: 3px;
 }
 
@@ -477,7 +481,10 @@ a.list-card { text-decoration: none; color: inherit; }
   -ms-overflow-style: none; scrollbar-width: none;
 }
 .hscroll::-webkit-scrollbar { display: none; }
+.hscroll .card-wrap { flex: 0 0 150px; height: 225px; scroll-snap-align: start; }
 .hscroll .card { flex: 0 0 150px; height: 225px; scroll-snap-align: start; }
+.card-act-off { font-size: 15px; }
+.card-act-off:hover { background: var(--accent); color: #fff; }
 
 /* ─── MODAL ─── */
 .backdrop {
@@ -923,16 +930,30 @@ footer {
 .ac-year { font-size: 14.5px; color: var(--text-3); margin-left: 12px; flex-shrink: 0; }
 
 /* ─── SORT BAR ─── */
-.sort-div { width:1px; height:16px; background:var(--border); margin:0 4px; flex:none; }
-.sort-btn.dim.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.sort-div { width:1px; height:18px; background:var(--text-3); opacity:.45; margin:0 6px; flex:none; }
+
+/* each dimension owns a colour, reused by the legend and the film-page pips */
+.sort-btn.dim { border-color: currentColor; }
+.sort-btn[data-sort="jumps"] { color: var(--dim-jumps); }
+.sort-btn[data-sort="gore"]  { color: var(--dim-gore); }
+.sort-btn[data-sort="dread"] { color: var(--dim-dread); }
+.sort-btn.dim:hover { background: var(--surface-2); }
+.sort-btn[data-sort="jumps"].active { background: var(--dim-jumps); border-color: var(--dim-jumps); color: #fff; }
+.sort-btn[data-sort="gore"].active  { background: var(--dim-gore);  border-color: var(--dim-gore);  color: #fff; }
+.sort-btn[data-sort="dread"].active { background: var(--dim-dread); border-color: var(--dim-dread); color: #fff; }
 .dim-legend {
   display:flex; flex-wrap:wrap; gap:6px 22px; margin:10px 0 0;
   font-size:13.5px; color:var(--text-3); line-height:1.5;
 }
+.dim-legend span { display:flex; align-items:baseline; color:var(--text-2); }
 .dim-legend b {
   font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:1.2px;
-  text-transform:uppercase; color:var(--accent); margin-right:7px;
+  text-transform:uppercase; margin-right:8px; padding:2px 7px; border-radius:3px;
+  color:#fff; flex:none;
 }
+.dim-legend span:nth-child(1) b { background: var(--dim-jumps); }
+.dim-legend span:nth-child(2) b { background: var(--dim-gore); }
+.dim-legend span:nth-child(3) b { background: var(--dim-dread); }
 @media (max-width:640px){ .dim-legend { gap:4px 0; flex-direction:column; } }
 .sort-bar {
   display: flex;
@@ -955,15 +976,15 @@ footer {
   padding: 5px 12px;
   border-radius: 20px;
   font-size: 13.5px;
-  background: none;
-  border: 1px solid transparent;
-  color: var(--text-3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-2);
   cursor: pointer;
   font-family: var(--sans);
   transition: all 0.2s;
 }
-.sort-btn:hover { color: var(--text-2); }
-.sort-btn.active { border-color: var(--text-2); color: var(--text); background: var(--surface-2); }
+.sort-btn:hover { color: var(--text); border-color: var(--text-3); background: var(--surface-2); }
+.sort-btn.active { border-color: var(--ink); color: #fff; background: var(--ink); }
 
 /* ─── CARD STREAMING ─── */
 .card-overlay .card-stream {
@@ -1819,6 +1840,8 @@ footer {
 </div>
 </noscript>
 
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <!-- MODAL -->
 <div class="backdrop" id="backdrop" onclick="closeModal(event)">
   <div class="modal" onclick="event.stopPropagation()">
@@ -2024,13 +2047,31 @@ async function upsertMovie(idx) {
   }
 }
 
+let toastTimer = null;
+function toast(html) {
+  const el = document.getElementById('toast');
+  if (!el) return;
+  el.innerHTML = html;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 4000);
+}
+
+const STATUS_COPY = {
+  want: ['Added to Watchlist', 'Removed from Watchlist'],
+  seen: ['Marked as watched', 'Unmarked as watched']
+};
+
 function setStatus(idx, status, e) {
-  if (e) e.stopPropagation();
+  // The buttons sit next to an <a>, not inside it, but a stray bubbled click
+  // on any surface should still never navigate.
+  if (e) { e.preventDefault(); e.stopPropagation(); }
   const u = loadUser();
   const list = u[status];
   const other = u[status === 'want' ? 'seen' : 'want'];
   const i = list.indexOf(idx);
-  if (i === -1) {
+  const added = i === -1;
+  if (added) {
     list.push(idx);
     const j = other.indexOf(idx);
     if (j !== -1) other.splice(j, 1);
@@ -2041,6 +2082,38 @@ function setStatus(idx, status, e) {
   upsertMovie(idx);
   renderGrid();
   renderCollection();
+  toast(`<span>${STATUS_COPY[status][added ? 0 : 1]}</span>${added ? ' <a href="#collections" onclick="closeModal()">View</a>' : ''}`);
+}
+
+// Repaint just the two modal buttons. Re-rendering the whole modal would throw
+// away scroll position and the rating panel's in-flight state.
+function syncModalStatusButtons(idx) {
+  const u = loadUser();
+  const want = document.getElementById('modalWantBtn');
+  const seen = document.getElementById('modalSeenBtn');
+  if (want) {
+    want.classList.toggle('saved', u.want.includes(idx));
+    want.textContent = u.want.includes(idx) ? '✓ On Watchlist' : '+ Watchlist';
+  }
+  if (seen) {
+    seen.classList.toggle('saved-seen', u.seen.includes(idx));
+    seen.textContent = u.seen.includes(idx) ? '✓ Watched' : 'Watched?';
+  }
+}
+
+// Rating a film is a statement that you have seen it. Additive only — this
+// must never toggle "watched" back off as a side effect of a rating.
+function markSeen(idx) {
+  const u = loadUser();
+  if (u.seen.includes(idx)) return false;
+  u.seen.push(idx);
+  const j = u.want.indexOf(idx);
+  if (j !== -1) u.want.splice(j, 1);
+  saveUser(u);
+  upsertMovie(idx);
+  renderGrid();
+  renderCollection();
+  return true;
 }
 
 // ─── INTENSITY RATING ───
@@ -2200,6 +2273,13 @@ function rateDimension(idx, key, stars, e) {
   wsRating.note = 'Saving…';
   refreshWhatScaresRating(idx);
 
+  // You cannot rate a film you have not seen, so scoring one files it under
+  // Watched. Only on a set — clearing a score says nothing about having watched.
+  if (wsRating.mine[key] && markSeen(idx)) {
+    syncModalStatusButtons(idx);
+    toast('<span>Rated · filed under Watched</span> <a href="#collections" onclick="closeModal()">View</a>');
+  }
+
   saveDimensionRating(idx, previous);
 }
 
@@ -2261,9 +2341,11 @@ function imdbStars(score) {
   return '★'.repeat(full) + '☆'.repeat(5 - full);
 }
 
-function collCardHTML(idx) {
+function collCardHTML(idx, status) {
   const m = M[idx];
-  return `<a class="card" href="/movies/${slugify(m.t)}.html">
+  const off = status === 'want' ? 'Remove from Watchlist' : 'Unmark as watched';
+  return `<div class="card-wrap">
+  <a class="card" href="/movies/${slugify(m.t)}.html">
     <div class="poster">
       <img src="${TMDB}${m.p}" alt="${m.t}" loading="lazy">
       <div class="card-overlay">
@@ -2271,7 +2353,12 @@ function collCardHTML(idx) {
         <div class="meta">${m.y}</div>
       </div>
     </div>
-  </a>`;
+  </a>
+  <div class="card-actions">
+    <button class="card-act card-act-off" type="button" data-tip="${off}"
+      aria-label="${off} — ${escAttr(m.t)}" onclick="setStatus(${idx},'${status}',event)">×</button>
+  </div>
+</div>`;
 }
 
 function renderCollection() {
@@ -2291,11 +2378,11 @@ function renderCollection() {
 
   if (want.length) {
     document.getElementById('wantCount').textContent = want.length + ' films';
-    document.getElementById('wantRow').innerHTML = want.map(i => collCardHTML(i)).join('');
+    document.getElementById('wantRow').innerHTML = want.map(i => collCardHTML(i, 'want')).join('');
   }
   if (seen.length) {
     document.getElementById('seenCount').textContent = seen.length + ' films';
-    document.getElementById('seenRow').innerHTML = seen.map(i => collCardHTML(i)).join('');
+    document.getElementById('seenRow').innerHTML = seen.map(i => collCardHTML(i, 'seen')).join('');
   }
 }
 
@@ -2448,15 +2535,12 @@ function cardHTML(m, idx, score, featured) {
   const mainTag = m.tags[0];
   const streamText = m.str && m.str.length ? m.str.slice(0,2).join(' · ') : '';
   const why = searchMode === 'mood' ? MOOD_WHY[idx] : null;
-  return `<a class="card${featured ? ' featured' : ''}" href="/movies/${slugify(m.t)}.html"${why && !featured ? ` title="${escAttr(why)}"` : ''}>
+  return `<div class="card-wrap${featured ? ' featured' : ''}">
+  <a class="card" href="/movies/${slugify(m.t)}.html"${why && !featured ? ` title="${escAttr(why)}"` : ''}>
     <div class="poster">
       <img src="${TMDB}${m.p}" alt="${m.t}" loading="lazy">
       <span class="card-tag">${mainTag}</span>
       ${m.obscure ? '<div class="gem-badge">Hidden Gem</div>' : ''}
-      <div class="card-actions">
-        <button class="card-act${isWant ? ' on-want' : ''}" title="${isWant ? 'On watchlist' : 'Add to watchlist'}" onclick="setStatus(${idx},'want',event)">+</button>
-        <button class="card-act${isSeen ? ' on-seen' : ''}" title="${isSeen ? 'Watched' : 'Mark as watched'}" onclick="setStatus(${idx},'seen',event)">✓</button>
-      </div>
       <div class="card-overlay">
         ${why && featured ? `<div class="card-why">“${escAttr(why)}”</div>` : ''}
         <div class="card-vitals">${vitalHTML('S', m.scare)}${vitalHTML('G', m.gore, true)}${vitalHTML('D', m.dread)}</div>
@@ -2469,7 +2553,18 @@ function cardHTML(m, idx, score, featured) {
         ${streamText ? `<div class="card-stream">${streamText}</div>` : ''}
       </div>
     </div>
-  </a>`;
+  </a>
+  <div class="card-actions">
+    <button class="card-act${isWant ? ' on-want' : ''}" type="button"
+      data-tip="${isWant ? 'Remove from Watchlist' : 'Add to Watchlist'}"
+      aria-pressed="${isWant}" aria-label="${isWant ? 'Remove' : 'Add'} ${escAttr(m.t)} ${isWant ? 'from' : 'to'} watchlist"
+      onclick="setStatus(${idx},'want',event)">+</button>
+    <button class="card-act${isSeen ? ' on-seen' : ''}" type="button"
+      data-tip="${isSeen ? 'Unmark as watched' : 'Mark as watched'}"
+      aria-pressed="${isSeen}" aria-label="${isSeen ? 'Unmark' : 'Mark'} ${escAttr(m.t)} as watched"
+      onclick="setStatus(${idx},'seen',event)">✓</button>
+  </div>
+</div>`;
 }
 
 function renderLists() {
@@ -2856,10 +2951,10 @@ function openModal(idx) {
   const isSeen = u.seen.includes(idx);
   const userActionsHTML = `<div class="modal-section">
     <div class="modal-user-actions">
-      <button class="modal-fav${isWant ? ' saved' : ''}" onclick="setStatus(${idx},'want',event);openModal(${idx})">
+      <button class="modal-fav${isWant ? ' saved' : ''}" id="modalWantBtn" onclick="setStatus(${idx},'want',event);syncModalStatusButtons(${idx})">
         ${isWant ? '✓ On Watchlist' : '+ Watchlist'}
       </button>
-      <button class="modal-fav modal-seen${isSeen ? ' saved-seen' : ''}" onclick="setStatus(${idx},'seen',event);openModal(${idx})">
+      <button class="modal-fav modal-seen${isSeen ? ' saved-seen' : ''}" id="modalSeenBtn" onclick="setStatus(${idx},'seen',event);syncModalStatusButtons(${idx})">
         ${isSeen ? '✓ Watched' : 'Watched?'}
       </button>
     </div>
