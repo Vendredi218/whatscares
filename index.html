@@ -259,6 +259,13 @@ section { margin-bottom: 48px; }
   transform: scale(1.05);
 }
 
+/* A card that searches in place rather than navigating is a button, so it
+   needs its native chrome stripped. .fav-row .card supplies the real border. */
+.card-btn {
+  font: inherit; padding: 0; text-align: left; border: none;
+  appearance: none; -webkit-appearance: none;
+}
+
 /* featured first card */
 .card-wrap.featured {
   grid-column: span 2;
@@ -482,7 +489,6 @@ a.list-card { text-decoration: none; color: inherit; }
 }
 .hscroll::-webkit-scrollbar { display: none; }
 .hscroll .card-wrap { flex: 0 0 150px; height: 225px; scroll-snap-align: start; }
-.card-btn { font: inherit; padding: 0; text-align: left; border: none; }
 .hscroll .card { flex: 0 0 150px; height: 225px; scroll-snap-align: start; }
 .card-act-off { font-size: 15px; }
 .card-act-off:hover { background: var(--accent); color: #fff; }
