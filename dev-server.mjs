@@ -57,6 +57,7 @@ createServer(async (req, res) => {
   // static files
   let path = normalize(url.pathname).replace(/^(\.\.[/\\])+/, '');
   if (path === '/' || path === '\\') path = '/index.html';
+  else if (path.endsWith('/')) path += 'index.html'; // directory URLs, like Vercel
   const file = join(process.cwd(), path);
   if (!file.startsWith(process.cwd())) { res.writeHead(403).end(); return; }
   try {

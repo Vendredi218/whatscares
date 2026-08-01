@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "node dev-server.mjs",
-    "build-catalog": "node scripts/build-catalog.mjs"
+    "build-catalog": "node scripts/build-catalog.mjs",
+    "build:movies": "node scripts/build-movie-pages.mjs",
+    "seo:ping": "node scripts/indexnow-ping.mjs"
   }
 }
