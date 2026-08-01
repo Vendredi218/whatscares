@@ -149,6 +149,21 @@ a.tag:hover{border-color:var(--accent);color:var(--text)}
 .chip .src.imdb{color:var(--gold)}.chip .src.rt{color:var(--accent)}.chip .src.pop{color:#d98e04}.chip .src.db{color:#2da44e}
 .chip b{font-weight:600;font-size: 17px}
 .chip i{font-style:normal;font-size: 13px;color:var(--text-3)}
+.rate{border-top:1px solid var(--border);margin-top:22px;padding-top:18px}
+.rate h3{font-family:var(--mono);font-size:12.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-3);font-weight:700;margin-bottom:12px}
+.rate .row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.rate .lbl{font-family:var(--mono);font-size:12.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-3);font-weight:700;width:64px;flex:none}
+.rate .pips{display:flex;gap:6px}
+.rate .pip{width:17px;height:17px;border-radius:50%;border:1.5px solid var(--border);background:none;padding:0;cursor:pointer;transition:transform .12s,background .12s,border-color .12s}
+.rate .pip:hover,.rate .pip:focus-visible{border-color:var(--accent);transform:scale(1.18);outline:none}
+.rate .pip.on{background:var(--accent);border-color:var(--accent)}
+.rate .agg{font-size:14px;color:var(--text-2);margin-left:6px;font-variant-numeric:tabular-nums}
+.rate .agg b{color:var(--text);font-weight:600;display:inline-block}
+.rate .agg b.bump{animation:pop .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{0%{transform:scale(1);color:var(--text)}40%{transform:scale(1.5);color:var(--accent)}100%{transform:scale(1);color:var(--text)}}
+.rate .note{font-size:13.5px;color:var(--text-3);margin-top:10px}
+.rate .note a{color:var(--gold);border-bottom:1px solid rgba(125,92,13,.35)}
+@media (prefers-reduced-motion: reduce){.rate .agg b.bump{animation:none}.rate .pip{transition:none}}
 .intensity{margin-bottom:22px}
 .intensity .row{display:flex;align-items:center;gap:12px;font-size: 15.5px;margin-bottom:4px}
 .intensity .row span.lbl{width:60px;color:var(--text-2)}
@@ -335,6 +350,15 @@ ${headerHtml}
       <div class="row"><span class="lbl">Gore</span>${dots(m.gore)}</div>
       <div class="row"><span class="lbl">Dread</span>${dots(m.dread)}</div>
     </div>
+    <div class="rate" data-idx="${m.idx}">
+      <h3>Rate the intensity</h3>
+      ${['jumps','gore','dread'].map(k => `<div class="row" data-dim="${k}">
+        <span class="lbl">${k}</span>
+        <span class="pips">${[1,2,3,4,5].map(n => `<button class="pip" type="button" data-v="${n}" aria-label="${k} ${n} of 5"></button>`).join('')}</span>
+        <span class="agg" data-agg="${k}"></span>
+      </div>`).join('')}
+      <p class="note" id="rateNote"></p>
+    </div>
     <p class="stream">${m.str && m.str.length
       ? `Streaming on <b>${m.str.map(esc).join(' · ')}</b> <span style="color:var(--text-3)">(US, subject to change)</span>`
       : `Not on major US streamers — check digital rental.`}</p>
@@ -373,6 +397,79 @@ ${sims.length ? `<section>
 </section>
 </main>
 ${footerHtml}
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+(function () {
+  var sb = window.supabase.createClient(
+    'https://tkomadaiuhqgsnlixgtw.supabase.co',
+    'sb_publishable_nmap6xPXEztMqK-wEmr3Bw_qpTO1KBJ');
+  var box = document.querySelector('.rate');
+  if (!box) return;
+  var idx = +box.dataset.idx, DIMS = ['jumps', 'gore', 'dread'];
+  var note = document.getElementById('rateNote');
+  var mine = {}, user = null;
+
+  function paint(dim, v) {
+    var pips = box.querySelectorAll('[data-dim="' + dim + '"] .pip');
+    for (var i = 0; i < pips.length; i++) pips[i].classList.toggle('on', +pips[i].dataset.v <= v);
+  }
+
+  function showAgg(stats) {
+    DIMS.forEach(function (d) {
+      var el = box.querySelector('[data-agg="' + d + '"]');
+      var avg = stats && stats[d + '_avg'];
+      if (!avg) { el.textContent = ''; return; }
+      var old = el.querySelector('b') ? el.querySelector('b').textContent : null;
+      el.innerHTML = '<b>' + avg + '</b> \u00b7 ' + stats.votes + ' vote' + (stats.votes === 1 ? '' : 's');
+      if (old && old !== String(avg)) {
+        var b = el.querySelector('b');
+        b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump');
+      }
+    });
+  }
+
+  function loadAgg() {
+    return sb.from('movie_rating_stats').select('*').eq('movie_idx', idx)
+      .maybeSingle().then(function (r) { showAgg(r.data); });
+  }
+
+  function save(dim, v) {
+    if (!user) return;
+    var prev = Object.assign({}, mine);
+    mine[dim] = v; paint(dim, v);
+    var row = Object.assign({ user_id: user.id, movie_idx: idx }, mine);
+    sb.from('user_ratings').upsert(row, { onConflict: 'user_id,movie_idx' }).then(function (r) {
+      if (r.error) {
+        mine = prev; paint(dim, prev[dim] || 0);
+        note.textContent = 'Could not save that - try again.';
+        return;
+      }
+      note.textContent = 'Saved. One rating per person; change it any time.';
+      loadAgg();
+    });
+  }
+
+  box.querySelectorAll('.pip').forEach(function (p) {
+    p.addEventListener('click', function () {
+      if (!user) { note.innerHTML = '<a href="/">Sign in on the homepage</a> to rate this film.'; return; }
+      save(p.closest('.row').dataset.dim, +p.dataset.v);
+    });
+  });
+
+  loadAgg();
+  sb.auth.getSession().then(function (res) {
+    user = res.data.session && res.data.session.user;
+    if (!user) { note.innerHTML = '<a href="/">Sign in</a> to add your rating.'; return; }
+    sb.from('user_ratings').select('jumps,gore,dread')
+      .eq('user_id', user.id).eq('movie_idx', idx).maybeSingle().then(function (r) {
+        if (r.data) {
+          DIMS.forEach(function (d) { if (r.data[d]) { mine[d] = r.data[d]; paint(d, r.data[d]); } });
+          note.textContent = 'Your rating. Change it any time.';
+        } else note.textContent = 'Tap a dot to rate.';
+      });
+  });
+})();
+</script>
 </body>
 </html>
 `;
@@ -450,6 +547,7 @@ function sitemap() {
 
 // ---------- write ----------
 mkdirSync(join(root, 'movies'), { recursive: true });
+movies.forEach((m, i) => { m.idx = i; });
 for (const m of movies) writeFileSync(join(root, 'movies', `${m.slug}.html`), moviePage(m));
 writeFileSync(join(root, 'movies', 'index.html'), hubPage());
 writeFileSync(join(root, 'sitemap.xml'), sitemap());
