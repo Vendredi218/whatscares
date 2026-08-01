@@ -8,6 +8,7 @@
 <meta name="keywords" content="horror movie recommendations, find horror movies, best horror films, A24 horror, folk horror, cosmic horror, psychological horror, body horror, gore horror, slow-burn horror, J-horror, where to stream horror movies">
 <link rel="canonical" href="https://whatscares.com/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="WhatScares — Horror Movies Matched to Your Taste">
 <meta property="og:description" content="The smartest way to find horror. Tell us your taste — folk, cosmic, psychological, gore — and we match you with films + where to stream them.">
@@ -59,9 +60,11 @@ nav {
 .brand {
   font-family: var(--serif); font-weight: 400;
   font-size: 17px; letter-spacing: 0.5px;
-  color: var(--text);
+  color: var(--text); text-decoration: none;
+  display: flex; align-items: center; gap: 9px;
 }
 .brand em { font-style: italic; color: var(--accent); }
+.brand-mark { height: 22px; width: auto; display: block; flex: none; }
 
 .nav-links { display: flex; gap: 32px; }
 .nav-links a {
@@ -1052,7 +1055,7 @@ footer {
 <body>
 
 <nav>
-  <a href="/" class="brand">What<em>Scares</em></a>
+  <a href="/" class="brand"><svg class="brand-mark" viewBox="18 10 28 50" fill="currentColor" aria-hidden="true"><path d="M20.2 29.5A13 13 0 1 1 39.5 34.6C36 37.2 34.4 41 34.3 46L29.3 46C29.6 41.2 32.4 36.6 34.9 31.9A8.5 8.5 0 1 0 22.3 28.5Z"/><circle cx="32" cy="54" r="5" fill="#c4352a"/></svg>What<em>Scares</em></a>
   <div class="nav-links">
     <a href="#" class="active">Discover</a>
     <a href="#collections">Collections</a>

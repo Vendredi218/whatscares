@@ -1,0 +1,5 @@
+<!-- WhatScares mark. Glyph inherits currentColor; the dot stays vermilion. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="18 10 28 50" fill="currentColor">
+  <path d="M20.2 29.5A13 13 0 1 1 39.5 34.6C36 37.2 34.4 41 34.3 46L29.3 46C29.6 41.2 32.4 36.6 34.9 31.9A8.5 8.5 0 1 0 22.3 28.5Z"/>
+  <circle cx="32" cy="54" r="5" fill="#c4352a"/>
+</svg>
