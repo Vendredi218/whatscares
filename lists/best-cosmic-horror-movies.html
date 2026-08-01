@@ -32,7 +32,7 @@
 
 :root {
   --bg: #e9e3d5; --surface: #f4f0e6; --surface-2: #dcd3c0;
-  --border: #cdc2ab; --border-light: #3a3226;
+  --border: #cdc2ab; --border-light: #b9ab90;
   --text: #191512; --text-2: #584f44; --text-3: #6b6153;
   --accent: #a82e22; --gold: #7d5c0d;
   --accent-2: #c4432f; --mono: 'Courier Prime', 'Courier New', monospace;
@@ -49,7 +49,7 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 clamp(16px, 4vw, 48px); height: 52px;
-  background: rgba(15,14,12,0.92); backdrop-filter: blur(20px);
+  background: rgba(238,233,222,0.90); backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 .brand { font-family: var(--sans); font-weight: 600; font-size: 14.5px; letter-spacing: 5px; text-transform: uppercase; text-decoration: none; color: var(--text); }
@@ -69,7 +69,7 @@ nav {
 .page-header { margin-bottom: 48px; border-bottom: 1px solid var(--border); padding-bottom: 32px; }
 .page-header h1 {
   font-family: var(--serif); font-size: clamp(36px, 6vw, 56px); font-weight: 400;
-  line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; color: var(--cream);
+  line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; color: var(--text);
 }
 .page-header .intro {
   font-family: var(--serif); font-size: 19px; font-style: italic;
@@ -134,7 +134,7 @@ nav {
   margin-bottom: 56px;
 }
 .dual-card { position: relative; }
-.dual-card .card-img {
+.dual-card .card-img { max-height: 58vh;
   aspect-ratio: 3/4; border-radius: 4px; overflow: hidden;
   position: relative;
 }
@@ -209,7 +209,7 @@ nav {
 .editorial-item .info { padding-top: 2px; }
 .editorial-item .info h3 {
   font-family: var(--serif); font-size: 22px; font-weight: 400;
-  color: var(--cream); margin-bottom: 2px; line-height: 1.3;
+  color: var(--text); margin-bottom: 2px; line-height: 1.3;
 }
 .editorial-item .info .item-meta {
   font-size: 14.5px; color: var(--text-3); margin-bottom: 8px;
@@ -236,7 +236,7 @@ nav {
 }
 .faq-section h2 {
   font-family: var(--serif); font-size: 28px; font-weight: 400; margin-bottom: 28px;
-  color: var(--cream);
+  color: var(--text);
 }
 .faq-item { border-bottom: 1px solid var(--border); }
 .faq-q {
@@ -256,7 +256,7 @@ nav {
 .more-lists { margin-bottom: 56px; }
 .more-lists h2 {
   font-family: var(--serif); font-size: 28px; font-weight: 400; margin-bottom: 24px;
-  color: var(--cream);
+  color: var(--text);
 }
 .more-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px;
@@ -267,8 +267,11 @@ nav {
   text-decoration: none; transition: border-color 0.2s, background 0.2s;
 }
 .more-grid a:hover { border-color: var(--border-light); background: var(--surface-2); }
-.more-grid a h3 { font-family: var(--serif); font-size: 17px; font-weight: 400; color: var(--cream); margin-bottom: 6px; }
+.more-grid a h3 { font-family: var(--serif); font-size: 17px; font-weight: 400; color: var(--text); margin-bottom: 6px; }
 .more-grid a p { font-size: 13.5px; color: var(--text-3); font-style: italic; font-family: var(--serif); }
+
+.film-link { color: inherit; text-decoration: none; }
+.film-link:hover { color: var(--accent); }
 
 /* FOOTER */
 footer {
@@ -354,7 +357,7 @@ footer a{color:var(--accent-2);text-decoration:none}
 <div class="page">
 
 <div class="crumbs">
-  <a href="/">WhatScares</a> / <a href="/">Lists</a> / Cosmic Horror
+  <a href="/">WhatScares</a> / <a href="/#collections">Lists</a> / Cosmic Horror
 </div>
 
 <header class="page-header">
@@ -376,7 +379,7 @@ footer a{color:var(--accent-2);text-decoration:none}
   </div>
   <div class="rank-num">01</div>
   <div class="hero-content">
-    <h2>The Lighthouse</h2>
+    <h2><a class="film-link" href="/movies/the-lighthouse.html">The Lighthouse</a></h2>
     <div class="meta">2019 &middot; Robert Eggers</div>
     <div class="scores">
       <span class="score-tag imdb">IMDb 7.4</span>
@@ -403,7 +406,7 @@ footer a{color:var(--accent-2);text-decoration:none}
         <span class="score-tag imdb">IMDb 6.8</span>
         <span class="score-tag rt">RT 88%</span>
       </div>
-      <h3>Annihilation</h3>
+      <h3><a class="film-link" href="/movies/annihilation.html">Annihilation</a></h3>
       <div class="card-meta">2018 &middot; Alex Garland</div>
       <p class="card-desc">A biologist enters an expanding zone of alien mutation where the laws of biology and identity dissolve. Pure cosmic horror in ecological drag — the Shimmer does not attack so much as rewrite.</p>
       <div class="card-streams"><span>Paramount+</span><span>Hulu</span></div>
@@ -420,7 +423,7 @@ footer a{color:var(--accent-2);text-decoration:none}
         <span class="score-tag imdb">IMDb 6.5</span>
         <span class="score-tag rt">RT 91%</span>
       </div>
-      <h3>Mandy</h3>
+      <h3><a class="film-link" href="/movies/mandy.html">Mandy</a></h3>
       <div class="card-meta">2018 &middot; Panos Cosmatos</div>
       <p class="card-desc">A revenge film that melts into a psychedelic nightmare. Cosmatos layers oil-painting textures and synth drones until violence becomes ritual and reality becomes negotiable.</p>
       <div class="card-streams"><span>Shudder</span><span>Tubi</span></div>
@@ -438,7 +441,7 @@ footer a{color:var(--accent-2);text-decoration:none}
     <div class="rank">04</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/xC9GZeJZ3NagdkGg9nLQx0aPG6J.jpg" alt="Possessor" loading="lazy"></div>
     <div class="info">
-      <h3>Possessor</h3>
+      <h3><a class="film-link" href="/movies/possessor.html">Possessor</a></h3>
       <div class="item-meta">2020 &middot; Brandon Cronenberg</div>
       <p class="item-desc">An assassin who hijacks other people's bodies begins to lose track of which identity is hers. The horror of consciousness as software, identity as something that can be overwritten.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.5</span><span class="s tom">RT 94%</span></div>
@@ -450,7 +453,7 @@ footer a{color:var(--accent-2);text-decoration:none}
     <div class="rank">05</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/c3zEimDraIyMSasPMGDaNOrhnzn.jpg" alt="Pulse" loading="lazy"></div>
     <div class="info">
-      <h3>Pulse</h3>
+      <h3><a class="film-link" href="/movies/pulse.html">Pulse</a></h3>
       <div class="item-meta">2001 &middot; Kiyoshi Kurosawa</div>
       <p class="item-desc">The dead begin leaking into the world through the internet, and Tokyo slowly empties. Cosmic horror by way of millennial loneliness — the apocalypse arrives not with spectacle but with isolation.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.5</span><span class="s tom">RT 73%</span></div>
@@ -462,7 +465,7 @@ footer a{color:var(--accent-2);text-decoration:none}
     <div class="rank">06</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/55wmcXJIDYITr7JDijJTdvwSaAv.jpg" alt="Under the Skin" loading="lazy"></div>
     <div class="info">
-      <h3>Under the Skin</h3>
+      <h3><a class="film-link" href="/movies/under-the-skin.html">Under the Skin</a></h3>
       <div class="item-meta">2013 &middot; Jonathan Glazer</div>
       <p class="item-desc">An alien predator in Scarlett Johansson's form stalks Glasgow, luring men to dissolution in a void of black liquid. The cosmic horror is in the perspective shift: we are the prey, and we are not interesting.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.3</span><span class="s tom">RT 85%</span></div>
@@ -474,7 +477,7 @@ footer a{color:var(--accent-2);text-decoration:none}
     <div class="rank">07</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/k7rD7LzlsPS4jmE6Siah0QO4tAc.jpg" alt="Color Out of Space" loading="lazy"></div>
     <div class="info">
-      <h3>Color Out of Space</h3>
+      <h3><a class="film-link" href="/movies/color-out-of-space.html">Color Out of Space</a></h3>
       <div class="item-meta">2019 &middot; Richard Stanley</div>
       <p class="item-desc">A meteorite lands on a family farm and begins corrupting everything — water, plants, animals, time, sanity. The most literal Lovecraft adaptation on this list: an alien presence that cannot be named or resisted.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.1</span><span class="s tom">RT 86%</span></div>
@@ -486,7 +489,7 @@ footer a{color:var(--accent-2);text-decoration:none}
     <div class="rank">08</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/2WhZAPi3vomEQdzAPIYTvmvWaxI.jpg" alt="The Void" loading="lazy"></div>
     <div class="info">
-      <h3>The Void</h3>
+      <h3><a class="film-link" href="/movies/the-void.html">The Void</a></h3>
       <div class="item-meta">2016 &middot; Gillespie &amp; Kostanski</div>
       <p class="item-desc">A rural hospital becomes ground zero for interdimensional horror, with robed cultists outside and Lovecraftian body horror inside. Practical effects — latex, prosthetics, puppetry — committed to the unknowable.</p>
       <div class="item-scores"><span class="s gold">IMDb 5.8</span><span class="s tom">RT 75%</span></div>

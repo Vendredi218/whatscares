@@ -32,7 +32,7 @@
 
 :root {
   --bg: #e9e3d5; --surface: #f4f0e6; --surface-2: #dcd3c0;
-  --border: #cdc2ab; --border-light: #3a3226;
+  --border: #cdc2ab; --border-light: #b9ab90;
   --text: #191512; --text-2: #584f44; --text-3: #6b6153;
   --accent: #a82e22; --gold: #7d5c0d;
   --accent-2: #c4432f; --mono: 'Courier Prime', 'Courier New', monospace;
@@ -49,7 +49,7 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 clamp(16px, 4vw, 48px); height: 52px;
-  background: rgba(15,14,12,0.92); backdrop-filter: blur(20px);
+  background: rgba(238,233,222,0.90); backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 .brand { font-family: var(--sans); font-weight: 600; font-size: 14.5px; letter-spacing: 5px; text-transform: uppercase; text-decoration: none; color: var(--text); }
@@ -69,7 +69,7 @@ nav {
 .page-header { margin-bottom: 48px; border-bottom: 1px solid var(--border); padding-bottom: 32px; }
 .page-header h1 {
   font-family: var(--serif); font-size: clamp(36px, 6vw, 56px); font-weight: 400;
-  line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; color: var(--cream);
+  line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; color: var(--text);
 }
 .page-header .intro {
   font-family: var(--serif); font-size: 19px; font-style: italic;
@@ -134,7 +134,7 @@ nav {
   margin-bottom: 56px;
 }
 .dual-card { position: relative; }
-.dual-card .card-img {
+.dual-card .card-img { max-height: 58vh;
   aspect-ratio: 3/4; border-radius: 4px; overflow: hidden;
   position: relative;
 }
@@ -209,7 +209,7 @@ nav {
 .editorial-item .info { padding-top: 2px; }
 .editorial-item .info h3 {
   font-family: var(--serif); font-size: 22px; font-weight: 400;
-  color: var(--cream); margin-bottom: 2px; line-height: 1.3;
+  color: var(--text); margin-bottom: 2px; line-height: 1.3;
 }
 .editorial-item .info .item-meta {
   font-size: 14.5px; color: var(--text-3); margin-bottom: 8px;
@@ -236,7 +236,7 @@ nav {
 }
 .faq-section h2 {
   font-family: var(--serif); font-size: 28px; font-weight: 400; margin-bottom: 28px;
-  color: var(--cream);
+  color: var(--text);
 }
 .faq-item { border-bottom: 1px solid var(--border); }
 .faq-q {
@@ -256,7 +256,7 @@ nav {
 .more-lists { margin-bottom: 56px; }
 .more-lists h2 {
   font-family: var(--serif); font-size: 28px; font-weight: 400; margin-bottom: 24px;
-  color: var(--cream);
+  color: var(--text);
 }
 .more-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px;
@@ -267,8 +267,11 @@ nav {
   text-decoration: none; transition: border-color 0.2s, background 0.2s;
 }
 .more-grid a:hover { border-color: var(--border-light); background: var(--surface-2); }
-.more-grid a h3 { font-family: var(--serif); font-size: 17px; font-weight: 400; color: var(--cream); margin-bottom: 6px; }
+.more-grid a h3 { font-family: var(--serif); font-size: 17px; font-weight: 400; color: var(--text); margin-bottom: 6px; }
 .more-grid a p { font-size: 13.5px; color: var(--text-3); font-style: italic; font-family: var(--serif); }
+
+.film-link { color: inherit; text-decoration: none; }
+.film-link:hover { color: var(--accent); }
 
 /* FOOTER */
 footer {
@@ -352,7 +355,7 @@ footer a{color:var(--accent-2);text-decoration:none}
 <div class="page">
 
 <div class="crumbs">
-  <a href="/">WhatScares</a> / <a href="/">Lists</a> / Religious Horror
+  <a href="/">WhatScares</a> / <a href="/#collections">Lists</a> / Religious Horror
 </div>
 
 <header class="page-header">
@@ -374,7 +377,7 @@ footer a{color:var(--accent-2);text-decoration:none}
   </div>
   <div class="rank-num">01</div>
   <div class="hero-content">
-    <h2>The Exorcist</h2>
+    <h2><a class="film-link" href="/movies/the-exorcist.html">The Exorcist</a></h2>
     <div class="meta">1973 &middot; William Friedkin</div>
     <div class="scores">
       <span class="score-tag imdb">IMDb 8.1</span>
@@ -402,7 +405,7 @@ footer a{color:var(--accent-2);text-decoration:none}
         <span class="score-tag imdb">IMDb 7.5</span>
         <span class="score-tag rt">RT 92%</span>
       </div>
-      <h3>The Wicker Man</h3>
+      <h3><a class="film-link" href="/movies/the-wicker-man.html">The Wicker Man</a></h3>
       <div class="card-meta">1973 &middot; Robin Hardy</div>
       <p class="card-desc">A devout Christian policeman investigates a missing girl on a remote Scottish island where the locals worship older gods. Hardy's folk horror masterpiece builds to one of cinema's most iconic and devastating endings.</p>
       <div class="card-streams"><span>Tubi</span></div>
@@ -419,7 +422,7 @@ footer a{color:var(--accent-2);text-decoration:none}
         <span class="score-tag imdb">IMDb 6.9</span>
         <span class="score-tag rt">RT 90%</span>
       </div>
-      <h3>The Witch</h3>
+      <h3><a class="film-link" href="/movies/the-witch.html">The Witch</a></h3>
       <div class="card-meta">2015 &middot; Robert Eggers</div>
       <p class="card-desc">A Puritan family exiled to the wilderness unravels under religious paranoia and something ancient lurking in the woods. Eggers' debut turns Calvinist theology itself into a source of horror — the family's faith dooms them as surely as the evil outside.</p>
       <div class="card-streams"><span>Paramount+</span><span>Shudder</span></div>
@@ -437,7 +440,7 @@ footer a{color:var(--accent-2);text-decoration:none}
     <div class="rank">04</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/ArNYeeDFLVye7JpqLElYdbE6fOa.jpg" alt="Saint Maud" loading="lazy"></div>
     <div class="info">
-      <h3>Saint Maud</h3>
+      <h3><a class="film-link" href="/movies/saint-maud.html">Saint Maud</a></h3>
       <div class="item-meta">2019 &middot; Rose Glass</div>
       <p class="item-desc">A palliative-care nurse's fervent devotion to God tips into obsession and delusion. Rose Glass makes you feel Maud's ecstasy and terror as one indistinguishable experience, building to a final image that burns.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.7</span><span class="s tom">RT 93%</span></div>
@@ -449,7 +452,7 @@ footer a{color:var(--accent-2);text-decoration:none}
     <div class="rank">05</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/tb86j8jVCVsdZnzf8I6cIi65IeM.jpg" alt="Annabelle: Creation" loading="lazy"></div>
     <div class="info">
-      <h3>Annabelle: Creation</h3>
+      <h3><a class="film-link" href="/movies/annabelle-creation.html">Annabelle: Creation</a></h3>
       <div class="item-meta">2017 &middot; David Sandberg</div>
       <p class="item-desc">Sandberg elevates Conjuring-universe material with genuine craftsmanship. A dollmaker's grief opens a door to something that wears the shape of his dead daughter, and the orphan girls who move in pay the price.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.5</span><span class="s tom">RT 69%</span></div>
@@ -461,7 +464,7 @@ footer a{color:var(--accent-2);text-decoration:none}
     <div class="rank">06</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/rd269f2Yftxxam3EOJPYVwrvjIJ.jpg" alt="Apostle" loading="lazy"></div>
     <div class="info">
-      <h3>Apostle</h3>
+      <h3><a class="film-link" href="/movies/apostle.html">Apostle</a></h3>
       <div class="item-meta">2018 &middot; Gareth Evans</div>
       <p class="item-desc">Gareth Evans trades martial arts for folk horror as a man infiltrates a remote island cult to rescue his sister. What starts as a period thriller escalates into something far stranger and more brutal — a fever dream of sacrifice and false gods.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.3</span><span class="s tom">RT 79%</span></div>

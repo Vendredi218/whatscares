@@ -32,7 +32,7 @@
 
 :root {
   --bg: #e9e3d5; --surface: #f4f0e6; --surface-2: #dcd3c0;
-  --border: #cdc2ab; --border-light: #3a3226;
+  --border: #cdc2ab; --border-light: #b9ab90;
   --text: #191512; --text-2: #584f44; --text-3: #6b6153;
   --accent: #a82e22; --gold: #7d5c0d;
   --accent-2: #c4432f; --mono: 'Courier Prime', 'Courier New', monospace;
@@ -49,7 +49,7 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 clamp(16px, 4vw, 48px); height: 52px;
-  background: rgba(15,14,12,0.92); backdrop-filter: blur(20px);
+  background: rgba(238,233,222,0.90); backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 .brand { font-family: var(--sans); font-weight: 600; font-size: 14.5px; letter-spacing: 5px; text-transform: uppercase; text-decoration: none; color: var(--text); }
@@ -69,7 +69,7 @@ nav {
 .page-header { margin-bottom: 48px; border-bottom: 1px solid var(--border); padding-bottom: 32px; }
 .page-header h1 {
   font-family: var(--serif); font-size: clamp(36px, 6vw, 56px); font-weight: 400;
-  line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; color: var(--cream);
+  line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; color: var(--text);
 }
 .page-header .intro {
   font-family: var(--serif); font-size: 19px; font-style: italic;
@@ -134,7 +134,7 @@ nav {
   margin-bottom: 56px;
 }
 .dual-card { position: relative; }
-.dual-card .card-img {
+.dual-card .card-img { max-height: 58vh;
   aspect-ratio: 3/4; border-radius: 4px; overflow: hidden;
   position: relative;
 }
@@ -209,7 +209,7 @@ nav {
 .editorial-item .info { padding-top: 2px; }
 .editorial-item .info h3 {
   font-family: var(--serif); font-size: 22px; font-weight: 400;
-  color: var(--cream); margin-bottom: 2px; line-height: 1.3;
+  color: var(--text); margin-bottom: 2px; line-height: 1.3;
 }
 .editorial-item .info .item-meta {
   font-size: 14.5px; color: var(--text-3); margin-bottom: 8px;
@@ -236,7 +236,7 @@ nav {
 }
 .faq-section h2 {
   font-family: var(--serif); font-size: 28px; font-weight: 400; margin-bottom: 28px;
-  color: var(--cream);
+  color: var(--text);
 }
 .faq-item { border-bottom: 1px solid var(--border); }
 .faq-q {
@@ -256,7 +256,7 @@ nav {
 .more-lists { margin-bottom: 56px; }
 .more-lists h2 {
   font-family: var(--serif); font-size: 28px; font-weight: 400; margin-bottom: 24px;
-  color: var(--cream);
+  color: var(--text);
 }
 .more-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px;
@@ -267,8 +267,11 @@ nav {
   text-decoration: none; transition: border-color 0.2s, background 0.2s;
 }
 .more-grid a:hover { border-color: var(--border-light); background: var(--surface-2); }
-.more-grid a h3 { font-family: var(--serif); font-size: 17px; font-weight: 400; color: var(--cream); margin-bottom: 6px; }
+.more-grid a h3 { font-family: var(--serif); font-size: 17px; font-weight: 400; color: var(--text); margin-bottom: 6px; }
 .more-grid a p { font-size: 13.5px; color: var(--text-3); font-style: italic; font-family: var(--serif); }
+
+.film-link { color: inherit; text-decoration: none; }
+.film-link:hover { color: var(--accent); }
 
 /* FOOTER */
 footer {
@@ -330,7 +333,7 @@ footer a{color:var(--accent-2);text-decoration:none}
 <div class="page">
 
 <div class="crumbs">
-  <a href="/">WhatScares</a> / <a href="/">Lists</a> / Folk Horror
+  <a href="/">WhatScares</a> / <a href="/#collections">Lists</a> / Folk Horror
 </div>
 
 <header class="page-header">
@@ -352,7 +355,7 @@ footer a{color:var(--accent-2);text-decoration:none}
   </div>
   <div class="rank-num">01</div>
   <div class="hero-content">
-    <h2>Tumbbad</h2>
+    <h2><a class="film-link" href="/movies/tumbbad.html">Tumbbad</a></h2>
     <div class="meta">2018 &middot; Rahi Anil Barve</div>
     <div class="scores">
       <span class="score-tag imdb">IMDb 8.2</span>
@@ -379,7 +382,7 @@ footer a{color:var(--accent-2);text-decoration:none}
         <span class="score-tag imdb">IMDb 7.5</span>
         <span class="score-tag rt">RT 92%</span>
       </div>
-      <h3>The Wicker Man</h3>
+      <h3><a class="film-link" href="/movies/the-wicker-man.html">The Wicker Man</a></h3>
       <div class="card-meta">1973 &middot; Robin Hardy</div>
       <p class="card-desc">The film that gave folk horror its vocabulary. A devout Christian detective arrives on a remote Scottish island and finds a community devoted to pagan worship — unaware that the islanders have been conducting a ritual all along.</p>
       <div class="card-streams"><span>Tubi</span></div>
@@ -396,7 +399,7 @@ footer a{color:var(--accent-2);text-decoration:none}
         <span class="score-tag imdb">IMDb 7.1</span>
         <span class="score-tag rt">RT 83%</span>
       </div>
-      <h3>Midsommar</h3>
+      <h3><a class="film-link" href="/movies/midsommar.html">Midsommar</a></h3>
       <div class="card-meta">2019 &middot; Ari Aster</div>
       <p class="card-desc">Ari Aster inverted the genre's visual grammar by setting his folk horror nightmare in perpetual, bleached-out Swedish daylight. It doubles as a devastating breakup movie — the commune offers Dani the emotional reciprocity her relationship never did.</p>
       <div class="card-streams"><span>Apple TV+</span></div>
@@ -414,7 +417,7 @@ footer a{color:var(--accent-2);text-decoration:none}
     <div class="rank">04</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/zap5hpFCWSvdWSuPGAQyjUv2wAC.jpg" alt="The Witch" loading="lazy"></div>
     <div class="info">
-      <h3>The Witch</h3>
+      <h3><a class="film-link" href="/movies/the-witch.html">The Witch</a></h3>
       <div class="item-meta">2015 &middot; Robert Eggers</div>
       <p class="item-desc">Eggers' debut reconstructs 1630s New England with fanatical accuracy — dialogue drawn from actual Puritan journals. The horror is in the family's theology turning against them: they already believed in the devil before they ever saw one.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.9</span><span class="s tom">RT 90%</span></div>
@@ -426,7 +429,7 @@ footer a{color:var(--accent-2);text-decoration:none}
     <div class="rank">05</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/9022CYEGqYETCeXN1oE3uwYJWub.jpg" alt="The Ritual" loading="lazy"></div>
     <div class="info">
-      <h3>The Ritual</h3>
+      <h3><a class="film-link" href="/movies/the-ritual.html">The Ritual</a></h3>
       <div class="item-meta">2017 &middot; David Bruckner</div>
       <p class="item-desc">Four old friends take a hiking shortcut through a primeval Scandinavian forest and find something worshipped there long before Christianity. The forest itself feels sentient and hostile — every gnarled tree amplifies the survivors' guilt into something monstrous.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.3</span><span class="s tom">RT 74%</span></div>
@@ -438,7 +441,7 @@ footer a{color:var(--accent-2);text-decoration:none}
     <div class="rank">06</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/rd269f2Yftxxam3EOJPYVwrvjIJ.jpg" alt="Apostle" loading="lazy"></div>
     <div class="info">
-      <h3>Apostle</h3>
+      <h3><a class="film-link" href="/movies/apostle.html">Apostle</a></h3>
       <div class="item-meta">2018 &middot; Gareth Evans</div>
       <p class="item-desc">Gareth Evans pivots from The Raid's kinetic action to period folk horror. A man infiltrates a remote island cult to rescue his kidnapped sister, and what begins as an undercover thriller spirals into something far stranger as the island's true religion reveals itself.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.3</span><span class="s tom">RT 79%</span></div>
@@ -450,7 +453,7 @@ footer a{color:var(--accent-2);text-decoration:none}
     <div class="rank">07</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/gP9yviboTGWGolqUZKIB1UkF1C2.jpg" alt="Lamb" loading="lazy"></div>
     <div class="info">
-      <h3>Lamb</h3>
+      <h3><a class="film-link" href="/movies/lamb.html">Lamb</a></h3>
       <div class="item-meta">2021 &middot; V. Johannsson</div>
       <p class="item-desc">An Icelandic couple discovers something unnatural among their flock and decides to raise it as their own. Folk horror at its most quiet and mythic — its dread comes from the certainty that nature will reclaim what was taken.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.3</span><span class="s tom">RT 86%</span></div>
