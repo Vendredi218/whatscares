@@ -10,7 +10,7 @@ const BASE_URL = USE_OPENROUTER
   ? (process.env.OPENROUTER_BASE_URL || 'https://openrouter.ai/api/v1')
   : (process.env.MINIMAX_BASE_URL || 'https://api.minimax.io/v1');
 const MODEL = USE_OPENROUTER
-  ? (process.env.OPENROUTER_MODEL || 'deepseek/deepseek-v4-flash-0731')
+  ? (process.env.OPENROUTER_MODEL || 'deepseek/deepseek-v4-pro')
   : (process.env.MINIMAX_MODEL || 'MiniMax-M3');
 
 function catalogLines() {
@@ -71,7 +71,7 @@ function extractJSON(text) {
 
 export async function moodSearch(query, apiKey) {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 50_000);
+  const timer = setTimeout(() => controller.abort(), 55_000);
   try {
     const res = await fetch(`${BASE_URL}/chat/completions`, {
       method: 'POST',

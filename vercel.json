@@ -2,8 +2,23 @@
   "headers": [
     {
       "source": "/(.*)",
-      "has": [{ "type": "host", "value": "whatscares.vercel.app" }],
-      "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
+      "has": [
+        {
+          "type": "host",
+          "value": "whatscares.vercel.app"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
     }
-  ]
+  ],
+  "functions": {
+    "api/mood-search.js": {
+      "maxDuration": 60
+    }
+  }
 }
