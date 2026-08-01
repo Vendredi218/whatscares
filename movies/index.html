@@ -16,11 +16,13 @@
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/atmo.css">
+<script src="/atmo.js" defer></script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0d0d0d;--surface:#141414;--surface-2:#1a1a1a;--border:#222;--text:#e5e5e5;--text-2:#999;--text-3:#555;--accent:#c4352a;--gold:#e2b616;--sans:'Inter',-apple-system,system-ui,sans-serif;--serif:'EB Garamond',Georgia,serif;--radius:6px}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased}
+:root{--bg: #e9e3d5;--surface: #f4f0e6;--surface-2: #dcd3c0;--border: #cdc2ab;--text: #191512;--text-2: #584f44;--text-3: #6b6153;--accent: #a82e22;--accent-2: #c4432f;--gold: #7d5c0d;--sans:'Inter',-apple-system,system-ui,sans-serif;--serif:'EB Garamond',Georgia,serif;--mono:'Courier Prime','Courier New',monospace;--chrome:rgba(238,233,222,0.90);--panel:rgba(244,240,230,0.92);--field:rgba(255,253,247,0.78);--hover:rgba(205,194,171,0.45);--radius:3px}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:960px;margin:0 auto;padding:0 20px}
 header.site{border-bottom:1px solid var(--border);padding:16px 0}
@@ -28,48 +30,65 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between}
 .logo{font-family:var(--serif);font-size:22px;font-weight:600;letter-spacing:.5px;display:flex;align-items:center;gap:10px}
 .logo em{color:var(--accent);font-style:italic}
 .logo svg{height:26px;width:auto;display:block;flex:none}
-nav.top a{color:var(--text-2);font-size:14px;margin-left:20px}
+nav.top a{color:var(--text-2);font-size: 15.5px;margin-left:20px;font-weight:700}
+nav.top .lights{margin-left:20px;background:none;border:1px solid var(--border);color:var(--text-2);font:inherit;font-size: 13.5px;letter-spacing:.5px;padding:5px 11px;border-radius:999px;cursor:pointer}
+nav.top .lights:hover{color:var(--text);border-color:var(--text-3)}
 nav.top a:hover{color:var(--text)}
-.crumbs{font-size:13px;color:var(--text-3);margin:20px 0}
+.crumbs{font-size: 14.5px;color:var(--text-3);margin:20px 0;font-weight:700}
 .crumbs a{color:var(--text-2)}.crumbs a:hover{color:var(--text)}
 .hero{display:grid;grid-template-columns:250px 1fr;gap:32px;margin-bottom:40px}
-.poster img{width:100%;border-radius:var(--radius);border:1px solid var(--border);display:block;background:var(--surface-2)}
+.poster img{width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;border-radius:var(--radius);border:1px solid var(--border);display:block;background:var(--surface-2)}
 h1{font-family:var(--serif);font-size:40px;font-weight:600;line-height:1.15;margin-bottom:6px}
-.byline{color:var(--text-2);font-size:15px;margin-bottom:14px}
+.byline{color:var(--text-2);font-size: 16.5px;margin-bottom:14px;font-weight:700}
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
-.tag{font-size:12px;letter-spacing:.4px;padding:4px 10px;border:1px solid var(--border);border-radius:999px;color:var(--text-2)}
+.tag{font-size: 13.5px;letter-spacing:.4px;padding:4px 10px;border:1px solid var(--border);border-radius:999px;color:var(--text-2);font-weight:700}
 a.tag:hover{border-color:var(--accent);color:var(--text)}
 .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
 .chip{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px;display:flex;align-items:baseline;gap:7px}
-.chip .src{font-size:11px;letter-spacing:.5px;color:var(--text-3);font-weight:500}
+.chip .src{font-size: 13px;letter-spacing:.5px;color:var(--text-3);font-weight:700}
 .chip .src.imdb{color:var(--gold)}.chip .src.rt{color:var(--accent)}.chip .src.pop{color:#d98e04}.chip .src.db{color:#2da44e}
-.chip b{font-weight:600;font-size:16px}
-.chip i{font-style:normal;font-size:11px;color:var(--text-3)}
+.chip b{font-weight:600;font-size: 17px}
+.chip i{font-style:normal;font-size: 13px;color:var(--text-3)}
+.rate{border-top:1px solid var(--border);margin-top:22px;padding-top:18px}
+.rate h3{font-family:var(--mono);font-size:12.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-3);font-weight:700;margin-bottom:12px}
+.rate .row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.rate .lbl{font-family:var(--mono);font-size:12.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-3);font-weight:700;width:64px;flex:none}
+.rate .pips{display:flex;gap:6px}
+.rate .pip{width:17px;height:17px;border-radius:50%;border:1.5px solid var(--border);background:none;padding:0;cursor:pointer;transition:transform .12s,background .12s,border-color .12s}
+.rate .pip:hover,.rate .pip:focus-visible{border-color:var(--accent);transform:scale(1.18);outline:none}
+.rate .pip.on{background:var(--accent);border-color:var(--accent)}
+.rate .agg{font-size:14px;color:var(--text-2);margin-left:6px;font-variant-numeric:tabular-nums}
+.rate .agg b{color:var(--text);font-weight:600;display:inline-block}
+.rate .agg b.bump{animation:pop .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{0%{transform:scale(1);color:var(--text)}40%{transform:scale(1.5);color:var(--accent)}100%{transform:scale(1);color:var(--text)}}
+.rate .note{font-size:13.5px;color:var(--text-3);margin-top:10px}
+.rate .note a{color:var(--gold);border-bottom:1px solid rgba(125,92,13,.35)}
+@media (prefers-reduced-motion: reduce){.rate .agg b.bump{animation:none}.rate .pip{transition:none}}
 .intensity{margin-bottom:22px}
-.intensity .row{display:flex;align-items:center;gap:12px;font-size:14px;margin-bottom:4px}
+.intensity .row{display:flex;align-items:center;gap:12px;font-size: 15.5px;margin-bottom:4px}
 .intensity .row span.lbl{width:60px;color:var(--text-2)}
-.dots{letter-spacing:3px;color:var(--text-3);font-size:13px}
+.dots{letter-spacing:3px;color:var(--text-3);font-size: 14.5px}
 .dots b{color:var(--accent);font-weight:400}
-.stream{font-size:14px;color:var(--text-2);margin-bottom:22px}
+.stream{font-size: 15.5px;color:var(--text-2);margin-bottom:22px}
 .stream b{color:var(--text);font-weight:500}
-.trailer{display:inline-flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:8px 14px 8px 8px;font-size:14px;color:var(--text-2)}
+.trailer{display:inline-flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:8px 14px 8px 8px;font-size: 15.5px;color:var(--text-2)}
 .trailer:hover{border-color:var(--accent);color:var(--text)}
 .trailer img{width:80px;height:45px;object-fit:cover;border-radius:4px;display:block}
 section{margin-bottom:44px}
 h2{font-family:var(--serif);font-size:26px;font-weight:600;margin-bottom:14px}
-.blurb p{font-size:16.5px;line-height:1.75;color:var(--text);max-width:70ch}
-.faq dt{font-weight:500;font-size:16px;margin-top:18px;margin-bottom:6px}
-.faq dd{color:var(--text-2);font-size:15px;max-width:70ch}
+.blurb p{font-size: 17.5px;line-height:1.75;color:var(--text);max-width:70ch}
+.faq dt{font-weight:500;font-size: 17px;margin-top:18px;margin-bottom:6px}
+.faq dd{color:var(--text-2);font-size: 16.5px;max-width:70ch}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:16px}
 .grid a{display:block}
-.grid img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:var(--radius);border:1px solid var(--border);display:block;background:var(--surface-2)}
-.grid .t{font-size:13.5px;margin-top:8px;line-height:1.35}
-.grid .y{font-size:12px;color:var(--text-3)}
+.grid img{width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;border-radius:var(--radius);border:1px solid var(--border);display:block;background:var(--surface-2)}
+.grid .t{font-size: 15px;margin-top:8px;line-height:1.35}
+.grid .y{font-size: 13.5px;color:var(--text-3)}
 .grid a:hover .t{color:var(--gold)}
 .morelinks{display:flex;flex-wrap:wrap;gap:10px}
-.morelinks a{border:1px solid var(--border);border-radius:999px;padding:7px 16px;font-size:13.5px;color:var(--text-2)}
+.morelinks a{border:1px solid var(--border);border-radius:999px;padding:7px 16px;font-size: 15px;color:var(--text-2)}
 .morelinks a:hover{border-color:var(--accent);color:var(--text)}
-footer.site{border-top:1px solid var(--border);padding:28px 0 40px;margin-top:20px;font-size:13px;color:var(--text-3)}
+footer.site{border-top:1px solid var(--border);padding:28px 0 40px;margin-top:20px;font-size: 14.5px;color:var(--text-3)}
 footer.site a{color:var(--text-2);margin-right:16px}
 footer.site a:hover{color:var(--text)}
 footer.site .row{margin-bottom:10px}
@@ -77,24 +96,59 @@ footer.site .row{margin-bottom:10px}
 .listrows li{border-bottom:1px solid var(--border)}
 .listrows a{display:flex;align-items:center;gap:14px;padding:10px 0}
 .listrows img{width:44px;height:66px;object-fit:cover;border-radius:4px;background:var(--surface-2);flex:none}
-.listrows .t{font-size:15.5px}
-.listrows .meta{font-size:13px;color:var(--text-3)}
-.listrows .score{margin-left:auto;font-size:14px;color:var(--gold);white-space:nowrap}
+.listrows .t{font-size: 17px}
+.listrows .meta{font-size: 14.5px;color:var(--text-3)}
+.listrows .score{margin-left:auto;font-size: 15.5px;color:var(--gold);white-space:nowrap}
 .listrows a:hover .t{color:var(--gold)}
-.intro{color:var(--text-2);font-size:15.5px;max-width:70ch;margin-bottom:28px}
+.intro{color:var(--text-2);font-size: 17px;max-width:70ch;margin-bottom:28px}
 @media(max-width:640px){
   .hero{grid-template-columns:1fr;gap:20px}
   .poster{max-width:220px}
   h1{font-size:30px}
-  nav.top a{margin-left:14px;font-size:13px}
+  nav.top a{margin-left:14px;font-size: 14.5px}
 }
+
+/* field guide design system — appended overrides win the cascade */
+::selection{background:rgba(181,55,42,.4);color:var(--text)}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:5px}
+nav.top a{font-family:var(--mono);font-size: 12.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-3)}
+nav.top a:hover{color:var(--text)}
+nav.top a.threshold{color:var(--accent-2);border-bottom:1px dotted rgba(224,87,63,.55);padding-bottom:2px}
+.crumbs{font-family:var(--mono);font-size: 12.5px;letter-spacing:1.1px;text-transform:uppercase}
+h1{font-weight:500;letter-spacing:-.5px}
+.byline{font-family:var(--mono);font-size: 13px;letter-spacing:1.1px;text-transform:uppercase;color:var(--text-3)}
+.tag{font-family:var(--mono);font-size: 12.5px;letter-spacing:1.1px;text-transform:uppercase;border-radius:2px;padding:5px 11px}
+.chip{border-radius:3px;background:var(--field)}
+.chip .src{font-family:var(--mono);font-size: 12px;letter-spacing:1px;text-transform:uppercase}
+.chip b{font-family:var(--mono);font-weight:700}
+.chip i{font-family:var(--mono);font-size: 12px}
+.intensity .row span.lbl{font-family:var(--mono);font-size: 12.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-3);width:64px}
+.dots{font-size: 12px;letter-spacing:5px;color:#3a3226}
+.dots b{color:var(--accent-2);text-shadow:0 0 8px rgba(224,87,63,.4)}
+main{counter-reset:plate}
+section h2{counter-increment:plate;font-weight:500;border-top:1px solid var(--border);padding-top:26px}
+section h2::before{content:'PLATE ' counter(plate,upper-roman);display:block;font-family:var(--mono);font-size: 12.5px;letter-spacing:3.5px;color:var(--accent-2);margin-bottom:9px}
+.blurb p{font-family:var(--serif);font-size:19.5px;line-height:1.7}
+.trailer{border-radius:3px}
+.trailer span{font-family:var(--mono);font-size: 12.5px;letter-spacing:1.4px;text-transform:uppercase}
+.grid .t{font-size: 14.5px}
+.grid .y{font-family:var(--mono);font-size: 12.5px}
+.morelinks a{border-radius:2px;font-family:var(--mono);font-size: 12.5px;letter-spacing:1.1px;text-transform:uppercase}
+footer.site{font-family:var(--mono);font-size: 12.5px;letter-spacing:1.1px;text-transform:uppercase}
+footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
+.listrows .meta{font-family:var(--mono);font-size: 12.5px}
+.listrows .score{font-family:var(--mono)}
+.poster img,.grid img{filter:saturate(.85) contrast(1.05)}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"All Horror Films on WhatScares","numberOfItems":136,"itemListElement":[{"@type":"ListItem","position":1,"name":"[REC] (2007)","url":"https://whatscares.com/movies/rec.html"},{"@type":"ListItem","position":2,"name":"28 Days Later (2002)","url":"https://whatscares.com/movies/28-days-later.html"},{"@type":"ListItem","position":3,"name":"A Girl Walks Home Alone at Night (2014)","url":"https://whatscares.com/movies/a-girl-walks-home-alone-at-night.html"},{"@type":"ListItem","position":4,"name":"A Nightmare on Elm Street (1984)","url":"https://whatscares.com/movies/a-nightmare-on-elm-street.html"},{"@type":"ListItem","position":5,"name":"A Quiet Place (2018)","url":"https://whatscares.com/movies/a-quiet-place.html"},{"@type":"ListItem","position":6,"name":"A Tale of Two Sisters (2003)","url":"https://whatscares.com/movies/a-tale-of-two-sisters.html"},{"@type":"ListItem","position":7,"name":"Alien (1979)","url":"https://whatscares.com/movies/alien.html"},{"@type":"ListItem","position":8,"name":"Annabelle: Creation (2017)","url":"https://whatscares.com/movies/annabelle-creation.html"},{"@type":"ListItem","position":9,"name":"Annihilation (2018)","url":"https://whatscares.com/movies/annihilation.html"},{"@type":"ListItem","position":10,"name":"Apostle (2018)","url":"https://whatscares.com/movies/apostle.html"},{"@type":"ListItem","position":11,"name":"Audition (1999)","url":"https://whatscares.com/movies/audition.html"},{"@type":"ListItem","position":12,"name":"Barbarian (2022)","url":"https://whatscares.com/movies/barbarian.html"},{"@type":"ListItem","position":13,"name":"Bedevilled (2010)","url":"https://whatscares.com/movies/bedevilled.html"},{"@type":"ListItem","position":14,"name":"Bone Tomahawk (2015)","url":"https://whatscares.com/movies/bone-tomahawk.html"},{"@type":"ListItem","position":15,"name":"Bulbbul (2020)","url":"https://whatscares.com/movies/bulbbul.html"},{"@type":"ListItem","position":16,"name":"Candyman (1992)","url":"https://whatscares.com/movies/candyman.html"},{"@type":"ListItem","position":17,"name":"Carrie (1976)","url":"https://whatscares.com/movies/carrie.html"},{"@type":"ListItem","position":18,"name":"Color Out of Space (2019)","url":"https://whatscares.com/movies/color-out-of-space.html"},{"@type":"ListItem","position":19,"name":"Creep (2014)","url":"https://whatscares.com/movies/creep.html"},{"@type":"ListItem","position":20,"name":"Cure (1997)","url":"https://whatscares.com/movies/cure.html"},{"@type":"ListItem","position":21,"name":"Dark Water (2002)","url":"https://whatscares.com/movies/dark-water.html"},{"@type":"ListItem","position":22,"name":"Dead Silence (2007)","url":"https://whatscares.com/movies/dead-silence.html"},{"@type":"ListItem","position":23,"name":"Deep Red (1975)","url":"https://whatscares.com/movies/deep-red.html"},{"@type":"ListItem","position":24,"name":"Detention (2019)","url":"https://whatscares.com/movies/detention.html"},{"@type":"ListItem","position":25,"name":"Don't Look Now (1973)","url":"https://whatscares.com/movies/dont-look-now.html"},{"@type":"ListItem","position":26,"name":"Double Vision (2002)","url":"https://whatscares.com/movies/double-vision.html"},{"@type":"ListItem","position":27,"name":"Dumplings (2004)","url":"https://whatscares.com/movies/dumplings.html"},{"@type":"ListItem","position":28,"name":"Evil Dead II (1987)","url":"https://whatscares.com/movies/evil-dead-ii.html"},{"@type":"ListItem","position":29,"name":"Exhuma (2024)","url":"https://whatscares.com/movies/exhuma.html"},{"@type":"ListItem","position":30,"name":"Eyes Without a Face (1960)","url":"https://whatscares.com/movies/eyes-without-a-face.html"},{"@type":"ListItem","position":31,"name":"Get Out (2017)","url":"https://whatscares.com/movies/get-out.html"},{"@type":"ListItem","position":32,"name":"Gonjiam: Haunted Asylum (2018)","url":"https://whatscares.com/movies/gonjiam-haunted-asylum.html"},{"@type":"ListItem","position":33,"name":"Goodnight Mommy (2014)","url":"https://whatscares.com/movies/goodnight-mommy.html"},{"@type":"ListItem","position":34,"name":"Halloween (1978)","url":"https://whatscares.com/movies/halloween.html"},{"@type":"ListItem","position":35,"name":"Hell House LLC (2015)","url":"https://whatscares.com/movies/hell-house-llc.html"},{"@type":"ListItem","position":36,"name":"Hellraiser (1987)","url":"https://whatscares.com/movies/hellraiser.html"},{"@type":"ListItem","position":37,"name":"Hereditary (2018)","url":"https://whatscares.com/movies/hereditary.html"},{"@type":"ListItem","position":38,"name":"His House (2020)","url":"https://whatscares.com/movies/his-house.html"},{"@type":"ListItem","position":39,"name":"House (1977)","url":"https://whatscares.com/movies/house.html"},{"@type":"ListItem","position":40,"name":"Hush (2016)","url":"https://whatscares.com/movies/hush.html"},{"@type":"ListItem","position":41,"name":"I Saw the Devil (2010)","url":"https://whatscares.com/movies/i-saw-the-devil.html"},{"@type":"ListItem","position":42,"name":"Impetigore (2019)","url":"https://whatscares.com/movies/impetigore.html"},{"@type":"ListItem","position":43,"name":"Incantation (2022)","url":"https://whatscares.com/movies/incantation.html"},{"@type":"ListItem","position":44,"name":"Inside (2007)","url":"https://whatscares.com/movies/inside.html"},{"@type":"ListItem","position":45,"name":"Insidious (2010)","url":"https://whatscares.com/movies/insidious.html"},{"@type":"ListItem","position":46,"name":"It (2017)","url":"https://whatscares.com/movies/it.html"},{"@type":"ListItem","position":47,"name":"It Follows (2014)","url":"https://whatscares.com/movies/it-follows.html"},{"@type":"ListItem","position":48,"name":"Ju-On: The Grudge (2002)","url":"https://whatscares.com/movies/ju-on-the-grudge.html"},{"@type":"ListItem","position":49,"name":"Kill List (2011)","url":"https://whatscares.com/movies/kill-list.html"},{"@type":"ListItem","position":50,"name":"Kwaidan (1964)","url":"https://whatscares.com/movies/kwaidan.html"},{"@type":"ListItem","position":51,"name":"Lake Mungo (2008)","url":"https://whatscares.com/movies/lake-mungo.html"},{"@type":"ListItem","position":52,"name":"Lamb (2021)","url":"https://whatscares.com/movies/lamb.html"},{"@type":"ListItem","position":53,"name":"Late Night with the Devil (2023)","url":"https://whatscares.com/movies/late-night-with-the-devil.html"},{"@type":"ListItem","position":54,"name":"Let the Right One In (2008)","url":"https://whatscares.com/movies/let-the-right-one-in.html"},{"@type":"ListItem","position":55,"name":"Longlegs (2024)","url":"https://whatscares.com/movies/longlegs.html"},{"@type":"ListItem","position":56,"name":"M3GAN (2022)","url":"https://whatscares.com/movies/m3gan.html"},{"@type":"ListItem","position":57,"name":"Mandy (2018)","url":"https://whatscares.com/movies/mandy.html"},{"@type":"ListItem","position":58,"name":"Martyrs (2008)","url":"https://whatscares.com/movies/martyrs.html"},{"@type":"ListItem","position":59,"name":"Midsommar (2019)","url":"https://whatscares.com/movies/midsommar.html"},{"@type":"ListItem","position":60,"name":"Mr. Vampire (1985)","url":"https://whatscares.com/movies/mr-vampire.html"},{"@type":"ListItem","position":61,"name":"Nope (2022)","url":"https://whatscares.com/movies/nope.html"},{"@type":"ListItem","position":62,"name":"Noroi: The Curse (2005)","url":"https://whatscares.com/movies/noroi-the-curse.html"},{"@type":"ListItem","position":63,"name":"Nosferatu (2024)","url":"https://whatscares.com/movies/nosferatu.html"},{"@type":"ListItem","position":64,"name":"Oddity (2024)","url":"https://whatscares.com/movies/oddity.html"},{"@type":"ListItem","position":65,"name":"One Cut of the Dead (2017)","url":"https://whatscares.com/movies/one-cut-of-the-dead.html"},{"@type":"ListItem","position":66,"name":"Onibaba (1964)","url":"https://whatscares.com/movies/onibaba.html"},{"@type":"ListItem","position":67,"name":"Out of the Dark (1995)","url":"https://whatscares.com/movies/out-of-the-dark.html"},{"@type":"ListItem","position":68,"name":"Paranormal Activity (2007)","url":"https://whatscares.com/movies/paranormal-activity.html"},{"@type":"ListItem","position":69,"name":"Pearl (2022)","url":"https://whatscares.com/movies/pearl.html"},{"@type":"ListItem","position":70,"name":"Poltergeist (1982)","url":"https://whatscares.com/movies/poltergeist.html"},{"@type":"ListItem","position":71,"name":"Possession (1981)","url":"https://whatscares.com/movies/possession.html"},{"@type":"ListItem","position":72,"name":"Possessor (2020)","url":"https://whatscares.com/movies/possessor.html"},{"@type":"ListItem","position":73,"name":"Possum (2018)","url":"https://whatscares.com/movies/possum.html"},{"@type":"ListItem","position":74,"name":"Psycho (1960)","url":"https://whatscares.com/movies/psycho.html"},{"@type":"ListItem","position":75,"name":"Pulse (2001)","url":"https://whatscares.com/movies/pulse.html"},{"@type":"ListItem","position":76,"name":"Raw (2016)","url":"https://whatscares.com/movies/raw.html"},{"@type":"ListItem","position":77,"name":"Re-Animator (1985)","url":"https://whatscares.com/movies/re-animator.html"},{"@type":"ListItem","position":78,"name":"Rigor Mortis (2013)","url":"https://whatscares.com/movies/rigor-mortis.html"},{"@type":"ListItem","position":79,"name":"Ringu (1998)","url":"https://whatscares.com/movies/ringu.html"},{"@type":"ListItem","position":80,"name":"Rosemary's Baby (1968)","url":"https://whatscares.com/movies/rosemarys-baby.html"},{"@type":"ListItem","position":81,"name":"Saint Maud (2019)","url":"https://whatscares.com/movies/saint-maud.html"},{"@type":"ListItem","position":82,"name":"Satan's Slaves (2017)","url":"https://whatscares.com/movies/satans-slaves.html"},{"@type":"ListItem","position":83,"name":"Scream (1996)","url":"https://whatscares.com/movies/scream.html"},{"@type":"ListItem","position":84,"name":"Session 9 (2001)","url":"https://whatscares.com/movies/session-9.html"},{"@type":"ListItem","position":85,"name":"Shutter (2004)","url":"https://whatscares.com/movies/shutter.html"},{"@type":"ListItem","position":86,"name":"Sinister (2012)","url":"https://whatscares.com/movies/sinister.html"},{"@type":"ListItem","position":87,"name":"Sleep (2023)","url":"https://whatscares.com/movies/sleep.html"},{"@type":"ListItem","position":88,"name":"Smile (2022)","url":"https://whatscares.com/movies/smile.html"},{"@type":"ListItem","position":89,"name":"Speak No Evil (2022)","url":"https://whatscares.com/movies/speak-no-evil.html"},{"@type":"ListItem","position":90,"name":"Stree (2018)","url":"https://whatscares.com/movies/stree.html"},{"@type":"ListItem","position":91,"name":"Suspiria (1977)","url":"https://whatscares.com/movies/suspiria.html"},{"@type":"ListItem","position":92,"name":"Talk to Me (2022)","url":"https://whatscares.com/movies/talk-to-me.html"},{"@type":"ListItem","position":93,"name":"Terrified (2017)","url":"https://whatscares.com/movies/terrified.html"},{"@type":"ListItem","position":94,"name":"Terrifier 2 (2022)","url":"https://whatscares.com/movies/terrifier-2.html"},{"@type":"ListItem","position":95,"name":"Tetsuo: The Iron Man (1989)","url":"https://whatscares.com/movies/tetsuo-the-iron-man.html"},{"@type":"ListItem","position":96,"name":"The Autopsy of Jane Doe (2016)","url":"https://whatscares.com/movies/the-autopsy-of-jane-doe.html"},{"@type":"ListItem","position":97,"name":"The Babadook (2014)","url":"https://whatscares.com/movies/the-babadook.html"},{"@type":"ListItem","position":98,"name":"The Beyond (1981)","url":"https://whatscares.com/movies/the-beyond.html"},{"@type":"ListItem","position":99,"name":"The Blair Witch Project (1999)","url":"https://whatscares.com/movies/the-blair-witch-project.html"},{"@type":"ListItem","position":100,"name":"The Boy (2016)","url":"https://whatscares.com/movies/the-boy.html"},{"@type":"ListItem","position":101,"name":"The Cabin in the Woods (2011)","url":"https://whatscares.com/movies/the-cabin-in-the-woods.html"},{"@type":"ListItem","position":102,"name":"The Call (2020)","url":"https://whatscares.com/movies/the-call.html"},{"@type":"ListItem","position":103,"name":"The Conjuring (2013)","url":"https://whatscares.com/movies/the-conjuring.html"},{"@type":"ListItem","position":104,"name":"The Dark and the Wicked (2020)","url":"https://whatscares.com/movies/the-dark-and-the-wicked.html"},{"@type":"ListItem","position":105,"name":"The Descent (2005)","url":"https://whatscares.com/movies/the-descent.html"},{"@type":"ListItem","position":106,"name":"The Devil's Backbone (2001)","url":"https://whatscares.com/movies/the-devils-backbone.html"},{"@type":"ListItem","position":107,"name":"The Exorcist (1973)","url":"https://whatscares.com/movies/the-exorcist.html"},{"@type":"ListItem","position":108,"name":"The Eye (2002)","url":"https://whatscares.com/movies/the-eye.html"},{"@type":"ListItem","position":109,"name":"The Fly (1986)","url":"https://whatscares.com/movies/the-fly.html"},{"@type":"ListItem","position":110,"name":"The Host (2006)","url":"https://whatscares.com/movies/the-host.html"},{"@type":"ListItem","position":111,"name":"The House of the Devil (2009)","url":"https://whatscares.com/movies/the-house-of-the-devil.html"},{"@type":"ListItem","position":112,"name":"The Lighthouse (2019)","url":"https://whatscares.com/movies/the-lighthouse.html"},{"@type":"ListItem","position":113,"name":"The Medium (2021)","url":"https://whatscares.com/movies/the-medium.html"},{"@type":"ListItem","position":114,"name":"The Omen (1976)","url":"https://whatscares.com/movies/the-omen.html"},{"@type":"ListItem","position":115,"name":"The Orphanage (2007)","url":"https://whatscares.com/movies/the-orphanage.html"},{"@type":"ListItem","position":116,"name":"The Others (2001)","url":"https://whatscares.com/movies/the-others.html"},{"@type":"ListItem","position":117,"name":"The Quiet Family (1998)","url":"https://whatscares.com/movies/the-quiet-family.html"},{"@type":"ListItem","position":118,"name":"The Ritual (2017)","url":"https://whatscares.com/movies/the-ritual.html"},{"@type":"ListItem","position":119,"name":"The Sadness (2021)","url":"https://whatscares.com/movies/the-sadness.html"},{"@type":"ListItem","position":120,"name":"The Shining (1980)","url":"https://whatscares.com/movies/the-shining.html"},{"@type":"ListItem","position":121,"name":"The Substance (2024)","url":"https://whatscares.com/movies/the-substance.html"},{"@type":"ListItem","position":122,"name":"The Texas Chain Saw Massacre (1974)","url":"https://whatscares.com/movies/the-texas-chain-saw-massacre.html"},{"@type":"ListItem","position":123,"name":"The Thing (1982)","url":"https://whatscares.com/movies/the-thing.html"},{"@type":"ListItem","position":124,"name":"The Void (2016)","url":"https://whatscares.com/movies/the-void.html"},{"@type":"ListItem","position":125,"name":"The Wailing (2016)","url":"https://whatscares.com/movies/the-wailing.html"},{"@type":"ListItem","position":126,"name":"The Wicker Man (1973)","url":"https://whatscares.com/movies/the-wicker-man.html"},{"@type":"ListItem","position":127,"name":"The Witch (2015)","url":"https://whatscares.com/movies/the-witch.html"},{"@type":"ListItem","position":128,"name":"Thirst (2009)","url":"https://whatscares.com/movies/thirst.html"},{"@type":"ListItem","position":129,"name":"Tigers Are Not Afraid (2017)","url":"https://whatscares.com/movies/tigers-are-not-afraid.html"},{"@type":"ListItem","position":130,"name":"Train to Busan (2016)","url":"https://whatscares.com/movies/train-to-busan.html"},{"@type":"ListItem","position":131,"name":"Tumbbad (2018)","url":"https://whatscares.com/movies/tumbbad.html"},{"@type":"ListItem","position":132,"name":"Under the Shadow (2016)","url":"https://whatscares.com/movies/under-the-shadow.html"},{"@type":"ListItem","position":133,"name":"Under the Skin (2013)","url":"https://whatscares.com/movies/under-the-skin.html"},{"@type":"ListItem","position":134,"name":"Us (2019)","url":"https://whatscares.com/movies/us.html"},{"@type":"ListItem","position":135,"name":"When Evil Lurks (2023)","url":"https://whatscares.com/movies/when-evil-lurks.html"},{"@type":"ListItem","position":136,"name":"X (2022)","url":"https://whatscares.com/movies/x.html"}]}</script>
 </head>
 <body>
+<div class="atmo" aria-hidden="true"><div class="flashlight" id="flashlight"></div><div class="vignette"></div><div class="flicker" id="flicker"></div><div class="grain" id="grain"></div></div>
 <header class="site"><div class="wrap">
 <a class="logo" href="/"><svg viewBox="18 10 28 50" fill="currentColor" aria-hidden="true"><path d="M20.2 29.5A13 13 0 1 1 39.5 34.6C36 37.2 34.4 41 34.3 46L29.3 46C29.6 41.2 32.4 36.6 34.9 31.9A8.5 8.5 0 1 0 22.3 28.5Z"/><circle cx="32" cy="54" r="5" fill="#c4352a"/></svg>What<em>Scares</em></a>
-<nav class="top"><a href="/movies/">All Films</a><a href="/#collections">Lists</a><a href="/">Mood Search</a></nav>
+<nav class="top"><a href="/movies/">All Films</a><a href="/#collections">Lists</a><a href="/">Mood Search</a><a href="/find-your-fear.html" class="threshold">Find Your Fear</a><button class="lights" id="lightsBtn" type="button">&#9680; lights out</button></nav>
 </div></header>
 <main class="wrap">
 <nav class="crumbs"><a href="/">Home</a> / All Films</nav>
@@ -153,7 +207,7 @@ footer.site .row{margin-bottom:10px}
 <li><a href="/movies/kwaidan.html"><img src="https://image.tmdb.org/t/p/w92/t9UMfViYl47SdZZatKQ1JKjjCgs.jpg" alt="" loading="lazy" width="44" height="66"><span><span class="t">Kwaidan</span> <span class="meta">1964 · Masaki Kobayashi</span></span><span class="score">★ 7.9</span></a></li>
 <li><a href="/movies/lake-mungo.html"><img src="https://image.tmdb.org/t/p/w92/g0zCELYfBfSv8TOGC13buABVN53.jpg" alt="" loading="lazy" width="44" height="66"><span><span class="t">Lake Mungo</span> <span class="meta">2008 · Joel Anderson</span></span><span class="score">★ 6.2</span></a></li>
 <li><a href="/movies/lamb.html"><img src="https://image.tmdb.org/t/p/w92/gP9yviboTGWGolqUZKIB1UkF1C2.jpg" alt="" loading="lazy" width="44" height="66"><span><span class="t">Lamb</span> <span class="meta">2021 · V. Jóhannsson</span></span><span class="score">★ 6.3</span></a></li>
-<li><a href="/movies/late-night-with-the-devil.html"><img src="https://image.tmdb.org/t/p/w92/hqcexYHbiTBfDIdDWxrxPtVndBX.jpg" alt="" loading="lazy" width="44" height="66"><span><span class="t">Late Night with the Devil</span> <span class="meta">2023 · Cameron Cairnes</span></span><span class="score">★ 7</span></a></li>
+<li><a href="/movies/late-night-with-the-devil.html"><img src="https://image.tmdb.org/t/p/w92/mu8LRWT9GHkfiyHm7kgxT6YNvMW.jpg" alt="" loading="lazy" width="44" height="66"><span><span class="t">Late Night with the Devil</span> <span class="meta">2023 · Cameron Cairnes</span></span><span class="score">★ 7</span></a></li>
 <li><a href="/movies/let-the-right-one-in.html"><img src="https://image.tmdb.org/t/p/w92/7IG4WjaAOVDlLvLUkh513HSwhW8.jpg" alt="" loading="lazy" width="44" height="66"><span><span class="t">Let the Right One In</span> <span class="meta">2008 · Tomas Alfredson</span></span><span class="score">★ 7.8</span></a></li>
 <li><a href="/movies/longlegs.html"><img src="https://image.tmdb.org/t/p/w92/qZPLK5ktRKa3CL4sKRZtj8UlPYc.jpg" alt="" loading="lazy" width="44" height="66"><span><span class="t">Longlegs</span> <span class="meta">2024 · Osgood Perkins</span></span><span class="score">★ 6.5</span></a></li>
 <li><a href="/movies/m3gan.html"><img src="https://image.tmdb.org/t/p/w92/d9nBoowhjiiYc4FBNtQkPY7c11H.jpg" alt="" loading="lazy" width="44" height="66"><span><span class="t">M3GAN</span> <span class="meta">2022 · Gerard Johnstone</span></span><span class="score">★ 6.3</span></a></li>
@@ -240,8 +294,9 @@ footer.site .row{margin-bottom:10px}
 </ul>
 </main>
 <footer class="site"><div class="wrap">
+<div class="row colophon">WhatScares — a field guide to fear · printed in the dark</div>
 <div class="row">
-<a href="/">WhatScares</a><a href="/movies/">All 136 films</a><a href="/articles/douban-vs-imdb-horror-ratings.html">Douban vs IMDb</a>
+<a href="/">WhatScares</a><a href="/movies/">All 136 films</a><a href="/find-your-fear.html">Find Your Fear</a><a href="/articles/douban-vs-imdb-horror-ratings.html">Douban vs IMDb</a>
 </div>
 <div class="row">
 <a href="/lists/best-a24-horror-films.html">A24 Horror</a><a href="/lists/best-folk-horror-movies.html">Folk Horror</a><a href="/lists/best-cosmic-horror-movies.html">Cosmic Horror</a><a href="/lists/best-slow-burn-horror-movies.html">Slow-Burn Horror</a><a href="/lists/best-religious-horror-movies.html">Religious Horror</a>

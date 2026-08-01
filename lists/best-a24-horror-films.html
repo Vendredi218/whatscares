@@ -23,16 +23,19 @@
 <meta name="twitter:image" content="https://whatscares.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/atmo.css">
+<script src="/atmo.js" defer></script>
 
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg: #0f0e0c; --surface: #171614; --surface-2: #1e1d1a;
-  --border: #2a2824; --border-light: #3a3830;
-  --text: #e8e4dc; --text-2: #b0a898; --text-3: #706858;
-  --accent: #c4352a; --gold: #e2b616;
+  --bg: #e9e3d5; --surface: #f4f0e6; --surface-2: #dcd3c0;
+  --border: #cdc2ab; --border-light: #b9ab90;
+  --text: #191512; --text-2: #584f44; --text-3: #6b6153;
+  --accent: #a82e22; --gold: #7d5c0d;
+  --accent-2: #c4432f; --mono: 'Courier Prime', 'Courier New', monospace;
   --cream: #f0ebe0;
   --sans: 'Inter', -apple-system, system-ui, sans-serif;
   --serif: 'EB Garamond', Georgia, serif;
@@ -46,19 +49,19 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 clamp(16px, 4vw, 48px); height: 52px;
-  background: rgba(15,14,12,0.92); backdrop-filter: blur(20px);
+  background: rgba(238,233,222,0.90); backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
-.brand { font-family: var(--sans); font-weight: 600; font-size: 13px; letter-spacing: 5px; text-transform: uppercase; text-decoration: none; color: var(--text); }
+.brand { font-family: var(--sans); font-weight: 600; font-size: 14.5px; letter-spacing: 5px; text-transform: uppercase; text-decoration: none; color: var(--text); }
 .brand em { font-style: normal; color: var(--accent); }
-.nav-back { font-size: 12px; color: var(--text-3); text-decoration: none; }
+.nav-back { font-size: 13.5px; color: var(--text-3); text-decoration: none; }
 .nav-back:hover { color: var(--text-2); }
 
 /* PAGE */
 .page { max-width: 960px; margin: 0 auto; padding: 80px clamp(20px, 5vw, 40px) 40px; }
 
 /* CRUMBS */
-.crumbs { font-size: 11px; color: var(--text-3); margin-bottom: 32px; letter-spacing: 1px; text-transform: uppercase; }
+.crumbs { font-size: 13px; color: var(--text-3); margin-bottom: 32px; letter-spacing: 1px; text-transform: uppercase; }
 .crumbs a { color: var(--text-3); text-decoration: none; }
 .crumbs a:hover { color: var(--text-2); }
 
@@ -66,13 +69,13 @@ nav {
 .page-header { margin-bottom: 48px; border-bottom: 1px solid var(--border); padding-bottom: 32px; }
 .page-header h1 {
   font-family: var(--serif); font-size: clamp(36px, 6vw, 56px); font-weight: 400;
-  line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; color: var(--cream);
+  line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; color: var(--text);
 }
 .page-header .intro {
   font-family: var(--serif); font-size: 19px; font-style: italic;
   color: var(--text-2); line-height: 1.7; max-width: 640px; margin-bottom: 20px;
 }
-.byline { display: flex; gap: 20px; font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 1.5px; }
+.byline { display: flex; gap: 20px; font-size: 13px; color: var(--text-3); text-transform: uppercase; letter-spacing: 1.1px; }
 
 /* HERO FEATURE — #1 */
 .hero-feature {
@@ -104,7 +107,7 @@ nav {
   color: var(--cream); margin-bottom: 8px; line-height: 1.2;
 }
 .hero-feature .meta {
-  font-size: 14px; color: var(--text-2); margin-bottom: 12px;
+  font-size: 15.5px; color: var(--text-2); margin-bottom: 12px;
   font-family: var(--serif); font-style: italic;
 }
 .hero-feature .desc {
@@ -114,14 +117,14 @@ nav {
 .scores { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; }
 .score-tag {
   display: inline-flex; align-items: center; gap: 4px;
-  padding: 3px 10px; border-radius: 3px; font-size: 12px; font-weight: 500;
+  padding: 3px 10px; border-radius: 3px; font-size: 13.5px; font-weight: 500;
 }
 .score-tag.imdb { background: rgba(226,182,22,0.12); color: var(--gold); }
 .score-tag.rt { background: rgba(196,53,42,0.12); color: #e86; }
 .stream-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.stream-label { font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: 1px; }
+.stream-label { font-size: 12.5px; color: var(--text-3); text-transform: uppercase; letter-spacing: 1px; }
 .stream-pill {
-  padding: 3px 10px; border-radius: 12px; font-size: 11px;
+  padding: 3px 10px; border-radius: 12px; font-size: 13px;
   background: rgba(255,255,255,0.08); color: var(--text-2);
 }
 
@@ -131,7 +134,7 @@ nav {
   margin-bottom: 56px;
 }
 .dual-card { position: relative; }
-.dual-card .card-img {
+.dual-card .card-img { max-height: 58vh;
   aspect-ratio: 3/4; border-radius: 4px; overflow: hidden;
   position: relative;
 }
@@ -158,18 +161,18 @@ nav {
   color: var(--cream); margin-bottom: 4px;
 }
 .dual-card .card-meta {
-  font-size: 13px; color: var(--text-2); margin-bottom: 8px;
+  font-size: 14.5px; color: var(--text-2); margin-bottom: 8px;
   font-family: var(--serif); font-style: italic;
 }
 .dual-card .card-desc {
-  font-family: var(--serif); font-size: 14px; line-height: 1.6;
+  font-family: var(--serif); font-size: 15.5px; line-height: 1.6;
   color: var(--text-2); display: -webkit-box; -webkit-line-clamp: 3;
   -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 10px;
 }
 .dual-card .card-scores { display: flex; gap: 8px; margin-bottom: 8px; }
 .dual-card .card-streams { display: flex; gap: 4px; flex-wrap: wrap; }
 .dual-card .card-streams span {
-  font-size: 10px; padding: 2px 8px; border-radius: 10px;
+  font-size: 12.5px; padding: 2px 8px; border-radius: 10px;
   background: rgba(255,255,255,0.08); color: var(--text-3);
 }
 
@@ -206,23 +209,23 @@ nav {
 .editorial-item .info { padding-top: 2px; }
 .editorial-item .info h3 {
   font-family: var(--serif); font-size: 22px; font-weight: 400;
-  color: var(--cream); margin-bottom: 2px; line-height: 1.3;
+  color: var(--text); margin-bottom: 2px; line-height: 1.3;
 }
 .editorial-item .info .item-meta {
-  font-size: 13px; color: var(--text-3); margin-bottom: 8px;
+  font-size: 14.5px; color: var(--text-3); margin-bottom: 8px;
   font-family: var(--serif); font-style: italic;
 }
 .editorial-item .info .item-desc {
-  font-family: var(--serif); font-size: 15px; line-height: 1.65;
+  font-family: var(--serif); font-size: 16.5px; line-height: 1.65;
   color: var(--text-2); margin-bottom: 10px;
 }
 .editorial-item .info .item-scores { display: flex; gap: 8px; margin-bottom: 8px; }
-.editorial-item .info .item-scores .s { font-size: 12px; font-weight: 500; }
+.editorial-item .info .item-scores .s { font-size: 13.5px; font-weight: 500; }
 .editorial-item .info .item-scores .s.gold { color: var(--gold); }
 .editorial-item .info .item-scores .s.tom { color: #e86; }
 .editorial-item .info .item-streams { display: flex; gap: 4px; flex-wrap: wrap; }
 .editorial-item .info .item-streams span {
-  font-size: 10px; padding: 2px 8px; border-radius: 10px;
+  font-size: 12.5px; padding: 2px 8px; border-radius: 10px;
   background: var(--surface-2); color: var(--text-3); border: 1px solid var(--border);
 }
 
@@ -233,11 +236,11 @@ nav {
 }
 .faq-section h2 {
   font-family: var(--serif); font-size: 28px; font-weight: 400; margin-bottom: 28px;
-  color: var(--cream);
+  color: var(--text);
 }
 .faq-item { border-bottom: 1px solid var(--border); }
 .faq-q {
-  padding: 18px 0; cursor: pointer; font-size: 15px; font-weight: 400;
+  padding: 18px 0; cursor: pointer; font-size: 16.5px; font-weight: 400;
   font-family: var(--serif);
   color: var(--text); display: flex; justify-content: space-between; align-items: center;
 }
@@ -245,7 +248,7 @@ nav {
 .faq-item.open .faq-q::after { transform: rotate(45deg); }
 .faq-a {
   max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s;
-  font-family: var(--serif); font-size: 15px; line-height: 1.75; color: var(--text-2);
+  font-family: var(--serif); font-size: 16.5px; line-height: 1.75; color: var(--text-2);
 }
 .faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
 
@@ -253,7 +256,7 @@ nav {
 .more-lists { margin-bottom: 56px; }
 .more-lists h2 {
   font-family: var(--serif); font-size: 28px; font-weight: 400; margin-bottom: 24px;
-  color: var(--cream);
+  color: var(--text);
 }
 .more-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px;
@@ -264,12 +267,15 @@ nav {
   text-decoration: none; transition: border-color 0.2s, background 0.2s;
 }
 .more-grid a:hover { border-color: var(--border-light); background: var(--surface-2); }
-.more-grid a h3 { font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--cream); margin-bottom: 6px; }
-.more-grid a p { font-size: 12px; color: var(--text-3); font-style: italic; font-family: var(--serif); }
+.more-grid a h3 { font-family: var(--serif); font-size: 17px; font-weight: 400; color: var(--text); margin-bottom: 6px; }
+.more-grid a p { font-size: 13.5px; color: var(--text-3); font-style: italic; font-family: var(--serif); }
+
+.film-link { color: inherit; text-decoration: none; }
+.film-link:hover { color: var(--accent); }
 
 /* FOOTER */
 footer {
-  text-align: center; padding: 32px 20px; font-size: 11px; color: var(--text-3);
+  text-align: center; padding: 32px 20px; font-size: 13px; color: var(--text-3);
   border-top: 1px solid var(--border); letter-spacing: 1px; text-transform: uppercase;
 }
 
@@ -285,9 +291,24 @@ footer {
 @media (max-width: 480px) {
   .editorial-item { grid-template-columns: 32px 64px 1fr; gap: 12px; padding: 20px 0; }
   .editorial-item .rank { font-size: 24px; }
-  .editorial-item .info h3 { font-size: 16px; }
-  .editorial-item .info .item-desc { font-size: 13px; }
+  .editorial-item .info h3 { font-size: 17px; }
+  .editorial-item .info .item-desc { font-size: 14.5px; }
 }
+
+/* field guide atmosphere — appended overrides */
+::selection{background:rgba(181,55,42,.4);color:var(--text)}
+.crumbs,.byline,.nav-back,.stream-label{font-family:var(--mono)}
+.score-tag,.stream-pill{font-family:var(--mono);letter-spacing:1px}
+nav.top a{font-family:var(--mono);font-size: 12.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-3)}
+nav.top a:hover{color:var(--text)}
+nav.top a.threshold,.threshold-nav{font-family:var(--mono);font-size: 12.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent-2);text-decoration:none;border-bottom:1px dotted rgba(224,87,63,.55);padding-bottom:2px}
+.threshold-nav:hover{color:var(--text)}
+.nav-right{display:flex;align-items:center;gap:18px}
+.lights-btn{font-family:var(--mono);font-size: 12.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-3);background:transparent;border:1px solid var(--border);border-radius:20px;padding:6px 13px;cursor:pointer;transition:all .25s}
+.lights-btn:hover{color:var(--text-2);border-color:var(--text-3)}
+body.lights-out .lights-btn{color:var(--gold);border-color:rgba(217,154,69,.45)}
+footer{font-family:var(--mono);letter-spacing:1.4px;text-transform:uppercase;font-size: 12.5px}
+footer a{color:var(--accent-2);text-decoration:none}
 </style>
 
 <!-- JSON-LD: ItemList -->
@@ -330,16 +351,17 @@ footer {
 
 </head>
 <body>
+<div class="atmo" aria-hidden="true"><div class="flashlight" id="flashlight"></div><div class="vignette"></div><div class="flicker" id="flicker"></div><div class="grain" id="grain"></div></div>
 
 <nav>
   <a href="/" class="brand">What<em>Scares</em></a>
-  <a href="/" class="nav-back">Back to WhatScares</a>
+  <span class="nav-right"><a href="/find-your-fear.html" class="threshold-nav">Find Your Fear</a><button class="lights-btn" id="lightsBtn" onclick="toggleLights()" aria-pressed="false">&#9680; lights out</button><a href="/" class="nav-back">Back to WhatScares</a></span>
 </nav>
 
 <div class="page">
 
 <div class="crumbs">
-  <a href="/">WhatScares</a> / <a href="/">Lists</a> / A24 Horror
+  <a href="/">WhatScares</a> / <a href="/#collections">Lists</a> / A24 Horror
 </div>
 
 <header class="page-header">
@@ -361,7 +383,7 @@ footer {
   </div>
   <div class="rank-num">01</div>
   <div class="hero-content">
-    <h2>The Lighthouse</h2>
+    <h2><a class="film-link" href="/movies/the-lighthouse.html">The Lighthouse</a></h2>
     <div class="meta">2019 &middot; Robert Eggers</div>
     <div class="scores">
       <span class="score-tag imdb">IMDb 7.4</span>
@@ -388,7 +410,7 @@ footer {
         <span class="score-tag imdb">IMDb 7.3</span>
         <span class="score-tag rt">RT 89%</span>
       </div>
-      <h3>Hereditary</h3>
+      <h3><a class="film-link" href="/movies/hereditary.html">Hereditary</a></h3>
       <div class="card-meta">2018 &middot; Ari Aster</div>
       <p class="card-desc">The film that proved A24 could deliver a genuine cultural event. Toni Collette's career-defining performance anchors a devastating portrait of a family imploding under hereditary darkness.</p>
       <div class="card-streams"><span>Apple TV+</span><span>Paramount+</span></div>
@@ -405,7 +427,7 @@ footer {
         <span class="score-tag imdb">IMDb 7.1</span>
         <span class="score-tag rt">RT 83%</span>
       </div>
-      <h3>Midsommar</h3>
+      <h3><a class="film-link" href="/movies/midsommar.html">Midsommar</a></h3>
       <div class="card-meta">2019 &middot; Ari Aster</div>
       <p class="card-desc">Horror in blinding daylight. Aster disguises a breakup story as a folk horror nightmare. Florence Pugh radiates vulnerability as a grieving woman among Swedish cultists.</p>
       <div class="card-streams"><span>Apple TV+</span></div>
@@ -423,7 +445,7 @@ footer {
     <div class="rank">04</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/kdPMUMJzyYAc4roD52qavX0nLIC.jpg" alt="Talk to Me" loading="lazy"></div>
     <div class="info">
-      <h3>Talk to Me</h3>
+      <h3><a class="film-link" href="/movies/talk-to-me.html">Talk to Me</a></h3>
       <div class="item-meta">2022 &middot; Philippou Bros.</div>
       <p class="item-desc">The Philippou Brothers' debut turns a party-game seance into a visceral, addictive nightmare. The freshest voice in A24 horror since Aster.</p>
       <div class="item-scores"><span class="s gold">IMDb 7.1</span><span class="s tom">RT 95%</span></div>
@@ -435,7 +457,7 @@ footer {
     <div class="rank">05</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/z5uIG81pXyHKg7cUFIu84Wjn4NS.jpg" alt="Pearl" loading="lazy"></div>
     <div class="info">
-      <h3>Pearl</h3>
+      <h3><a class="film-link" href="/movies/pearl.html">Pearl</a></h3>
       <div class="item-meta">2022 &middot; Ti West</div>
       <p class="item-desc">Mia Goth delivers a tour-de-force as a farm girl whose Hollywood dreams curdle into something monstrous. Ti West's Technicolor homage hides real darkness.</p>
       <div class="item-scores"><span class="s gold">IMDb 7.0</span><span class="s tom">RT 92%</span></div>
@@ -447,7 +469,7 @@ footer {
     <div class="rank">06</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/zap5hpFCWSvdWSuPGAQyjUv2wAC.jpg" alt="The Witch" loading="lazy"></div>
     <div class="info">
-      <h3>The Witch</h3>
+      <h3><a class="film-link" href="/movies/the-witch.html">The Witch</a></h3>
       <div class="item-meta">2015 &middot; Robert Eggers</div>
       <p class="item-desc">Eggers' debut put A24 horror on the map. A Puritan family exiled to the edge of a dark wood slowly disintegrates under the weight of religious paranoia and something older lurking beyond the trees.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.9</span><span class="s tom">RT 90%</span></div>
@@ -459,7 +481,7 @@ footer {
     <div class="rank">07</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/iwnQ1JH1wdWrGYkgWySptJ5284A.jpg" alt="It Follows" loading="lazy"></div>
     <div class="info">
-      <h3>It Follows</h3>
+      <h3><a class="film-link" href="/movies/it-follows.html">It Follows</a></h3>
       <div class="item-meta">2014 &middot; D.R. Mitchell</div>
       <p class="item-desc">A sexually transmitted curse that follows you at walking pace, forever. David Robert Mitchell turned a simple concept into one of the most unsettling horror films of the decade.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.8</span><span class="s tom">RT 95%</span></div>
@@ -471,7 +493,7 @@ footer {
     <div class="rank">08</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/ArNYeeDFLVye7JpqLElYdbE6fOa.jpg" alt="Saint Maud" loading="lazy"></div>
     <div class="info">
-      <h3>Saint Maud</h3>
+      <h3><a class="film-link" href="/movies/saint-maud.html">Saint Maud</a></h3>
       <div class="item-meta">2019 &middot; Rose Glass</div>
       <p class="item-desc">A palliative-care nurse's devotion to God becomes indistinguishable from madness. Rose Glass's debut is a tight, unnerving character study that builds to a genuinely shocking final image.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.7</span><span class="s tom">RT 93%</span></div>
@@ -483,7 +505,7 @@ footer {
     <div class="rank">09</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/lopZSVtXzhFY603E9OqF7O1YKsh.jpg" alt="X" loading="lazy"></div>
     <div class="info">
-      <h3>X</h3>
+      <h3><a class="film-link" href="/movies/x.html">X</a></h3>
       <div class="item-meta">2022 &middot; Ti West</div>
       <p class="item-desc">Ti West's love letter to '70s exploitation and slasher films. A porn crew shoots on a remote Texas farm with an elderly couple who aren't what they seem.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.6</span><span class="s tom">RT 95%</span></div>
@@ -495,7 +517,7 @@ footer {
     <div class="rank">10</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/55wmcXJIDYITr7JDijJTdvwSaAv.jpg" alt="Under the Skin" loading="lazy"></div>
     <div class="info">
-      <h3>Under the Skin</h3>
+      <h3><a class="film-link" href="/movies/under-the-skin.html">Under the Skin</a></h3>
       <div class="item-meta">2013 &middot; Jonathan Glazer</div>
       <p class="item-desc">Scarlett Johansson as an alien predator in Glasgow. Glazer's film is less horror than an existential experience — cold, beautiful, and profoundly alien in every sense.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.3</span><span class="s tom">RT 85%</span></div>
@@ -507,7 +529,7 @@ footer {
     <div class="rank">11</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/gP9yviboTGWGolqUZKIB1UkF1C2.jpg" alt="Lamb" loading="lazy"></div>
     <div class="info">
-      <h3>Lamb</h3>
+      <h3><a class="film-link" href="/movies/lamb.html">Lamb</a></h3>
       <div class="item-meta">2021 &middot; V. Johannsson</div>
       <p class="item-desc">An Icelandic couple discovers something miraculous and unnatural in their sheep barn. A quiet, mythic fable that unfolds at its own glacial pace.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.3</span><span class="s tom">RT 86%</span></div>
@@ -551,7 +573,7 @@ footer {
 
 </div>
 
-<footer>WhatScares — horror matched to your taste</footer>
+<footer>WhatScares — a field guide to fear · printed in the dark · <a href="/find-your-fear.html">the threshold</a></footer>
 
 <script>
 document.querySelectorAll('.hero-feature, .dual-card, .editorial-item').forEach(el => {

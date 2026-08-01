@@ -23,16 +23,19 @@
 <meta name="twitter:image" content="https://whatscares.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/atmo.css">
+<script src="/atmo.js" defer></script>
 
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg: #0f0e0c; --surface: #171614; --surface-2: #1e1d1a;
-  --border: #2a2824; --border-light: #3a3830;
-  --text: #e8e4dc; --text-2: #b0a898; --text-3: #706858;
-  --accent: #c4352a; --gold: #e2b616;
+  --bg: #e9e3d5; --surface: #f4f0e6; --surface-2: #dcd3c0;
+  --border: #cdc2ab; --border-light: #b9ab90;
+  --text: #191512; --text-2: #584f44; --text-3: #6b6153;
+  --accent: #a82e22; --gold: #7d5c0d;
+  --accent-2: #c4432f; --mono: 'Courier Prime', 'Courier New', monospace;
   --cream: #f0ebe0;
   --sans: 'Inter', -apple-system, system-ui, sans-serif;
   --serif: 'EB Garamond', Georgia, serif;
@@ -46,19 +49,19 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 clamp(16px, 4vw, 48px); height: 52px;
-  background: rgba(15,14,12,0.92); backdrop-filter: blur(20px);
+  background: rgba(238,233,222,0.90); backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
-.brand { font-family: var(--sans); font-weight: 600; font-size: 13px; letter-spacing: 5px; text-transform: uppercase; text-decoration: none; color: var(--text); }
+.brand { font-family: var(--sans); font-weight: 600; font-size: 14.5px; letter-spacing: 5px; text-transform: uppercase; text-decoration: none; color: var(--text); }
 .brand em { font-style: normal; color: var(--accent); }
-.nav-back { font-size: 12px; color: var(--text-3); text-decoration: none; }
+.nav-back { font-size: 13.5px; color: var(--text-3); text-decoration: none; }
 .nav-back:hover { color: var(--text-2); }
 
 /* PAGE */
 .page { max-width: 960px; margin: 0 auto; padding: 80px clamp(20px, 5vw, 40px) 40px; }
 
 /* CRUMBS */
-.crumbs { font-size: 11px; color: var(--text-3); margin-bottom: 32px; letter-spacing: 1px; text-transform: uppercase; }
+.crumbs { font-size: 13px; color: var(--text-3); margin-bottom: 32px; letter-spacing: 1px; text-transform: uppercase; }
 .crumbs a { color: var(--text-3); text-decoration: none; }
 .crumbs a:hover { color: var(--text-2); }
 
@@ -66,13 +69,13 @@ nav {
 .page-header { margin-bottom: 48px; border-bottom: 1px solid var(--border); padding-bottom: 32px; }
 .page-header h1 {
   font-family: var(--serif); font-size: clamp(36px, 6vw, 56px); font-weight: 400;
-  line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; color: var(--cream);
+  line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; color: var(--text);
 }
 .page-header .intro {
   font-family: var(--serif); font-size: 19px; font-style: italic;
   color: var(--text-2); line-height: 1.7; max-width: 640px; margin-bottom: 20px;
 }
-.byline { display: flex; gap: 20px; font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 1.5px; }
+.byline { display: flex; gap: 20px; font-size: 13px; color: var(--text-3); text-transform: uppercase; letter-spacing: 1.1px; }
 
 /* HERO FEATURE — #1 */
 .hero-feature {
@@ -104,7 +107,7 @@ nav {
   color: var(--cream); margin-bottom: 8px; line-height: 1.2;
 }
 .hero-feature .meta {
-  font-size: 14px; color: var(--text-2); margin-bottom: 12px;
+  font-size: 15.5px; color: var(--text-2); margin-bottom: 12px;
   font-family: var(--serif); font-style: italic;
 }
 .hero-feature .desc {
@@ -114,14 +117,14 @@ nav {
 .scores { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; }
 .score-tag {
   display: inline-flex; align-items: center; gap: 4px;
-  padding: 3px 10px; border-radius: 3px; font-size: 12px; font-weight: 500;
+  padding: 3px 10px; border-radius: 3px; font-size: 13.5px; font-weight: 500;
 }
 .score-tag.imdb { background: rgba(226,182,22,0.12); color: var(--gold); }
 .score-tag.rt { background: rgba(196,53,42,0.12); color: #e86; }
 .stream-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.stream-label { font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: 1px; }
+.stream-label { font-size: 12.5px; color: var(--text-3); text-transform: uppercase; letter-spacing: 1px; }
 .stream-pill {
-  padding: 3px 10px; border-radius: 12px; font-size: 11px;
+  padding: 3px 10px; border-radius: 12px; font-size: 13px;
   background: rgba(255,255,255,0.08); color: var(--text-2);
 }
 
@@ -131,7 +134,7 @@ nav {
   margin-bottom: 56px;
 }
 .dual-card { position: relative; }
-.dual-card .card-img {
+.dual-card .card-img { max-height: 58vh;
   aspect-ratio: 3/4; border-radius: 4px; overflow: hidden;
   position: relative;
 }
@@ -158,18 +161,18 @@ nav {
   color: var(--cream); margin-bottom: 4px;
 }
 .dual-card .card-meta {
-  font-size: 13px; color: var(--text-2); margin-bottom: 8px;
+  font-size: 14.5px; color: var(--text-2); margin-bottom: 8px;
   font-family: var(--serif); font-style: italic;
 }
 .dual-card .card-desc {
-  font-family: var(--serif); font-size: 14px; line-height: 1.6;
+  font-family: var(--serif); font-size: 15.5px; line-height: 1.6;
   color: var(--text-2); display: -webkit-box; -webkit-line-clamp: 3;
   -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 10px;
 }
 .dual-card .card-scores { display: flex; gap: 8px; margin-bottom: 8px; }
 .dual-card .card-streams { display: flex; gap: 4px; flex-wrap: wrap; }
 .dual-card .card-streams span {
-  font-size: 10px; padding: 2px 8px; border-radius: 10px;
+  font-size: 12.5px; padding: 2px 8px; border-radius: 10px;
   background: rgba(255,255,255,0.08); color: var(--text-3);
 }
 
@@ -206,23 +209,23 @@ nav {
 .editorial-item .info { padding-top: 2px; }
 .editorial-item .info h3 {
   font-family: var(--serif); font-size: 22px; font-weight: 400;
-  color: var(--cream); margin-bottom: 2px; line-height: 1.3;
+  color: var(--text); margin-bottom: 2px; line-height: 1.3;
 }
 .editorial-item .info .item-meta {
-  font-size: 13px; color: var(--text-3); margin-bottom: 8px;
+  font-size: 14.5px; color: var(--text-3); margin-bottom: 8px;
   font-family: var(--serif); font-style: italic;
 }
 .editorial-item .info .item-desc {
-  font-family: var(--serif); font-size: 15px; line-height: 1.65;
+  font-family: var(--serif); font-size: 16.5px; line-height: 1.65;
   color: var(--text-2); margin-bottom: 10px;
 }
 .editorial-item .info .item-scores { display: flex; gap: 8px; margin-bottom: 8px; }
-.editorial-item .info .item-scores .s { font-size: 12px; font-weight: 500; }
+.editorial-item .info .item-scores .s { font-size: 13.5px; font-weight: 500; }
 .editorial-item .info .item-scores .s.gold { color: var(--gold); }
 .editorial-item .info .item-scores .s.tom { color: #e86; }
 .editorial-item .info .item-streams { display: flex; gap: 4px; flex-wrap: wrap; }
 .editorial-item .info .item-streams span {
-  font-size: 10px; padding: 2px 8px; border-radius: 10px;
+  font-size: 12.5px; padding: 2px 8px; border-radius: 10px;
   background: var(--surface-2); color: var(--text-3); border: 1px solid var(--border);
 }
 
@@ -233,11 +236,11 @@ nav {
 }
 .faq-section h2 {
   font-family: var(--serif); font-size: 28px; font-weight: 400; margin-bottom: 28px;
-  color: var(--cream);
+  color: var(--text);
 }
 .faq-item { border-bottom: 1px solid var(--border); }
 .faq-q {
-  padding: 18px 0; cursor: pointer; font-size: 15px; font-weight: 400;
+  padding: 18px 0; cursor: pointer; font-size: 16.5px; font-weight: 400;
   font-family: var(--serif);
   color: var(--text); display: flex; justify-content: space-between; align-items: center;
 }
@@ -245,7 +248,7 @@ nav {
 .faq-item.open .faq-q::after { transform: rotate(45deg); }
 .faq-a {
   max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s;
-  font-family: var(--serif); font-size: 15px; line-height: 1.75; color: var(--text-2);
+  font-family: var(--serif); font-size: 16.5px; line-height: 1.75; color: var(--text-2);
 }
 .faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
 
@@ -253,7 +256,7 @@ nav {
 .more-lists { margin-bottom: 56px; }
 .more-lists h2 {
   font-family: var(--serif); font-size: 28px; font-weight: 400; margin-bottom: 24px;
-  color: var(--cream);
+  color: var(--text);
 }
 .more-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px;
@@ -264,12 +267,15 @@ nav {
   text-decoration: none; transition: border-color 0.2s, background 0.2s;
 }
 .more-grid a:hover { border-color: var(--border-light); background: var(--surface-2); }
-.more-grid a h3 { font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--cream); margin-bottom: 6px; }
-.more-grid a p { font-size: 12px; color: var(--text-3); font-style: italic; font-family: var(--serif); }
+.more-grid a h3 { font-family: var(--serif); font-size: 17px; font-weight: 400; color: var(--text); margin-bottom: 6px; }
+.more-grid a p { font-size: 13.5px; color: var(--text-3); font-style: italic; font-family: var(--serif); }
+
+.film-link { color: inherit; text-decoration: none; }
+.film-link:hover { color: var(--accent); }
 
 /* FOOTER */
 footer {
-  text-align: center; padding: 32px 20px; font-size: 11px; color: var(--text-3);
+  text-align: center; padding: 32px 20px; font-size: 13px; color: var(--text-3);
   border-top: 1px solid var(--border); letter-spacing: 1px; text-transform: uppercase;
 }
 
@@ -285,9 +291,24 @@ footer {
 @media (max-width: 480px) {
   .editorial-item { grid-template-columns: 32px 64px 1fr; gap: 12px; padding: 20px 0; }
   .editorial-item .rank { font-size: 24px; }
-  .editorial-item .info h3 { font-size: 16px; }
-  .editorial-item .info .item-desc { font-size: 13px; }
+  .editorial-item .info h3 { font-size: 17px; }
+  .editorial-item .info .item-desc { font-size: 14.5px; }
 }
+
+/* field guide atmosphere — appended overrides */
+::selection{background:rgba(181,55,42,.4);color:var(--text)}
+.crumbs,.byline,.nav-back,.stream-label{font-family:var(--mono)}
+.score-tag,.stream-pill{font-family:var(--mono);letter-spacing:1px}
+nav.top a{font-family:var(--mono);font-size: 12.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-3)}
+nav.top a:hover{color:var(--text)}
+nav.top a.threshold,.threshold-nav{font-family:var(--mono);font-size: 12.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent-2);text-decoration:none;border-bottom:1px dotted rgba(224,87,63,.55);padding-bottom:2px}
+.threshold-nav:hover{color:var(--text)}
+.nav-right{display:flex;align-items:center;gap:18px}
+.lights-btn{font-family:var(--mono);font-size: 12.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-3);background:transparent;border:1px solid var(--border);border-radius:20px;padding:6px 13px;cursor:pointer;transition:all .25s}
+.lights-btn:hover{color:var(--text-2);border-color:var(--text-3)}
+body.lights-out .lights-btn{color:var(--gold);border-color:rgba(217,154,69,.45)}
+footer{font-family:var(--mono);letter-spacing:1.4px;text-transform:uppercase;font-size: 12.5px}
+footer a{color:var(--accent-2);text-decoration:none}
 </style>
 
 <!-- JSON-LD: ItemList -->
@@ -302,16 +323,17 @@ footer {
 
 </head>
 <body>
+<div class="atmo" aria-hidden="true"><div class="flashlight" id="flashlight"></div><div class="vignette"></div><div class="flicker" id="flicker"></div><div class="grain" id="grain"></div></div>
 
 <nav>
   <a href="/" class="brand">What<em>Scares</em></a>
-  <a href="/" class="nav-back">Back to WhatScares</a>
+  <span class="nav-right"><a href="/find-your-fear.html" class="threshold-nav">Find Your Fear</a><button class="lights-btn" id="lightsBtn" onclick="toggleLights()" aria-pressed="false">&#9680; lights out</button><a href="/" class="nav-back">Back to WhatScares</a></span>
 </nav>
 
 <div class="page">
 
 <div class="crumbs">
-  <a href="/">WhatScares</a> / <a href="/">Lists</a> / Folk Horror
+  <a href="/">WhatScares</a> / <a href="/#collections">Lists</a> / Folk Horror
 </div>
 
 <header class="page-header">
@@ -333,7 +355,7 @@ footer {
   </div>
   <div class="rank-num">01</div>
   <div class="hero-content">
-    <h2>Tumbbad</h2>
+    <h2><a class="film-link" href="/movies/tumbbad.html">Tumbbad</a></h2>
     <div class="meta">2018 &middot; Rahi Anil Barve</div>
     <div class="scores">
       <span class="score-tag imdb">IMDb 8.2</span>
@@ -360,7 +382,7 @@ footer {
         <span class="score-tag imdb">IMDb 7.5</span>
         <span class="score-tag rt">RT 92%</span>
       </div>
-      <h3>The Wicker Man</h3>
+      <h3><a class="film-link" href="/movies/the-wicker-man.html">The Wicker Man</a></h3>
       <div class="card-meta">1973 &middot; Robin Hardy</div>
       <p class="card-desc">The film that gave folk horror its vocabulary. A devout Christian detective arrives on a remote Scottish island and finds a community devoted to pagan worship — unaware that the islanders have been conducting a ritual all along.</p>
       <div class="card-streams"><span>Tubi</span></div>
@@ -377,7 +399,7 @@ footer {
         <span class="score-tag imdb">IMDb 7.1</span>
         <span class="score-tag rt">RT 83%</span>
       </div>
-      <h3>Midsommar</h3>
+      <h3><a class="film-link" href="/movies/midsommar.html">Midsommar</a></h3>
       <div class="card-meta">2019 &middot; Ari Aster</div>
       <p class="card-desc">Ari Aster inverted the genre's visual grammar by setting his folk horror nightmare in perpetual, bleached-out Swedish daylight. It doubles as a devastating breakup movie — the commune offers Dani the emotional reciprocity her relationship never did.</p>
       <div class="card-streams"><span>Apple TV+</span></div>
@@ -395,7 +417,7 @@ footer {
     <div class="rank">04</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/zap5hpFCWSvdWSuPGAQyjUv2wAC.jpg" alt="The Witch" loading="lazy"></div>
     <div class="info">
-      <h3>The Witch</h3>
+      <h3><a class="film-link" href="/movies/the-witch.html">The Witch</a></h3>
       <div class="item-meta">2015 &middot; Robert Eggers</div>
       <p class="item-desc">Eggers' debut reconstructs 1630s New England with fanatical accuracy — dialogue drawn from actual Puritan journals. The horror is in the family's theology turning against them: they already believed in the devil before they ever saw one.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.9</span><span class="s tom">RT 90%</span></div>
@@ -407,7 +429,7 @@ footer {
     <div class="rank">05</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/9022CYEGqYETCeXN1oE3uwYJWub.jpg" alt="The Ritual" loading="lazy"></div>
     <div class="info">
-      <h3>The Ritual</h3>
+      <h3><a class="film-link" href="/movies/the-ritual.html">The Ritual</a></h3>
       <div class="item-meta">2017 &middot; David Bruckner</div>
       <p class="item-desc">Four old friends take a hiking shortcut through a primeval Scandinavian forest and find something worshipped there long before Christianity. The forest itself feels sentient and hostile — every gnarled tree amplifies the survivors' guilt into something monstrous.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.3</span><span class="s tom">RT 74%</span></div>
@@ -419,7 +441,7 @@ footer {
     <div class="rank">06</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/rd269f2Yftxxam3EOJPYVwrvjIJ.jpg" alt="Apostle" loading="lazy"></div>
     <div class="info">
-      <h3>Apostle</h3>
+      <h3><a class="film-link" href="/movies/apostle.html">Apostle</a></h3>
       <div class="item-meta">2018 &middot; Gareth Evans</div>
       <p class="item-desc">Gareth Evans pivots from The Raid's kinetic action to period folk horror. A man infiltrates a remote island cult to rescue his kidnapped sister, and what begins as an undercover thriller spirals into something far stranger as the island's true religion reveals itself.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.3</span><span class="s tom">RT 79%</span></div>
@@ -431,7 +453,7 @@ footer {
     <div class="rank">07</div>
     <div class="poster"><img src="https://image.tmdb.org/t/p/w342/gP9yviboTGWGolqUZKIB1UkF1C2.jpg" alt="Lamb" loading="lazy"></div>
     <div class="info">
-      <h3>Lamb</h3>
+      <h3><a class="film-link" href="/movies/lamb.html">Lamb</a></h3>
       <div class="item-meta">2021 &middot; V. Johannsson</div>
       <p class="item-desc">An Icelandic couple discovers something unnatural among their flock and decides to raise it as their own. Folk horror at its most quiet and mythic — its dread comes from the certainty that nature will reclaim what was taken.</p>
       <div class="item-scores"><span class="s gold">IMDb 6.3</span><span class="s tom">RT 86%</span></div>
@@ -475,7 +497,7 @@ footer {
 
 </div>
 
-<footer>WhatScares — horror matched to your taste</footer>
+<footer>WhatScares — a field guide to fear · printed in the dark · <a href="/find-your-fear.html">the threshold</a></footer>
 
 <script>
 document.querySelectorAll('.hero-feature, .dual-card, .editorial-item').forEach(el => {
