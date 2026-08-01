@@ -449,17 +449,30 @@ ${footerHtml}
     });
   }
 
+  // Nobody signs up to click three dots. An anonymous session still yields a real
+  // auth.uid(), so the unique index keeps doing the work with zero friction.
+  // Clearing storage or going incognito gets around it; this stops casual
+  // double-voting, not a determined person.
+  function ensureUser() {
+    if (user) return Promise.resolve(user);
+    return sb.auth.signInAnonymously().then(function (r) {
+      if (r.error) { note.textContent = 'Could not start a session - try again.'; return null; }
+      user = r.data.user;
+      return user;
+    });
+  }
+
   box.querySelectorAll('.pip').forEach(function (p) {
     p.addEventListener('click', function () {
-      if (!user) { note.innerHTML = '<a href="/">Sign in on the homepage</a> to rate this film.'; return; }
-      save(p.closest('.row').dataset.dim, +p.dataset.v);
+      var dim = p.closest('.row').dataset.dim, v = +p.dataset.v;
+      ensureUser().then(function (u) { if (u) save(dim, v); });
     });
   });
 
   loadAgg();
   sb.auth.getSession().then(function (res) {
     user = res.data.session && res.data.session.user;
-    if (!user) { note.innerHTML = '<a href="/">Sign in</a> to add your rating.'; return; }
+    if (!user) { note.textContent = 'Tap a dot to rate.'; return; }
     sb.from('user_ratings').select('jumps,gore,dread')
       .eq('user_id', user.id).eq('movie_idx', idx).maybeSingle().then(function (r) {
         if (r.data) {
