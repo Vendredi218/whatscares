@@ -108,6 +108,13 @@ function metaDesc(m) {
 
 const dots = n => '<span class="dots"><b>' + '●'.repeat(n) + '</b>' + '○'.repeat(5 - n) + '</span>';
 
+// Same blend as the homepage: every source normalised to 10 and averaged.
+function movieScore(m) {
+  const v = [m.imdb, m.rt != null ? m.rt / 10 : null, m.pc != null ? m.pc / 10 : null,
+             m.mc != null ? m.mc / 10 : null, m.db].filter(x => x != null);
+  return v.length ? (v.reduce((a, b) => a + b, 0) / v.length).toFixed(1) : null;
+}
+
 function ratingChips(m) {
   const chips = [];
   if (m.imdb != null) chips.push(`<div class="chip"><span class="src imdb">IMDb</span><b>${m.imdb}</b>${m.iv ? `<i>${votes(m.iv)} votes</i>` : ''}</div>`);
@@ -143,6 +150,11 @@ h1{font-family:var(--serif);font-size:40px;font-weight:600;line-height:1.15;marg
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
 .tag{font-size: 13.5px;letter-spacing:.4px;padding:4px 10px;border:1px solid var(--border);border-radius:999px;color:var(--text-2);font-weight:700}
 a.tag:hover{border-color:var(--accent);color:var(--text)}
+.movie-score{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.movie-score .ms-label{font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-3)}
+.movie-score .ms-num{font-family:var(--serif);font-size:34px;font-weight:600;line-height:1;color:var(--text);font-variant-numeric:tabular-nums}
+.movie-score .ms-max{font-size:15px;color:var(--text-3)}
+.movie-score .ms-src{font-size:13px;color:var(--text-3);margin-left:2px}
 .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
 .chip{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px;display:flex;align-items:baseline;gap:7px}
 .chip .src{font-size: 13px;letter-spacing:.5px;color:var(--text-3);font-weight:700}
@@ -357,6 +369,12 @@ ${headerHtml}
     <div class="tags">${m.tags.map(t => TAG_LIST_PAGE[t]
       ? `<a class="tag" href="/lists/${TAG_LIST_PAGE[t][0]}">${esc(label(t))}</a>`
       : `<span class="tag">${esc(label(t))}</span>`).join('')}</div>
+    ${movieScore(m) != null ? `<div class="movie-score">
+      <span class="ms-label">Movie score</span>
+      <span class="ms-num">${movieScore(m)}</span>
+      <span class="ms-max">/ 10</span>
+      <span class="ms-src">averaged across ${[m.imdb, m.rt, m.pc, m.mc, m.db].filter(x => x != null).length} sources</span>
+    </div>` : ''}
     <div class="chips">
       ${ratingChips(m)}
     </div>
@@ -506,7 +524,7 @@ ${footerHtml}
     }
     var el = row(d).querySelector('.agg');
     var old = el.querySelector('b') ? el.querySelector('b').textContent : null;
-    var shown = avg.toFixed(1);
+    var shown = (avg * 2).toFixed(1);   // pips are 1-5, the figure reads /10
     var votes = stats && stats.votes;
     el.innerHTML = '<b>' + shown + '</b>' + (votes ? ' \u00b7 ' + votes + ' vote' + (votes === 1 ? '' : 's') : '');
     if (old && old !== shown) {

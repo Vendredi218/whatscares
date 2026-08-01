@@ -43,6 +43,11 @@ h1{font-family:var(--serif);font-size:40px;font-weight:600;line-height:1.15;marg
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
 .tag{font-size: 13.5px;letter-spacing:.4px;padding:4px 10px;border:1px solid var(--border);border-radius:999px;color:var(--text-2);font-weight:700}
 a.tag:hover{border-color:var(--accent);color:var(--text)}
+.movie-score{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.movie-score .ms-label{font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-3)}
+.movie-score .ms-num{font-family:var(--serif);font-size:34px;font-weight:600;line-height:1;color:var(--text);font-variant-numeric:tabular-nums}
+.movie-score .ms-max{font-size:15px;color:var(--text-3)}
+.movie-score .ms-src{font-size:13px;color:var(--text-3);margin-left:2px}
 .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
 .chip{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px;display:flex;align-items:baseline;gap:7px}
 .chip .src{font-size: 13px;letter-spacing:.5px;color:var(--text-3);font-weight:700}
@@ -176,6 +181,12 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
     <h1>Terrified</h1>
     <p class="byline">2017 · Directed by Demián Rugna</p>
     <div class="tags"><span class="tag">Supernatural</span><span class="tag">Atmospheric</span></div>
+    <div class="movie-score">
+      <span class="ms-label">Movie score</span>
+      <span class="ms-num">7.2</span>
+      <span class="ms-max">/ 10</span>
+      <span class="ms-src">averaged across 3 sources</span>
+    </div>
     <div class="chips">
       <div class="chip"><span class="src imdb">IMDb</span><b>6.5</b><i>31k votes</i></div>
       <div class="chip"><span class="src rt">RT</span><b>82%</b><i>critics</i></div>
@@ -347,7 +358,7 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
     }
     var el = row(d).querySelector('.agg');
     var old = el.querySelector('b') ? el.querySelector('b').textContent : null;
-    var shown = avg.toFixed(1);
+    var shown = (avg * 2).toFixed(1);   // pips are 1-5, the figure reads /10
     var votes = stats && stats.votes;
     el.innerHTML = '<b>' + shown + '</b>' + (votes ? ' · ' + votes + ' vote' + (votes === 1 ? '' : 's') : '');
     if (old && old !== shown) {

@@ -2375,7 +2375,8 @@ function movieScore(m) {
   return v.length ? (v.reduce((a, b) => a + b, 0) / v.length).toFixed(1) : null;
 }
 function intensityScore(m) {
-  return ((m.scare + m.gore + m.dread) / 3).toFixed(1);   // string: 4.0 must not collapse to 4
+  // pips are 1-5; doubled here so it reads on the same scale as the movie score
+  return ((m.scare + m.gore + m.dread) / 3 * 2).toFixed(1);
 }
 
 function vitalHTML(label, val, ember) {
@@ -2597,7 +2598,7 @@ function cardHTML(m, idx, score, featured) {
           ${movieScore(m) != null ? `<span class="cr"><i>Movie</i><b>${movieScore(m)}</b></span>` : ''}
           <span class="cr int"><i>Intensity</i><b>${intensityScore(m)}</b></span>
         </div>
-        ${streamText ? `<div class="card-stream">${streamText}</div>` : ''}
+
       </div>
     </div>
   </a>
