@@ -3,7 +3,12 @@
 import { createServer } from 'http';
 import { readFile } from 'fs/promises';
 import { existsSync, readFileSync } from 'fs';
-import { extname, join, normalize } from 'path';
+import { dirname, extname, join, normalize } from 'path';
+import { fileURLToPath } from 'url';
+
+// Serve the checkout this file lives in, not the shell's cwd — otherwise a git
+// worktree preview silently serves the main checkout instead.
+const ROOT = dirname(fileURLToPath(import.meta.url));
 
 // minimal .env loader
 if (existsSync('.env')) {
@@ -58,8 +63,8 @@ createServer(async (req, res) => {
   let path = normalize(url.pathname).replace(/^(\.\.[/\\])+/, '');
   if (path === '/' || path === '\\') path = '/index.html';
   else if (path.endsWith('/')) path += 'index.html'; // directory URLs, like Vercel
-  const file = join(process.cwd(), path);
-  if (!file.startsWith(process.cwd())) { res.writeHead(403).end(); return; }
+  const file = join(ROOT, path);
+  if (!file.startsWith(ROOT)) { res.writeHead(403).end(); return; }
   try {
     const data = await readFile(file);
     res.writeHead(200, { 'Content-Type': MIME[extname(file)] || 'application/octet-stream' }).end(data);
