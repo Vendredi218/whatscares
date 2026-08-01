@@ -300,7 +300,7 @@ const footerHtml = `<footer class="site"><div class="wrap">
 <div class="row">
 <a href="/lists/best-a24-horror-films.html">A24 Horror</a><a href="/lists/best-folk-horror-movies.html">Folk Horror</a><a href="/lists/best-cosmic-horror-movies.html">Cosmic Horror</a><a href="/lists/best-slow-burn-horror-movies.html">Slow-Burn Horror</a><a href="/lists/best-religious-horror-movies.html">Religious Horror</a>
 </div>
-<div>Ratings shown are courtesy of their respective platforms. Intensity ratings (scare / gore / dread) are WhatScares editorial.</div>
+<div>Ratings shown are courtesy of their respective platforms. Intensity ratings (jumps / gore / dread) start as our own read and shift as readers rate them.</div>
 </div></footer>`;
 
 // ---------- movie page ----------
