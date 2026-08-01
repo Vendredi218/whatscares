@@ -53,7 +53,7 @@ export default async function handler(req, res) {
   if (!query) return res.status(400).json({ error: 'query required' });
   if (query.length > 200) return res.status(400).json({ error: 'query too long (max 200 chars)' });
 
-  const key = (process.env.DEEPSEEK_OPENROUTER || process.env.MINIMAX_API_KEY || '').trim();
+  const key = (process.env.MINIMAX_API_KEY || process.env.DEEPSEEK_OPENROUTER || '').trim();
   if (!key) return res.status(503).json({ error: 'search not configured' });
 
   const cacheKey = query.toLowerCase();

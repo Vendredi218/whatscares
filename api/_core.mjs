@@ -13,6 +13,9 @@ const BASE_URL = USE_OPENROUTER
 const MODEL = USE_OPENROUTER
   ? (process.env.OPENROUTER_MODEL || 'deepseek/deepseek-v4-pro')
   : (process.env.MINIMAX_MODEL || 'MiniMax-M3');
+const API_KEY = USE_OPENROUTER ? OPENROUTER_KEY : process.env.MINIMAX_API_KEY;
+export const providerReady = !!API_KEY;
+export const providerName = USE_OPENROUTER ? 'openrouter' : 'minimax';
 
 function catalogLines() {
   return CATALOG.map(m =>
@@ -78,7 +81,7 @@ export async function moodSearch(query, apiKey) {
       method: 'POST',
       signal: controller.signal,
       headers: {
-        'Authorization': `Bearer ${USE_OPENROUTER ? OPENROUTER_KEY : apiKey}`,
+        'Authorization': `Bearer ${API_KEY || apiKey}`,
         'Content-Type': 'application/json',
         // OpenRouter attributes traffic by these; harmless elsewhere
         ...(USE_OPENROUTER ? { 'HTTP-Referer': 'https://whatscares.com', 'X-Title': 'WhatScares' } : {}),
