@@ -10,7 +10,7 @@ const BASE_URL = USE_OPENROUTER
   ? (process.env.OPENROUTER_BASE_URL || 'https://openrouter.ai/api/v1')
   : (process.env.MINIMAX_BASE_URL || 'https://api.minimax.io/v1');
 const MODEL = USE_OPENROUTER
-  ? (process.env.OPENROUTER_MODEL || 'deepseek/deepseek-v4-flash')
+  ? (process.env.OPENROUTER_MODEL || 'deepseek/deepseek-v4-pro')
   : (process.env.MINIMAX_MODEL || 'MiniMax-M3');
 
 function catalogLines() {
