@@ -48,7 +48,7 @@
   --field: rgba(255,253,247,0.78);
   --hover: rgba(205,194,171,0.45);
   --ink: #2c2620;
-  --dim-jumps: #a33d15;
+  --dim-jumps: #775709;
   --dim-gore: #8e1f1a;
   --dim-dread: #3f4a4a;
   --radius: 3px;
@@ -482,6 +482,7 @@ a.list-card { text-decoration: none; color: inherit; }
 }
 .hscroll::-webkit-scrollbar { display: none; }
 .hscroll .card-wrap { flex: 0 0 150px; height: 225px; scroll-snap-align: start; }
+.card-btn { font: inherit; padding: 0; text-align: left; border: none; }
 .hscroll .card { flex: 0 0 150px; height: 225px; scroll-snap-align: start; }
 .card-act-off { font-size: 15px; }
 .card-act-off:hover { background: var(--accent); color: #fff; }
@@ -2591,8 +2592,7 @@ function renderLists() {
 function renderHered() {
   const sim = similar(M[0]).slice(0,8);
   document.getElementById('heredRow').innerHTML = sim.map(s => {
-    const idx = M.indexOf(s.m);
-    return `<a class="card" href="/movies/${slugify(m.t)}.html">
+    return `<a class="card" href="/movies/${slugify(s.m.t)}.html">
       <div class="poster">
         <img src="${TMDB}${s.m.p}" alt="${s.m.t}" loading="lazy">
         <div class="card-overlay">
@@ -2886,7 +2886,8 @@ function renderFavStart() {
   const popular = [0,1,2,4,6,9,20,21,23,24,25,26,28,34];
   document.getElementById('favRow').innerHTML = popular.map(idx => {
     const m = M[idx];
-    return `<div class="card" onclick="selectFilm(${idx})">
+    // A button, not a link: this searches in place rather than navigating.
+    return `<button class="card card-btn" type="button" onclick="selectFilm(${idx})">
       <div class="poster">
         <img src="${TMDB}${m.p}" alt="${m.t}" loading="lazy">
         <div class="card-overlay">
@@ -2894,7 +2895,7 @@ function renderFavStart() {
           <div class="meta">${m.y}</div>
         </div>
       </div>
-    </a>`;
+    </button>`;
   }).join('');
 }
 
