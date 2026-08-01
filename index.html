@@ -2710,11 +2710,19 @@ function renderHered() {
 }
 
 function similar(movie) {
+  // Tags say what kind of film it is; the three axes say how it feels to sit
+  // through. Matching on tags alone sends someone who loved The Witch a film
+  // with four times its jump count, which is the opposite of what they asked.
+  const MAX_D = Math.sqrt(3 * 25);   // furthest possible point in 0-5 space
   return M.filter(m => m !== movie).map(m => {
     const shared = movie.tags.filter(t => m.tags.includes(t)).length;
-    const total = new Set([...movie.tags, ...m.tags]).size;
-    return { m, score: Math.round((shared / total) * 100) };
-  }).sort((a,b) => b.score - a.score);
+    const union = new Set([...movie.tags, ...m.tags]).size;
+    const tag = union ? shared / union : 0;
+    const d = Math.sqrt(
+      (m.scare - movie.scare) ** 2 + (m.gore - movie.gore) ** 2 + (m.dread - movie.dread) ** 2);
+    const feel = 1 - d / MAX_D;
+    return { m, score: Math.round((tag * 0.6 + feel * 0.4) * 100) };
+  }).sort((a, b) => b.score - a.score);
 }
 
 // ─── INTERACTIONS ───

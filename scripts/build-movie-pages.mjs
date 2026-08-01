@@ -83,13 +83,19 @@ const streamAnswer = m => m.str && m.str.length
   : `${m.t} is not on major US subscription streamers right now — look for it on digital rental or purchase (Apple TV, Prime Video, or your usual store).`;
 
 function similar(m) {
+  // Same weighting as the homepage: what kind of film it is, plus how it feels.
+  const MAX_D = Math.sqrt(3 * 25);
   return movies
     .filter(o => o !== m)
     .map(o => {
       const shared = o.tags.filter(t => m.tags.includes(t)).length;
-      return { o, score: shared * 2 + (Math.abs(o.dread - m.dread) <= 1 ? 1 : 0) };
+      const union = new Set([...o.tags, ...m.tags]).size;
+      const tag = union ? shared / union : 0;
+      const d = Math.sqrt(
+        (o.scare - m.scare) ** 2 + (o.gore - m.gore) ** 2 + (o.dread - m.dread) ** 2);
+      return { o, score: tag * 0.6 + (1 - d / MAX_D) * 0.4 };
     })
-    .filter(x => x.score >= 2)
+    .filter(x => x.score >= 0.45)
     .sort((a, b) => b.score - a.score || (b.o.imdb || 0) - (a.o.imdb || 0))
     .slice(0, 6)
     .map(x => x.o);
