@@ -1488,7 +1488,7 @@ footer {
   <div class="hero-meta">136 hand-picked films · intensity-rated · streaming included</div>
   <a class="threshold-link" href="/find-your-fear.html" id="thresholdLink">
     <span class="tl-kicker">or skip the search</span>
-    <span class="tl-main">Cross the Threshold — a sixty-second calibration of fear <span class="tl-arrow">&rarr;</span></span>
+    <span class="tl-main">Find Your Fear — a sixty-second calibration <span class="tl-arrow">&rarr;</span></span>
   </a>
   </div>
 </header>
@@ -2828,7 +2828,7 @@ function checkUrlMovie() {
     if (diag && diag.archetype) {
       const link = document.getElementById('thresholdLink');
       link.innerHTML = `<span class="tl-kicker">diagnosed · field note ${diag.file || ''}</span>
-        <span class="tl-main">Your fear has a name: ${diag.archetype} — revisit the Threshold <span class="tl-arrow">&rarr;</span></span>`;
+        <span class="tl-main">Your fear has a name: ${diag.archetype} — rate your fear again <span class="tl-arrow">&rarr;</span></span>`;
     }
   } catch (e) {}
 

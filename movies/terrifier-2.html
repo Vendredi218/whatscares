@@ -49,22 +49,23 @@ a.tag:hover{border-color:var(--accent);color:var(--text)}
 .chip .src.imdb{color:var(--gold)}.chip .src.rt{color:var(--accent)}.chip .src.pop{color:#d98e04}.chip .src.db{color:#2da44e}
 .chip b{font-weight:600;font-size: 17px}
 .chip i{font-style:normal;font-size: 13px;color:var(--text-3)}
-.rate{border-top:1px solid var(--border);margin-top:22px;padding-top:18px}
-.rate h3{font-family:var(--mono);font-size:12.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-3);font-weight:700;margin-bottom:12px}
-.rate .row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.rate .lbl{font-family:var(--mono);font-size:12.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-3);font-weight:700;width:64px;flex:none}
-.rate .pips{display:flex;gap:6px}
-.rate .pip{width:17px;height:17px;border-radius:50%;border:1.5px solid var(--border);background:none;padding:0;cursor:pointer;transition:transform .12s,background .12s,border-color .12s}
-.rate .pip:hover,.rate .pip:focus-visible{border-color:var(--accent);transform:scale(1.18);outline:none}
-.rate .pip.on{background:var(--accent);border-color:var(--accent)}
-.rate .agg{font-size:14px;color:var(--text-2);margin-left:6px;font-variant-numeric:tabular-nums}
-.rate .agg b{color:var(--text);font-weight:600;display:inline-block}
-.rate .agg b.bump{animation:pop .45s cubic-bezier(.2,1.6,.4,1)}
-@keyframes pop{0%{transform:scale(1);color:var(--text)}40%{transform:scale(1.5);color:var(--accent)}100%{transform:scale(1);color:var(--text)}}
-.rate .note{font-size:13.5px;color:var(--text-3);margin-top:10px}
-.rate .note a{color:var(--gold);border-bottom:1px solid rgba(125,92,13,.35)}
-@media (prefers-reduced-motion: reduce){.rate .agg b.bump{animation:none}.rate .pip{transition:none}}
 .intensity{margin-bottom:22px}
+.intensity .row{display:flex;align-items:center;gap:14px;margin-bottom:7px}
+.intensity .lbl{font-family:var(--mono);font-size:12.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-3);font-weight:700;width:64px;flex:none}
+.intensity .pips{display:flex;gap:7px}
+.intensity .pip{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border);background:none;padding:0;cursor:pointer;transition:transform .12s,background .12s,border-color .12s}
+.intensity .pip.on{background:var(--accent);border-color:var(--accent)}
+.intensity .row:hover .pip{border-color:var(--text-3)}
+.intensity .pip:hover,.intensity .pip:focus-visible{transform:scale(1.22);border-color:var(--accent);outline:none}
+.intensity .pip.mine{box-shadow:0 0 0 2px var(--bg),0 0 0 3.5px var(--gold)}
+.intensity .agg{font-size:15.5px;color:var(--text-2);font-variant-numeric:tabular-nums}
+.intensity .agg b{color:var(--text);font-weight:600;display:inline-block}
+.intensity .agg b.bump{animation:pop .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{0%{transform:scale(1);color:var(--text)}40%{transform:scale(1.5);color:var(--accent)}100%{transform:scale(1);color:var(--text)}}
+.rate-note{font-size:13.5px;color:var(--text-3);margin-top:10px}
+.rate-note a{color:var(--gold);border-bottom:1px solid rgba(125,92,13,.35)}
+@media (prefers-reduced-motion: reduce){.intensity .agg b.bump{animation:none}.intensity .pip{transition:none}}
+
 .intensity .row{display:flex;align-items:center;gap:12px;font-size: 15.5px;margin-bottom:4px}
 .intensity .row span.lbl{width:60px;color:var(--text-2)}
 .dots{letter-spacing:3px;color:var(--text-3);font-size: 14.5px}
@@ -167,27 +168,21 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
       <div class="chip"><span class="src pop">RT</span><b>81%</b><i>audience</i></div>
       <div class="chip"><span class="src db">豆瓣</span><b>5.9</b><i>20k votes</i></div>
     </div>
-    <div class="intensity">
-      <div class="row"><span class="lbl">Scare</span><span class="dots"><b>●●●●●</b></span></div>
-      <div class="row"><span class="lbl">Gore</span><span class="dots"><b>●●●●●</b></span></div>
-      <div class="row"><span class="lbl">Dread</span><span class="dots"><b>●</b>○○○○</span></div>
-    </div>
-    <div class="rate" data-idx="30">
-      <h3>Rate the intensity</h3>
-      <div class="row" data-dim="jumps">
+    <div class="intensity" data-idx="30">
+      <div class="row" data-dim="jumps" data-base="5">
         <span class="lbl">jumps</span>
-        <span class="pips"><button class="pip" type="button" data-v="1" aria-label="jumps 1 of 5"></button><button class="pip" type="button" data-v="2" aria-label="jumps 2 of 5"></button><button class="pip" type="button" data-v="3" aria-label="jumps 3 of 5"></button><button class="pip" type="button" data-v="4" aria-label="jumps 4 of 5"></button><button class="pip" type="button" data-v="5" aria-label="jumps 5 of 5"></button></span>
-        <span class="agg" data-agg="jumps"></span>
-      </div><div class="row" data-dim="gore">
+        <span class="pips"><button class="pip on" type="button" data-v="1" aria-label="Rate jumps 1 of 5"></button><button class="pip on" type="button" data-v="2" aria-label="Rate jumps 2 of 5"></button><button class="pip on" type="button" data-v="3" aria-label="Rate jumps 3 of 5"></button><button class="pip on" type="button" data-v="4" aria-label="Rate jumps 4 of 5"></button><button class="pip on" type="button" data-v="5" aria-label="Rate jumps 5 of 5"></button></span>
+        <span class="agg"><b>5.0</b></span>
+      </div><div class="row" data-dim="gore" data-base="5">
         <span class="lbl">gore</span>
-        <span class="pips"><button class="pip" type="button" data-v="1" aria-label="gore 1 of 5"></button><button class="pip" type="button" data-v="2" aria-label="gore 2 of 5"></button><button class="pip" type="button" data-v="3" aria-label="gore 3 of 5"></button><button class="pip" type="button" data-v="4" aria-label="gore 4 of 5"></button><button class="pip" type="button" data-v="5" aria-label="gore 5 of 5"></button></span>
-        <span class="agg" data-agg="gore"></span>
-      </div><div class="row" data-dim="dread">
+        <span class="pips"><button class="pip on" type="button" data-v="1" aria-label="Rate gore 1 of 5"></button><button class="pip on" type="button" data-v="2" aria-label="Rate gore 2 of 5"></button><button class="pip on" type="button" data-v="3" aria-label="Rate gore 3 of 5"></button><button class="pip on" type="button" data-v="4" aria-label="Rate gore 4 of 5"></button><button class="pip on" type="button" data-v="5" aria-label="Rate gore 5 of 5"></button></span>
+        <span class="agg"><b>5.0</b></span>
+      </div><div class="row" data-dim="dread" data-base="1">
         <span class="lbl">dread</span>
-        <span class="pips"><button class="pip" type="button" data-v="1" aria-label="dread 1 of 5"></button><button class="pip" type="button" data-v="2" aria-label="dread 2 of 5"></button><button class="pip" type="button" data-v="3" aria-label="dread 3 of 5"></button><button class="pip" type="button" data-v="4" aria-label="dread 4 of 5"></button><button class="pip" type="button" data-v="5" aria-label="dread 5 of 5"></button></span>
-        <span class="agg" data-agg="dread"></span>
+        <span class="pips"><button class="pip on" type="button" data-v="1" aria-label="Rate dread 1 of 5"></button><button class="pip" type="button" data-v="2" aria-label="Rate dread 2 of 5"></button><button class="pip" type="button" data-v="3" aria-label="Rate dread 3 of 5"></button><button class="pip" type="button" data-v="4" aria-label="Rate dread 4 of 5"></button><button class="pip" type="button" data-v="5" aria-label="Rate dread 5 of 5"></button></span>
+        <span class="agg"><b>1.0</b></span>
       </div>
-      <p class="note" id="rateNote"></p>
+      <p class="rate-note" id="rateNote">Tap a dot to add your rating.</p>
     </div>
     <p class="stream">Streaming on <b>Screambox · Tubi</b> <span style="color:var(--text-3)">(US, subject to change)</span></p>
     <a class="trailer" href="https://www.youtube.com/watch?v=h7GlMsfUMHM" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/h7GlMsfUMHM/mqdefault.jpg" alt="" loading="lazy" width="80" height="45"><span>▶&nbsp; Watch the trailer</span></a>
@@ -245,62 +240,63 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
   var sb = window.supabase.createClient(
     'https://tkomadaiuhqgsnlixgtw.supabase.co',
     'sb_publishable_nmap6xPXEztMqK-wEmr3Bw_qpTO1KBJ');
-  var box = document.querySelector('.rate');
+  var box = document.querySelector('.intensity');
   if (!box) return;
   var idx = +box.dataset.idx, DIMS = ['jumps', 'gore', 'dread'];
   var note = document.getElementById('rateNote');
-  var mine = {}, user = null;
+  var mine = {}, user = null, stats = null;
 
-  function paint(dim, v) {
-    var pips = box.querySelectorAll('[data-dim="' + dim + '"] .pip');
-    for (var i = 0; i < pips.length; i++) pips[i].classList.toggle('on', +pips[i].dataset.v <= v);
+  function row(d) { return box.querySelector('[data-dim="' + d + '"]'); }
+  function baseOf(d) { return +row(d).dataset.base; }
+
+  // The dots show the score. Once real people have rated, the score IS their
+  // mean; before that it is our own read. Your own pick gets a gold ring so it
+  // stays distinguishable from the average.
+  function render(d) {
+    var avg = stats && stats[d + '_avg'] ? Number(stats[d + '_avg']) : baseOf(d);
+    var pips = row(d).querySelectorAll('.pip');
+    for (var i = 0; i < pips.length; i++) {
+      var n = +pips[i].dataset.v;
+      pips[i].classList.toggle('on', n <= Math.round(avg));
+      pips[i].classList.toggle('mine', mine[d] === n);
+    }
+    var el = row(d).querySelector('.agg');
+    var old = el.querySelector('b') ? el.querySelector('b').textContent : null;
+    var shown = avg.toFixed(1);
+    var votes = stats && stats.votes;
+    el.innerHTML = '<b>' + shown + '</b>' + (votes ? ' · ' + votes + ' vote' + (votes === 1 ? '' : 's') : '');
+    if (old && old !== shown) {
+      var b = el.querySelector('b');
+      b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump');
+    }
   }
+  function renderAll() { DIMS.forEach(render); }
 
-  function showAgg(stats) {
-    DIMS.forEach(function (d) {
-      var el = box.querySelector('[data-agg="' + d + '"]');
-      var avg = stats && stats[d + '_avg'];
-      if (!avg) { el.textContent = ''; return; }
-      var old = el.querySelector('b') ? el.querySelector('b').textContent : null;
-      el.innerHTML = '<b>' + avg + '</b> · ' + stats.votes + ' vote' + (stats.votes === 1 ? '' : 's');
-      if (old && old !== String(avg)) {
-        var b = el.querySelector('b');
-        b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump');
-      }
-    });
-  }
-
-  function loadAgg() {
+  function loadStats() {
     return sb.from('movie_rating_stats').select('*').eq('movie_idx', idx)
-      .maybeSingle().then(function (r) { showAgg(r.data); });
+      .maybeSingle().then(function (r) { stats = r.data; renderAll(); });
   }
 
   function save(dim, v) {
-    if (!user) return;
     var prev = Object.assign({}, mine);
-    mine[dim] = v; paint(dim, v);
-    var row = Object.assign({ user_id: user.id, movie_idx: idx }, mine);
-    sb.from('user_ratings').upsert(row, { onConflict: 'user_id,movie_idx' }).then(function (r) {
+    mine[dim] = v; render(dim);
+    var payload = Object.assign({ user_id: user.id, movie_idx: idx }, mine);
+    sb.from('user_ratings').upsert(payload, { onConflict: 'user_id,movie_idx' }).then(function (r) {
       if (r.error) {
-        mine = prev; paint(dim, prev[dim] || 0);
+        mine = prev; render(dim);
         note.textContent = 'Could not save that - try again.';
         return;
       }
       note.textContent = 'Saved. One rating per person; change it any time.';
-      loadAgg();
+      loadStats();
     });
   }
 
-  // Nobody signs up to click three dots. An anonymous session still yields a real
-  // auth.uid(), so the unique index keeps doing the work with zero friction.
-  // Clearing storage or going incognito gets around it; this stops casual
-  // double-voting, not a determined person.
   function ensureUser() {
     if (user) return Promise.resolve(user);
     return sb.auth.signInAnonymously().then(function (r) {
       if (r.error) { note.textContent = 'Could not start a session - try again.'; return null; }
-      user = r.data.user;
-      return user;
+      user = r.data.user; return user;
     });
   }
 
@@ -308,24 +304,24 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
     p.addEventListener('click', function () {
       var dim = p.closest('.row').dataset.dim, v = +p.dataset.v;
       var prev = mine[dim] || 0;
-      paint(dim, v);                       // paint first: a first-time rater would
-      ensureUser().then(function (u) {     // otherwise wait a round-trip for the anon session
+      mine[dim] = v; render(dim);
+      ensureUser().then(function (u) {
         if (u) save(dim, v);
-        else paint(dim, prev);
+        else { if (prev) mine[dim] = prev; else delete mine[dim]; render(dim); }
       });
     });
   });
 
-  loadAgg();
+  loadStats();
   sb.auth.getSession().then(function (res) {
     user = res.data.session && res.data.session.user;
-    if (!user) { note.textContent = 'Tap a dot to rate.'; return; }
+    if (!user) return;
     sb.from('user_ratings').select('jumps,gore,dread')
       .eq('user_id', user.id).eq('movie_idx', idx).maybeSingle().then(function (r) {
-        if (r.data) {
-          DIMS.forEach(function (d) { if (r.data[d]) { mine[d] = r.data[d]; paint(d, r.data[d]); } });
-          note.textContent = 'Your rating. Change it any time.';
-        } else note.textContent = 'Tap a dot to rate.';
+        if (!r.data) return;
+        DIMS.forEach(function (d) { if (r.data[d]) mine[d] = r.data[d]; });
+        renderAll();
+        note.textContent = 'Your rating is ringed. Change it any time.';
       });
   });
 })();
