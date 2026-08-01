@@ -164,7 +164,7 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Movie","name":"Us","url":"https://whatscares.com/movies/us.html","image":"https://image.tmdb.org/t/p/w500/ux2dU1jQ2ACIMShzB3yP93Udpzc.jpg","datePublished":"2019","director":{"@type":"Person","name":"Jordan Peele"},"genre":["Psychological","Slasher"],"description":"A family's beach vacation meets its scissors-wielding mirror image in red jumpsuits. Peele's doppelgänger fable trades Get Out's tight allegory for sprawling nightmare logic, anchored by Lupita Nyong'o's dual performance — the Tethered voice alone is worth the ticket.","aggregateRating":{"@type":"AggregateRating","ratingValue":6.8,"bestRating":10,"ratingCount":396231}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"WhatScares","item":"https://whatscares.com/"},{"@type":"ListItem","position":2,"name":"All Films","item":"https://whatscares.com/movies/"},{"@type":"ListItem","position":3,"name":"Us","item":"https://whatscares.com/movies/us.html"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Us?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Us rates 4/5 for scares and 3/5 for dread. It is genuinely scary, with sustained tension and hard-hitting scares."}},{"@type":"Question","name":"How gory is Us?","acceptedAnswer":{"@type":"Answer","text":"Us rates 3/5 for gore — expect a moderate amount of blood and violence."}},{"@type":"Question","name":"Where can I stream Us?","acceptedAnswer":{"@type":"Answer","text":"Us is not on major US subscription streamers right now — look for it on digital rental or purchase (Apple TV, Prime Video, or your usual store)."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Us?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Us rates 8.0/10 for jump scares and 6.0/10 for dread. It is genuinely scary, with sustained tension and hard-hitting scares."}},{"@type":"Question","name":"How gory is Us?","acceptedAnswer":{"@type":"Answer","text":"Us rates 6.0/10 for gore — expect a moderate amount of blood and violence."}},{"@type":"Question","name":"Where can I stream Us?","acceptedAnswer":{"@type":"Answer","text":"Us is not on major US subscription streamers right now — look for it on digital rental or purchase (Apple TV, Prime Video, or your usual store)."}}]}</script>
 </head>
 <body>
 <div class="atmo" aria-hidden="true"><div class="flashlight" id="flashlight"></div><div class="vignette"></div><div class="flicker" id="flicker"></div><div class="grain" id="grain"></div></div>
@@ -231,8 +231,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 <section class="faq">
   <h2>Before you press play</h2>
   <dl>
-    <dt>How scary is Us?</dt><dd>On our intensity scale, Us rates 4/5 for scares and 3/5 for dread. It is genuinely scary, with sustained tension and hard-hitting scares.</dd>
-    <dt>How gory is Us?</dt><dd>Us rates 3/5 for gore — expect a moderate amount of blood and violence.</dd>
+    <dt>How scary is Us?</dt><dd>On our intensity scale, Us rates <span data-faq="jumps">8.0</span>/10 for jump scares and <span data-faq="dread">6.0</span>/10 for dread. It is genuinely scary, with sustained tension and hard-hitting scares.</dd>
+    <dt>How gory is Us?</dt><dd>Us rates <span data-faq="gore">6.0</span>/10 for gore — expect a moderate amount of blood and violence.</dd>
     <dt>Where can I stream Us?</dt><dd>Us is not on major US subscription streamers right now — look for it on digital rental or purchase (Apple TV, Prime Video, or your usual store).</dd>
   </dl>
 </section>
@@ -361,6 +361,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
     var old = el.querySelector('b') ? el.querySelector('b').textContent : null;
     var shown = (avg * 2).toFixed(1);   // pips are 1-5, the figure reads /10
     var votes = stats && stats.votes;
+    // the FAQ prose quotes the same figures; keep them from drifting
+    document.querySelectorAll('[data-faq="' + d + '"]').forEach(function (n) { n.textContent = shown; });
     el.innerHTML = '<b>' + shown + '</b>' + (votes ? ' · ' + votes + ' vote' + (votes === 1 ? '' : 's') : '');
     if (old && old !== shown) {
       var b = el.querySelector('b');

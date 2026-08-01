@@ -164,7 +164,7 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Movie","name":"Lamb","url":"https://whatscares.com/movies/lamb.html","image":"https://image.tmdb.org/t/p/w500/gP9yviboTGWGolqUZKIB1UkF1C2.jpg","datePublished":"2021","director":{"@type":"Person","name":"V. Jóhannsson"},"genre":["Folk","Atmospheric","Slow-Burn","Isolation","A24"],"description":"An Icelandic sheep farm, a childless couple, and a newborn that is not quite either species. Jóhannsson plays it deadpan-straight, more uncanny fable than horror film, with mountain silences that do the work of a score — until nature calls in its debt.","aggregateRating":{"@type":"AggregateRating","ratingValue":6.3,"bestRating":10,"ratingCount":45032}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"WhatScares","item":"https://whatscares.com/"},{"@type":"ListItem","position":2,"name":"All Films","item":"https://whatscares.com/movies/"},{"@type":"ListItem","position":3,"name":"Lamb","item":"https://whatscares.com/movies/lamb.html"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Lamb?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Lamb rates 1/5 for scares and 4/5 for dread. It is mild by horror standards — more unsettling than outright scary."}},{"@type":"Question","name":"How gory is Lamb?","acceptedAnswer":{"@type":"Answer","text":"Lamb rates 1/5 for gore — expect almost no gore."}},{"@type":"Question","name":"Where can I stream Lamb?","acceptedAnswer":{"@type":"Answer","text":"As of our last update, Lamb is streaming on Prime Video in the US. Availability changes, so check your service before settling in."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Lamb?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Lamb rates 2.0/10 for jump scares and 8.0/10 for dread. It is mild by horror standards — more unsettling than outright scary."}},{"@type":"Question","name":"How gory is Lamb?","acceptedAnswer":{"@type":"Answer","text":"Lamb rates 2.0/10 for gore — expect almost no gore."}},{"@type":"Question","name":"Where can I stream Lamb?","acceptedAnswer":{"@type":"Answer","text":"As of our last update, Lamb is streaming on Prime Video in the US. Availability changes, so check your service before settling in."}}]}</script>
 </head>
 <body>
 <div class="atmo" aria-hidden="true"><div class="flashlight" id="flashlight"></div><div class="vignette"></div><div class="flicker" id="flicker"></div><div class="grain" id="grain"></div></div>
@@ -232,8 +232,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 <section class="faq">
   <h2>Before you press play</h2>
   <dl>
-    <dt>How scary is Lamb?</dt><dd>On our intensity scale, Lamb rates 1/5 for scares and 4/5 for dread. It is mild by horror standards — more unsettling than outright scary.</dd>
-    <dt>How gory is Lamb?</dt><dd>Lamb rates 1/5 for gore — expect almost no gore.</dd>
+    <dt>How scary is Lamb?</dt><dd>On our intensity scale, Lamb rates <span data-faq="jumps">2.0</span>/10 for jump scares and <span data-faq="dread">8.0</span>/10 for dread. It is mild by horror standards — more unsettling than outright scary.</dd>
+    <dt>How gory is Lamb?</dt><dd>Lamb rates <span data-faq="gore">2.0</span>/10 for gore — expect almost no gore.</dd>
     <dt>Where can I stream Lamb?</dt><dd>As of our last update, Lamb is streaming on Prime Video in the US. Availability changes, so check your service before settling in.</dd>
   </dl>
 </section>
@@ -364,6 +364,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
     var old = el.querySelector('b') ? el.querySelector('b').textContent : null;
     var shown = (avg * 2).toFixed(1);   // pips are 1-5, the figure reads /10
     var votes = stats && stats.votes;
+    // the FAQ prose quotes the same figures; keep them from drifting
+    document.querySelectorAll('[data-faq="' + d + '"]').forEach(function (n) { n.textContent = shown; });
     el.innerHTML = '<b>' + shown + '</b>' + (votes ? ' · ' + votes + ' vote' + (votes === 1 ? '' : 's') : '');
     if (old && old !== shown) {
       var b = el.querySelector('b');

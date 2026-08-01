@@ -164,7 +164,7 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Movie","name":"Exhuma","url":"https://whatscares.com/movies/exhuma.html","image":"https://image.tmdb.org/t/p/w500/6dasJ58GGFcC62H9KuukAryltUp.jpg","datePublished":"2024","director":{"@type":"Person","name":"Jang Jae-hyun"},"genre":["K-Horror","Folk","Supernatural","Occult"],"description":"A feng shui master, a mortician, and two shamans relocate a wealthy family's ancestral grave and hit something that should have stayed buried. Korea's biggest occult hit layers geomancy, colonial history, and full-throated ritual spectacle — the gut ceremony sequence alone justifies the ticket.","aggregateRating":{"@type":"AggregateRating","ratingValue":6.9,"bestRating":10,"ratingCount":29987}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"WhatScares","item":"https://whatscares.com/"},{"@type":"ListItem","position":2,"name":"All Films","item":"https://whatscares.com/movies/"},{"@type":"ListItem","position":3,"name":"Exhuma","item":"https://whatscares.com/movies/exhuma.html"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Exhuma?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Exhuma rates 3/5 for scares and 4/5 for dread. It is moderately scary, with a handful of strong sequences."}},{"@type":"Question","name":"How gory is Exhuma?","acceptedAnswer":{"@type":"Answer","text":"Exhuma rates 2/5 for gore — expect only light gore."}},{"@type":"Question","name":"Where can I stream Exhuma?","acceptedAnswer":{"@type":"Answer","text":"As of our last update, Exhuma is streaming on Shudder in the US. Availability changes, so check your service before settling in."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Exhuma?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Exhuma rates 6.0/10 for jump scares and 8.0/10 for dread. It is moderately scary, with a handful of strong sequences."}},{"@type":"Question","name":"How gory is Exhuma?","acceptedAnswer":{"@type":"Answer","text":"Exhuma rates 4.0/10 for gore — expect only light gore."}},{"@type":"Question","name":"Where can I stream Exhuma?","acceptedAnswer":{"@type":"Answer","text":"As of our last update, Exhuma is streaming on Shudder in the US. Availability changes, so check your service before settling in."}}]}</script>
 </head>
 <body>
 <div class="atmo" aria-hidden="true"><div class="flashlight" id="flashlight"></div><div class="vignette"></div><div class="flicker" id="flicker"></div><div class="grain" id="grain"></div></div>
@@ -231,8 +231,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 <section class="faq">
   <h2>Before you press play</h2>
   <dl>
-    <dt>How scary is Exhuma?</dt><dd>On our intensity scale, Exhuma rates 3/5 for scares and 4/5 for dread. It is moderately scary, with a handful of strong sequences.</dd>
-    <dt>How gory is Exhuma?</dt><dd>Exhuma rates 2/5 for gore — expect only light gore.</dd>
+    <dt>How scary is Exhuma?</dt><dd>On our intensity scale, Exhuma rates <span data-faq="jumps">6.0</span>/10 for jump scares and <span data-faq="dread">8.0</span>/10 for dread. It is moderately scary, with a handful of strong sequences.</dd>
+    <dt>How gory is Exhuma?</dt><dd>Exhuma rates <span data-faq="gore">4.0</span>/10 for gore — expect only light gore.</dd>
     <dt>Where can I stream Exhuma?</dt><dd>As of our last update, Exhuma is streaming on Shudder in the US. Availability changes, so check your service before settling in.</dd>
   </dl>
 </section>
@@ -361,6 +361,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
     var old = el.querySelector('b') ? el.querySelector('b').textContent : null;
     var shown = (avg * 2).toFixed(1);   // pips are 1-5, the figure reads /10
     var votes = stats && stats.votes;
+    // the FAQ prose quotes the same figures; keep them from drifting
+    document.querySelectorAll('[data-faq="' + d + '"]').forEach(function (n) { n.textContent = shown; });
     el.innerHTML = '<b>' + shown + '</b>' + (votes ? ' · ' + votes + ' vote' + (votes === 1 ? '' : 's') : '');
     if (old && old !== shown) {
       var b = el.querySelector('b');

@@ -164,7 +164,7 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Movie","name":"Alien","url":"https://whatscares.com/movies/alien.html","image":"https://image.tmdb.org/t/p/w500/vfrQk5IPloGg1v9Rzbh2Eg3VGyM.jpg","datePublished":"1979","director":{"@type":"Person","name":"Ridley Scott"},"genre":["Creature","Isolation","Atmospheric","Slow-Burn"],"description":"A haunted house in deep space where the house wins slowly. Scott's original remains the template for creature horror: blue-collar crew, corporate indifference, and Giger's biomechanical nightmare revealed one glimpse at a time. The chestburster still detonates dinner parties.","aggregateRating":{"@type":"AggregateRating","ratingValue":8.4,"bestRating":10,"ratingCount":1069174}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"WhatScares","item":"https://whatscares.com/"},{"@type":"ListItem","position":2,"name":"All Films","item":"https://whatscares.com/movies/"},{"@type":"ListItem","position":3,"name":"Alien","item":"https://whatscares.com/movies/alien.html"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Alien?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Alien rates 5/5 for scares and 5/5 for dread. It is among the scariest films on WhatScares. The dread keeps climbing even between the big moments."}},{"@type":"Question","name":"How gory is Alien?","acceptedAnswer":{"@type":"Answer","text":"Alien rates 3/5 for gore — expect a moderate amount of blood and violence."}},{"@type":"Question","name":"Where can I stream Alien?","acceptedAnswer":{"@type":"Answer","text":"As of our last update, Alien is streaming on Hulu in the US. Availability changes, so check your service before settling in."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Alien?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Alien rates 10.0/10 for jump scares and 10.0/10 for dread. It is among the scariest films on WhatScares. The dread keeps climbing even between the big moments."}},{"@type":"Question","name":"How gory is Alien?","acceptedAnswer":{"@type":"Answer","text":"Alien rates 6.0/10 for gore — expect a moderate amount of blood and violence."}},{"@type":"Question","name":"Where can I stream Alien?","acceptedAnswer":{"@type":"Answer","text":"As of our last update, Alien is streaming on Hulu in the US. Availability changes, so check your service before settling in."}}]}</script>
 </head>
 <body>
 <div class="atmo" aria-hidden="true"><div class="flashlight" id="flashlight"></div><div class="vignette"></div><div class="flicker" id="flicker"></div><div class="grain" id="grain"></div></div>
@@ -232,8 +232,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 <section class="faq">
   <h2>Before you press play</h2>
   <dl>
-    <dt>How scary is Alien?</dt><dd>On our intensity scale, Alien rates 5/5 for scares and 5/5 for dread. It is among the scariest films on WhatScares. The dread keeps climbing even between the big moments.</dd>
-    <dt>How gory is Alien?</dt><dd>Alien rates 3/5 for gore — expect a moderate amount of blood and violence.</dd>
+    <dt>How scary is Alien?</dt><dd>On our intensity scale, Alien rates <span data-faq="jumps">10.0</span>/10 for jump scares and <span data-faq="dread">10.0</span>/10 for dread. It is among the scariest films on WhatScares. The dread keeps climbing even between the big moments.</dd>
+    <dt>How gory is Alien?</dt><dd>Alien rates <span data-faq="gore">6.0</span>/10 for gore — expect a moderate amount of blood and violence.</dd>
     <dt>Where can I stream Alien?</dt><dd>As of our last update, Alien is streaming on Hulu in the US. Availability changes, so check your service before settling in.</dd>
   </dl>
 </section>
@@ -362,6 +362,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
     var old = el.querySelector('b') ? el.querySelector('b').textContent : null;
     var shown = (avg * 2).toFixed(1);   // pips are 1-5, the figure reads /10
     var votes = stats && stats.votes;
+    // the FAQ prose quotes the same figures; keep them from drifting
+    document.querySelectorAll('[data-faq="' + d + '"]').forEach(function (n) { n.textContent = shown; });
     el.innerHTML = '<b>' + shown + '</b>' + (votes ? ' · ' + votes + ' vote' + (votes === 1 ? '' : 's') : '');
     if (old && old !== shown) {
       var b = el.querySelector('b');

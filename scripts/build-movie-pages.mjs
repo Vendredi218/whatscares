@@ -64,13 +64,20 @@ const GORE_TEXT = {
   4: 'heavy gore', 5: 'extreme gore — not for the squeamish',
 };
 
-function scareAnswer(m) {
-  let a = `On our intensity scale, ${m.t} rates ${m.scare}/5 for scares and ${m.dread}/5 for dread. It ${SCARE_TEXT[m.scare]}.`;
-  if (m.scare <= 3 && m.dread >= 5) a += ' Expect little in the way of jump scares, but a sense of dread that builds steadily and lingers after the credits.';
-  else if (m.dread >= 5) a += ' The dread keeps climbing even between the big moments.';
-  return a;
+const ten = v => (v * 2).toFixed(1);
+const live = (dim, v) => `<span data-faq="${dim}">${ten(v)}</span>`;
+
+function scareTail(m) {
+  if (m.scare <= 3 && m.dread >= 5) return ' Expect little in the way of jump scares, but a sense of dread that builds steadily and lingers after the credits.';
+  if (m.dread >= 5) return ' The dread keeps climbing even between the big moments.';
+  return '';
 }
-const goreAnswer = m => `${m.t} rates ${m.gore}/5 for gore — expect ${GORE_TEXT[m.gore]}.`;
+// plain text -> JSON-LD (read before any script runs); html -> the page, where
+// the figures get replaced by reader averages once they load
+const scareAnswer = m => `On our intensity scale, ${m.t} rates ${ten(m.scare)}/10 for jump scares and ${ten(m.dread)}/10 for dread. It ${SCARE_TEXT[m.scare]}.${scareTail(m)}`;
+const scareAnswerHTML = m => `On our intensity scale, ${esc(m.t)} rates ${live('jumps', m.scare)}/10 for jump scares and ${live('dread', m.dread)}/10 for dread. It ${SCARE_TEXT[m.scare]}.${scareTail(m)}`;
+const goreAnswer = m => `${m.t} rates ${ten(m.gore)}/10 for gore — expect ${GORE_TEXT[m.gore]}.`;
+const goreAnswerHTML = m => `${esc(m.t)} rates ${live('gore', m.gore)}/10 for gore — expect ${GORE_TEXT[m.gore]}.`;
 const streamAnswer = m => m.str && m.str.length
   ? `As of our last update, ${m.t} is streaming on ${m.str.join(' and ')} in the US. Availability changes, so check your service before settling in.`
   : `${m.t} is not on major US subscription streamers right now — look for it on digital rental or purchase (Apple TV, Prime Video, or your usual store).`;
@@ -410,8 +417,8 @@ ${headerHtml}
 <section class="faq">
   <h2>Before you press play</h2>
   <dl>
-    <dt>How scary is ${esc(m.t)}?</dt><dd>${esc(scareAnswer(m))}</dd>
-    <dt>How gory is ${esc(m.t)}?</dt><dd>${esc(goreAnswer(m))}</dd>
+    <dt>How scary is ${esc(m.t)}?</dt><dd>${scareAnswerHTML(m)}</dd>
+    <dt>How gory is ${esc(m.t)}?</dt><dd>${goreAnswerHTML(m)}</dd>
     <dt>Where can I stream ${esc(m.t)}?</dt><dd>${esc(streamAnswer(m))}</dd>
   </dl>
 </section>
@@ -526,6 +533,8 @@ ${footerHtml}
     var old = el.querySelector('b') ? el.querySelector('b').textContent : null;
     var shown = (avg * 2).toFixed(1);   // pips are 1-5, the figure reads /10
     var votes = stats && stats.votes;
+    // the FAQ prose quotes the same figures; keep them from drifting
+    document.querySelectorAll('[data-faq="' + d + '"]').forEach(function (n) { n.textContent = shown; });
     el.innerHTML = '<b>' + shown + '</b>' + (votes ? ' \u00b7 ' + votes + ' vote' + (votes === 1 ? '' : 's') : '');
     if (old && old !== shown) {
       var b = el.querySelector('b');

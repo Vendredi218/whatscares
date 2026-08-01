@@ -164,7 +164,7 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Movie","name":"House","url":"https://whatscares.com/movies/house.html","image":"https://image.tmdb.org/t/p/w500/myMnHnG6kxYaQYknnW76VCHBpYT.jpg","datePublished":"1977","director":{"@type":"Person","name":"Nobuhiko Obayashi"},"genre":["J-Horror","Supernatural","Witch"],"description":"Seven schoolgirls visit an aunt's country house that eats them one by one — via piano, futons, and a very committed cat. Obayashi's psychedelic collage uses every in-camera trick of 1977 at once. Less scary than delirious: horror as pop-art sugar rush.","aggregateRating":{"@type":"AggregateRating","ratingValue":7.2,"bestRating":10,"ratingCount":40040}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"WhatScares","item":"https://whatscares.com/"},{"@type":"ListItem","position":2,"name":"All Films","item":"https://whatscares.com/movies/"},{"@type":"ListItem","position":3,"name":"House","item":"https://whatscares.com/movies/house.html"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is House?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, House rates 2/5 for scares and 2/5 for dread. It is on the gentler side — it favors mood and atmosphere over hard scares."}},{"@type":"Question","name":"How gory is House?","acceptedAnswer":{"@type":"Answer","text":"House rates 3/5 for gore — expect a moderate amount of blood and violence."}},{"@type":"Question","name":"Where can I stream House?","acceptedAnswer":{"@type":"Answer","text":"House is not on major US subscription streamers right now — look for it on digital rental or purchase (Apple TV, Prime Video, or your usual store)."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is House?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, House rates 4.0/10 for jump scares and 4.0/10 for dread. It is on the gentler side — it favors mood and atmosphere over hard scares."}},{"@type":"Question","name":"How gory is House?","acceptedAnswer":{"@type":"Answer","text":"House rates 6.0/10 for gore — expect a moderate amount of blood and violence."}},{"@type":"Question","name":"Where can I stream House?","acceptedAnswer":{"@type":"Answer","text":"House is not on major US subscription streamers right now — look for it on digital rental or purchase (Apple TV, Prime Video, or your usual store)."}}]}</script>
 </head>
 <body>
 <div class="atmo" aria-hidden="true"><div class="flashlight" id="flashlight"></div><div class="vignette"></div><div class="flicker" id="flicker"></div><div class="grain" id="grain"></div></div>
@@ -231,8 +231,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 <section class="faq">
   <h2>Before you press play</h2>
   <dl>
-    <dt>How scary is House?</dt><dd>On our intensity scale, House rates 2/5 for scares and 2/5 for dread. It is on the gentler side — it favors mood and atmosphere over hard scares.</dd>
-    <dt>How gory is House?</dt><dd>House rates 3/5 for gore — expect a moderate amount of blood and violence.</dd>
+    <dt>How scary is House?</dt><dd>On our intensity scale, House rates <span data-faq="jumps">4.0</span>/10 for jump scares and <span data-faq="dread">4.0</span>/10 for dread. It is on the gentler side — it favors mood and atmosphere over hard scares.</dd>
+    <dt>How gory is House?</dt><dd>House rates <span data-faq="gore">6.0</span>/10 for gore — expect a moderate amount of blood and violence.</dd>
     <dt>Where can I stream House?</dt><dd>House is not on major US subscription streamers right now — look for it on digital rental or purchase (Apple TV, Prime Video, or your usual store).</dd>
   </dl>
 </section>
@@ -361,6 +361,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
     var old = el.querySelector('b') ? el.querySelector('b').textContent : null;
     var shown = (avg * 2).toFixed(1);   // pips are 1-5, the figure reads /10
     var votes = stats && stats.votes;
+    // the FAQ prose quotes the same figures; keep them from drifting
+    document.querySelectorAll('[data-faq="' + d + '"]').forEach(function (n) { n.textContent = shown; });
     el.innerHTML = '<b>' + shown + '</b>' + (votes ? ' · ' + votes + ' vote' + (votes === 1 ? '' : 's') : '');
     if (old && old !== shown) {
       var b = el.querySelector('b');

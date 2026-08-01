@@ -164,7 +164,7 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Movie","name":"Cure","url":"https://whatscares.com/movies/cure.html","image":"https://image.tmdb.org/t/p/w500/xNVJr9q6AtSbjosS6Ed9YirOkSo.jpg","datePublished":"1997","director":{"@type":"Person","name":"Kiyoshi Kurosawa"},"genre":["J-Horror","Psychological","Slow-Burn","Atmospheric"],"description":"A detective chases serial murders committed by ordinary people who can't say why, all linked to a drifting young man who asks questions and lights lighters. Kurosawa's procedural is hypnosis as horror — it implants its unease and lets your own head finish the job.","aggregateRating":{"@type":"AggregateRating","ratingValue":7.5,"bestRating":10,"ratingCount":39556}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"WhatScares","item":"https://whatscares.com/"},{"@type":"ListItem","position":2,"name":"All Films","item":"https://whatscares.com/movies/"},{"@type":"ListItem","position":3,"name":"Cure","item":"https://whatscares.com/movies/cure.html"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Cure?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Cure rates 3/5 for scares and 5/5 for dread. It is moderately scary, with a handful of strong sequences. Expect little in the way of jump scares, but a sense of dread that builds steadily and lingers after the credits."}},{"@type":"Question","name":"How gory is Cure?","acceptedAnswer":{"@type":"Answer","text":"Cure rates 2/5 for gore — expect only light gore."}},{"@type":"Question","name":"Where can I stream Cure?","acceptedAnswer":{"@type":"Answer","text":"Cure is not on major US subscription streamers right now — look for it on digital rental or purchase (Apple TV, Prime Video, or your usual store)."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Cure?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Cure rates 6.0/10 for jump scares and 10.0/10 for dread. It is moderately scary, with a handful of strong sequences. Expect little in the way of jump scares, but a sense of dread that builds steadily and lingers after the credits."}},{"@type":"Question","name":"How gory is Cure?","acceptedAnswer":{"@type":"Answer","text":"Cure rates 4.0/10 for gore — expect only light gore."}},{"@type":"Question","name":"Where can I stream Cure?","acceptedAnswer":{"@type":"Answer","text":"Cure is not on major US subscription streamers right now — look for it on digital rental or purchase (Apple TV, Prime Video, or your usual store)."}}]}</script>
 </head>
 <body>
 <div class="atmo" aria-hidden="true"><div class="flashlight" id="flashlight"></div><div class="vignette"></div><div class="flicker" id="flicker"></div><div class="grain" id="grain"></div></div>
@@ -231,8 +231,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 <section class="faq">
   <h2>Before you press play</h2>
   <dl>
-    <dt>How scary is Cure?</dt><dd>On our intensity scale, Cure rates 3/5 for scares and 5/5 for dread. It is moderately scary, with a handful of strong sequences. Expect little in the way of jump scares, but a sense of dread that builds steadily and lingers after the credits.</dd>
-    <dt>How gory is Cure?</dt><dd>Cure rates 2/5 for gore — expect only light gore.</dd>
+    <dt>How scary is Cure?</dt><dd>On our intensity scale, Cure rates <span data-faq="jumps">6.0</span>/10 for jump scares and <span data-faq="dread">10.0</span>/10 for dread. It is moderately scary, with a handful of strong sequences. Expect little in the way of jump scares, but a sense of dread that builds steadily and lingers after the credits.</dd>
+    <dt>How gory is Cure?</dt><dd>Cure rates <span data-faq="gore">4.0</span>/10 for gore — expect only light gore.</dd>
     <dt>Where can I stream Cure?</dt><dd>Cure is not on major US subscription streamers right now — look for it on digital rental or purchase (Apple TV, Prime Video, or your usual store).</dd>
   </dl>
 </section>
@@ -361,6 +361,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
     var old = el.querySelector('b') ? el.querySelector('b').textContent : null;
     var shown = (avg * 2).toFixed(1);   // pips are 1-5, the figure reads /10
     var votes = stats && stats.votes;
+    // the FAQ prose quotes the same figures; keep them from drifting
+    document.querySelectorAll('[data-faq="' + d + '"]').forEach(function (n) { n.textContent = shown; });
     el.innerHTML = '<b>' + shown + '</b>' + (votes ? ' · ' + votes + ' vote' + (votes === 1 ? '' : 's') : '');
     if (old && old !== shown) {
       var b = el.querySelector('b');

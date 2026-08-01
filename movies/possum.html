@@ -164,7 +164,7 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Movie","name":"Possum","url":"https://whatscares.com/movies/possum.html","image":"https://image.tmdb.org/t/p/w500/5QOFKSpE7KacBriU95fxG6hmmvr.jpg","datePublished":"2018","director":{"@type":"Person","name":"Matthew Holness"},"genre":["Dolls","Psychological","Atmospheric","Slow-Burn"],"description":"Sean Harris carries a leather bag containing a spider-legged puppet he cannot destroy, through the greyest England ever filmed. Matthew Holness made an anti-entertainment about shame and abuse that works like a cursed public-information film. Genuinely oppressive.","aggregateRating":{"@type":"AggregateRating","ratingValue":5.8,"bestRating":10,"ratingCount":12398}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"WhatScares","item":"https://whatscares.com/"},{"@type":"ListItem","position":2,"name":"All Films","item":"https://whatscares.com/movies/"},{"@type":"ListItem","position":3,"name":"Possum","item":"https://whatscares.com/movies/possum.html"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Possum?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Possum rates 2/5 for scares and 5/5 for dread. It is on the gentler side — it favors mood and atmosphere over hard scares. Expect little in the way of jump scares, but a sense of dread that builds steadily and lingers after the credits."}},{"@type":"Question","name":"How gory is Possum?","acceptedAnswer":{"@type":"Answer","text":"Possum rates 1/5 for gore — expect almost no gore."}},{"@type":"Question","name":"Where can I stream Possum?","acceptedAnswer":{"@type":"Answer","text":"As of our last update, Possum is streaming on Shudder in the US. Availability changes, so check your service before settling in."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Possum?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Possum rates 4.0/10 for jump scares and 10.0/10 for dread. It is on the gentler side — it favors mood and atmosphere over hard scares. Expect little in the way of jump scares, but a sense of dread that builds steadily and lingers after the credits."}},{"@type":"Question","name":"How gory is Possum?","acceptedAnswer":{"@type":"Answer","text":"Possum rates 2.0/10 for gore — expect almost no gore."}},{"@type":"Question","name":"Where can I stream Possum?","acceptedAnswer":{"@type":"Answer","text":"As of our last update, Possum is streaming on Shudder in the US. Availability changes, so check your service before settling in."}}]}</script>
 </head>
 <body>
 <div class="atmo" aria-hidden="true"><div class="flashlight" id="flashlight"></div><div class="vignette"></div><div class="flicker" id="flicker"></div><div class="grain" id="grain"></div></div>
@@ -231,8 +231,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 <section class="faq">
   <h2>Before you press play</h2>
   <dl>
-    <dt>How scary is Possum?</dt><dd>On our intensity scale, Possum rates 2/5 for scares and 5/5 for dread. It is on the gentler side — it favors mood and atmosphere over hard scares. Expect little in the way of jump scares, but a sense of dread that builds steadily and lingers after the credits.</dd>
-    <dt>How gory is Possum?</dt><dd>Possum rates 1/5 for gore — expect almost no gore.</dd>
+    <dt>How scary is Possum?</dt><dd>On our intensity scale, Possum rates <span data-faq="jumps">4.0</span>/10 for jump scares and <span data-faq="dread">10.0</span>/10 for dread. It is on the gentler side — it favors mood and atmosphere over hard scares. Expect little in the way of jump scares, but a sense of dread that builds steadily and lingers after the credits.</dd>
+    <dt>How gory is Possum?</dt><dd>Possum rates <span data-faq="gore">2.0</span>/10 for gore — expect almost no gore.</dd>
     <dt>Where can I stream Possum?</dt><dd>As of our last update, Possum is streaming on Shudder in the US. Availability changes, so check your service before settling in.</dd>
   </dl>
 </section>
@@ -361,6 +361,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
     var old = el.querySelector('b') ? el.querySelector('b').textContent : null;
     var shown = (avg * 2).toFixed(1);   // pips are 1-5, the figure reads /10
     var votes = stats && stats.votes;
+    // the FAQ prose quotes the same figures; keep them from drifting
+    document.querySelectorAll('[data-faq="' + d + '"]').forEach(function (n) { n.textContent = shown; });
     el.innerHTML = '<b>' + shown + '</b>' + (votes ? ' · ' + votes + ' vote' + (votes === 1 ? '' : 's') : '');
     if (old && old !== shown) {
       var b = el.querySelector('b');

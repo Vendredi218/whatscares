@@ -164,7 +164,7 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Movie","name":"Annabelle: Creation","url":"https://whatscares.com/movies/annabelle-creation.html","image":"https://image.tmdb.org/t/p/w500/tb86j8jVCVsdZnzf8I6cIi65IeM.jpg","datePublished":"2017","director":{"@type":"Person","name":"David Sandberg"},"genre":["Dolls","Supernatural","Possession","Religious"],"description":"The best of the Annabelle films by a wide margin — a dollmaker's farmhouse, orphaned girls, and a patient demon. Sandberg directs scares with mechanical precision: every creaking dumbwaiter and sheet-covered chair is a little trap that springs on schedule.","aggregateRating":{"@type":"AggregateRating","ratingValue":6.5,"bestRating":10,"ratingCount":171350}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"WhatScares","item":"https://whatscares.com/"},{"@type":"ListItem","position":2,"name":"All Films","item":"https://whatscares.com/movies/"},{"@type":"ListItem","position":3,"name":"Annabelle: Creation","item":"https://whatscares.com/movies/annabelle-creation.html"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Annabelle: Creation?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Annabelle: Creation rates 4/5 for scares and 3/5 for dread. It is genuinely scary, with sustained tension and hard-hitting scares."}},{"@type":"Question","name":"How gory is Annabelle: Creation?","acceptedAnswer":{"@type":"Answer","text":"Annabelle: Creation rates 2/5 for gore — expect only light gore."}},{"@type":"Question","name":"Where can I stream Annabelle: Creation?","acceptedAnswer":{"@type":"Answer","text":"As of our last update, Annabelle: Creation is streaming on Max and Netflix in the US. Availability changes, so check your service before settling in."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Annabelle: Creation?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Annabelle: Creation rates 8.0/10 for jump scares and 6.0/10 for dread. It is genuinely scary, with sustained tension and hard-hitting scares."}},{"@type":"Question","name":"How gory is Annabelle: Creation?","acceptedAnswer":{"@type":"Answer","text":"Annabelle: Creation rates 4.0/10 for gore — expect only light gore."}},{"@type":"Question","name":"Where can I stream Annabelle: Creation?","acceptedAnswer":{"@type":"Answer","text":"As of our last update, Annabelle: Creation is streaming on Max and Netflix in the US. Availability changes, so check your service before settling in."}}]}</script>
 </head>
 <body>
 <div class="atmo" aria-hidden="true"><div class="flashlight" id="flashlight"></div><div class="vignette"></div><div class="flicker" id="flicker"></div><div class="grain" id="grain"></div></div>
@@ -232,8 +232,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 <section class="faq">
   <h2>Before you press play</h2>
   <dl>
-    <dt>How scary is Annabelle: Creation?</dt><dd>On our intensity scale, Annabelle: Creation rates 4/5 for scares and 3/5 for dread. It is genuinely scary, with sustained tension and hard-hitting scares.</dd>
-    <dt>How gory is Annabelle: Creation?</dt><dd>Annabelle: Creation rates 2/5 for gore — expect only light gore.</dd>
+    <dt>How scary is Annabelle: Creation?</dt><dd>On our intensity scale, Annabelle: Creation rates <span data-faq="jumps">8.0</span>/10 for jump scares and <span data-faq="dread">6.0</span>/10 for dread. It is genuinely scary, with sustained tension and hard-hitting scares.</dd>
+    <dt>How gory is Annabelle: Creation?</dt><dd>Annabelle: Creation rates <span data-faq="gore">4.0</span>/10 for gore — expect only light gore.</dd>
     <dt>Where can I stream Annabelle: Creation?</dt><dd>As of our last update, Annabelle: Creation is streaming on Max and Netflix in the US. Availability changes, so check your service before settling in.</dd>
   </dl>
 </section>
@@ -362,6 +362,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
     var old = el.querySelector('b') ? el.querySelector('b').textContent : null;
     var shown = (avg * 2).toFixed(1);   // pips are 1-5, the figure reads /10
     var votes = stats && stats.votes;
+    // the FAQ prose quotes the same figures; keep them from drifting
+    document.querySelectorAll('[data-faq="' + d + '"]').forEach(function (n) { n.textContent = shown; });
     el.innerHTML = '<b>' + shown + '</b>' + (votes ? ' · ' + votes + ' vote' + (votes === 1 ? '' : 's') : '');
     if (old && old !== shown) {
       var b = el.querySelector('b');

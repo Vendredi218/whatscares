@@ -164,7 +164,7 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Movie","name":"Out of the Dark","url":"https://whatscares.com/movies/out-of-the-dark.html","image":"https://image.tmdb.org/t/p/w500/fsx6xnk6KoZmslCbD7y6mLB2PHb.jpg","datePublished":"1995","director":{"@type":"Person","name":"Jeffrey Lau"},"genre":["HK / Taiwan","Supernatural","Possession"],"description":"Stephen Chow plays a ghostbusting mentor whose methods are somewhere between Leon: The Professional and complete nonsense. A cult mo lei tau horror-comedy that swings between absurdist gags and surprisingly dark turns — beloved in Cantonese, baffling elsewhere, essential either way.","aggregateRating":{"@type":"AggregateRating","ratingValue":6.8,"bestRating":10,"ratingCount":3194}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"WhatScares","item":"https://whatscares.com/"},{"@type":"ListItem","position":2,"name":"All Films","item":"https://whatscares.com/movies/"},{"@type":"ListItem","position":3,"name":"Out of the Dark","item":"https://whatscares.com/movies/out-of-the-dark.html"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Out of the Dark?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Out of the Dark rates 2/5 for scares and 2/5 for dread. It is on the gentler side — it favors mood and atmosphere over hard scares."}},{"@type":"Question","name":"How gory is Out of the Dark?","acceptedAnswer":{"@type":"Answer","text":"Out of the Dark rates 2/5 for gore — expect only light gore."}},{"@type":"Question","name":"Where can I stream Out of the Dark?","acceptedAnswer":{"@type":"Answer","text":"Out of the Dark is not on major US subscription streamers right now — look for it on digital rental or purchase (Apple TV, Prime Video, or your usual store)."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Out of the Dark?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Out of the Dark rates 4.0/10 for jump scares and 4.0/10 for dread. It is on the gentler side — it favors mood and atmosphere over hard scares."}},{"@type":"Question","name":"How gory is Out of the Dark?","acceptedAnswer":{"@type":"Answer","text":"Out of the Dark rates 4.0/10 for gore — expect only light gore."}},{"@type":"Question","name":"Where can I stream Out of the Dark?","acceptedAnswer":{"@type":"Answer","text":"Out of the Dark is not on major US subscription streamers right now — look for it on digital rental or purchase (Apple TV, Prime Video, or your usual store)."}}]}</script>
 </head>
 <body>
 <div class="atmo" aria-hidden="true"><div class="flashlight" id="flashlight"></div><div class="vignette"></div><div class="flicker" id="flicker"></div><div class="grain" id="grain"></div></div>
@@ -230,8 +230,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 <section class="faq">
   <h2>Before you press play</h2>
   <dl>
-    <dt>How scary is Out of the Dark?</dt><dd>On our intensity scale, Out of the Dark rates 2/5 for scares and 2/5 for dread. It is on the gentler side — it favors mood and atmosphere over hard scares.</dd>
-    <dt>How gory is Out of the Dark?</dt><dd>Out of the Dark rates 2/5 for gore — expect only light gore.</dd>
+    <dt>How scary is Out of the Dark?</dt><dd>On our intensity scale, Out of the Dark rates <span data-faq="jumps">4.0</span>/10 for jump scares and <span data-faq="dread">4.0</span>/10 for dread. It is on the gentler side — it favors mood and atmosphere over hard scares.</dd>
+    <dt>How gory is Out of the Dark?</dt><dd>Out of the Dark rates <span data-faq="gore">4.0</span>/10 for gore — expect only light gore.</dd>
     <dt>Where can I stream Out of the Dark?</dt><dd>Out of the Dark is not on major US subscription streamers right now — look for it on digital rental or purchase (Apple TV, Prime Video, or your usual store).</dd>
   </dl>
 </section>
@@ -360,6 +360,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
     var old = el.querySelector('b') ? el.querySelector('b').textContent : null;
     var shown = (avg * 2).toFixed(1);   // pips are 1-5, the figure reads /10
     var votes = stats && stats.votes;
+    // the FAQ prose quotes the same figures; keep them from drifting
+    document.querySelectorAll('[data-faq="' + d + '"]').forEach(function (n) { n.textContent = shown; });
     el.innerHTML = '<b>' + shown + '</b>' + (votes ? ' · ' + votes + ' vote' + (votes === 1 ? '' : 's') : '');
     if (old && old !== shown) {
       var b = el.querySelector('b');

@@ -164,7 +164,7 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Movie","name":"[REC]","url":"https://whatscares.com/movies/rec.html","image":"https://image.tmdb.org/t/p/w500/hgyJR4sgMsee6xMFM3xYiG6cDCh.jpg","datePublished":"2007","director":{"@type":"Person","name":"Jaume Balagueró"},"genre":["Found Footage","Zombie","Isolation"],"description":"A TV reporter follows firefighters into a Barcelona apartment building; quarantine seals the doors behind them. Spain's found-footage benchmark is a machine for panic — one location, real-time collapse, and a night-vision attic finale that remains the subgenre's scariest scene.","aggregateRating":{"@type":"AggregateRating","ratingValue":7.4,"bestRating":10,"ratingCount":218399}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"WhatScares","item":"https://whatscares.com/"},{"@type":"ListItem","position":2,"name":"All Films","item":"https://whatscares.com/movies/"},{"@type":"ListItem","position":3,"name":"[REC]","item":"https://whatscares.com/movies/rec.html"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is [REC]?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, [REC] rates 5/5 for scares and 4/5 for dread. It is among the scariest films on WhatScares."}},{"@type":"Question","name":"How gory is [REC]?","acceptedAnswer":{"@type":"Answer","text":"[REC] rates 4/5 for gore — expect heavy gore."}},{"@type":"Question","name":"Where can I stream [REC]?","acceptedAnswer":{"@type":"Answer","text":"As of our last update, [REC] is streaming on Tubi in the US. Availability changes, so check your service before settling in."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is [REC]?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, [REC] rates 10.0/10 for jump scares and 8.0/10 for dread. It is among the scariest films on WhatScares."}},{"@type":"Question","name":"How gory is [REC]?","acceptedAnswer":{"@type":"Answer","text":"[REC] rates 8.0/10 for gore — expect heavy gore."}},{"@type":"Question","name":"Where can I stream [REC]?","acceptedAnswer":{"@type":"Answer","text":"As of our last update, [REC] is streaming on Tubi in the US. Availability changes, so check your service before settling in."}}]}</script>
 </head>
 <body>
 <div class="atmo" aria-hidden="true"><div class="flashlight" id="flashlight"></div><div class="vignette"></div><div class="flicker" id="flicker"></div><div class="grain" id="grain"></div></div>
@@ -232,8 +232,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 <section class="faq">
   <h2>Before you press play</h2>
   <dl>
-    <dt>How scary is [REC]?</dt><dd>On our intensity scale, [REC] rates 5/5 for scares and 4/5 for dread. It is among the scariest films on WhatScares.</dd>
-    <dt>How gory is [REC]?</dt><dd>[REC] rates 4/5 for gore — expect heavy gore.</dd>
+    <dt>How scary is [REC]?</dt><dd>On our intensity scale, [REC] rates <span data-faq="jumps">10.0</span>/10 for jump scares and <span data-faq="dread">8.0</span>/10 for dread. It is among the scariest films on WhatScares.</dd>
+    <dt>How gory is [REC]?</dt><dd>[REC] rates <span data-faq="gore">8.0</span>/10 for gore — expect heavy gore.</dd>
     <dt>Where can I stream [REC]?</dt><dd>As of our last update, [REC] is streaming on Tubi in the US. Availability changes, so check your service before settling in.</dd>
   </dl>
 </section>
@@ -362,6 +362,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
     var old = el.querySelector('b') ? el.querySelector('b').textContent : null;
     var shown = (avg * 2).toFixed(1);   // pips are 1-5, the figure reads /10
     var votes = stats && stats.votes;
+    // the FAQ prose quotes the same figures; keep them from drifting
+    document.querySelectorAll('[data-faq="' + d + '"]').forEach(function (n) { n.textContent = shown; });
     el.innerHTML = '<b>' + shown + '</b>' + (votes ? ' · ' + votes + ' vote' + (votes === 1 ? '' : 's') : '');
     if (old && old !== shown) {
       var b = el.querySelector('b');

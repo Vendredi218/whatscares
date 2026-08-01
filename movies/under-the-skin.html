@@ -164,7 +164,7 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Movie","name":"Under the Skin","url":"https://whatscares.com/movies/under-the-skin.html","image":"https://image.tmdb.org/t/p/w500/55wmcXJIDYITr7JDijJTdvwSaAv.jpg","datePublished":"2013","director":{"@type":"Person","name":"Jonathan Glazer"},"genre":["Cosmic","Atmospheric","Slow-Burn","A24","Body Horror"],"description":"Scarlett Johansson drives a van through Glasgow, harvesting men into a black void that remains cinema's most economical image of alien indifference. Glazer strips dialogue and explanation until what's left is pure, freezing otherness. Mica Levi's score is half the horror.","aggregateRating":{"@type":"AggregateRating","ratingValue":6.3,"bestRating":10,"ratingCount":172065}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"WhatScares","item":"https://whatscares.com/"},{"@type":"ListItem","position":2,"name":"All Films","item":"https://whatscares.com/movies/"},{"@type":"ListItem","position":3,"name":"Under the Skin","item":"https://whatscares.com/movies/under-the-skin.html"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Under the Skin?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Under the Skin rates 2/5 for scares and 5/5 for dread. It is on the gentler side — it favors mood and atmosphere over hard scares. Expect little in the way of jump scares, but a sense of dread that builds steadily and lingers after the credits."}},{"@type":"Question","name":"How gory is Under the Skin?","acceptedAnswer":{"@type":"Answer","text":"Under the Skin rates 2/5 for gore — expect only light gore."}},{"@type":"Question","name":"Where can I stream Under the Skin?","acceptedAnswer":{"@type":"Answer","text":"As of our last update, Under the Skin is streaming on Max in the US. Availability changes, so check your service before settling in."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Under the Skin?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Under the Skin rates 4.0/10 for jump scares and 10.0/10 for dread. It is on the gentler side — it favors mood and atmosphere over hard scares. Expect little in the way of jump scares, but a sense of dread that builds steadily and lingers after the credits."}},{"@type":"Question","name":"How gory is Under the Skin?","acceptedAnswer":{"@type":"Answer","text":"Under the Skin rates 4.0/10 for gore — expect only light gore."}},{"@type":"Question","name":"Where can I stream Under the Skin?","acceptedAnswer":{"@type":"Answer","text":"As of our last update, Under the Skin is streaming on Max in the US. Availability changes, so check your service before settling in."}}]}</script>
 </head>
 <body>
 <div class="atmo" aria-hidden="true"><div class="flashlight" id="flashlight"></div><div class="vignette"></div><div class="flicker" id="flicker"></div><div class="grain" id="grain"></div></div>
@@ -232,8 +232,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 <section class="faq">
   <h2>Before you press play</h2>
   <dl>
-    <dt>How scary is Under the Skin?</dt><dd>On our intensity scale, Under the Skin rates 2/5 for scares and 5/5 for dread. It is on the gentler side — it favors mood and atmosphere over hard scares. Expect little in the way of jump scares, but a sense of dread that builds steadily and lingers after the credits.</dd>
-    <dt>How gory is Under the Skin?</dt><dd>Under the Skin rates 2/5 for gore — expect only light gore.</dd>
+    <dt>How scary is Under the Skin?</dt><dd>On our intensity scale, Under the Skin rates <span data-faq="jumps">4.0</span>/10 for jump scares and <span data-faq="dread">10.0</span>/10 for dread. It is on the gentler side — it favors mood and atmosphere over hard scares. Expect little in the way of jump scares, but a sense of dread that builds steadily and lingers after the credits.</dd>
+    <dt>How gory is Under the Skin?</dt><dd>Under the Skin rates <span data-faq="gore">4.0</span>/10 for gore — expect only light gore.</dd>
     <dt>Where can I stream Under the Skin?</dt><dd>As of our last update, Under the Skin is streaming on Max in the US. Availability changes, so check your service before settling in.</dd>
   </dl>
 </section>
@@ -364,6 +364,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
     var old = el.querySelector('b') ? el.querySelector('b').textContent : null;
     var shown = (avg * 2).toFixed(1);   // pips are 1-5, the figure reads /10
     var votes = stats && stats.votes;
+    // the FAQ prose quotes the same figures; keep them from drifting
+    document.querySelectorAll('[data-faq="' + d + '"]').forEach(function (n) { n.textContent = shown; });
     el.innerHTML = '<b>' + shown + '</b>' + (votes ? ' · ' + votes + ' vote' + (votes === 1 ? '' : 's') : '');
     if (old && old !== shown) {
       var b = el.querySelector('b');

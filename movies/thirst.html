@@ -164,7 +164,7 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Movie","name":"Thirst","url":"https://whatscares.com/movies/thirst.html","image":"https://image.tmdb.org/t/p/w500/sBnFQwOcmL3dAIYfiQ9nLvLSW7B.jpg","datePublished":"2009","director":{"@type":"Person","name":"Park Chan-wook"},"genre":["K-Horror","Vampire","Body Horror","Religious"],"description":"Park Chan-wook's priest survives a medical experiment and returns with an appetite his vows can't contain. A vampire film staged as moral farce and doomed romance — sacrilege, mahjong, and one of the great pitch-black endings in the genre.","aggregateRating":{"@type":"AggregateRating","ratingValue":7.1,"bestRating":10,"ratingCount":55418}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"WhatScares","item":"https://whatscares.com/"},{"@type":"ListItem","position":2,"name":"All Films","item":"https://whatscares.com/movies/"},{"@type":"ListItem","position":3,"name":"Thirst","item":"https://whatscares.com/movies/thirst.html"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Thirst?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Thirst rates 3/5 for scares and 3/5 for dread. It is moderately scary, with a handful of strong sequences."}},{"@type":"Question","name":"How gory is Thirst?","acceptedAnswer":{"@type":"Answer","text":"Thirst rates 4/5 for gore — expect heavy gore."}},{"@type":"Question","name":"Where can I stream Thirst?","acceptedAnswer":{"@type":"Answer","text":"Thirst is not on major US subscription streamers right now — look for it on digital rental or purchase (Apple TV, Prime Video, or your usual store)."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is Thirst?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, Thirst rates 6.0/10 for jump scares and 6.0/10 for dread. It is moderately scary, with a handful of strong sequences."}},{"@type":"Question","name":"How gory is Thirst?","acceptedAnswer":{"@type":"Answer","text":"Thirst rates 8.0/10 for gore — expect heavy gore."}},{"@type":"Question","name":"Where can I stream Thirst?","acceptedAnswer":{"@type":"Answer","text":"Thirst is not on major US subscription streamers right now — look for it on digital rental or purchase (Apple TV, Prime Video, or your usual store)."}}]}</script>
 </head>
 <body>
 <div class="atmo" aria-hidden="true"><div class="flashlight" id="flashlight"></div><div class="vignette"></div><div class="flicker" id="flicker"></div><div class="grain" id="grain"></div></div>
@@ -231,8 +231,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 <section class="faq">
   <h2>Before you press play</h2>
   <dl>
-    <dt>How scary is Thirst?</dt><dd>On our intensity scale, Thirst rates 3/5 for scares and 3/5 for dread. It is moderately scary, with a handful of strong sequences.</dd>
-    <dt>How gory is Thirst?</dt><dd>Thirst rates 4/5 for gore — expect heavy gore.</dd>
+    <dt>How scary is Thirst?</dt><dd>On our intensity scale, Thirst rates <span data-faq="jumps">6.0</span>/10 for jump scares and <span data-faq="dread">6.0</span>/10 for dread. It is moderately scary, with a handful of strong sequences.</dd>
+    <dt>How gory is Thirst?</dt><dd>Thirst rates <span data-faq="gore">8.0</span>/10 for gore — expect heavy gore.</dd>
     <dt>Where can I stream Thirst?</dt><dd>Thirst is not on major US subscription streamers right now — look for it on digital rental or purchase (Apple TV, Prime Video, or your usual store).</dd>
   </dl>
 </section>
@@ -361,6 +361,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
     var old = el.querySelector('b') ? el.querySelector('b').textContent : null;
     var shown = (avg * 2).toFixed(1);   // pips are 1-5, the figure reads /10
     var votes = stats && stats.votes;
+    // the FAQ prose quotes the same figures; keep them from drifting
+    document.querySelectorAll('[data-faq="' + d + '"]').forEach(function (n) { n.textContent = shown; });
     el.innerHTML = '<b>' + shown + '</b>' + (votes ? ' · ' + votes + ' vote' + (votes === 1 ? '' : 's') : '');
     if (old && old !== shown) {
       var b = el.querySelector('b');

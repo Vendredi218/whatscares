@@ -164,7 +164,7 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Movie","name":"The Descent","url":"https://whatscares.com/movies/the-descent.html","image":"https://image.tmdb.org/t/p/w500/ztlqrY7VgFIFmtzVsh3TPYiXCdF.jpg","datePublished":"2005","director":{"@type":"Person","name":"Neil Marshall"},"genre":["Creature","Isolation","Gore","Atmospheric"],"description":"Six women, one unmapped cave system, and claustrophobia so complete the monsters feel almost like relief when they arrive. Marshall's masterpiece tightens both physically and emotionally — grief and resentment go spelunking too. See the original UK ending.","aggregateRating":{"@type":"AggregateRating","ratingValue":7.2,"bestRating":10,"ratingCount":274694}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"WhatScares","item":"https://whatscares.com/"},{"@type":"ListItem","position":2,"name":"All Films","item":"https://whatscares.com/movies/"},{"@type":"ListItem","position":3,"name":"The Descent","item":"https://whatscares.com/movies/the-descent.html"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is The Descent?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, The Descent rates 5/5 for scares and 4/5 for dread. It is among the scariest films on WhatScares."}},{"@type":"Question","name":"How gory is The Descent?","acceptedAnswer":{"@type":"Answer","text":"The Descent rates 4/5 for gore — expect heavy gore."}},{"@type":"Question","name":"Where can I stream The Descent?","acceptedAnswer":{"@type":"Answer","text":"As of our last update, The Descent is streaming on Tubi and Pluto TV in the US. Availability changes, so check your service before settling in."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How scary is The Descent?","acceptedAnswer":{"@type":"Answer","text":"On our intensity scale, The Descent rates 10.0/10 for jump scares and 8.0/10 for dread. It is among the scariest films on WhatScares."}},{"@type":"Question","name":"How gory is The Descent?","acceptedAnswer":{"@type":"Answer","text":"The Descent rates 8.0/10 for gore — expect heavy gore."}},{"@type":"Question","name":"Where can I stream The Descent?","acceptedAnswer":{"@type":"Answer","text":"As of our last update, The Descent is streaming on Tubi and Pluto TV in the US. Availability changes, so check your service before settling in."}}]}</script>
 </head>
 <body>
 <div class="atmo" aria-hidden="true"><div class="flashlight" id="flashlight"></div><div class="vignette"></div><div class="flicker" id="flicker"></div><div class="grain" id="grain"></div></div>
@@ -231,8 +231,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 <section class="faq">
   <h2>Before you press play</h2>
   <dl>
-    <dt>How scary is The Descent?</dt><dd>On our intensity scale, The Descent rates 5/5 for scares and 4/5 for dread. It is among the scariest films on WhatScares.</dd>
-    <dt>How gory is The Descent?</dt><dd>The Descent rates 4/5 for gore — expect heavy gore.</dd>
+    <dt>How scary is The Descent?</dt><dd>On our intensity scale, The Descent rates <span data-faq="jumps">10.0</span>/10 for jump scares and <span data-faq="dread">8.0</span>/10 for dread. It is among the scariest films on WhatScares.</dd>
+    <dt>How gory is The Descent?</dt><dd>The Descent rates <span data-faq="gore">8.0</span>/10 for gore — expect heavy gore.</dd>
     <dt>Where can I stream The Descent?</dt><dd>As of our last update, The Descent is streaming on Tubi and Pluto TV in the US. Availability changes, so check your service before settling in.</dd>
   </dl>
 </section>
@@ -361,6 +361,8 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
     var old = el.querySelector('b') ? el.querySelector('b').textContent : null;
     var shown = (avg * 2).toFixed(1);   // pips are 1-5, the figure reads /10
     var votes = stats && stats.votes;
+    // the FAQ prose quotes the same figures; keep them from drifting
+    document.querySelectorAll('[data-faq="' + d + '"]').forEach(function (n) { n.textContent = shown; });
     el.innerHTML = '<b>' + shown + '</b>' + (votes ? ' · ' + votes + ' vote' + (votes === 1 ? '' : 's') : '');
     if (old && old !== shown) {
       var b = el.querySelector('b');

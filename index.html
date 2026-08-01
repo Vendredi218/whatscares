@@ -2079,6 +2079,11 @@ const STATUS_COPY = {
   seen: ['Marked as watched', 'Unmarked as watched']
 };
 
+function peekMovie(idx, e) {
+  if (e) { e.preventDefault(); e.stopPropagation(); }
+  openModal(idx);
+}
+
 function setStatus(idx, status, e) {
   // The buttons sit next to an <a>, not inside it, but a stray bubbled click
   // on any surface should still never navigate.
@@ -2603,6 +2608,9 @@ function cardHTML(m, idx, score, featured) {
     </div>
   </a>
   <div class="card-actions">
+    <button class="card-act card-act-peek" type="button"
+      data-tip="Quick look" aria-label="Quick look at ${escAttr(m.t)}"
+      onclick="peekMovie(${idx},event)">&#8942;</button>
     <button class="card-act${isWant ? ' on-want' : ''}" type="button"
       data-tip="${isWant ? 'Remove from Watchlist' : 'Add to Watchlist'}"
       aria-pressed="${isWant}" aria-label="${isWant ? 'Remove' : 'Add'} ${escAttr(m.t)} ${isWant ? 'from' : 'to'} watchlist"
