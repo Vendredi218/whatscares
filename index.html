@@ -2097,9 +2097,28 @@ function setStatus(idx, status, e) {
   }
   saveUser(u);
   upsertMovie(idx);
-  renderGrid();
+  syncCardStatusButtons(idx);
   renderCollection();
   toast(`<span>${STATUS_COPY[status][added ? 0 : 1]}</span>${added ? ' <a href="#collections" onclick="closeModal()">View</a>' : ''}`);
+}
+
+// Same idea as the modal: touch only the buttons for this film. renderGrid()
+// rebuilt all 136 cards, which recreated every poster and made the page flash.
+// A film can appear in the grid, a collection row and a similar row at once,
+// so every button carrying this idx gets updated.
+function syncCardStatusButtons(idx) {
+  const u = loadUser();
+  const on = { want: u.want.includes(idx), seen: u.seen.includes(idx) };
+  document.querySelectorAll(`.card-act[data-idx="${idx}"]`).forEach(b => {
+    const st = b.dataset.status;
+    if (!st) return;
+    b.classList.toggle(st === 'want' ? 'on-want' : 'on-seen', on[st]);
+    b.setAttribute('aria-pressed', String(on[st]));
+    b.dataset.tip = st === 'want'
+      ? (on.want ? 'Remove from Watchlist' : 'Add to Watchlist')
+      : (on.seen ? 'Unmark as watched' : 'Mark as watched');
+  });
+  syncModalStatusButtons(idx);
 }
 
 // Repaint just the two modal buttons. Re-rendering the whole modal would throw
@@ -2586,10 +2605,11 @@ function cardHTML(m, idx, score, featured) {
     <button class="card-act${isWant ? ' on-want' : ''}" type="button"
       data-tip="${isWant ? 'Remove from Watchlist' : 'Add to Watchlist'}"
       aria-pressed="${isWant}" aria-label="${isWant ? 'Remove' : 'Add'} ${escAttr(m.t)} ${isWant ? 'from' : 'to'} watchlist"
-      onclick="setStatus(${idx},'want',event)">+</button>
+      data-idx="${idx}" data-status="want" onclick="setStatus(${idx},'want',event)">+</button>
     <button class="card-act${isSeen ? ' on-seen' : ''}" type="button"
       data-tip="${isSeen ? 'Unmark as watched' : 'Mark as watched'}"
       aria-pressed="${isSeen}" aria-label="${isSeen ? 'Unmark' : 'Mark'} ${escAttr(m.t)} as watched"
+      data-idx="${idx}" data-status="seen"
       onclick="setStatus(${idx},'seen',event)">✓</button>
   </div>
 </div>`;
