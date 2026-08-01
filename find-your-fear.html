@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Threshold — A Calibration of Fear · WhatScares</title>
+<title>Find Your Fear — a 60-Second Horror Calibration · WhatScares</title>
 <meta name="description" content="A sixty-second calibration of fear. Knock twice, answer five questions, and the archive will name your fear — then prescribe three films for it.">
-<link rel="canonical" href="https://whatscares.com/threshold.html">
+<link rel="canonical" href="https://whatscares.com/find-your-fear.html">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -606,7 +606,7 @@ function diagnose(fromSaved) {
       showDoor();
     });
     document.getElementById('copyBtn').addEventListener('click', (e) => {
-      const text = `DIAGNOSIS N\u00ba ${file} — ${arch.name}\n"${arch.desc}"\nFingerprint: ${top.map(([t, v]) => t + ' ' + v).join(' · ')}\nPrescribed: ${picks.map(p => p.m.t + ' (' + p.m.y + ')').join(' · ')}\n— whatscares.com/threshold.html`;
+      const text = `DIAGNOSIS N\u00ba ${file} — ${arch.name}\n"${arch.desc}"\nFingerprint: ${top.map(([t, v]) => t + ' ' + v).join(' · ')}\nPrescribed: ${picks.map(p => p.m.t + ' (' + p.m.y + ')').join(' · ')}\n— whatscares.com/find-your-fear.html`;
       const done = () => { e.target.textContent = 'copied'; setTimeout(() => { e.target.textContent = 'copy diagnosis'; }, 1800); };
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, done);
       else done();
