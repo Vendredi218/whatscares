@@ -371,7 +371,17 @@ section { margin-bottom: 48px; }
   margin-top: 3px;
 }
 
-.card-overlay .card-score {
+.card-overlay .card-ratings { display:flex; gap:14px; align-items:baseline; margin-top:3px; flex-wrap:wrap; }
+.card-ratings .cr { display:flex; align-items:baseline; gap:5px; }
+.card-ratings i {
+  font-style:normal; font-family:var(--mono); font-size:10.5px; letter-spacing:1.1px;
+  text-transform:uppercase; color:rgba(255,255,255,0.55);
+}
+.card-ratings b { font-size:15px; font-weight:600; color:#fff; font-variant-numeric:tabular-nums; }
+.card-ratings .int b { color:var(--dim-gore); }
+.card.featured .card-ratings b { font-size:18px; }
+@media (max-width:480px){ .card-ratings { gap:10px; } .card-ratings i { font-size:10px; } }
+.card-score {
   display: flex; align-items: center; gap: 6px;
   margin-top: 4px;
 }
@@ -2332,6 +2342,17 @@ function resetStars(el, idx) {
   });
 }
 
+// IMDb alone skews mainstream; averaging every source on a 10-point scale
+// surfaces the critically-loved films it under-rates.
+function movieScore(m) {
+  const v = [m.imdb, m.rt != null ? m.rt / 10 : null, m.pc != null ? m.pc / 10 : null,
+             m.mc != null ? m.mc / 10 : null, m.db].filter(x => x != null);
+  return v.length ? (v.reduce((a, b) => a + b, 0) / v.length).toFixed(1) : null;
+}
+function intensityScore(m) {
+  return ((m.scare + m.gore + m.dread) / 3).toFixed(1);   // string: 4.0 must not collapse to 4
+}
+
 function vitalHTML(label, val, ember) {
   return `<span class="vital"><span class="vital-label">${label}</span>${Array.from({length:5},(_,i)=>`<i class="${i<val?'on':''}${ember?' g':''}"></i>`).join('')}</span>`;
 }
@@ -2547,10 +2568,10 @@ function cardHTML(m, idx, score, featured) {
         <div class="card-vitals">${vitalHTML('S', m.scare)}${vitalHTML('G', m.gore, true)}${vitalHTML('D', m.dread)}</div>
         <div class="title">${m.t}</div>
         <div class="meta">${m.y} · ${m.d}</div>
-        ${m.imdb ? `<div class="card-score">
-          <span class="stars">${imdbStars(m.imdb)}</span>
-          <span class="score-num">${m.imdb}</span>
-        </div>` : ''}
+        <div class="card-ratings">
+          ${movieScore(m) != null ? `<span class="cr"><i>Movie</i><b>${movieScore(m)}</b></span>` : ''}
+          <span class="cr int"><i>Intensity</i><b>${intensityScore(m)}</b></span>
+        </div>
         ${streamText ? `<div class="card-stream">${streamText}</div>` : ''}
       </div>
     </div>
