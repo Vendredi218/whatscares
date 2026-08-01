@@ -227,9 +227,13 @@ section { margin-bottom: 48px; }
   gap: 12px;
 }
 
+/* The grid item is the wrapper, not the link: <button> is not allowed inside
+   <a>, and a click on one would trigger the anchor's navigation. */
+.card-wrap { position: relative; display: block; min-width: 0; }
+
 .card {
   cursor: pointer;
-  display: block; color: inherit; text-decoration: none;
+  display: block; height: 100%; color: inherit; text-decoration: none;
   position: relative;
   border-radius: var(--radius);
   overflow: hidden;
@@ -252,7 +256,7 @@ section { margin-bottom: 48px; }
 }
 
 /* featured first card */
-.card.featured {
+.card-wrap.featured {
   grid-column: span 2;
   grid-row: span 2;
 }
@@ -277,26 +281,13 @@ section { margin-bottom: 48px; }
   white-space: nowrap; max-width: calc(100% - 20px); overflow: hidden; text-overflow: ellipsis;
 }
 
-/* fav button */
-.card-fav {
-  position: absolute; top: 8px; right: 8px; z-index: 3;
-  width: 32px; height: 32px; border-radius: 50%;
-  background: rgba(0,0,0,0.55); border: none;
-  color: var(--text-2); font-size: 17px;
-  cursor: pointer; display: flex; align-items: center; justify-content: center;
-  backdrop-filter: blur(6px);
-  opacity: 0; transition: opacity 0.2s, color 0.2s;
-}
-.card:hover .card-fav { opacity: 1; }
-.card-fav:hover { color: var(--accent); }
-.card-fav.saved { color: var(--accent); opacity: 1; }
-
 /* want / seen quick actions */
 .card-actions {
-  position: absolute; top: 8px; right: 8px; z-index: 3;
+  position: absolute; top: 8px; right: 8px; z-index: 4;
   display: flex; flex-direction: column; gap: 6px;
 }
 .card-act {
+  position: relative;
   width: 30px; height: 30px; border-radius: 50%;
   background: rgba(0,0,0,0.55); border: none;
   color: rgba(255,255,255,0.85); font-size: 16.5px; line-height: 1;
@@ -304,10 +295,50 @@ section { margin-bottom: 48px; }
   backdrop-filter: blur(6px);
   opacity: 0; transition: opacity 0.2s, background 0.2s, color 0.2s;
 }
-.card:hover .card-act, .card-act.on-want, .card-act.on-seen { opacity: 1; }
+.card-wrap:hover .card-act, .card-act:focus-visible,
+.card-act.on-want, .card-act.on-seen { opacity: 1; }
 .card-act:hover { background: rgba(0,0,0,0.8); }
 .card-act.on-want { background: var(--accent); color: #fff; }
 .card-act.on-seen { background: var(--gold); color: #1a1400; }
+
+/* Own tooltip, because native title= waits a second, cannot be styled, and
+   never appears on touch. Both surfaces read as an action, not a state. */
+.card-act::after {
+  content: attr(data-tip);
+  position: absolute; top: 50%; right: calc(100% + 8px);
+  transform: translateY(-50%);
+  padding: 4px 8px; border-radius: 3px;
+  background: rgba(10,8,6,0.92); color: #f2ece0;
+  font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.6px;
+  white-space: nowrap; pointer-events: none;
+  opacity: 0; transition: opacity 0.15s;
+}
+.card-act:hover::after, .card-act:focus-visible::after { opacity: 1; }
+
+/* Touch has no hover, so an opacity-0 button is an invisible tap target that
+   still takes taps. Show them at rest instead. */
+@media (hover: none) {
+  .card-act { opacity: 0.9; }
+  .card-act::after { content: none; }
+}
+
+/* The collection rails sit far below the fold, so the only proof a click
+   registered has to come to the visitor. */
+.toast {
+  position: fixed; left: 50%; bottom: 26px; z-index: 400;
+  transform: translate(-50%, 12px);
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 16px; border-radius: 4px;
+  background: rgba(10,8,6,0.94); border: 1px solid rgba(236,228,210,0.16);
+  color: #f2ece0; font-family: var(--mono); font-size: 13px; letter-spacing: 0.6px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  max-width: calc(100vw - 32px);
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.toast a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(217,154,69,0.45); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .toast { transition: opacity 0.2s ease; } }
 
 .coll-block { margin-bottom: 28px; }
 .coll-block:last-child { margin-bottom: 0; }
@@ -349,24 +380,24 @@ section { margin-bottom: 48px; }
   font-size: 13.5px; font-weight: 500; color: rgba(255,255,255,0.75);
 }
 
-.card.featured .card-overlay {
+.featured .card-overlay {
   padding: 80px 20px 20px;
 }
 
-.card.featured .card-overlay .title {
+.featured .card-overlay .title {
   font-size: 26px; font-weight: 500;
   font-family: var(--serif);
 }
 
-.card.featured .card-overlay .meta {
+.featured .card-overlay .meta {
   font-size: 15.5px; margin-top: 6px;
 }
 
-.card.featured .card-overlay .card-score .stars {
+.featured .card-overlay .card-score .stars {
   font-size: 13.5px;
 }
 
-.card.featured .card-overlay .card-score .score-num {
+.featured .card-overlay .card-score .score-num {
   font-size: 15.5px;
 }
 
@@ -892,6 +923,17 @@ footer {
 .ac-year { font-size: 14.5px; color: var(--text-3); margin-left: 12px; flex-shrink: 0; }
 
 /* ─── SORT BAR ─── */
+.sort-div { width:1px; height:16px; background:var(--border); margin:0 4px; flex:none; }
+.sort-btn.dim.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.dim-legend {
+  display:flex; flex-wrap:wrap; gap:6px 22px; margin:10px 0 0;
+  font-size:13.5px; color:var(--text-3); line-height:1.5;
+}
+.dim-legend b {
+  font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:1.2px;
+  text-transform:uppercase; color:var(--accent); margin-right:7px;
+}
+@media (max-width:640px){ .dim-legend { gap:4px 0; flex-direction:column; } }
 .sort-bar {
   display: flex;
   align-items: center;
@@ -1023,8 +1065,8 @@ footer {
   .sort-btn { padding: 5px 10px; font-size: 13px; }
   .pill { font-size: 14.5px; padding: 7px 14px; }
   .grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 240px; gap: 10px; }
-  .card.featured { grid-column: span 2; grid-row: span 1; }
-  .card.featured .card-overlay .title { font-size: 20px; }
+  .card-wrap.featured { grid-column: span 2; grid-row: span 1; }
+  .featured .card-overlay .title { font-size: 20px; }
   .card-overlay .title { font-size: 15.5px; }
   .card-overlay .meta { font-size: 13px; }
   .card-tag { font-size: 12.5px; padding: 3px 8px; }
@@ -1045,7 +1087,7 @@ footer {
   .list-card.list-featured { grid-column: span 1; }
   .nav-links { display: none; }
   .grid { grid-template-columns: 1fr; grid-auto-rows: 300px; gap: 10px; }
-  .card.featured { grid-column: span 1; }
+  .card-wrap.featured { grid-column: span 1; }
   .card-overlay { padding: 40px 10px 10px; }
   .card-overlay .title { font-size: 14.5px; }
   .lists-grid { grid-template-columns: 1fr; grid-auto-rows: 160px; }
@@ -1293,7 +1335,7 @@ body.loaded .hero h1 .w { animation: wordIn 1s cubic-bezier(0.2, 0.7, 0.3, 1) fo
 .card-overlay .title { font-weight: 500; letter-spacing: 0.1px; }
 .card-overlay .meta { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.5px; color: rgba(236,228,210,0.55); }
 .card-overlay .card-stream { font-family: var(--mono); font-size: 12px; letter-spacing: 0.5px; color: rgba(236,228,210,0.42); }
-.card.featured .card-overlay .title { letter-spacing: -0.3px; }
+.featured .card-overlay .title { letter-spacing: -0.3px; }
 
 /* vitals — scare/gore/dread revealed on hover (zero layout cost until shown) */
 .card-vitals {
@@ -1586,7 +1628,16 @@ footer {
           <button class="sort-btn" data-sort="newest" onclick="setSort('newest')">Newest</button>
           <button class="sort-btn" data-sort="oldest" onclick="setSort('oldest')">Oldest</button>
           <button class="sort-btn" data-sort="obscure" onclick="setSort('obscure')">Most Obscure</button>
+          <span class="sort-div"></span>
+          <button class="sort-btn dim" data-sort="jumps" onclick="setSort('jumps')">Most Jumps</button>
+          <button class="sort-btn dim" data-sort="gore" onclick="setSort('gore')">Most Gore</button>
+          <button class="sort-btn dim" data-sort="dread" onclick="setSort('dread')">Most Dread</button>
         </div>
+        <p class="dim-legend">
+          <span><b>Jumps</b> the ones that make you flinch</span>
+          <span><b>Gore</b> how much blood you are in for</span>
+          <span><b>Dread</b> the unease that follows you home</span>
+        </p>
         <div class="section-head">
           <h2 id="gridLabel">All Films</h2>
           <span class="count" id="gridCount"></span>
@@ -2355,6 +2406,9 @@ function renderGrid() {
       newest: (a,b) => b.movie.y - a.movie.y,
       oldest: (a,b) => a.movie.y - b.movie.y,
       obscure: (a,b) => (b.movie.obscure?1:0) - (a.movie.obscure?1:0) || (b.movie.imdb||0) - (a.movie.imdb||0),
+      jumps: (a,b) => b.movie.scare - a.movie.scare || (b.movie.imdb||0) - (a.movie.imdb||0),
+      gore:  (a,b) => b.movie.gore  - a.movie.gore  || (b.movie.imdb||0) - (a.movie.imdb||0),
+      dread: (a,b) => b.movie.dread - a.movie.dread || (b.movie.imdb||0) - (a.movie.imdb||0),
     };
     if (sorters[currentSort]) list.sort(sorters[currentSort]);
   }
