@@ -1,5 +1,5 @@
 // Local dev server: static files + /api/mood-search, mirroring the Vercel setup.
-// Usage: node dev-server.mjs   (PORT env respected; reads .env for MINIMAX_API_KEY)
+// Usage: node dev-server.mjs   (PORT env respected; reads .env for the model API key)
 import { createServer } from 'http';
 import { readFile } from 'fs/promises';
 import { existsSync, readFileSync } from 'fs';
@@ -42,7 +42,7 @@ createServer(async (req, res) => {
           res.writeHead(400, { 'Content-Type': 'application/json' }).end(JSON.stringify({ error: 'bad query' }));
           return;
         }
-        const key = process.env.MINIMAX_API_KEY;
+        const key = process.env.DEEPSEEK_OPENROUTER || process.env.MINIMAX_API_KEY;
         if (!key) {
           res.writeHead(503, { 'Content-Type': 'application/json' }).end(JSON.stringify({ error: 'no key' }));
           return;

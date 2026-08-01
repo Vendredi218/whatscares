@@ -1,8 +1,17 @@
 // Core mood-search logic, shared by api/mood-search.js (Vercel) and dev-server.mjs.
 import { CATALOG } from './_catalog.mjs';
 
-const BASE_URL = process.env.MINIMAX_BASE_URL || 'https://api.minimax.io';
-const MODEL = process.env.MINIMAX_MODEL || 'MiniMax-M3';
+// Both providers speak the OpenAI chat-completions shape, so switching is just
+// a key, a host and a model id. OpenRouter wins when its key is present.
+const OPENROUTER_KEY = process.env.DEEPSEEK_OPENROUTER;
+const USE_OPENROUTER = !!OPENROUTER_KEY;
+
+const BASE_URL = USE_OPENROUTER
+  ? (process.env.OPENROUTER_BASE_URL || 'https://openrouter.ai/api/v1')
+  : (process.env.MINIMAX_BASE_URL || 'https://api.minimax.io/v1');
+const MODEL = USE_OPENROUTER
+  ? (process.env.OPENROUTER_MODEL || 'deepseek/deepseek-v4-flash')
+  : (process.env.MINIMAX_MODEL || 'MiniMax-M3');
 
 function catalogLines() {
   return CATALOG.map(m =>
@@ -53,12 +62,14 @@ export async function moodSearch(query, apiKey) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 50_000);
   try {
-    const res = await fetch(`${BASE_URL}/v1/chat/completions`, {
+    const res = await fetch(`${BASE_URL}/chat/completions`, {
       method: 'POST',
       signal: controller.signal,
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
+        'Authorization': `Bearer ${USE_OPENROUTER ? OPENROUTER_KEY : apiKey}`,
         'Content-Type': 'application/json',
+        // OpenRouter attributes traffic by these; harmless elsewhere
+        ...(USE_OPENROUTER ? { 'HTTP-Referer': 'https://whatscares.com', 'X-Title': 'WhatScares' } : {}),
       },
       body: JSON.stringify({
         model: MODEL,
@@ -72,7 +83,7 @@ export async function moodSearch(query, apiKey) {
     });
     if (!res.ok) {
       const body = await res.text().catch(() => '');
-      throw new Error(`MiniMax ${res.status}: ${body.slice(0, 200)}`);
+      throw new Error(`${USE_OPENROUTER ? 'OpenRouter' : 'MiniMax'} ${res.status}: ${body.slice(0, 200)}`);
     }
     const data = await res.json();
     const content = data?.choices?.[0]?.message?.content || '';
