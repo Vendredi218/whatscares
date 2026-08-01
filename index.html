@@ -153,8 +153,9 @@ section { margin-bottom: 48px; }
   color: var(--text-3); font-size: 14.5px; font-family: var(--sans);
   cursor: pointer; text-align: left;
   transition: all 0.15s; letter-spacing: 0.2px;
-  white-space: nowrap;
+  white-space: normal;
 }
+.rail-item > .rail-count { flex: none; }
 .rail-item:hover { color: var(--text-2); background: var(--surface); }
 .rail-item.on {
   color: var(--text); background: var(--surface-2);
@@ -259,6 +260,8 @@ section { margin-bottom: 48px; }
 /* category tag */
 .card-tag {
   position: absolute; top: 10px; left: 10px; z-index: 3;
+  max-width: calc(100% - 68px);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   padding: 3px 10px; border-radius: 3px;
   font-size: 13px; font-weight: 600; text-transform: capitalize;
   background: var(--accent); color: white;
@@ -266,12 +269,12 @@ section { margin-bottom: 48px; }
 
 /* gem badge */
 .gem-badge {
-  position: absolute; top: 10px; right: 42px; z-index: 3;
+  position: absolute; top: 44px; left: 10px; right: auto; z-index: 3;
   padding: 3px 8px; border-radius: 3px;
   font-size: 12.5px; font-weight: 500; letter-spacing: 0.5px;
   background: rgba(0,0,0,0.65); color: rgba(255,255,255,0.8);
   backdrop-filter: blur(8px);
-  white-space: nowrap;
+  white-space: nowrap; max-width: calc(100% - 20px); overflow: hidden; text-overflow: ellipsis;
 }
 
 /* fav button */
@@ -1040,7 +1043,7 @@ footer {
   .card-overlay .title { font-size: 15.5px; }
   .card-overlay .meta { font-size: 13px; }
   .card-tag { font-size: 12.5px; padding: 3px 8px; }
-  .gem-badge { top: 36px; left: 10px; right: auto; }
+  .gem-badge { top: 40px; left: 10px; right: auto; }
   .lists-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 180px; }
   .list-card.list-featured { grid-column: span 2; grid-row: span 1; }
   .section-head h2 { font-size: 20px; }
@@ -1053,9 +1056,11 @@ footer {
 }
 
 @media (max-width: 480px) {
+  .lists-grid { grid-template-columns: 1fr; }
+  .list-card.list-featured { grid-column: span 1; }
   .nav-links { display: none; }
-  .grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; gap: 8px; }
-  .card.featured { grid-column: span 2; }
+  .grid { grid-template-columns: 1fr; grid-auto-rows: 300px; gap: 10px; }
+  .card.featured { grid-column: span 1; }
   .card-overlay { padding: 40px 10px 10px; }
   .card-overlay .title { font-size: 14.5px; }
   .lists-grid { grid-template-columns: 1fr; grid-auto-rows: 160px; }
@@ -2300,6 +2305,13 @@ function selectGenre(tag) {
   moodScores = null;
   renderRail();
   renderGrid();
+  // filtering changes page height, so the browser clamps scroll to the new bottom.
+  // Park the grid under the nav instead — the rail is sticky, so it can't be used as a reference.
+  const sec = document.getElementById('browse');
+  if (sec) {
+    const y = sec.getBoundingClientRect().top + window.scrollY - 64;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
+  }
 }
 
 function clearAll() {
