@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WhatScares — Horror Movies Matched to Your Taste | Smart Recommendations</title>
-<meta name="description" content="The smartest way to find horror movies. Tell us what scares you — folk rituals, cosmic dread, psychological terror, body horror — and we'll match you with films + where to stream them.">
-<meta name="keywords" content="horror movie recommendations, find horror movies, best horror films, A24 horror, folk horror, cosmic horror, psychological horror, body horror, gore horror, slow-burn horror, J-horror, where to stream horror movies">
+<title>WhatScares — Horror Rated for Jump Scares, Gore &amp; Dread | Search by Mood</title>
+<meta name="description" content="Three scores per horror film — jump scares, gore, dread — and you can sort by any of them. Plus IMDb, Rotten Tomatoes and Douban side by side. Or describe the night you want and we'll find it.">
+<meta name="keywords" content="how scary is this movie, horror movies by jump scare level, horror movies without gore, scariest horror movies ranked, horror movie intensity rating, find horror movies by mood, douban horror ratings, horror movie recommendations, folk horror, cosmic horror, slow-burn horror, where to stream horror movies">
 <link rel="canonical" href="https://whatscares.com/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="WhatScares — Horror Movies Matched to Your Taste">
-<meta property="og:description" content="The smartest way to find horror. Tell us your taste — folk, cosmic, psychological, gore — and we match you with films + where to stream them.">
+<meta property="og:title" content="WhatScares — Horror Rated for Jump Scares, Gore &amp; Dread">
+<meta property="og:description" content="Jumps, gore and dread scored separately on 136 horror films — sort by whichever you can take. IMDb, Rotten Tomatoes and Douban side by side.">
 <meta property="og:image" content="https://whatscares.com/og-image.png">
 <meta property="og:url" content="https://whatscares.com/">
 <meta property="og:site_name" content="WhatScares">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="WhatScares — Horror Movies Matched to Your Taste">
-<meta name="twitter:description" content="The smartest way to find horror. Tell us your taste — folk, cosmic, psychological, gore — and we match you with films + where to stream them.">
+<meta name="twitter:title" content="WhatScares — Horror Rated for Jump Scares, Gore &amp; Dread">
+<meta name="twitter:description" content="Jumps, gore and dread scored separately on 136 horror films — sort by whichever you can take. IMDb, Rotten Tomatoes and Douban side by side.">
 <meta name="twitter:image" content="https://whatscares.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1555,6 +1555,12 @@ footer {
   .ws-rating-overall { align-items: flex-start; flex-direction: column; }
   .ws-dimension-row { align-items: flex-start; flex-direction: column; gap: 8px; }
 }
+
+/* one line of context above the three-dimension legend */
+.dim-lede {
+  margin: 12px 0 2px; max-width: 62ch;
+  font-size: 13.5px; line-height: 1.55; color: var(--text-3);
+}
 </style>
 </head>
 <body>
@@ -1586,15 +1592,15 @@ footer {
   <div class="hero-corridor" id="heroCorridor" aria-hidden="true"></div>
   <div class="hero-inner">
   <div class="hero-eyebrow"><span class="eyebrow-rule"></span><span>Field N&ordm; <span id="filmCount">136</span> — A Field Guide to Fear</span><span class="eyebrow-rule"></span></div>
-  <h1 id="heroTitle">Horror that <em>gets&nbsp;you.</em></h1>
-  <p class="hero-sub">Not everyone fears the same thing. Tell us the dread you're after — folk rituals, cosmic void, slow-burn grief — and we'll find films you can actually stream.</p>
+  <h1 id="heroTitle">Scary is three <em>different&nbsp;things.</em></h1>
+  <p class="hero-sub">Jumps, gore, dread — every film scored on each, because the one that makes you flinch is rarely the one that follows you home. Sort by whichever you can take tonight, or just describe the evening you want.</p>
   <div class="search-panel">
     <div class="search-tabs">
       <button class="search-tab active" data-mode="mood" onclick="switchTab('mood')">Search by mood</button>
       <button class="search-tab" data-mode="similar" onclick="switchTab('similar')">Films like...</button>
     </div>
     <div class="search-mode active" id="moodMode">
-      <label class="search-label">What kind of horror are you in the mood for?</label>
+      <label class="search-label">Describe it in your own words — a feeling, a comparison, a limit</label>
       <input type="text" class="search-input" id="moodInput" placeholder="asian folk horror, slow burn, nothing too gory...">
       <button class="search-btn" onclick="searchMood()">Search</button>
       <div class="search-hints">
@@ -1605,14 +1611,14 @@ footer {
       </div>
     </div>
     <div class="search-mode" id="similarMode">
-      <label class="search-label">Which horror film do you want more of?</label>
+      <label class="search-label">Name a film you loved and we'll match on its elements, not its genre</label>
       <div class="autocomplete-wrap">
         <input type="text" class="search-input" id="filmInput" placeholder="Start typing a film name..." autocomplete="off">
         <div class="autocomplete-list" id="acList"></div>
       </div>
     </div>
   </div>
-  <div class="hero-meta">136 hand-picked films · intensity-rated · streaming included</div>
+  <div class="hero-meta">136 films · jumps/gore/dread on every one · IMDb, RT &amp; Douban together</div>
   <a class="threshold-link" href="/find-your-fear.html" id="thresholdLink">
     <span class="tl-kicker">or skip the search</span>
     <span class="tl-main">Find Your Fear — a sixty-second calibration <span class="tl-arrow">&rarr;</span></span>
@@ -1645,7 +1651,7 @@ footer {
     <div class="section-head">
       <h2>Start from a popular pick</h2>
     </div>
-    <p class="fav-sub">Tap a film to find similar horror</p>
+    <p class="fav-sub">Tap one and we'll rebuild the grid around what it's made of</p>
     <div class="hscroll fav-row" id="favRow"></div>
   </section>
 
@@ -1677,6 +1683,7 @@ footer {
           <button class="sort-btn dim" data-sort="gore" onclick="setSort('gore')">Most Gore</button>
           <button class="sort-btn dim" data-sort="dread" onclick="setSort('dread')">Most Dread</button>
         </div>
+        <p class="dim-lede">Three scores on every film, 1 to 5 — our read to begin with, then everyone's as they rate. Sort the catalog by any one of them.</p>
         <p class="dim-legend">
           <span><b>Jumps</b> the ones that make you flinch</span>
           <span><b>Gore</b> how much blood you are in for</span>
@@ -1713,7 +1720,7 @@ footer {
 
 <footer>
   <div class="footer-colophon"><span class="colophon-rule"></span>WhatScares — a field guide to fear · printed in the dark</div>
-  <div>horror matched to your taste</div>
+  <div>every film scored for jumps, gore and dread · IMDb, Rotten Tomatoes and Douban read side by side</div>
   <div role="navigation" aria-label="SEO lists" style="margin-top:16px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
     <a href="/lists/best-a24-horror-films.html" style="color:var(--text-3);font-size: 13px;text-decoration:none">Best A24 Horror Films</a>
     <a href="/lists/best-folk-horror-movies.html" style="color:var(--text-3);font-size: 13px;text-decoration:none">Best Folk Horror Movies</a>
@@ -1814,7 +1821,7 @@ footer {
 <noscript>
 <div style="max-width:800px;margin:40px auto;padding:20px;color:#e5e5e5;font-family:sans-serif">
 <h2>All Horror Films on WhatScares</h2>
-<p>Horror matched to your taste. Browse 60+ films filterable by what actually scares you — folk rituals, cosmic dread, psychological terror, body horror, gore — with streaming info for every title.</p>
+<p>136 hand-picked horror films, each scored on three separate axes — jump scares, gore, and dread — so you can tell a film that makes you flinch from one that quietly ruins your week. Sort the catalog by any of the three, filter by element (folk, cosmic, psychological, body horror, slasher), and read IMDb, Rotten Tomatoes, Metacritic and Douban scores side by side. A selection is listed below.</p>
 <ul>
 <li><strong>Hereditary</strong> (2018) — Dir. Ari Aster — IMDb 7.3 — Elements: a24, occult, grief, slow-burn, atmospheric</li>
 <li><strong>Midsommar</strong> (2019) — Dir. Ari Aster — IMDb 7.1 — Elements: a24, folk, cult, grief, atmospheric</li>
@@ -3287,7 +3294,7 @@ renderCollection();
 renderFavStart();
 checkUrlMovie();
 document.querySelector('.hero-meta').textContent =
-  `${M.length} hand-picked films · intensity-rated · streaming included`;
+  `${M.length} films · jumps/gore/dread on every one · IMDb, RT & Douban together`;
 
 sb.auth.onAuthStateChange(async (event, session) => {
   const user = session?.user || null;
