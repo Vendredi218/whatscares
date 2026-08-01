@@ -283,7 +283,7 @@ const Sound = {
     if (!AC) return;
     this.ctx = new AC();
     this.master = this.ctx.createGain();
-    this.master.gain.value = 0.6;
+    this.master.gain.value = 0.42;
     this.master.connect(this.ctx.destination);
   },
   startDrone() {
@@ -293,23 +293,27 @@ const Sound = {
     this.droneGain.gain.value = 0;
     this.droneGain.gain.linearRampToValueAtTime(0.055, ctx.currentTime + 3);
     this.droneGain.connect(this.master);
-    [54, 55.7].forEach(f => {
-      const o = ctx.createOscillator();
-      o.type = 'sine'; o.frequency.value = f;
-      o.connect(this.droneGain); o.start();
-    });
-    const o = ctx.createOscillator();
-    o.type = 'triangle'; o.frequency.value = 108.3;
-    const og = ctx.createGain(); og.gain.value = 0.18;
-    o.connect(og); og.connect(this.droneGain); o.start();
-    this.droneOsc = o;
+    this.droneOscs = [];
+    // 54/55.7 beat against each other; the 163Hz partial is what laptop speakers can actually reproduce
+    [[54, 'sine', 1], [55.7, 'sine', 1], [108.3, 'triangle', 0.18], [162.9, 'sine', 0.07]]
+      .forEach(([f, type, lvl]) => {
+        const o = ctx.createOscillator();
+        o.type = type; o.frequency.value = f;
+        const og = ctx.createGain(); og.gain.value = lvl;
+        o.connect(og); og.connect(this.droneGain); o.start();
+        this.droneOscs.push(o);
+      });
   },
   stopDrone() {
     if (!this.droneGain) return;
-    this.droneGain.gain.linearRampToValueAtTime(0, this.ctx.currentTime + 0.8);
-    const g = this.droneGain;
+    const t = this.ctx.currentTime;
+    this.droneGain.gain.cancelScheduledValues(t);
+    this.droneGain.gain.setValueAtTime(this.droneGain.gain.value, t);
+    this.droneGain.gain.linearRampToValueAtTime(0, t + 0.8);
+    const g = this.droneGain, oscs = this.droneOscs || [];
+    oscs.forEach(o => { try { o.stop(t + 0.9); } catch (e) {} });   // they used to run forever
     setTimeout(() => g.disconnect(), 1000);
-    this.droneGain = null;
+    this.droneGain = null; this.droneOscs = null;
   },
   burst(freq, decay, gain, type) {
     if (!this.on || !this.ctx) return;
@@ -317,10 +321,14 @@ const Sound = {
     const o = ctx.createOscillator();
     o.type = type || 'sine'; o.frequency.value = freq;
     const g = ctx.createGain();
-    g.gain.setValueAtTime(gain, ctx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + decay);
-    o.connect(g); g.connect(this.master);
-    o.start(); o.stop(ctx.currentTime + decay + 0.05);
+    const t0 = ctx.currentTime;
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(gain, t0 + 0.012);   // attack — without this the osc clicks
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + decay);
+    const lpf = ctx.createBiquadFilter();
+    lpf.type = 'lowpass'; lpf.frequency.value = 900; lpf.Q.value = 0.7;
+    o.connect(g); g.connect(lpf); lpf.connect(this.master);
+    o.start(t0); o.stop(t0 + decay + 0.05);
     const nb = ctx.createBufferSource();
     const buf = ctx.createBuffer(1, ctx.sampleRate * 0.09, ctx.sampleRate);
     const d = buf.getChannelData(0);
@@ -328,12 +336,15 @@ const Sound = {
     nb.buffer = buf;
     const lp = ctx.createBiquadFilter();
     lp.type = 'lowpass'; lp.frequency.value = 420;
-    const ng = ctx.createGain(); ng.gain.value = gain * 0.8;
+    const ng = ctx.createGain();
+    ng.gain.setValueAtTime(0.0001, t0);
+    ng.gain.exponentialRampToValueAtTime(gain * 0.45, t0 + 0.008);
+    ng.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.09);
     nb.connect(lp); lp.connect(ng); ng.connect(this.master);
-    nb.start();
+    nb.start(t0); nb.stop(t0 + 0.1);
   },
-  knock() { this.burst(88, 0.34, 0.5, 'sine'); },
-  thud() { this.burst(52, 0.5, 0.28, 'sine'); },
+  knock() { this.burst(88, 0.4, 0.32, 'sine'); },
+  thud() { this.burst(58, 0.6, 0.22, 'sine'); },
   swell() {
     if (!this.on || !this.droneGain) return;
     const ctx = this.ctx;
@@ -345,7 +356,7 @@ const Sound = {
     this.init();
     if (!this.ctx) return false;
     this.on = !this.on;
-    if (this.on) { this.ctx.resume(); this.startDrone(); }
+    if (this.on) { Promise.resolve(this.ctx.resume()).then(() => this.startDrone()); }
     else this.stopDrone();
     return this.on;
   }

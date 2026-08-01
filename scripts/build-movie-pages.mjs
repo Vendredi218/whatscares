@@ -135,7 +135,7 @@ nav.top a:hover{color:var(--text)}
 .crumbs{font-size:13px;color:var(--text-3);margin:20px 0}
 .crumbs a{color:var(--text-2)}.crumbs a:hover{color:var(--text)}
 .hero{display:grid;grid-template-columns:250px 1fr;gap:32px;margin-bottom:40px}
-.poster img{width:100%;border-radius:var(--radius);border:1px solid var(--border);display:block;background:var(--surface-2)}
+.poster img{width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;border-radius:var(--radius);border:1px solid var(--border);display:block;background:var(--surface-2)}
 h1{font-family:var(--serif);font-size:40px;font-weight:600;line-height:1.15;margin-bottom:6px}
 .byline{color:var(--text-2);font-size:15px;margin-bottom:14px}
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
@@ -164,7 +164,7 @@ h2{font-family:var(--serif);font-size:26px;font-weight:600;margin-bottom:14px}
 .faq dd{color:var(--text-2);font-size:15px;max-width:70ch}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:16px}
 .grid a{display:block}
-.grid img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:var(--radius);border:1px solid var(--border);display:block;background:var(--surface-2)}
+.grid img{width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;border-radius:var(--radius);border:1px solid var(--border);display:block;background:var(--surface-2)}
 .grid .t{font-size:13.5px;margin-top:8px;line-height:1.35}
 .grid .y{font-size:12px;color:var(--text-3)}
 .grid a:hover .t{color:var(--gold)}

@@ -223,6 +223,7 @@ section { margin-bottom: 48px; }
 
 .card {
   cursor: pointer;
+  display: block; color: inherit; text-decoration: none;
   position: relative;
   border-radius: var(--radius);
   overflow: hidden;
@@ -1992,7 +1993,7 @@ function imdbStars(score) {
 function collCardHTML(idx, u) {
   const m = M[idx];
   const r = u.ratings[idx] || 0;
-  return `<div class="card" onclick="openModal(${idx})">
+  return `<a class="card" href="/movies/${slugify(m.t)}.html">
     <div class="poster">
       <img src="${TMDB}${m.p}" alt="${m.t}" loading="lazy">
       <div class="card-overlay">
@@ -2000,7 +2001,7 @@ function collCardHTML(idx, u) {
         <div class="meta">${m.y}${r ? ' · ' + '★'.repeat(r) : ''}</div>
       </div>
     </div>
-  </div>`;
+  </a>`;
 }
 
 function renderCollection() {
@@ -2174,7 +2175,7 @@ function cardHTML(m, idx, score, featured) {
   const mainTag = m.tags[0];
   const streamText = m.str && m.str.length ? m.str.slice(0,2).join(' · ') : '';
   const why = searchMode === 'mood' ? MOOD_WHY[idx] : null;
-  return `<div class="card${featured ? ' featured' : ''}" onclick="openModal(${idx})"${why && !featured ? ` title="${escAttr(why)}"` : ''}>
+  return `<a class="card${featured ? ' featured' : ''}" href="/movies/${slugify(m.t)}.html"${why && !featured ? ` title="${escAttr(why)}"` : ''}>
     <div class="poster">
       <img src="${TMDB}${m.p}" alt="${m.t}" loading="lazy">
       <span class="card-tag">${mainTag}</span>
@@ -2195,7 +2196,7 @@ function cardHTML(m, idx, score, featured) {
         ${streamText ? `<div class="card-stream">${streamText}</div>` : ''}
       </div>
     </div>
-  </div>`;
+  </a>`;
 }
 
 function renderLists() {
@@ -2223,7 +2224,7 @@ function renderHered() {
   const sim = similar(M[0]).slice(0,8);
   document.getElementById('heredRow').innerHTML = sim.map(s => {
     const idx = M.indexOf(s.m);
-    return `<div class="card" onclick="openModal(${idx})">
+    return `<a class="card" href="/movies/${slugify(m.t)}.html">
       <div class="poster">
         <img src="${TMDB}${s.m.p}" alt="${s.m.t}" loading="lazy">
         <div class="card-overlay">
@@ -2231,7 +2232,7 @@ function renderHered() {
           <div class="meta">${s.m.y} · ${s.score}% match</div>
         </div>
       </div>
-    </div>`;
+    </a>`;
   }).join('');
 }
 
@@ -2518,7 +2519,7 @@ function renderFavStart() {
           <div class="meta">${m.y}</div>
         </div>
       </div>
-    </div>`;
+    </a>`;
   }).join('');
 }
 
@@ -2692,7 +2693,8 @@ document.addEventListener('keydown', e => {
 });
 
 // ─── URL PARAM → AUTO-OPEN MODAL ───
-function slugify(t) { return t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
+function slugify(t) { return t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+  .replace(/['\u2019]/g,'').replace(/&/g,' and ').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
 function checkUrlMovie() {
   const p = new URLSearchParams(window.location.search);
   const slug = p.get('movie');
