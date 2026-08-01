@@ -51,6 +51,12 @@
   --dim-jumps: #775709;
   --dim-gore: #8e1f1a;
   --dim-dread: #3f4a4a;
+  /* the same three dimensions, lifted for use on top of a poster: card vitals sit
+     on a black gradient in both themes, where the page-level tones go muddy.
+     Values are the lights-out cuts from atmo.css, held constant here. */
+  --vital-jumps: #c99320;
+  --vital-gore: #c4342b;
+  --vital-dread: #8fa3a3;
   --radius: 3px;
 }
 
@@ -106,11 +112,21 @@ nav {
 }
 .hero h1 em { font-style: italic; color: var(--text-2); }
 
+/* deliberately NOT the h1's serif: the subhead is body copy and should read as a
+   second voice, not a smaller echo of the headline */
 .hero-sub {
-  font-family: var(--serif); font-size: 17px; font-style: italic;
-  color: var(--text-2); line-height: 1.65;
-  max-width: 520px; margin: 0 auto 36px;
+  font-family: var(--sans); font-size: clamp(18px, 1.5vw, 20px); font-style: normal;
+  color: #443c33; line-height: 1.55;
+  max-width: 600px; margin: 0 auto 36px;
 }
+/* lights-out flips the ground out from under that fixed ink */
+body.lights-out .hero-sub { color: var(--text-2); }
+
+/* the three dimensions, in their colours — the sentence doubles as the legend */
+.hero-sub b { font-weight: 600; }
+.hero-sub .d-j { color: var(--dim-jumps); }
+.hero-sub .d-g { color: var(--dim-gore); }
+.hero-sub .d-d { color: var(--dim-dread); }
 
 .hero-meta {
   margin-top: 20px; font-size: 13.5px; color: var(--text-3);
@@ -696,6 +712,69 @@ a.list-card { text-decoration: none; color: inherit; }
 .empty.show { display: block; }
 .empty p { font-size: 16.5px; font-family: var(--serif); font-style: italic; }
 
+/* ─── MOOD SEARCH LOADER ─── */
+/* Occupies the slot the cards will land in, so the wait happens where the answer
+   will appear rather than under a disabled button 800px up the page. */
+.mood-loader { display: none; text-align: center; padding: 56px 20px 64px; }
+.mood-loader.show { display: block; }
+
+.ml-query {
+  font-family: var(--mono); font-size: 12px; letter-spacing: 1.6px;
+  text-transform: uppercase; color: var(--text-3);
+  margin-bottom: 20px; overflow-wrap: anywhere;
+}
+
+/* three level meters, one per dimension, sweeping left to right */
+.ml-meters { display: flex; gap: 5px; justify-content: center; margin-bottom: 22px; }
+.ml-meters i {
+  display: block; width: 44px; height: 2px;
+  background: var(--border); position: relative; overflow: hidden;
+}
+.ml-meters i::after { content: ''; position: absolute; inset: 0; transform: translateX(-101%); }
+.ml-meters i:nth-child(1)::after { background: var(--dim-jumps); }
+.ml-meters i:nth-child(2)::after { background: var(--dim-gore); }
+.ml-meters i:nth-child(3)::after { background: var(--dim-dread); }
+@media (prefers-reduced-motion: no-preference) {
+  .ml-meters i::after { animation: mlSweep 2.6s ease-in-out infinite; }
+  .ml-meters i:nth-child(2)::after { animation-delay: 0.28s; }
+  .ml-meters i:nth-child(3)::after { animation-delay: 0.56s; }
+}
+@keyframes mlSweep {
+  0%   { transform: translateX(-101%); }
+  46%  { transform: translateX(0); }
+  54%  { transform: translateX(0); }
+  100% { transform: translateX(101%); }
+}
+
+/* No fade on the stage line. An opacity 0 -> 1 intro is one dropped or throttled
+   animation away from leaving the copy permanently invisible, and readability is
+   the entire job of this element. The meters carry the motion; the words just change. */
+.ml-stage {
+  font-family: var(--serif); font-size: 20px; font-style: italic;
+  color: var(--text-2); line-height: 1.4; max-width: 30em; margin: 0 auto;
+}
+
+.ml-elapsed {
+  font-family: var(--mono); font-size: 12px; letter-spacing: 1.6px;
+  color: var(--text-3); margin-top: 18px; min-height: 1em;
+}
+
+/* reduced motion: the copy still changes, nothing moves */
+@media (prefers-reduced-motion: reduce) {
+  .ml-meters { display: none; }
+}
+
+/* the browse column is narrow on phones — a long query would run to four lines */
+@media (max-width: 768px) {
+  .mood-loader { padding: 40px 4px 48px; }
+  .ml-query {
+    letter-spacing: 1px; margin-bottom: 16px;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .ml-meters i { width: 32px; }
+  .ml-stage { font-size: 17.5px; }
+}
+
 /* ─── AUTH MODAL ─── */
 .auth-backdrop {
   position: fixed; inset: 0; z-index: 300;
@@ -1036,6 +1115,8 @@ footer {
   text-underline-offset: 2px;
 }
 .beyond-note a:hover { color: var(--text); }
+/* the fallback admission — same register as the note above it, one shade warmer */
+.mood-fallback { color: var(--text-2); }
 
 /* ─── SEARCH RESULTS CONTEXT ─── */
 .results-context {
@@ -1087,7 +1168,8 @@ footer {
   nav { height: 50px; }
   .hero { padding: 96px 16px 40px; }
   .hero h1 { font-size: 32px; }
-  .hero-sub { font-size: 16.5px; margin-bottom: 28px; }
+  /* size comes from the clamp on the base rule; this block only sets rhythm */
+  .hero-sub { margin-bottom: 28px; }
   .search-input { font-size: 17px; }
   .search-panel { max-width: 100%; }
   .search-mode { padding: 18px 16px 18px; }
@@ -1239,10 +1321,11 @@ body.loaded .hero h1 .w { animation: wordIn 1s cubic-bezier(0.2, 0.7, 0.3, 1) fo
   100% { opacity: 1; filter: none; transform: none; }
 }
 .hero h1 em {
-  color: var(--accent-2);
-  text-shadow: 0 0 34px rgba(224,87,63,0.28);
+  color: var(--accent);
 }
-.hero-sub { font-size: 17px; max-width: 540px; margin-bottom: 44px; }
+/* the glow was tuned for a dark ground — on paper it reads as ink bleed */
+body.lights-out .hero h1 em { text-shadow: 0 0 34px rgba(224,87,63,0.28); }
+.hero-sub { margin-bottom: 44px; }
 .hero-meta {
   font-family: var(--mono); font-size: 12.5px; letter-spacing: 1.7px;
   text-transform: uppercase; color: var(--text-3); margin-top: 26px;
@@ -1395,13 +1478,16 @@ body.loaded .hero h1 .w { animation: wordIn 1s cubic-bezier(0.2, 0.7, 0.3, 1) fo
   color: rgba(236,228,210,0.6); margin-right: 3px; line-height: 1;
 }
 .vital i { display: block; width: 3px; background: rgba(236,228,210,0.16); }
-.vital i.on { background: var(--accent-2); box-shadow: 0 0 5px rgba(224,87,63,0.45); }
 .vital i:nth-of-type(1) { height: 4px; }
 .vital i:nth-of-type(2) { height: 6px; }
 .vital i:nth-of-type(3) { height: 8px; }
 .vital i:nth-of-type(4) { height: 10px; }
 .vital i:nth-of-type(5) { height: 12px; }
-.vital i.g.on { background: var(--gold); box-shadow: 0 0 5px rgba(217,154,69,0.4); }
+/* one colour per dimension, matching the sort buttons, the legend chips and the
+   film-page pips — so the code is learnable in one place and read anywhere */
+.vital i.j.on { background: var(--vital-jumps); box-shadow: 0 0 5px rgba(201,147,32,0.45); }
+.vital i.g.on { background: var(--vital-gore);  box-shadow: 0 0 5px rgba(196,52,43,0.45); }
+.vital i.d.on { background: var(--vital-dread); box-shadow: 0 0 5px rgba(143,163,163,0.45); }
 
 .card-why { font-size: 17px; }
 .results-query { font-size: 17px; }
@@ -1593,7 +1679,7 @@ footer {
   <div class="hero-inner">
   <div class="hero-eyebrow"><span class="eyebrow-rule"></span><span>Field N&ordm; <span id="filmCount">136</span> — A Field Guide to Fear</span><span class="eyebrow-rule"></span></div>
   <h1 id="heroTitle">Scary is three <em>different&nbsp;things.</em></h1>
-  <p class="hero-sub">Jumps, gore, dread — every film scored on each, because the one that makes you flinch is rarely the one that follows you home. Sort by whichever you can take tonight, or just describe the evening you want.</p>
+  <p class="hero-sub"><b class="d-j">Jumps</b>, <b class="d-g">gore</b>, <b class="d-d">dread</b> — every film scored on each, because the one that makes you flinch is rarely the one that follows you home. Sort by whichever you can take tonight, or just describe the evening you want.</p>
   <div class="search-panel">
     <div class="search-tabs">
       <button class="search-tab active" data-mode="mood" onclick="switchTab('mood')">Search by mood</button>
@@ -1671,6 +1757,7 @@ footer {
           <button class="start-over" onclick="startOver()">Start over</button>
         </div>
         <div class="beyond-note" id="beyondNote" style="display:none"></div>
+        <div class="beyond-note mood-fallback" id="moodFallback" style="display:none">The archive didn't answer this time. These are matched on tags alone — blunter, but yours.</div>
         <div class="sort-bar">
           <span class="sort-label">Sort</span>
           <button class="sort-btn active" data-sort="match" onclick="setSort('match')">Best Match</button>
@@ -1692,6 +1779,12 @@ footer {
         <div class="section-head">
           <h2 id="gridLabel">All Films</h2>
           <span class="count" id="gridCount"></span>
+        </div>
+        <div class="mood-loader" id="moodLoader">
+          <p class="ml-query" id="moodLoaderQuery"></p>
+          <div class="ml-meters" aria-hidden="true"><i></i><i></i><i></i></div>
+          <p class="ml-stage" id="moodLoaderStage" role="status"></p>
+          <p class="ml-elapsed" id="moodLoaderElapsed" aria-hidden="true"></p>
         </div>
         <div class="grid" id="grid"></div>
         <div class="empty" id="empty"><p>Nothing here yet — try different elements.</p></div>
@@ -2431,8 +2524,10 @@ function intensityScore(m) {
   return ((m.scare + m.gore + m.dread) / 3 * 2).toFixed(1);
 }
 
-function vitalHTML(label, val, ember) {
-  return `<span class="vital"><span class="vital-label">${label}</span>${Array.from({length:5},(_,i)=>`<i class="${i<val?'on':''}${ember?' g':''}"></i>`).join('')}</span>`;
+// dim is the dimension class — 'j' jumps, 'g' gore, 'd' dread — so each bar
+// carries its own colour rather than sharing one ember.
+function vitalHTML(label, val, dim) {
+  return `<span class="vital"><span class="vital-label">${label}</span>${Array.from({length:5},(_,i)=>`<i class="${dim}${i<val?' on':''}"></i>`).join('')}</span>`;
 }
 
 function imdbStars(score) {
@@ -2585,6 +2680,8 @@ function renderGrid() {
   } else {
     note.style.display = 'none';
   }
+  document.getElementById('moodFallback').style.display =
+    (searchMode === 'mood' && moodDegraded) ? 'block' : 'none';
 
   if (gemsOnly) list = list.filter(({ movie: m }) => m.obscure);
 
@@ -2645,7 +2742,7 @@ function cardHTML(m, idx, score, featured) {
       ${m.obscure ? '<div class="gem-badge">Hidden Gem</div>' : ''}
       <div class="card-overlay">
         ${why && featured ? `<div class="card-why">“${escAttr(why)}”</div>` : ''}
-        <div class="card-vitals">${vitalHTML('S', m.scare)}${vitalHTML('G', m.gore, true)}${vitalHTML('D', m.dread)}</div>
+        <div class="card-vitals">${vitalHTML('S', m.scare, 'j')}${vitalHTML('G', m.gore, 'g')}${vitalHTML('D', m.dread, 'd')}</div>
         <div class="title">${m.t}</div>
         <div class="meta">${m.y} · ${m.d}</div>
         <div class="card-ratings">
@@ -2843,29 +2940,110 @@ function escAttr(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 }
 
+// ─── MOOD SEARCH: THE WAIT ───
+// One request does the whole job: the entire catalog goes into the prompt with
+// the query, and the model comes back with matches plus a line on each. Nothing
+// streams, so there is no real progress to report — these stages are a clock,
+// not a pipeline. They describe the work that single call is doing, in the order
+// it does it, and none of them claims a step has finished. Measured latency is
+// 5-35s, occasionally up to the 55s abort.
+const MOOD_STAGES = [
+  { at: 0,     text: 'Reading your query.' },
+  { at: 2500,  text: `Holding it against all ${M.length} films in the archive.` },
+  { at: 7000,  text: 'Weighing jumps, gore and dread against what you asked for.' },
+  { at: 15000, text: 'Writing down why each one fits.' },
+  { at: 26000, text: 'Slower than usual. It is still deciding.' },
+  { at: 40000, text: 'We give it one minute. After that we match you ourselves, on tags alone.' },
+];
+
+let moodTimers = [];      // every pending stage timeout
+let moodTick = 0;         // the elapsed-counter interval
+let moodBusy = false;     // Enter fires even while the button is disabled
+let moodDegraded = false; // true when the archive did not answer and tags did
+
+function fmtElapsed(ms) {
+  const s = Math.floor(ms / 1000);
+  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')} elapsed`;
+}
+
+function startMoodLoader(query) {
+  stopMoodLoader();  // never let two runs share one clock
+  const box = document.getElementById('moodLoader');
+  const stage = document.getElementById('moodLoaderStage');
+  const elapsed = document.getElementById('moodLoaderElapsed');
+  document.getElementById('moodLoaderQuery').textContent = `searching — “${query}”`;
+  elapsed.textContent = '';
+
+  const setStage = text => { stage.textContent = text; };
+
+  for (const s of MOOD_STAGES) {
+    if (!s.at) setStage(s.text);
+    else moodTimers.push(setTimeout(() => setStage(s.text), s.at));
+  }
+
+  // The counter is proof of life, not decoration — it only earns its place once
+  // the wait has stopped feeling instant.
+  const t0 = Date.now();
+  moodTimers.push(setTimeout(() => {
+    const write = () => { elapsed.textContent = fmtElapsed(Date.now() - t0); };
+    write();
+    moodTick = setInterval(write, 1000);
+  }, 6000));
+
+  // last search's cards, notes and counts must not read as this one's answer
+  document.getElementById('grid').innerHTML = '';
+  document.getElementById('gridLabel').textContent = 'Matching Films';
+  document.getElementById('gridCount').textContent = '';
+  document.getElementById('empty').classList.remove('show');
+  document.getElementById('beyondNote').style.display = 'none';
+  document.getElementById('moodFallback').style.display = 'none';
+  document.getElementById('resultsContext').style.display = 'none';
+  box.classList.add('show');
+  box.scrollIntoView({
+    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+    block: 'center',
+  });
+}
+
+// Idempotent, and the only way the loader ever goes away. Called from a finally,
+// so a stray stage can never repaint over a rendered result or an error.
+function stopMoodLoader() {
+  moodTimers.forEach(clearTimeout);
+  moodTimers = [];
+  clearInterval(moodTick);
+  moodTick = 0;
+  const box = document.getElementById('moodLoader');
+  if (box) box.classList.remove('show');
+}
+
 async function searchMood() {
   const text = document.getElementById('moodInput').value.trim();
-  if (!text) return;
+  if (!text || moodBusy) return;
+  moodBusy = true;
   const btn = document.querySelector('#moodMode .search-btn');
   const orig = btn.textContent;
   btn.disabled = true;
-  btn.textContent = 'Consulting the archive…';
+  btn.textContent = 'Consulting the archive';  // :disabled::after supplies the dots
 
   let scores = null;
   Object.keys(MOOD_WHY).forEach(k => delete MOOD_WHY[k]);
   moodBeyond = [];
+  startMoodLoader(text);
+
+  let abortTimer = 0;
+  let answered = false;   // the archive replied — even a reply of "nothing fits"
   try {
     const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 55000);
+    abortTimer = setTimeout(() => ctrl.abort(), 55000);
     const r = await fetch('/api/mood-search', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query: text }),
       signal: ctrl.signal,
     });
-    clearTimeout(timer);
     if (r.ok) {
       const data = await r.json();
+      answered = Array.isArray(data.matches);
       if (Array.isArray(data.matches) && data.matches.length) {
         scores = new Map();
         data.matches.forEach((m, i) => {
@@ -2878,9 +3056,18 @@ async function searchMood() {
       }
     }
   } catch (e) { /* API down or timeout — fall back to local matching */ }
+  finally {
+    // resolved, failed or aborted: nothing may still be ticking after this
+    clearTimeout(abortTimer);
+    stopMoodLoader();
+    btn.disabled = false;
+    btn.textContent = orig;
+    moodBusy = false;
+  }
 
-  btn.disabled = false;
-  btn.textContent = orig;
+  // Only a genuine failure gets the note. A reply of "nothing honestly fits" is
+  // an answer, and saying otherwise would be a lie in the user's favour.
+  moodDegraded = !answered;
   if (!scores || !scores.size) scores = parseMood(text);
 
   moodScores = scores;
