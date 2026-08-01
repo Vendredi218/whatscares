@@ -14,10 +14,12 @@ create table if not exists public.user_ratings (
   dread       smallint check (dread  between 1 and 5),
   created_at  timestamptz not null default now(),
   updated_at  timestamptz not null default now(),
-  -- one vote per person per film, enforced in the database. Front-end checks
+  -- One vote per person per film, enforced in the database. Front-end checks
   -- are convenience; this is the part that actually stops vote stuffing.
-  -- Partial index (below) instead of a plain UNIQUE so that imported rows,
-  -- which all share a null user_id, are not treated as duplicates.
+  -- A plain UNIQUE works for imported rows too: Postgres treats NULLs as
+  -- distinct, so any number of offline rows (user_id is null) coexist. A
+  -- partial index would break upserts — ON CONFLICT cannot target one.
+  unique (user_id, movie_idx),
   constraint app_rating_has_user check (source <> 'app' or user_id is not null),
   -- a row with nothing rated is meaningless; keep the table clean
   constraint at_least_one_score check (jumps is not null or gore is not null or dread is not null)
@@ -35,8 +37,6 @@ create policy "update own rating" on public.user_ratings
 create policy "delete own rating" on public.user_ratings
   for delete using (auth.uid() = user_id);
 
-create unique index if not exists uniq_user_movie
-  on public.user_ratings(user_id, movie_idx) where user_id is not null;
 create index if not exists idx_user_ratings_movie on public.user_ratings(movie_idx);
 
 create or replace function public.touch_updated_at() returns trigger
@@ -69,3 +69,13 @@ grant select on public.movie_rating_stats to anon, authenticated;
 
 -- Sanity check after running:
 --   select * from public.movie_rating_stats order by votes desc limit 5;
+
+-- ─────────────────────────────────────────────────────────────
+-- MIGRATION: if you already ran the first version of this file, the partial
+-- index it created cannot be targeted by ON CONFLICT, so every upsert fails
+-- with "no unique or exclusion constraint matching". Run this once:
+--
+--   drop index if exists public.uniq_user_movie;
+--   alter table public.user_ratings
+--     add constraint user_ratings_user_id_movie_idx_key unique (user_id, movie_idx);
+-- ─────────────────────────────────────────────────────────────
