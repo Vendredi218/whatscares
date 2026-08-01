@@ -19,7 +19,7 @@ if (!match) throw new Error('Could not find `const M = [...]` in movies.js');
 const movies = new Function(`return [${match[1]}]`)();
 
 const slugify = t => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
-  .replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  .replace(/['’]/g, '').replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
 const bySlug = new Map();
 for (const m of movies) {
