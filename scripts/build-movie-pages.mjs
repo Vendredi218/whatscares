@@ -151,8 +151,8 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between}
 .logo em{color:var(--accent);font-style:italic}
 .logo svg{height:26px;width:auto;display:block;flex:none}
 nav.top a{color:var(--text-2);font-size: 15.5px;margin-left:20px;font-weight:700}
-nav.top .lights{margin-left:20px;background:none;border:1px solid var(--border);color:var(--text-2);font:inherit;font-size: 13.5px;letter-spacing:.5px;padding:5px 11px;border-radius:999px;cursor:pointer}
-nav.top .lights:hover{color:var(--text);border-color:var(--text-3)}
+.lights{margin-left:20px;background:none;border:1px solid var(--border);color:var(--text-2);font:inherit;font-size: 13.5px;letter-spacing:.5px;padding:5px 11px;border-radius:999px;cursor:pointer;flex:none}
+.lights:hover{color:var(--text);border-color:var(--text-3)}
 nav.top a:hover{color:var(--text)}
 .crumbs{font-size: 14.5px;color:var(--text-3);margin:20px 0;font-weight:700}
 .crumbs a{color:var(--text-2)}.crumbs a:hover{color:var(--text)}
@@ -299,6 +299,37 @@ footer.site .colophon{color:var(--text-3);letter-spacing:1.4px}
 .listrows .meta{font-family:var(--mono);font-size: 12.5px}
 .listrows .score{font-family:var(--mono)}
 .poster img,.grid img{filter:saturate(.85) contrast(1.05)}
+
+/* phones — the header was four uppercase mono links and a spelled-out button
+   trying to share one row with the logo, and losing. The links get their own
+   scrolling row underneath; the logo and the lights glyph keep the first.
+   Appended last on purpose: the 640px block above is overridden by the design
+   system rules that follow it, so anything set there never lands. */
+@media(max-width:640px){
+  header.site{padding:12px 0 0}
+  header.site .wrap{flex-wrap:wrap;row-gap:2px}
+  .logo{font-size:19px;gap:8px;flex:1 1 auto;min-width:0}
+  .logo svg{height:22px}
+  .lights{margin-left:12px;width:32px;height:32px;padding:0;border-radius:50%;font-size:14px;display:flex;align-items:center;justify-content:center}
+  .lb-text{display:none}
+  nav.top{
+    order:3;flex:0 0 100%;
+    display:flex;align-items:center;gap:18px;
+    overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+    margin:0 -20px;padding:6px 20px 10px;
+  }
+  nav.top::-webkit-scrollbar{display:none}
+  nav.top a{margin-left:0;flex:none;white-space:nowrap;font-size:12px}
+  .crumbs{margin:16px 0}
+
+  /* the index rows ran title, year and director together on one inline line,
+     so a long title wrapped and left the director stranded on a third */
+  .listrows a{align-items:flex-start;gap:11px;padding:12px 0}
+  .listrows a > span:not(.score){flex:1 1 auto;min-width:0;display:block}
+  .listrows .t{display:block;font-family:var(--serif);font-size:16.5px;line-height:1.25}
+  .listrows .meta{display:block;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .listrows .score{align-self:flex-start;padding-top:3px}
+}
 `;
 
 const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -313,7 +344,8 @@ const MARK_SVG = `<svg viewBox="18 10 28 50" fill="currentColor" aria-hidden="tr
 
 const headerHtml = `<header class="site"><div class="wrap">
 <a class="logo" href="/">${MARK_SVG}What<em>Scares</em></a>
-<nav class="top"><a href="/movies/">All Films</a><a href="/#collections">Lists</a><a href="/">Mood Search</a><a href="/find-your-fear.html" class="threshold">Find Your Fear</a><button class="lights" id="lightsBtn" type="button">&#9680; lights out</button></nav>
+<nav class="top"><a href="/movies/">All Films</a><a href="/#collections">Lists</a><a href="/">Mood Search</a><a href="/find-your-fear.html" class="threshold">Find Your Fear</a></nav>
+<button class="lights" id="lightsBtn" type="button">&#9680;<span class="lb-text"> lights out</span></button>
 </div></header>`;
 
 const footerHtml = `<footer class="site"><div class="wrap">

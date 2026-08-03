@@ -1647,6 +1647,225 @@ footer {
   margin: 12px 0 2px; max-width: 62ch;
   font-size: 13.5px; line-height: 1.55; color: var(--text-3);
 }
+
+/* ═══════════════════════════════════════════════════════════
+   PHONES — a different structure, not a smaller desktop
+
+   Three things change shape below 768px. The genre column becomes a
+   scrolling chip rail, because 178px of nav out of 390px of screen is
+   not a sidebar, it is most of the page. The sort row stops wrapping
+   into five ragged lines and scrolls sideways instead. And each card
+   unfolds: the plate stays small on the left, and the entry text moves
+   off the image onto the paper, where a printed poster title can no
+   longer collide with ours.
+
+   `.meta-more` carries the tag, the gem mark and the streaming names —
+   facts that live in badges on the poster at desktop width, where there
+   is a poster big enough to hold them.
+   ═══════════════════════════════════════════════════════════ */
+
+.meta-more, .card-stream { display: none; }
+
+@media (max-width: 768px) {
+
+  /* ─── genre rail → chip strip ─── */
+  .browse-layout { display: block; gap: 0; }
+  .browse-main { flex: none; }
+  .genre-rail {
+    flex: none; width: auto; max-height: none;
+    flex-direction: row; gap: 6px;
+    position: sticky; top: 51px; z-index: 20;
+    overflow-x: auto; overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding: 9px clamp(20px, 4vw, 48px);
+    margin: 0 calc(-1 * clamp(20px, 4vw, 48px)) 14px;
+    border-right: none; border-bottom: 1px solid var(--border);
+    background: var(--chrome); backdrop-filter: blur(14px) saturate(1.3);
+  }
+  .rail-item {
+    flex: none; gap: 5px;
+    padding: 6px 11px;
+    border: 1px solid var(--border); border-left: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--surface);
+    font-family: var(--mono); font-size: 12px; letter-spacing: 1.1px;
+    text-transform: uppercase; white-space: nowrap;
+    line-height: 1.2;
+  }
+  .rail-item.on {
+    border-color: var(--accent); border-left-color: var(--accent);
+    color: var(--accent); background: var(--accent-soft); font-weight: 400;
+  }
+  /* the count on every chip doubles the rail's length for one number */
+  .rail-count { display: none; }
+  .rail-item.on .rail-count { display: inline; color: var(--accent); opacity: 0.7; }
+
+  /* ─── sort row: one line that scrolls, not five that wrap ─── */
+  .sort-bar {
+    flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    gap: 6px; margin-bottom: 14px; padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+  .sort-bar::-webkit-scrollbar { display: none; }
+  .sort-bar .sort-btn, .sort-bar .sort-label, .sort-bar .sort-div { flex: none; }
+  .sort-label { margin-right: 2px; }
+  .filter-extras { padding-top: 2px; }
+
+  /* ─── the catalog becomes a list of field-guide entries ─── */
+  .grid {
+    display: block;
+    border-top: 1px solid var(--border);
+  }
+  .grid .card-wrap,
+  .grid .card-wrap.featured {
+    grid-column: auto; grid-row: auto;
+    border-bottom: 1px solid var(--border);
+  }
+  .grid .card {
+    display: flex; align-items: flex-start; gap: 12px;
+    height: auto; padding: 14px 0;
+    border: none; border-radius: 0; background: none; overflow: visible;
+  }
+  .grid .card:hover { border-color: transparent; }
+  .grid .card .poster {
+    flex: 0 0 68px; width: 68px; height: 100px;
+    border: 1px solid var(--border); border-radius: 2px;
+  }
+  .grid .card .poster img { border-radius: 1px; }
+
+  /* off the image, onto the paper */
+  .grid .card-overlay,
+  .grid .featured .card-overlay {
+    position: static; flex: 1 1 auto; min-width: 0;
+    display: flex; flex-direction: column;
+    padding: 0; background: none;
+  }
+  .grid .card-tag, .grid .gem-badge { display: none; }
+  .meta-more { display: inline; }
+  /* Where the film is streaming never survived the meta line's ellipsis, and it
+     is the first thing anyone asks. The vitals row has spare width on the right. */
+  .grid .card-stream {
+    display: block; margin-left: auto; align-self: center;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.4px;
+    text-transform: uppercase; color: var(--text-3);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  .grid .card-overlay .title,
+  .grid .featured .card-overlay .title {
+    order: 1;
+    font-family: var(--serif); font-size: 18px; font-weight: 500;
+    line-height: 1.2; letter-spacing: 0;
+    color: var(--text); text-shadow: none;
+    padding-right: 70px;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  /* Same right gutter as the title: the two buttons sit in the row's top-right
+     corner, and the meta line's second line of text runs straight under them.
+     Year and genre survive the ellipsis, the director's name is what gives —
+     the same order of sacrifice the reference makes. */
+  .grid .card-overlay .meta,
+  .grid .featured .card-overlay .meta {
+    order: 2; margin: 3px 0 0; padding-right: 70px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.3px;
+    text-transform: uppercase; color: var(--text-3);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .grid .card-ratings {
+    order: 3; margin-top: 7px; gap: 8px; flex-wrap: nowrap; width: 100%;
+  }
+  .grid .card-ratings i { color: var(--text-3); font-size: 9.5px; }
+  .grid .card-ratings b {
+    font-family: var(--serif); font-size: 21px; font-weight: 500;
+    color: var(--accent); line-height: 1;
+  }
+  .grid .card-ratings .int { margin-left: auto; }
+  .grid .card-ratings .int b { font-size: 16px; color: var(--dim-gore); }
+
+  /* Vitals ride in on hover at desktop width. Touch has no hover, and on a
+     phone they are the reason to read the row at all — so they always show. */
+  .grid .card-vitals {
+    order: 4; margin: 8px 0 0; gap: 13px;
+    max-height: none; overflow: visible;
+    opacity: 1; transform: none; transition: none;
+  }
+  .grid .vital-label { color: var(--text-3); font-size: 8.5px; }
+  .grid .vital i { background: var(--border); box-shadow: none; }
+  .grid .vital i.j.on { background: var(--dim-jumps); box-shadow: none; }
+  .grid .vital i.g.on { background: var(--dim-gore);  box-shadow: none; }
+  .grid .vital i.d.on { background: var(--dim-dread); box-shadow: none; }
+  .grid .card-why {
+    order: 5; margin: 9px 0 0;
+    font-size: 14px; line-height: 1.5; color: var(--text-2);
+  }
+
+  /* Two actions, in the row's own top-right gutter. The third — quick look —
+     goes: on a phone the row already opens the film, so a peek at it is the
+     same journey with an extra tap target competing for the title's width. */
+  .grid .card-actions { top: 14px; right: 0; flex-direction: row; gap: 6px; }
+  .grid .card-act-peek { display: none; }
+  /* No hover to reveal them, and they are the row's only controls. The
+     poster-ready gate still outranks this at (0,3,0) and holds them until
+     there is a row behind them. */
+  .grid .card-act {
+    opacity: 1;
+    width: 30px; height: 30px;
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--text-3); backdrop-filter: none;
+  }
+  .grid .card-act.on-want { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  .grid .card-act.on-seen { background: rgba(125,92,13,0.12); border-color: var(--gold); color: var(--gold); }
+
+  /* ─── the side-scrolling rails get the same cure ───
+     A 120px-wide poster with a title set over it puts our words on top of
+     whatever the poster already had printed there. Image keeps its 2:3, the
+     words move underneath onto the paper. */
+  .hscroll { gap: 10px; }
+  .hscroll .card-wrap, .hscroll .card { flex: 0 0 116px; height: auto; }
+  .hscroll .card { border: none; background: none; }
+  .hscroll .card .poster {
+    display: flex; flex-direction: column;
+    height: auto; background: none;
+  }
+  .hscroll .card .poster img {
+    flex: none; height: 172px;
+    border: 1px solid var(--border); border-radius: 2px;
+  }
+  .hscroll .card-overlay {
+    position: static; padding: 7px 0 0; background: none;
+  }
+  .hscroll .card-overlay .title {
+    font-family: var(--serif); font-size: 14.5px; font-weight: 500;
+    line-height: 1.25; color: var(--text); text-shadow: none;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .hscroll .card-overlay .meta {
+    margin-top: 2px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.3px;
+    color: var(--text-3);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  /* the remove-from-collection × was a white glyph on a dark poster */
+  .hscroll .card-actions { top: 6px; right: 6px; }
+  .hscroll .card-act {
+    opacity: 1;
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--text-3); backdrop-filter: none;
+  }
+}
+
+/* One line of chrome. "Lights out" spelled out is 9 mono characters at
+   1.4px tracking; the glyph alone says the same thing in 30px. */
+@media (max-width: 560px) {
+  .lights-btn { padding: 0; width: 32px; height: 32px; border-radius: 50%; font-size: 14px; }
+  .lb-text { display: none; }
+  .auth-btn { padding: 6px 12px; white-space: nowrap; }
+  .nav-right { gap: 8px; }
+  nav { gap: 10px; }
+}
 </style>
 </head>
 <body>
@@ -1667,7 +1886,7 @@ footer {
     <a href="/find-your-fear.html" class="threshold-nav">Find Your Fear</a>
   </div>
   <div class="nav-right">
-    <button class="lights-btn" id="lightsBtn" onclick="toggleLights()" aria-pressed="false">&#9680; lights out</button>
+    <button class="lights-btn" id="lightsBtn" onclick="toggleLights()" aria-pressed="false">&#9680;<span class="lb-text"> lights out</span></button>
     <div class="nav-user" id="navUser">
       <button class="auth-btn" onclick="openAuth()">Sign In</button>
     </div>
@@ -2740,16 +2959,15 @@ function cardHTML(m, idx, score, featured) {
       <img src="${TMDB}${m.p}" alt="${m.t}" loading="lazy">
       <span class="card-tag">${mainTag}</span>
       ${m.obscure ? '<div class="gem-badge">Hidden Gem</div>' : ''}
-      <div class="card-overlay">
-        ${why && featured ? `<div class="card-why">“${escAttr(why)}”</div>` : ''}
-        <div class="card-vitals">${vitalHTML('S', m.scare, 'j')}${vitalHTML('G', m.gore, 'g')}${vitalHTML('D', m.dread, 'd')}</div>
-        <div class="title">${m.t}</div>
-        <div class="meta">${m.y} · ${m.d}</div>
-        <div class="card-ratings">
-          ${movieScore(m) != null ? `<span class="cr"><i>Movie</i><b>${movieScore(m)}</b></span>` : ''}
-          <span class="cr int"><i>Intensity</i><b>${intensityScore(m)}</b></span>
-        </div>
-
+    </div>
+    <div class="card-overlay">
+      ${why && featured ? `<div class="card-why">“${escAttr(why)}”</div>` : ''}
+      <div class="card-vitals">${vitalHTML('J', m.scare, 'j')}${vitalHTML('G', m.gore, 'g')}${vitalHTML('D', m.dread, 'd')}${streamText ? `<span class="card-stream">${streamText}</span>` : ''}</div>
+      <div class="title">${m.t}</div>
+      <div class="meta">${m.y}<span class="meta-more"> · ${mainTag}</span> · ${m.d}${m.obscure ? '<span class="meta-more"> · Hidden Gem</span>' : ''}</div>
+      <div class="card-ratings">
+        ${movieScore(m) != null ? `<span class="cr"><i>Movie</i><b>${movieScore(m)}</b></span>` : ''}
+        <span class="cr int"><i>Intensity</i><b>${intensityScore(m)}</b></span>
       </div>
     </div>
   </a>

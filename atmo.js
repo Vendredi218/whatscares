@@ -75,7 +75,10 @@
     const btn = document.getElementById('lightsBtn');
     if (!btn) return;
     const out = document.body.classList.contains('lights-out');
-    btn.innerHTML = out ? '&#9681; lights on' : '&#9680; lights out';
+    // the label is a span so a narrow nav can drop the words and keep the glyph
+    btn.innerHTML = out
+      ? '&#9681;<span class="lb-text"> lights on</span>'
+      : '&#9680;<span class="lb-text"> lights out</span>';
     btn.setAttribute('aria-pressed', String(out));
   }
   window.toggleLights = function () {
