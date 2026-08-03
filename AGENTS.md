@@ -13,6 +13,11 @@
 - `npm run build:movies` — regenerate film pages + sitemap after editing the template or catalog
 - `npm run seo:ping` — IndexNow ping
 
+## Parallel sessions
+- More than one agent session is often running against this repo at once. Work in a git worktree, not the shared checkout — otherwise another session's `git commit -a` sweeps up your in-progress edits and lands them under an unrelated message.
+- Before merging back, check the main checkout is clean. Never stash or discard changes you did not make; back them up and wait, or ask.
+- `dev-server.mjs` serves the directory it lives in, not `process.cwd()`. A worktree preview needs its own `.claude/launch.json` entry pointing at that worktree's copy, or you will silently preview the main checkout.
+
 ## Design system
 - Concept: "A Field Guide to Fear" — analog horror archive. Spec: `docs/field-guide-design-system.md`.
 - `atmo.css` + `atmo.js` — shared atmosphere layers (grain / vignette / flicker / flashlight). Include in `<head>`, add the `.atmo` div after `<body>`. Palette lives in each page's `:root`.
