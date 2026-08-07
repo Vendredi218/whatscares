@@ -1,0 +1,85 @@
+name: Refresh showtimes
+
+# Showtime data goes stale fast — runs end, sold-out status moves daily — so
+# /showtimes.html is rebuilt every morning. Both sources are a single unauthenticated
+# request each (IMAX's own showtime index, Alamo's public schedule), so this is cheap
+# and nothing here touches the rate-limited seat-map endpoints.
+
+on:
+  schedule:
+    - cron: '0 14 * * *'      # 07:00 America/Los_Angeles
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-showtimes
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install fetch dependency
+        run: pip install --quiet curl_cffi
+
+      # Written to a scratch dir first so a bad fetch cannot clobber good data.
+      - name: Fetch showtimes
+        run: |
+          mkdir -p .fresh
+          python3 scripts/fetch-imax.py  --miles 150 --out .fresh/imax-screenings.json
+          python3 scripts/fetch-indie.py --market sf --out .fresh/indie-screenings.json
+
+      # A run that ends, an API that changes shape, or a silent block would all show
+      # up as an empty or tiny file. Publishing that would replace a working page with
+      # an empty one, which is worse than serving yesterday's data.
+      - name: Validate before publishing
+        run: |
+          python3 - <<'PY'
+          import json, sys, pathlib
+          ok = True
+          for name, floor in (("imax-screenings.json", 50), ("indie-screenings.json", 5)):
+              p = pathlib.Path(".fresh") / name
+              if not p.exists():
+                  print(f"::error::{name} was not written"); ok = False; continue
+              try:
+                  n = len(json.loads(p.read_text()))
+              except json.JSONDecodeError as e:
+                  print(f"::error::{name} is not valid JSON: {e}"); ok = False; continue
+              print(f"{name}: {n} records (floor {floor})")
+              if n < floor:
+                  print(f"::error::{name} has {n} records, below the {floor} floor — "
+                        f"treating as a failed fetch rather than publishing it")
+                  ok = False
+          sys.exit(0 if ok else 1)
+          PY
+
+      - name: Publish
+        run: |
+          mv .fresh/imax-screenings.json  data/imax-screenings.json
+          mv .fresh/indie-screenings.json data/indie-screenings.json
+          rm -rf .fresh
+          node scripts/build-showtimes.mjs
+
+      - name: Commit if anything changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/imax-screenings.json data/indie-screenings.json showtimes.html
+          if git diff --cached --quiet; then
+            echo "No change in today's showtimes — nothing to publish."
+            exit 0
+          fi
+          git commit -m "Refresh showtimes $(date -u +%Y-%m-%d)"
+          git push
