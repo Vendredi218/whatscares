@@ -6,6 +6,7 @@
     "dev": "node dev-server.mjs",
     "build-catalog": "node scripts/build-catalog.mjs",
     "build:movies": "node scripts/build-movie-pages.mjs",
+    "build:home": "node scripts/prerender-home.mjs",
     "seo:ping": "node scripts/indexnow-ping.mjs"
   }
 }
