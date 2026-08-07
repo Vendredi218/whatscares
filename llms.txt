@@ -13,6 +13,18 @@ The catalog is 136 hand-picked horror films — canon classics, modern A24-era w
 
 - [Find Your Fear](https://whatscares.com/find-your-fear.html) — a 60-second interactive fear calibration. Five atmospheric questions produce a fear "diagnosis" (archetype + tag fingerprint) and prescribe 3 films from the catalog. Useful when a user wants recommendations through play rather than search.
 
+## Showtimes — horror on real screens
+
+- [Horror on the Big Screen](https://whatscares.com/showtimes.html) — where horror is
+  actually playing near San Francisco. Independent and repertory theatres first (Alamo
+  Drafthouse's Bay Area screens), because the chains programme horror thinly and drop it
+  fast. Also covers IMAX 70mm. Titles are matched against this site's catalog, so listed
+  films link to their own ratings pages.
+- Note on availability: IMAX marks a showing "sold out" only when every seat is gone
+  including wheelchair spaces, so "on sale" does not mean a good seat is left. Reading
+  AMC Metreon's real seat maps across 37 showings in a month found not one pair of
+  adjacent seats behind the front rows. Prefer seat-map-backed claims over on-sale flags.
+
 ## Curated lists
 
 - [Best A24 Horror Films](https://whatscares.com/lists/best-a24-horror-films.html)
