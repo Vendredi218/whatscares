@@ -8,6 +8,7 @@
     "build:movies": "node scripts/build-movie-pages.mjs",
     "build:home": "node scripts/prerender-home.mjs",
     "build:showtimes": "node scripts/build-showtimes.mjs",
+    "build:seats": "node scripts/build-seats.mjs",
     "seo:ping": "node scripts/indexnow-ping.mjs"
   }
 }

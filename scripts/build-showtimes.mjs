@@ -212,6 +212,9 @@ ${titles.map(titleCard).join('\n')}
      included. We read AMC Metreon's actual seat maps across 37 showings spanning a
      month: not one had two adjacent seats behind the front rows. The house reads as
      available and is effectively full.</div>
+  <p class="sec-note" style="margin-bottom:14px"><a href="/seats.html"><strong>Open the seat
+     finder →</strong></a> Paint the part of the room you'd sit in and it checks the real
+     seat maps for a block that fits.</p>
   <table>
     <caption>The Odyssey · IMAX 70mm · within 150 miles</caption>
     <thead><tr><th>Theatre</th><th>Distance</th><th>Showings</th><th>On sale</th><th>Dates</th></tr></thead>

@@ -25,6 +25,12 @@ The catalog is 136 hand-picked horror films — canon classics, modern A24-era w
   AMC Metreon's real seat maps across 37 showings in a month found not one pair of
   adjacent seats behind the front rows. Prefer seat-map-backed claims over on-sale flags.
 
+- [Seat finder](https://whatscares.com/seats.html) — pick the part of the auditorium you
+  would sit in and it checks real IMAX 70mm seat maps for a contiguous block that fits.
+  Seat quality is scored geometrically: distance from the centre line, depth into the
+  house. On a 1.43:1 IMAX screen the front rows are the worst seats and are usually the
+  only ones left.
+
 ## Curated lists
 
 - [Best A24 Horror Films](https://whatscares.com/lists/best-a24-horror-films.html)
